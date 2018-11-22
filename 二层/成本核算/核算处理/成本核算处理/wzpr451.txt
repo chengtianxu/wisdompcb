@@ -1,0 +1,1461 @@
+
+/****** 对象:  StoredProcedure [dbo].[wzpr451]    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451]
+@rkey451 int,
+@fm_date datetime,
+@end_date datetime
+AS
+insert into data0442              --增加本期工序过数表442
+   (d0451_ptr,dept_ptr,TO_DEPT_PTR,step,bom_ptr,WO_PTR,warehouse_ptr,wtype,quan_prod)
+SELECT @rkey451  AS d0451_ptr,Data0048.FM_DEPT_PTR,data0048.TO_DEPT_PTR,
+     Data0048.STEP_NO,Data0006.BOM_PTR,
+     Data0048.WO_PTR,data0048.warehouse_ptr,data0048.WTYPE,
+     SUM(Data0048.QTY_PROD) AS quan_prod
+FROM Data0048 INNER JOIN
+   Data0006 ON Data0048.WO_PTR = Data0006.RKEY  inner join 
+   data0492 on data0006.CUT_NO=data0492.CUT_NO
+WHERE
+     --  (Data0048.wtype <> 3) AND   --(如为外发则不算过板量)暂时采用平均分摊法(07.12.12)
+--对于材料本厂做的少分摊了,因为分了一部份给外发的产品,但对于制造费用多分摊了.制造费用是手工计算出来的外发费用
+       (Data0048.OUTTIME > @fm_date)  AND
+       (Data0048.OUTTIME <= @end_date) and 
+       (data0492.TTYPE<>3)  and      --返修投产不算成本
+       (data0006.RMA_PTR is null)    --正常重检作业单不算成本
+GROUP BY data0048.warehouse_ptr,Data0048.WO_PTR,Data0048.FM_DEPT_PTR,data0048.TO_DEPT_PTR,
+         Data0048.STEP_NO,Data0006.BOM_PTR,data0048.WTYPE
+
+insert into data0424
+(D0451_PTR,DEPT_PTR,warehouse_ptr,yield_sqft,yield_amount,std_ovhd_1,std_ovhd_2,std_ovhd_3,std_mtal_1,std_mtal_2)
+SELECT @rkey451 AS d0451_ptr,dbo.Data0034.COST_DEPT_PTR,dbo.data0442.warehouse_ptr, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.unit_sq) AS yield_sqft, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.LATEST_PRICE) AS yield_amount, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.unit_sq * isnull(dbo.Data0460.OVERHEAD_PER_SQFT,0))
+       AS std_ovhd_1, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.unit_sq * isnull(dbo.Data0460.OVERHEAD2_PER_SQFT,0))
+       AS std_ovhd_2, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.unit_sq * isnull(dbo.Data0460.OVERHEAD3_PER_SQFT,0))
+       AS std_ovhd_3, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.unit_sq * isnull(dbo.Data0460.MATL_PER_SQFT_1,0))
+       AS std_mtal_1, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.unit_sq * isnull(dbo.Data0460.MATL_PER_SQFT_2,0))
+       AS std_mtal_2
+FROM         dbo.Data0460 RIGHT OUTER JOIN
+      dbo.Data0025 INNER JOIN
+      dbo.Data0442 ON dbo.Data0025.RKEY = dbo.Data0442.BOM_PTR INNER JOIN
+      dbo.Data0034 ON dbo.Data0442.DEPT_PTR = dbo.Data0034.RKEY ON 
+      dbo.Data0460.BOM_PTR = dbo.Data0442.BOM_PTR AND 
+      dbo.Data0460.DEPT_PTR = dbo.Data0442.DEPT_PTR
+WHERE (dbo.Data0442.D0451_PTR = @rkey451) AND (dbo.Data0034.IS_COST_DEPT = 1)
+GROUP BY dbo.Data0034.COST_DEPT_PTR,dbo.data0442.warehouse_ptr  --增加制造费用表424
+
+insert into data0447
+(d0451_ptr,cost_dept_ptr,DEPT_PTR,MANU_PART_PTR,INVENT_PTR,
+MATL_STD_PRICE,QUAN_YIELD,QTY_BOM,warehouse_ptr)
+SELECT   @rkey451 AS d0451_ptr, dbo.Data0034.COST_DEPT_PTR, dbo.Data0442.DEPT_PTR,
+ dbo.Data0442.BOM_PTR, dbo.Data0026.INVENTORY_PTR, dbo.Data0017.STD_COST, 
+     dbo.Data0442.QUAN_PROD, dbo.Data0026.QTY_BOM, dbo.Data0442.warehouse_ptr
+FROM     dbo.Data0442 INNER JOIN
+       dbo.Data0026 ON dbo.Data0442.BOM_PTR = dbo.Data0026.MANU_BOM_PTR AND 
+dbo.Data0442.STEP = dbo.Data0026.ROUTE_STEP_NO INNER JOIN
+      dbo.Data0017 ON dbo.Data0026.INVENTORY_PTR = dbo.Data0017.RKEY INNER JOIN
+      dbo.Data0034 ON dbo.Data0442.DEPT_PTR = dbo.Data0034.RKEY
+WHERE     (dbo.Data0442.D0451_PTR = @rkey451) AND (dbo.Data0034.IS_COST_DEPT = 1)
+               --增加本期应工序产出而需要的标准材料(直接材料)447
+
+insert into data0447
+(d0451_ptr,cost_dept_ptr,DEPT_PTR,MANU_PART_PTR,INVENT_PTR,
+ MATL_STD_PRICE,QUAN_YIELD,QTY_BOM,warehouse_ptr)
+SELECT     @rkey451 AS d0451_ptr, dbo.Data0034.COST_DEPT_PTR, dbo.Data0442.DEPT_PTR,
+ dbo.Data0442.BOM_PTR, dbo.Data0495.INVENT_PTR, dbo.Data0017.STD_COST,dbo.Data0442.QUAN_PROD, 
+dbo.Data0495.QTY_BOM_PER_SQFT * dbo.Data0025.unit_sq AS qty_bom, dbo.Data0442.warehouse_ptr
+FROM         dbo.Data0025 INNER JOIN
+                      dbo.Data0442 INNER JOIN
+                      dbo.Data0034 ON dbo.Data0442.DEPT_PTR = dbo.Data0034.RKEY ON dbo.Data0025.RKEY = dbo.Data0442.BOM_PTR INNER JOIN
+                      dbo.Data0017 INNER JOIN
+                      dbo.Data0495 ON dbo.Data0017.RKEY = dbo.Data0495.INVENT_PTR ON dbo.Data0442.DEPT_PTR = dbo.Data0495.DEPT_PTR
+WHERE     (dbo.Data0442.D0451_PTR = @rkey451) AND (dbo.Data0034.IS_COST_DEPT = 1)
+
+ --增加本期应工序产出而需要的标准材料(间接材料)447
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];2    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];2
+@fm_date datetime,
+@end_date datetime,
+@rkey451 int,
+@rkey444_fm_date int,
+@rkey444_end_date int
+AS
+ insert into data0446
+ (d0451_ptr,d0022_ptr,invent_ptr,recd_date,open_quantity,unit_price,tax_2)
+SELECT @rkey451 AS d0451_ptr,D0022_PTR,INVENT_PTR,RECD_DATE,QUANTITY,unit_price,tax_2
+FROM Data0445
+where Data0445.D0444_PTR =@rkey444_fm_date --增加期初仓库材料库存
+
+insert into data0446
+(d0451_ptr,d0022_ptr,invent_ptr,recd_date,in_quantity,unit_price,tax_2)
+SELECT @rkey451 AS d0451_ptr,data0022.rkey,data0022.inventory_ptr,
+data0456.ship_DATE,data0022.QUANTITY,
+data0022.tax_price*data0456.exch_rate/(1+data0022.tax_2*0.01) as unit_price,
+data0022.tax_2
+FROM Data0022 inner join data0456
+on data0022.grn_ptr=data0456.rkey
+where data0456.ship_date > @fm_date
+and data0456.ship_date <= @end_date
+and data0456.ttype<>4                       --增加本期入库数据(调拨入库不算)
+
+insert into data0446
+(d0451_ptr,d0022_ptr,invent_ptr,recd_date,closed_quantity,unit_price,tax_2)
+SELECT @rkey451 AS d0451_ptr,D0022_PTR,INVENT_PTR,RECD_DATE,QUANTITY,unit_price,tax_2
+FROM Data0445
+where (Data0445.D0444_PTR =@rkey444_end_date) and
+          (Data0445.D0022_PTR NOT IN
+           (SELECT data0446.d0022_ptr FROM data0446 WHERE data0446.d0451_ptr =@rkey451)
+           )
+
+update data0446
+  set Data0446.closed_quantity=data0445.quantity
+  FROM Data0445 INNER JOIN
+  Data0446 ON Data0445.D0022_PTR = Data0446.D0022_PTR
+  WHERE (Data0445.D0444_PTR =@rkey444_end_date)
+  AND (Data0446.D0451_PTR =@rkey451)       --更新期末仓库材料库存数据
+
+insert into data0446 (d0451_ptr,d0022_ptr,invent_ptr,recd_date,out_quantity,unit_price,tax_2)
+SELECT  @rkey451 as d0451_ptr,dbo.Data0207.D0022_PTR, dbo.Data0207.INVENTORY_PTR, 
+      dbo.Data0456.ship_DATE, SUM(dbo.Data0207.QUANTITY) AS out_quantity, 
+      Data0022.tax_PRICE * Data0456.exch_rate/(1+data0022.tax_2*0.01) AS unit_price,
+      data0022.tax_2
+FROM dbo.Data0022 INNER JOIN
+      dbo.Data0207 ON dbo.Data0022.RKEY = dbo.Data0207.D0022_PTR INNER JOIN
+      dbo.Data0456 ON dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY
+WHERE (dbo.Data0207.TDATE > @fm_date) AND 
+      (dbo.Data0207.TDATE <= @end_date) AND 
+      (dbo.Data0022.RKEY NOT IN
+          (SELECT data0446.d0022_ptr
+         FROM data0446
+         WHERE data0446.d0451_ptr = @rkey451))
+GROUP BY dbo.Data0207.D0022_PTR, dbo.Data0207.INVENTORY_PTR, 
+      dbo.Data0456.ship_DATE, Data0022.tax_PRICE * Data0456.exch_rate/(1+data0022.tax_2*0.01),
+     data0022.tax_2
+
+update data0446
+set out_quantity=d1.out_quantity
+from data0446 inner join 
+      (SELECT D0022_PTR, SUM(QUANTITY)  AS out_quantity
+       FROM dbo.Data0207
+       WHERE (TDATE > @fm_date) AND (TDATE <= @end_date)
+       GROUP BY D0022_PTR) as d1
+ on data0446.d0022_ptr=d1.d0022_ptr 
+where (Data0446.D0451_PTR =@rkey451)            --更新本期材料发放数据到446
+
+insert into data0446 (d0451_ptr,d0022_ptr,invent_ptr,recd_date,return_quantity,unit_price,tax_2)
+SELECT  @rkey451 as d0451_ptr,Data0096.INV_TRAN_PTR, data0096.invt_ptr, 
+      Data0456.ship_DATE, SUM(Data0096.QUAN_REJD) AS return_quantity, 
+      AVG(Data0022.tax_PRICE * Data0456.exch_rate/(1+data0022.tax_2*0.01)) AS unit_price,
+     data0022.tax_2
+FROM Data0022 INNER JOIN
+      Data0096 ON dbo.Data0022.RKEY = Data0096.INV_TRAN_PTR INNER JOIN
+      Data0456 ON dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY
+WHERE (Data0096.TDATE > @fm_date) AND 
+      (Data0096.TDATE <= @end_date) AND 
+    (Data0096.flag = '2') and
+      (Data0022.RKEY NOT IN
+          (SELECT data0446.d0022_ptr FROM data0446
+         WHERE data0446.d0451_ptr = @rkey451))
+GROUP BY dbo.Data0096.INV_TRAN_PTR, dbo.Data0096.invt_ptr, 
+      dbo.Data0456.ship_DATE,data0022.tax_2
+
+update data0446
+set return_quantity=d1.return_quantity
+from data0446 inner join 
+      (SELECT INV_TRAN_PTR, SUM(QUAN_REJD)  AS return_quantity
+       FROM Data0096
+      WHERE (Data0096.TDATE > @fm_date) AND 
+      (Data0096.TDATE <= @end_date) and
+      (Data0096.flag = '2')                
+       GROUP BY INV_TRAN_PTR) as d1
+ on data0446.d0022_ptr=d1.INV_TRAN_PTR  --更新材料退货数据到446
+where (Data0446.D0451_PTR =@rkey451)    
+
+insert into data0446 (d0451_ptr,d0022_ptr,invent_ptr,recd_date,reject_quantity,unit_price,tax_2)
+SELECT  @rkey451 as d0451_ptr,Data0096.INV_TRAN_PTR, data0096.invt_ptr, 
+      Data0456.ship_DATE, SUM(Data0096.QUAN_REJD) AS reject_quantity, 
+      AVG(Data0022.tax_PRICE * Data0456.exch_rate/(1+data0022.tax_2*0.01)) AS unit_price,data0022.tax_2
+FROM Data0022 INNER JOIN
+      Data0096 ON dbo.Data0022.RKEY = Data0096.INV_TRAN_PTR INNER JOIN
+      Data0456 ON dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY
+WHERE (Data0096.TDATE > @fm_date) AND 
+      (Data0096.TDATE <= @end_date) AND 
+    (Data0096.flag = '1') and
+      (Data0022.RKEY NOT IN
+          (SELECT data0446.d0022_ptr
+         FROM data0446
+         WHERE data0446.d0451_ptr = @rkey451))
+GROUP BY dbo.Data0096.INV_TRAN_PTR, dbo.Data0096.invt_ptr, 
+      dbo.Data0456.ship_DATE,data0022.tax_2
+
+update data0446
+set reject_quantity=d1.reject_quantity
+from data0446 inner join 
+      (SELECT INV_TRAN_PTR, SUM(QUAN_REJD)  AS reject_quantity
+       FROM Data0096
+        WHERE (Data0096.TDATE > @fm_date) AND 
+               (Data0096.TDATE <= @end_date) and
+               (Data0096.flag = '1')                
+       GROUP BY INV_TRAN_PTR) as d1
+ on data0446.d0022_ptr=d1.INV_TRAN_PTR  --更新材料报废 数据到446
+where (Data0446.D0451_PTR =@rkey451)
+
+insert into data0446 (d0451_ptr,d0022_ptr,invent_ptr,recd_date,unit_price,tax_2)
+SELECT  @rkey451 as d0451_ptr,Data0095.SRCE_PTR, data0095.invt_ptr, 
+      Data0456.ship_DATE,
+ AVG(Data0022.tax_PRICE * Data0456.exch_rate/(1+data0022.tax_2*0.01)) AS unit_price,data0022.tax_2
+FROM Data0022 INNER JOIN
+      Data0095 ON dbo.Data0022.RKEY = Data0095.SRCE_PTR INNER JOIN
+      Data0456 ON dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY
+WHERE (Data0095.TRAN_DATE > @fm_date) AND 
+      (Data0095.TRAN_DATE <= @end_date) AND 
+    (Data0095.TRAN_TP = 23) and
+      (Data0022.RKEY NOT IN
+          (SELECT data0446.d0022_ptr
+         FROM data0446
+         WHERE data0446.d0451_ptr = @rkey451))
+GROUP BY dbo.Data0095.SRCE_PTR, dbo.Data0095.invt_ptr, 
+      dbo.Data0456.ship_DATE,data0022.tax_2
+
+update data0446
+set data0446.reject_quantity=data0446.reject_quantity+d1.reject_quantity
+from data0446 inner join 
+      (SELECT SRCE_PTR, SUM(-Data0095.QUANTITY)  AS reject_quantity
+       FROM Data0095
+       WHERE (Data0095.TRAN_DATE > @fm_date) AND 
+             (Data0095.TRAN_DATE <= @end_date) and
+             (Data0095.TRAN_TP = 23)                
+       GROUP BY SRCE_PTR) as d1
+ on data0446.d0022_ptr=d1.SRCE_PTR  --更新材料盘点差异 数据到446
+where (Data0446.D0451_PTR =@rkey451)    
+
+
+
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];3    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];3
+@rkey451 int,
+@rkey444_fm_date int,
+@rkey444_end_date int,
+@fm_date datetime,
+@end_date datetime
+ AS
+insert into data0454
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,invent_ptr,in_quantity,std_cost,actual_cost,in_amount)
+SELECT @rkey451 AS d0451_ptr, dbo.data0457.warehouse_ptr,dbo.Data0034.COST_DEPT_PTR, 
+      dbo.Data0207.INVENTORY_PTR, SUM(dbo.Data0207.QUANTITY) AS in_quantity, 
+      SUM(dbo.Data0017.STD_COST * dbo.Data0207.QUANTITY) AS std_cost, 
+      SUM(Data0022.tax_PRICE/(1+data0022.tax_2*0.01) * Data0207.QUANTITY * Data0456.exch_rate) 
+      AS actual_cost,
+      SUM(Data0022.tax_PRICE/(1+data0022.tax_2*0.01) * Data0207.QUANTITY * Data0456.exch_rate) 
+      AS in_amount
+FROM dbo.Data0207 INNER JOIN
+      dbo.Data0457 ON dbo.Data0207.GON_PTR = dbo.Data0457.RKEY INNER JOIN
+      dbo.Data0034 ON dbo.Data0457.dept_ptr = dbo.Data0034.RKEY INNER JOIN
+      dbo.Data0017 ON dbo.Data0207.INVENTORY_PTR = dbo.Data0017.RKEY INNER JOIN
+      dbo.Data0022 ON dbo.Data0207.D0022_PTR = dbo.Data0022.RKEY INNER JOIN
+      dbo.Data0456 ON dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY
+WHERE (Data0034.IS_COST_DEPT = 1) AND 
+      (Data0207.TDATE > @fm_date) AND 
+      (Data0207.TDATE <= @end_date)  --and (data0457.ttype<>1)  不包括按配料单发放的)(暂时不考虑)061030
+GROUP BY dbo.data0457.warehouse_ptr,dbo.Data0034.COST_DEPT_PTR,
+ dbo.Data0207.INVENTORY_PTR  --增加本期成本中心接收材料成本(生产部门)
+
+insert into data0454
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,invent_ptr,in_quantity,std_cost,actual_cost,in_amount)
+SELECT @rkey451 AS d0451_ptr,dbo.data0457.warehouse_ptr,Data0457.dept_ptr, 
+      dbo.Data0207.INVENTORY_PTR, SUM(dbo.Data0207.QUANTITY) AS in_quantity, 
+      SUM(dbo.Data0017.STD_COST * dbo.Data0207.QUANTITY) AS std_cost, 
+      SUM(Data0022.tax_PRICE/(1+data0022.tax_2*0.01) * Data0207.QUANTITY * Data0456.exch_rate) 
+      AS actual_cost,
+      SUM(Data0022.tax_PRICE/(1+data0022.tax_2*0.01) * Data0207.QUANTITY * Data0456.exch_rate) 
+      AS in_amount
+FROM dbo.Data0207 INNER JOIN
+      dbo.Data0457 ON dbo.Data0207.GON_PTR = dbo.Data0457.RKEY INNER JOIN
+      dbo.Data0034 ON dbo.Data0457.dept_ptr = dbo.Data0034.RKEY INNER JOIN
+      dbo.Data0017 ON dbo.Data0207.INVENTORY_PTR = dbo.Data0017.RKEY INNER JOIN
+      dbo.Data0022 ON dbo.Data0207.D0022_PTR = dbo.Data0022.RKEY INNER JOIN
+      dbo.Data0456 ON dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY
+WHERE (Data0034.IS_COST_DEPT <> 1) AND 
+      (Data0207.TDATE > @fm_date) AND 
+      (Data0207.TDATE <= @end_date)
+GROUP BY dbo.data0457.warehouse_ptr,Data0457.dept_ptr, Data0207.INVENTORY_PTR 
+--增加本期行政部门接收材料成本(非生产部门)
+
+insert into data0454
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,invent_ptr)
+SELECT  @rkey451 AS d0451_ptr,dbo.Data0462.warehouse_ptr,
+        dbo.Data0462.DEPT_PTR, dbo.Data0462.INVENT_PTR
+FROM dbo.Data0462 LEFT OUTER JOIN
+      dbo.Data0454 ON dbo.Data0462.DEPT_PTR = dbo.Data0454.COST_DEPT_PTR AND 
+      dbo.Data0462.INVENT_PTR = dbo.Data0454.INVENT_PTR AND 
+      dbo.data0462.warehouse_ptr = dbo.data0454.warehouse_ptr and
+      dbo.Data0454.D0451_PTR = @rkey451
+WHERE (dbo.Data0454.RKEY IS NULL) AND (dbo.Data0462.D0443_PTR = @rkey444_fm_date)
+
+update data0454
+set Data0454.OPEN_QUANTITY = Data0454.OPEN_QUANTITY+Data0462.QUAN,
+      Data0454.OPEN_AMOUNT = Data0454.OPEN_AMOUNT+Data0462.QUAN * dbo.Data0462.STD_PRICE,
+      Data0454.ACTUAL_COST = Data0454.ACTUAL_COST+Data0462.QUAN * dbo.Data0462.STD_PRICE,
+      data0454.std_cost = data0454.std_cost+Data0462.QUAN * dbo.Data0462.STD_PRICE
+FROM dbo.Data0462 INNER JOIN
+      dbo.Data0454 ON dbo.Data0462.DEPT_PTR = dbo.Data0454.COST_DEPT_PTR AND 
+      dbo.Data0462.INVENT_PTR = dbo.Data0454.INVENT_PTR AND
+      dbo.data0462.warehouse_ptr = dbo.data0454.warehouse_ptr and
+      dbo.Data0454.D0451_PTR = @rkey451
+WHERE (dbo.Data0462.D0443_PTR = @rkey444_fm_date)        --更新期初在线材料库存
+
+insert into data0454
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,invent_ptr)
+SELECT  @rkey451 AS d0451_ptr,dbo.Data0462.warehouse_ptr,
+        dbo.Data0462.DEPT_PTR, dbo.Data0462.INVENT_PTR
+FROM dbo.Data0462 LEFT OUTER JOIN
+      dbo.Data0454 ON dbo.Data0462.DEPT_PTR = dbo.Data0454.COST_DEPT_PTR AND 
+      dbo.Data0462.INVENT_PTR = dbo.Data0454.INVENT_PTR AND 
+      dbo.data0462.warehouse_ptr = dbo.data0454.warehouse_ptr and
+      dbo.Data0454.D0451_PTR = @rkey451
+WHERE (dbo.Data0454.RKEY IS NULL) AND (dbo.Data0462.D0443_PTR = @rkey444_end_date)
+
+update data0454
+set Data0454.closed_qty = Data0454.closed_qty + Data0462.QUAN,
+      Data0454.closed_amount = Data0454.closed_amount + Data0462.QUAN * dbo.Data0462.STD_PRICE,
+      Data0454.ACTUAL_COST = Data0454.ACTUAL_COST- Data0462.QUAN * dbo.Data0462.STD_PRICE,
+      data0454.std_cost = data0454.std_cost - Data0462.QUAN * dbo.Data0462.STD_PRICE
+FROM dbo.Data0462 INNER JOIN
+      dbo.Data0454 ON dbo.Data0462.DEPT_PTR = dbo.Data0454.COST_DEPT_PTR AND 
+      dbo.Data0462.INVENT_PTR = dbo.Data0454.INVENT_PTR AND 
+      dbo.data0462.warehouse_ptr = dbo.data0454.warehouse_ptr and
+      dbo.Data0454.D0451_PTR = @rkey451
+WHERE (dbo.Data0462.D0443_PTR = @rkey444_end_date)    --更新期末在线材料库存
+
+insert into data0454
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,invent_ptr,BUDGET_COST)
+SELECT @rkey451 AS d0451_ptr, d1.warehouse_ptr,d1.COST_DEPT_PTR, 
+         d1.INVENT_PTR, d1.std_cost
+FROM dbo.Data0454 RIGHT OUTER JOIN
+          (SELECT warehouse_ptr,COST_DEPT_PTR, INVENT_PTR, 
+               SUM(QUAN_YIELD * MATL_STD_PRICE * QTY_BOM) AS std_cost
+         FROM dbo.Data0447
+         WHERE (D0451_PTR = @rkey451)
+         GROUP BY warehouse_ptr,COST_DEPT_PTR, INVENT_PTR) d1 ON 
+      dbo.Data0454.COST_DEPT_PTR = d1.COST_DEPT_PTR AND 
+      dbo.Data0454.INVENT_PTR = d1.INVENT_PTR AND 
+      dbo.data0454.warehouse_ptr = d1.warehouse_ptr and
+      dbo.Data0454.D0451_PTR = @rkey451
+WHERE (dbo.Data0454.RKEY IS NULL)
+
+update data0454
+set Data0454.BUDGET_COST =  d1.budget_cost,
+      Data0454.std_quan_yield = d1.std_quan_yield
+FROM dbo.Data0454 INNER JOIN
+(SELECT data0447.warehouse_ptr,Data0447.COST_DEPT_PTR, Data0447.INVENT_PTR, 
+ SUM(Data0447.QUAN_YIELD * Data0447.MATL_STD_PRICE * Data0447.QTY_BOM) AS budget_cost,
+ sum(Data0447.QUAN_YIELD*Data0447.QTY_BOM) as std_quan_yield
+     FROM dbo.Data0447 
+     WHERE (dbo.Data0447.D0451_PTR = @rkey451)
+ GROUP BY data0447.warehouse_ptr,Data0447.COST_DEPT_PTR, Data0447.INVENT_PTR) d1 ON 
+      dbo.Data0454.COST_DEPT_PTR = d1.COST_DEPT_PTR AND 
+      dbo.Data0454.INVENT_PTR = d1.INVENT_PTR and
+      dbo.data0454.warehouse_ptr = d1.warehouse_ptr
+WHERE (dbo.Data0454.D0451_PTR = @rkey451)   --更新本期按工序产出算出的标准材料成本
+
+update data0454
+set quan_yield_sqft=data0424.yield_sqft,
+     quan_yield_amt=data0424.yield_amount
+FROM dbo.Data0454 INNER JOIN
+      dbo.Data0424 ON dbo.Data0454.COST_DEPT_PTR = dbo.Data0424.DEPT_PTR and
+      dbo.Data0424.warehouse_ptr = dbo.Data0454.warehouse_ptr
+where data0454.d0451_ptr=@rkey451 and data0424.d0451_ptr=@rkey451
+
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];4    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];4
+@rkey451 int
+ AS
+insert into data0453
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,budget_cost,std_cost,actual_cost)
+SELECT @rkey451 AS d0451_ptr,dbo.Data0454.warehouse_ptr,
+      dbo.Data0454.COST_DEPT_PTR, 
+   SUM(dbo.Data0454.BUDGET_COST)  AS budget_cost, 
+   SUM(dbo.Data0454.STD_COST) AS std_cost, 
+   SUM(dbo.Data0454.ACTUAL_COST) AS actual_cost
+FROM dbo.Data0454 INNER JOIN
+      dbo.Data0034 ON 
+      dbo.Data0454.COST_DEPT_PTR = dbo.Data0034.RKEY INNER JOIN
+      dbo.Data0017 ON dbo.Data0454.INVENT_PTR = dbo.Data0017.RKEY INNER JOIN
+      dbo.Data0496 ON dbo.Data0017.GROUP_PTR = dbo.Data0496.RKEY
+WHERE (dbo.Data0454.D0451_PTR = @rkey451) AND (Data0034.IS_COST_DEPT = 1) AND 
+      (dbo.Data0496.ttype = 'P')
+GROUP BY dbo.Data0454.warehouse_ptr,dbo.Data0454.COST_DEPT_PTR --新增工序理论原材料成本，实际材料成本汇总表453
+
+update data0453
+set yield_sqft=data0424.yield_sqft,
+     yield_amount=data0424.yield_amount
+from data0453 inner join data0424 on
+      data0453.cost_dept_ptr=data0424.dept_ptr AND 
+      dbo.Data0453.warehouse_ptr = dbo.Data0424.warehouse_ptr
+where data0453.d0451_ptr=@rkey451 and
+      data0424.d0451_ptr=@rkey451
+
+update data0424
+set ovhd_mtal_1=data0453.actual_cost
+from data0424 inner join data0453 on
+      data0424.dept_ptr=data0453.cost_dept_ptr AND 
+      dbo.Data0424.warehouse_ptr = dbo.Data0453.warehouse_ptr
+where data0453.d0451_ptr=@rkey451 and
+      data0424.d0451_ptr=@rkey451
+
+insert into data0421
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,budget_cost,std_cost,actual_cost)
+SELECT @rkey451 AS d0451_ptr,
+  dbo.Data0454.warehouse_ptr,
+  dbo.Data0454.COST_DEPT_PTR, 
+ SUM(dbo.Data0454.BUDGET_COST)   AS budget_cost,
+ SUM(dbo.Data0454.STD_COST) AS std_cost, 
+ SUM(dbo.Data0454.ACTUAL_COST) AS actual_cost
+FROM dbo.Data0454 INNER JOIN
+      dbo.Data0034 ON 
+      dbo.Data0454.COST_DEPT_PTR = dbo.Data0034.RKEY INNER JOIN
+      dbo.Data0017 ON dbo.Data0454.INVENT_PTR = dbo.Data0017.RKEY INNER JOIN
+      dbo.Data0496 ON dbo.Data0017.GROUP_PTR = dbo.Data0496.RKEY
+WHERE (dbo.Data0454.D0451_PTR = @rkey451) AND (Data0034.IS_COST_DEPT = 1) AND 
+      (dbo.Data0496.ttype <> 'P')
+GROUP BY dbo.Data0454.warehouse_ptr,dbo.Data0454.COST_DEPT_PTR --新增工序理论杂项材料成本汇总表421
+
+update data0421
+set yield_sqft=data0424.yield_sqft,
+     yield_amount=data0424.yield_amount
+from data0421 inner join data0424 on
+      data0421.cost_dept_ptr=data0424.dept_ptr AND 
+      dbo.Data0421.warehouse_ptr = dbo.Data0424.warehouse_ptr
+where data0421.d0451_ptr=@rkey451 and
+      data0424.d0451_ptr=@rkey451
+
+insert into data0422
+( d0451_ptr,warehouse_ptr,cost_dept_ptr,budget_cost,std_cost,actual_cost)
+SELECT @rkey451 AS d0451_ptr,
+       dbo.Data0454.warehouse_ptr,
+       dbo.Data0454.COST_DEPT_PTR, 
+  SUM(dbo.Data0454.BUDGET_COST)  AS budget_cost, 
+  SUM(dbo.Data0454.STD_COST) AS std_cost, 
+  SUM(dbo.Data0454.ACTUAL_COST) AS actual_cost
+FROM dbo.Data0454 INNER JOIN
+      dbo.Data0034 ON dbo.Data0454.COST_DEPT_PTR = dbo.Data0034.RKEY
+WHERE (dbo.Data0454.D0451_PTR = @rkey451) AND (Data0034.IS_COST_DEPT <> 1)
+GROUP BY dbo.Data0454.warehouse_ptr,dbo.Data0454.COST_DEPT_PTR --新增行政部门材料成本汇总表422
+
+insert into data0452
+( d0451_ptr,warehouse_ptr,group_ptr,budget_cost,std_cost,actual_cost)
+select  @rkey451 AS d0451_ptr,
+        dbo.Data0454.warehouse_ptr,
+        data0017.group_ptr,
+sum(data0454.budget_cost) as budget_cost,
+sum(data0454.std_cost) as std_cost,
+sum(data0454.actual_cost) as actual_cost
+from data0454 inner join data0017 on
+data0454.invent_ptr=data0017.rkey
+where   data0454.d0451_ptr=@rkey451
+group by dbo.Data0454.warehouse_ptr,data0017.group_ptr
+--更新本期材料成本按材料类别分类统计数据452
+
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];5    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];5
+@rkey451 int,
+@fmdate datetime,
+@enddate datetime
+ AS
+update data0451
+set dmatl_cst_out=d1.matl_out,
+      dmatl_cst_in_dept_open=d1.matl_open,
+      dmatl_cst_in_dept_closed=d1.matl_close
+from data0451 inner join
+(SELECT dbo.Data0454.D0451_PTR, SUM(dbo.Data0454.IN_AMOUNT) AS matl_out, 
+      SUM(dbo.Data0454.OPEN_AMOUNT) AS matl_open, 
+      SUM(dbo.Data0454.CLOSED_AMOUNT) AS matl_close
+FROM dbo.Data0454 INNER JOIN
+      dbo.Data0017 ON dbo.Data0454.INVENT_PTR = dbo.Data0017.RKEY INNER JOIN
+      dbo.Data0496 ON dbo.Data0017.GROUP_PTR = dbo.Data0496.RKEY INNER JOIN
+      dbo.Data0034 ON dbo.Data0454.COST_DEPT_PTR = dbo.Data0034.RKEY
+WHERE (dbo.Data0496.ttype = 'P') AND (Data0034.IS_COST_DEPT = 1) AND 
+      (dbo.Data0454.D0451_PTR = @rkey451)
+GROUP BY dbo.Data0454.D0451_PTR) d1 on data0451.rkey=d1.d0451_ptr  
+--更新本期(原材料)材料成本451,等于453.actual_cost
+
+update data0451
+set idmatl_cst_out=d1.matl_out,
+     idmatl_cst_in_dept_open=d1.matl_open,
+     idmatl_cst_in_dept_closed=d1.matl_close
+from data0451 inner join
+( SELECT dbo.Data0454.D0451_PTR, SUM(dbo.Data0454.IN_AMOUNT) AS matl_out, 
+      SUM(dbo.Data0454.OPEN_AMOUNT) AS matl_open, 
+      SUM(dbo.Data0454.CLOSED_AMOUNT) AS matl_close
+FROM dbo.Data0454 INNER JOIN
+      dbo.Data0017 ON dbo.Data0454.INVENT_PTR = dbo.Data0017.RKEY INNER JOIN
+      dbo.Data0496 ON dbo.Data0017.GROUP_PTR = dbo.Data0496.RKEY INNER JOIN
+      dbo.Data0034 ON dbo.Data0454.COST_DEPT_PTR = dbo.Data0034.RKEY
+WHERE (dbo.Data0496.ttype <> 'P') AND (Data0034.IS_COST_DEPT = 1) AND 
+      (dbo.Data0454.D0451_PTR = @rkey451)
+GROUP BY dbo.Data0454.D0451_PTR) d1 on data0451.rkey=d1.d0451_ptr 
+ --更新本期(杂项类)材料成本451,等于421.actual_cost
+
+update data0451              --更新本期入库,本期退货材料成本
+set purchased_matl_cost=total_sum.in_amount ,
+     returned_matl_cost=total_sum.return_amount
+from data0451 inner join
+      (select d0451_ptr,sum(in_quantity*unit_price) as in_amount ,
+                        sum(return_quantity*unit_price) as return_amount
+        from data0446
+        where data0446.d0451_ptr=@rkey451
+        group by d0451_ptr ) total_sum on data0451.rkey=total_sum.d0451_ptr
+where data0451.rkey=@rkey451  
+
+update data0451          --更新本期非订单耗用材料成本(行政部门及工序领用的杂项类材料成本)
+set misc_used_matl_cost=total_sum.amount             --该金额应该等于421表中(actual_cost字段)金额的合计
+from data0451 inner join
+(SELECT Data0421.D0451_PTR, SUM(Data0421.ACTUAL_COST) AS amount
+   FROM dbo.Data0421
+   WHERE (dbo.Data0421.D0451_PTR = @rkey451)
+    GROUP BY dbo.Data0421.D0451_PTR) total_sum on data0451.rkey=total_sum.d0451_ptr
+where data0451.rkey=@rkey451
+
+update data0451          --更新本期非订单耗用材料成本(行政部门及工序领用的杂项类材料成本)
+set misc_used_matl_cost=misc_used_matl_cost + total_sum.amount          --该金额应该等于422+421表中(actual_cost字段)金额的合计
+from data0451 inner join
+(SELECT Data0422.D0451_PTR, SUM(Data0422.ACTUAL_COST) AS amount
+   FROM dbo.Data0422
+   WHERE (dbo.Data0422.D0451_PTR = @rkey451)
+    GROUP BY dbo.Data0422.D0451_PTR) total_sum on data0451.rkey=total_sum.d0451_ptr
+where data0451.rkey=@rkey451
+
+
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];6    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];6
+@rkey451 int,
+@fm_date datetime,
+@end_date datetime
+AS
+insert into data0441   --增加本期工序报废记录不包括成品报废
+( d0451_ptr,dept_ptr,bom_ptr,qty_rejected,SQFT_REJECTED,wo_ptr,step,warehouse_ptr)
+SELECT TOP 100 PERCENT @rkey451 AS d0451_ptr, Data0058.RESP_DEPT_PTR, 
+      Data0006.BOM_PTR, Data0058.QTY_REJECT AS qty_rejected, 
+      Data0058.QTY_REJECT * Data0025.unit_sq AS sqft_rejected, 
+      Data0058.WO_PTR, Data0058.StepNow as step,data0058.warehouse_ptr
+FROM dbo.Data0058 INNER JOIN
+      dbo.Data0006 ON dbo.Data0058.WO_PTR = dbo.Data0006.RKEY INNER JOIN
+      dbo.Data0025 ON dbo.Data0006.BOM_PTR = dbo.Data0025.RKEY
+WHERE (dbo.Data0058.TDATETIME > @fm_date) AND 
+       (dbo.Data0058.TDATETIME <= @end_date) AND 
+       (data0058.ttype<>2)
+ORDER BY Data0058.DEPT_PTR, Data0006.BOM_PTR
+
+insert into data0411
+( d0451_ptr,dept_ptr,bom_ptr,QTY_REWORKED,SQFT_REWORKED,TOT_STD_MATL_COST,TOT_STD_OVHD_COST)
+SELECT @rkey451 AS d0451_ptr, dbo.Data0442.DEPT_PTR, dbo.Data0442.BOM_PTR, 
+      SUM(dbo.Data0442.QUAN_PROD) AS qty_reworked, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0025.unit_sq) AS sqft_reworked, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0460.TOT_ACCU_MATL_PER_SQFT * dbo.Data0025.unit_sq)
+       AS std_matl_cost, 
+      SUM(dbo.Data0442.QUAN_PROD * dbo.Data0460.TOT_ACCU_OVHD_PER_SQFT * dbo.Data0025.unit_sq)
+       AS std_ovhd_cost
+FROM dbo.Data0442 INNER JOIN
+      dbo.Data0460 ON dbo.Data0442.BOM_PTR = dbo.Data0460.BOM_PTR AND 
+      dbo.Data0442.STEP = dbo.Data0460.STEP AND 
+      dbo.Data0442.DEPT_PTR = dbo.Data0460.DEPT_PTR INNER JOIN
+      dbo.Data0025 ON dbo.Data0460.BOM_PTR = dbo.Data0025.RKEY
+WHERE (dbo.Data0442.D0451_PTR = @rkey451) AND (dbo.Data0442.WTYPE = 2)
+GROUP BY dbo.Data0442.DEPT_PTR, dbo.Data0442.BOM_PTR  --增加本期返工过数成本411
+
+insert into data0464
+( d0451_ptr,cust_part_ptr,so_ptr,wo_ptr,QUAN_PROD,amount,square,d0053_ptr)
+SELECT @rkey451 AS d0451_ptr, Data0053.CUST_PART_PTR, 
+      dbo.Data0060.RKEY AS so_ptr, Data0053.WORK_ORDER_PTR, 
+      dbo.Data0053.QUANTITY, 
+      dbo.Data0053.QUANTITY * dbo.Data0025.LATEST_PRICE AS amount, 
+      dbo.Data0053.QUANTITY * dbo.Data0025.unit_sq AS square,data0053.rkey
+FROM         dbo.Data0006 INNER JOIN
+                      dbo.Data0053 ON dbo.Data0006.RKEY = dbo.Data0053.WORK_ORDER_PTR INNER JOIN
+                      dbo.Data0025 ON dbo.Data0053.CUST_PART_PTR = dbo.Data0025.RKEY INNER JOIN
+                      dbo.data0492 ON dbo.Data0006.CUT_NO = dbo.data0492.CUT_NO INNER JOIN
+                      dbo.data0416 ON dbo.Data0053.NPAD_PTR = dbo.data0416.rkey LEFT OUTER JOIN
+                      dbo.Data0060 ON dbo.data0492.SO_NO = dbo.Data0060.SALES_ORDER
+WHERE     
+ (dbo.Data0416.sys_DATE > @fm_date) AND
+ (dbo.Data0416.sys_DATE <= @end_date) AND 
+ (dbo.Data0053.QUANTITY > 0) and
+ (Data0416.type =2)  --增加本期完工产品数量
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];7    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];7
+@rkey444_fm_date int,
+@rkey444_end_date int,
+@fm_date datetime,
+@end_date datetime,
+@rkey451 int
+AS
+ insert into data0372
+ (d0451_ptr,d0053_ptr,WO_PTR, indate,CUSTOMER_PART_PTR,open_quantity,unit_price,closed_cost_per_pcs)
+SELECT @rkey451 as d0451_ptr, d0053_ptr, WO_PTR, INDATE, CUSTOMER_PART_PTR, QUANTITY, UNIT_PRICE, 
+      ACT_MATL_COST_PER_PCS + ACT_OVHD_COST_PER_PCS AS open_cost_per_pcs
+FROM dbo.Data0449
+where data0449.d0444_ptr=@rkey444_fm_date        --增加期初成品库存
+
+ insert into data0372
+ (d0451_ptr,d0053_ptr,WO_PTR, indate,CUSTOMER_PART_PTR,in_quantity,unit_price)
+SELECT @rkey451 as d0451_ptr,dbo.Data0053.RKEY, dbo.Data0053.WORK_ORDER_PTR, 
+          dbo.Data0053.MFG_DATE, dbo.Data0053.CUST_PART_PTR,  dbo.Data0053.QUANTITY, 
+      dbo.Data0025.LATEST_PRICE
+FROM dbo.Data0053 INNER JOIN
+      dbo.Data0025 ON dbo.Data0053.CUST_PART_PTR = dbo.Data0025.RKEY
+     inner join data0416 on data0053.NPAD_PTR=data0416.rkey
+WHERE (dbo.Data0053.QUANTITY > 0) and
+      (data0416.sys_date >@fm_date) and
+      (data0416.sys_date <= @end_date)    --增加本期入仓库存
+
+update data0372
+  set Data0372.out_quantity=d1.shipped_52
+from data0372 inner join
+(SELECT dbo.Data0052.DATA0053_PTR, SUM(dbo.Data0052.QUAN_SHP)  AS shipped_52
+FROM dbo.Data0064 INNER JOIN
+      dbo.Data0052 ON dbo.Data0064.RKEY = dbo.Data0052.SO_SHP_PTR
+WHERE (dbo.Data0064.DATE_ASSIGN > @fm_date) and
+               (dbo.Data0064.DATE_ASSIGN <= @end_date)
+GROUP BY dbo.Data0052.DATA0053_PTR) d1 on
+data0372.d0053_ptr=d1.data0053_ptr
+where data0372.d0451_ptr=@rkey451      --更新本期指派出仓数据
+
+update data0372
+  set Data0372.spec_out_quantity=d1.spec_out_quantity
+from data0372 inner join
+(SELECT dbo.Data0465.D0053_PTR, SUM(dbo.Data0465.QUANTITY)  AS spec_out_quantity
+FROM dbo.Data0465 INNER JOIN
+      dbo.data0415 ON dbo.Data0465.heard_ptr = dbo.data0415.rkey
+WHERE (dbo.data0415.auth_date > @fm_date) and
+             (dbo.data0415.auth_date <= @end_date) 
+GROUP BY dbo.Data0465.D0053_PTR) d1 on
+data0372.d0053_ptr=d1.d0053_ptr
+where data0372.d0451_ptr=@rkey451      --更新本期特殊出仓数据
+
+update data0372
+  set Data0372.transfer_quantity=d1.quantity
+from data0372 inner join
+(SELECT SRCE_PTR, SUM(QUANTITY) AS quantity
+FROM dbo.Data0113
+WHERE (TRAN_TYPE = 2) AND 
+               (TDATE > @fm_date) and
+               (TDATE <= @end_date) 
+GROUP BY SRCE_PTR) d1 on
+data0372.d0053_ptr=d1.SRCE_PTR
+where data0372.d0451_ptr=@rkey451      --更新本期成品转移出仓数据
+
+update data0372
+  set Data0372.scrap_quantity=d1.quantity
+from data0372 inner join
+(SELECT dest_ptr, SUM(-QUANTITY) AS quantity
+FROM dbo.Data0113
+WHERE (TRAN_TYPE = 3) AND 
+               (TDATE > @fm_date) and
+               (TDATE <= @end_date) 
+GROUP BY dest_ptr) d1 on
+data0372.d0053_ptr=d1.dest_ptr
+where data0372.d0451_ptr=@rkey451      --更新本期成品盘点差异数据
+
+update data0372
+  set Data0372.scrap_quantity=Data0372.scrap_quantity+d1.scrap_quantity
+from data0372 inner join
+(SELECT TRAN_PTR, SUM(QTY_REJECT) AS scrap_quantity
+FROM dbo.Data0058
+WHERE (TTYPE = 2) AND 
+              (TDATETIME > @fm_date) and
+              (TDATETIME <= @end_date)
+GROUP BY TRAN_PTR) d1 on
+data0372.d0053_ptr=d1.TRAN_PTR
+where data0372.d0451_ptr=@rkey451      --更新本期成品报废数据
+
+update data0372          
+set Data0372.closed_quantity=data0449.quantity
+  FROM Data0449 INNER JOIN Data0372 ON Data0449.D0053_PTR = Data0372.D0053_PTR
+  WHERE (Data0449.D0444_PTR =@rkey444_end_date)
+  AND (Data0372.D0451_PTR =@rkey451)       --更新成 期末数量
+
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];8    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];8   --增加经过成本中心的过数记录及标准成本
+--@fm_date datetime,
+--@end_date datetime,
+@rkey451 int
+AS
+ insert into data0410
+ (d0451_ptr,WO_PTR,step,dept_ptr,qty,MATL_PER_SQFT_1,MATL_PER_SQFT_2,OVERHEAD1_PER_SQFT,OVERHEAD2_PER_SQFT,
+  OVERHEAD3_PER_SQFT,unit_sq,warehouse_ptr,TO_DEPT_PTR)
+SELECT    dbo.Data0442.D0451_PTR, dbo.Data0442.WO_PTR, dbo.Data0442.STEP,
+		  dbo.Data0034.COST_DEPT_PTR, dbo.Data0442.QUAN_PROD, 
+isnull(dbo.Data0460.MATL_PER_SQFT_1,0), isnull(dbo.Data0460.MATL_PER_SQFT_2,0), 
+isnull(dbo.Data0460.OVERHEAD_PER_SQFT,0), isnull(dbo.Data0460.OVERHEAD2_PER_SQFT,0), 
+isnull(dbo.Data0460.OVERHEAD3_PER_SQFT,0),
+ dbo.Data0025.unit_sq,dbo.Data0442.warehouse_ptr,data0442.TO_DEPT_PTR
+FROM         dbo.Data0034 INNER JOIN
+  dbo.Data0025 INNER JOIN
+  dbo.Data0442 ON dbo.Data0025.RKEY = dbo.Data0442.BOM_PTR ON
+  dbo.Data0034.RKEY = dbo.Data0442.DEPT_PTR LEFT OUTER JOIN
+  dbo.Data0460 ON dbo.Data0442.DEPT_PTR = dbo.Data0460.DEPT_PTR AND
+  dbo.Data0442.BOM_PTR = dbo.Data0460.BOM_PTR
+
+WHERE     (dbo.Data0034.IS_COST_DEPT = 1) AND 
+          (dbo.Data0442.D0451_PTR = @rkey451) AND 
+          (dbo.Data0442.QUAN_PROD > 0)
+--  (dbo.Data0442.WTYPE <> 3) and -- 暂时采用平均分摊法(07.12.12)
+    
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];9    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];9          --经过成本中心过数的作业单成本410
+@rkey451 int
+AS
+update data0410            --分配作业单上的实际材料成本
+set matl_amount=(data0410.MATL_PER_SQFT_1+data0410.MATL_PER_SQFT_2)*data0410.unit_sq
+  *data0410.QTY*data0424.OVHD_MTAL_1/(Data0424.STD_MTAL_1+Data0424.STD_MTAL_2),
+
+     matl_pcs=(data0410.MATL_PER_SQFT_1+data0410.MATL_PER_SQFT_2)*data0410.unit_sq
+               *data0424.OVHD_MTAL_1/(Data0424.STD_MTAL_1+Data0424.STD_MTAL_2)
+FROM dbo.data0410 INNER JOIN
+      dbo.Data0424 ON dbo.data0410.DEPT_PTR = dbo.Data0424.DEPT_PTR 
+      AND dbo.data0410.warehouse_ptr = dbo.Data0424.warehouse_ptr
+--INNER JOIN dbo.Data0034 ON dbo.Data0424.DEPT_PTR = dbo.Data0034.RKEY
+WHERE (dbo.data0410.D0451_PTR = @rkey451) AND 
+      (dbo.Data0424.D0451_PTR = @rkey451) AND 
+      (dbo.Data0424.STD_MTAL_1 + dbo.Data0424.STD_MTAL_2 > 0) 
+--AND (dbo.Data0034.Inst_Flag <> 'Y')                       --按配料单记算成本的工序不分配
+
+--update data0410
+--set data0410.matl_pcs=d1.cost_pcs,
+--    data0410.MATL_AMOUNT=data0410.QTY*d1.cost_pcs
+--FROM dbo.data0410 INNER JOIN
+--      dbo.Data0006 ON dbo.data0410.WO_PTR = dbo.Data0006.RKEY INNER JOIN
+--          (SELECT TOP 100 PERCENT dbo.Data0468.CUT_NO, dbo.Data0468.DEPT_PTR, 
+--               SUM((Data0207.QUANTITY * Data0022.tax_price * Data0456.exch_rate) 
+--               / (1 + Data0022.TAX_2 * 0.01) / data0492.ISSUED_QTY) AS cost_pcs
+--         FROM dbo.Data0207 INNER JOIN
+--               dbo.Data0468 ON 
+--               dbo.Data0207.D0468_PTR = dbo.Data0468.RKEY INNER JOIN
+--               dbo.Data0022 ON 
+--               dbo.Data0207.D0022_PTR = dbo.Data0022.RKEY INNER JOIN
+--               dbo.Data0456 ON 
+--               dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY INNER JOIN
+--               dbo.data0492 ON dbo.Data0468.CUT_NO = dbo.data0492.CUT_NO
+--        WHERE (dbo.data0492.ISSUED_QTY > 0)
+--         GROUP BY dbo.Data0468.CUT_NO, dbo.Data0468.DEPT_PTR
+--         ORDER BY dbo.Data0468.CUT_NO, dbo.Data0468.DEPT_PTR) d1 ON 
+--      dbo.Data0006.CUT_NO = d1.CUT_NO AND 
+--      dbo.data0410.DEPT_PTR = d1.DEPT_PTR INNER JOIN
+--      dbo.Data0034 ON d1.DEPT_PTR = dbo.Data0034.RKEY
+--WHERE (dbo.data0410.D0451_PTR = @rkey451) AND (dbo.Data0034.Inst_Flag = 'Y') --分配按配料单领用的材料
+
+update data0410            --分配作业单上的实际制造费用
+set  ovhd1_AMOUNT=data0410.unit_sq*data0410.QTY*Data0424.OVHD_1/Data0424.yield_sqft,
+     ovhd2_AMOUNT=data0410.unit_sq*data0410.QTY*Data0424.OVHD_2/Data0424.yield_sqft,
+     ovhd3_AMOUNT=data0410.unit_sq*data0410.QTY*Data0424.OVHD_3/Data0424.yield_sqft,
+     ovhd_pcs=data0410.unit_sq*(Data0424.OVHD_1+Data0424.OVHD_2+Data0424.OVHD_3)/Data0424.yield_sqft
+FROM dbo.data0410 INNER JOIN
+      dbo.Data0424 ON dbo.data0410.DEPT_PTR = dbo.Data0424.DEPT_PTR
+      AND dbo.data0410.warehouse_ptr = dbo.Data0424.warehouse_ptr
+WHERE (dbo.data0410.D0451_PTR = @rkey451) AND
+      (dbo.Data0424.D0451_PTR = @rkey451) and
+      (Data0424.yield_sqft>0)
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];10    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];10   --返回内层产品有分配记录的所有过数记录(次外层)
+@rkey451 int
+AS
+SELECT     TOP (100) PERCENT dbo.data0410.WO_PTR, dbo.data0410.STEP, 
+dbo.data0410.QTY, dbo.data0410.bring_matl_pcs, dbo.data0410.bring_ovhd_pcs
+FROM         dbo.data0410 INNER JOIN
+                      dbo.Data0006 ON dbo.data0410.WO_PTR = dbo.Data0006.RKEY INNER JOIN
+                      dbo.Data0025 ON dbo.Data0006.BOM_PTR = dbo.Data0025.RKEY INNER JOIN
+                      dbo.Data0025 AS Data0025_4 ON dbo.Data0025.PARENT_PTR = Data0025_4.RKEY 
+WHERE     (dbo.data0410.D0451_PTR = @rkey451) AND (Data0025_4.PARENT_PTR IS NULL) and
+exists(        SELECT     Data0025_3.PARENT_PTR, Data0025_3.BOM_STEP
+                FROM          dbo.Data0025 AS Data0025_3 INNER JOIN
+               dbo.Data0025 AS Data0025_1 ON Data0025_3.PARENT_PTR = Data0025_1.RKEY INNER JOIN
+               dbo.Data0025 AS Data0025_2 ON Data0025_1.PARENT_PTR = Data0025_2.RKEY
+                WHERE      (Data0025_2.PARENT_PTR IS NULL) and
+          dbo.Data0025.RKEY = Data0025_3.PARENT_PTR AND 
+          dbo.data0410.STEP = Data0025_3.BOM_STEP
+                GROUP BY Data0025_3.PARENT_PTR, Data0025_3.BOM_STEP) 
+ORDER BY dbo.data0410.WO_PTR, dbo.data0410.STEP
+
+
+
+
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];11    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];11 --返回顶层作业单有分配内层的
+@rkey451 int
+AS
+SELECT     TOP (100) PERCENT dbo.data0410.WO_PTR, dbo.data0410.STEP, 
+dbo.data0410.QTY, dbo.data0410.bring_matl_pcs, dbo.data0410.bring_ovhd_pcs
+FROM         dbo.data0410 INNER JOIN
+                      dbo.Data0006 ON dbo.data0410.WO_PTR = dbo.Data0006.RKEY INNER JOIN
+                      dbo.Data0025 ON dbo.Data0006.BOM_PTR = dbo.Data0025.RKEY 
+WHERE     (dbo.data0410.D0451_PTR = @rkey451) AND (dbo.Data0025.PARENT_PTR IS NULL) and
+exists(SELECT Data0025_3.PARENT_PTR, Data0025_3.BOM_STEP
+                FROM          dbo.Data0025 AS Data0025_3 INNER JOIN
+              dbo.Data0025 AS Data0025_1 ON Data0025_3.PARENT_PTR = Data0025_1.RKEY
+                WHERE      (Data0025_1.PARENT_PTR IS NULL) and
+              dbo.Data0025.RKEY = Data0025_3.PARENT_PTR AND 
+              dbo.data0410.STEP = Data0025_3.BOM_STEP
+                GROUP BY Data0025_3.PARENT_PTR, Data0025_3.BOM_STEP)
+ORDER BY dbo.data0410.WO_PTR, dbo.data0410.STEP
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];12    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];12--返回分配的内层成本
+@rkey06 int,
+@step int
+ AS
+SELECT SUM((data0410.matl_pcs+data0410.bring_matl_pcs) * d1.putout_qty) AS matl,   --材料成本
+      SUM((data0410.ovhd_pcs+data0410.bring_ovhd_pcs) * d1.putout_qty) AS ovhd     --制造费用成本
+FROM dbo.data0410 INNER JOIN
+          (SELECT Data0489.SOURCE_PTR, SUM(dbo.Data0489.QTY) AS putout_qty
+         FROM  Data0489  inner join data0006 ON 
+               Data0489.SOURCE_PTR = data0006.rkey INNER JOIN
+               Data0025 ON Data0006.BOM_PTR = dbo.Data0025.RKEY
+         WHERE (Data0489.TTYPE = 2) AND (Data0489.QTY > 0) AND 
+               (Data0489.WO_PTR = @rkey06) AND (Data0025.BOM_STEP = @step)
+         GROUP BY Data0489.SOURCE_PTR) d1 ON 
+         data0410.WO_PTR = d1.SOURCE_PTR
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];13    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];13
+@rkey451 int,
+--@rkey444_end_date int,
+@fm_date datetime,
+@end_date datetime
+AS
+update data0006                  --更新本期入库的作业单总成本(实际成本)
+set MATL_COST=d1.matl_pcs_cost,  --先不包括提交入库工序的成本
+    OVHD_COST=d1.ovhd_pcs_cost
+FROM dbo.Data0006 INNER JOIN
+          (SELECT WO_PTR AS rkey06, 
+               SUM(matl_pcs + bring_matl_pcs) AS matl_pcs_cost, 
+               SUM(ovhd_pcs + bring_ovhd_pcs) AS ovhd_pcs_cost
+         FROM data0410 where TO_DEPT_PTR is not null   
+         GROUP BY WO_PTR) d1 ON Data0006.RKEY = d1.rkey06 INNER JOIN
+          (SELECT WORK_ORDER_PTR
+         FROM dbo.Data0053
+         WHERE (RMA_PTR = 0) AND  --只更新本期正常过数入库的作业单,退货1,及返修2不算不参加当期成本分配
+              (MFG_DATE > @fm_date) AND 
+              (MFG_DATE <= @end_date)
+         GROUP BY WORK_ORDER_PTR) d2 ON Data0006.RKEY = d2.WORK_ORDER_PTR
+
+update data0006                --更新本期入库的作业单总成本(加上本期提交入库的工序成本)  
+set MATL_COST=data0006.MATL_COST+d1.matl_pcs_cost, 
+    OVHD_COST=data0006.OVHD_COST+d1.ovhd_pcs_cost
+FROM dbo.Data0006 INNER JOIN
+          (SELECT WO_PTR AS rkey06, 
+               avg(matl_pcs + bring_matl_pcs) AS matl_pcs_cost, 
+               avg(ovhd_pcs + bring_ovhd_pcs) AS ovhd_pcs_cost
+         FROM data0410 
+         where (TO_DEPT_PTR is null) and (D0451_PTR=@rkey451)  --本期提交入库(包装)工序的成本
+           group by wo_ptr) d1 ON Data0006.RKEY = d1.rkey06 INNER JOIN
+          (SELECT WORK_ORDER_PTR
+         FROM dbo.Data0053
+         WHERE (RMA_PTR = 0) AND  --只更新本期正常过数入库的作业单,退货1,及返修2不算不参加当期成本分配
+              (MFG_DATE > @fm_date) AND 
+              (MFG_DATE <= @end_date)
+         GROUP BY WORK_ORDER_PTR) d2 ON Data0006.RKEY = d2.WORK_ORDER_PTR
+
+ update data0053
+ set matl_ovhd_pcs=data0006.MATL_COST+data0006.OVHD_COST
+ FROM Data0053 inner join data0006
+ on data0053.WORK_ORDER_PTR=data0006.rkey
+ WHERE (data0053.RMA_PTR =0) AND  --更新本期过数入库的作业单成本:=当期分配成本
+      (data0053.MFG_DATE > @fm_date) AND 
+      (data0053.MFG_DATE <= @end_date)
+
+
+ update data0053
+ set matl_ovhd_pcs=data0053.matl_ovhd_pcs+data0006.PLANNED_QTY
+ FROM Data0053 inner join data0006
+ on data0053.WORK_ORDER_PTR=data0006.rkey
+ WHERE (data0053.RMA_PTR in (1,2)) AND  --更新本期过数入库的作业单退货1,及返修2成本:=当期分配成本+上期生产的带入成本
+      (data0053.MFG_DATE > @fm_date) AND 
+      (data0053.MFG_DATE <= @end_date) and
+      (data0006.ENT_DATETIME <= @fm_date) 
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];14    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];14
+@fm_date datetime,
+@end_date datetime,
+@rkey451 int
+AS
+declare @sales_amount money
+declare @sales_sqft money
+SELECT
+@sales_amount=
+SUM(Data0064.QUAN_SHIPPED * Data0060.PARTS_ALLOC / Data0060.EXCH_RATE),
+@sales_sqft=
+SUM(Data0064.QUAN_SHIPPED * Data0025.unit_sq) 
+FROM dbo.Data0025 INNER JOIN
+      dbo.Data0060 ON dbo.Data0025.RKEY = dbo.Data0060.CUST_PART_PTR INNER JOIN
+      dbo.Data0064 ON dbo.Data0060.RKEY = dbo.Data0064.SO_PTR
+WHERE (dbo.Data0064.assign_type = 0) AND          --只统计正常指派的金额
+               (dbo.Data0060.so_tp = 0)   and                    --外发加工,半制程的订单不算销售金额
+      (dbo.Data0064.DATE_ASSIGN > @fm_date) AND 
+      (dbo.Data0064.DATE_ASSIGN <= @end_date) 
+
+update data0451
+set yield_in_amount=@sales_amount,
+     yield_in_sqft=@sales_sqft,
+     total_matl_cst=dmatl_cst_in_dept_open+
+                             idmatl_cst_in_dept_open+            /* matl_cst_in_sfg_open+*/
+                             matl_cst_in_fg_open+
+                             matl_cst_in_wip_open+
+                             dmatl_cst_out+
+                             idmatl_cst_out-
+                            dmatl_cst_in_dept_closed-
+                            idmatl_cst_in_dept_closed-            /* matl_cst_in_sfg_closed-*/
+                            matl_cst_in_fg_closed-
+                            matl_cst_in_wip_closed,
+     total_ovhd_cst= ovhd_cst_in_fg_open+              /*ovhd_cst_in_sfg_open+*/
+                              ovhd_cst_in_wip_open+
+                              ovhd_cst_in_wip_occured-        /* ovhd_cst_in_sfg_closed-*/
+                              ovhd_cst_in_fg_closed-
+                              ovhd_cst_in_wip_closed
+where data0451.rkey=@rkey451
+
+update data0451 
+set open_wip_cost=matl_cst_in_wip_open+ovhd_cst_in_wip_open           --更新期初在制品成本
+where data0451.rkey=@rkey451
+
+update data0451 
+set closed_wip_cost=matl_cst_in_wip_closed+ovhd_cst_in_wip_closed           --更新期末在制品成本
+where data0451.rkey=@rkey451
+
+update data0451 
+set open_fg_cost = matl_cst_in_fg_open+ovhd_cst_in_fg_open            --更新期初产成品成本
+where data0451.rkey=@rkey451
+
+update data0451 
+set closed_fg_cost=matl_cst_in_fg_closed+ovhd_cst_in_fg_closed        --更新期末产成品成本
+where data0451.rkey=@rkey451
+/*
+update data0451 
+set MATL_CST_IN_STOCK_OPEN = matl_cst_in_sfg_open+ovhd_cst_in_sfg_open   --更新期初半成品成本
+where data0451.rkey=@rkey451
+
+update data0451 
+set MATL_CST_IN_STOCK_CLOSED=matl_cst_in_sfg_closed+ovhd_cst_in_sfg_closed  --更新期末半成品成本
+where data0451.rkey=@rkey451
+*/
+
+
+
+
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];15    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];15
+@rkey451 int
+AS
+BEGIN
+ declare
+  @rkey441 int,
+  @wo int,
+  @step_no int,
+  @matl float,
+  @ovhd float
+
+ declare main_cur cursor for
+  select rkey,wo_ptr, step from data0441
+  where D0451_PTR=@rkey451
+
+--begin tran
+
+  open main_cur
+  fetch next from main_cur into @rkey441,@wo,@step_no
+
+  while @@fetch_status = 0
+  begin
+   SELECT @matl=isnull(SUM(matl_pcs + bring_matl_pcs),0) ,@ovhd=isnull(SUM(ovhd_pcs + bring_ovhd_pcs),0 )
+   FROM dbo.data0410
+   WHERE (WO_PTR = @wo) AND (STEP < @step_no) AND (D0451_PTR <= @rkey451)
+   
+   if (@matl>0) or (@ovhd>0) 
+    update data0441
+     set TOT_STD_MATL_COST=data0441.QTY_REJECTED*@matl,
+         TOT_STD_OVHD_COST=data0441.QTY_REJECTED*@ovhd
+    where data0441.rkey=@rkey441
+
+    --if @@error <> 0 goto error_handle
+    fetch next from main_cur into @rkey441,@wo,@step_no
+  end;
+
+ --commit tran
+
+--error_handle:
+ -- rollback tran
+ 
+ close main_cur
+ deallocate main_cur
+/*
+  update data0441
+  set TOT_STD_MATL_COST=TOT_STD_MATL_COST+data0006.PLANNED_QTY
+  from data0441 inner join data0006
+  on data0441.wo_ptr=data0006.rkey
+  where D0451_PTR=@rkey451
+*/
+END
+
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];16    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];16
+@rkey451 int,
+@rkey444_fm_date int,
+@rkey444_end_date int,
+@fm_date datetime,
+@end_date datetime
+AS
+
+update data0053     --更新退货入库的库存成本
+set cost_pcs=derivedtbl_1.cost_price
+FROM         dbo.Data0053 INNER JOIN
+       dbo.data0416 ON dbo.Data0053.NPAD_PTR = dbo.data0416.rkey INNER JOIN
+      (SELECT   dbo.data0120.rma_ptr, 
+                AVG(derivedtbl.avg_price) AS cost_price
+        FROM    dbo.data0120 INNER JOIN
+(SELECT  dbo.Data0052.SO_SHP_PTR, 
+        AVG(Data0053_1.matl_ovhd_pcs+Data0053_1.cost_pcs) AS avg_price
+ FROM   dbo.Data0052 INNER JOIN
+  dbo.Data0053 AS Data0053_1 ON dbo.Data0052.DATA0053_PTR = Data0053_1.RKEY
+  GROUP BY dbo.Data0052.SO_SHP_PTR) AS derivedtbl ON derivedtbl.SO_SHP_PTR = dbo.data0120.ship_ptr
+          GROUP BY dbo.data0120.rma_ptr) AS derivedtbl_1 ON dbo.data0416.rma_ptr = derivedtbl_1.rma_ptr
+WHERE     (dbo.data0416.type = 4) and   
+          (data0053.MFG_DATE > @fm_date) AND 
+          (data0053.MFG_DATE <= @end_date)
+
+update data0006  --更新本期按MRB返修投产的作业单带入成本
+set PLANNED_QTY=derivedtbl_1.avg_price
+FROM         dbo.data0492 INNER JOIN
+  dbo.Data0006 ON dbo.data0492.CUT_NO = dbo.Data0006.CUT_NO INNER JOIN
+  dbo.data0414 ON dbo.data0492.mrb_ptr = dbo.data0414.rkey INNER JOIN
+      (SELECT     dbo.Data0465.heard_ptr,
+            AVG(Data0053_1.matl_ovhd_pcs+Data0053_1.cost_pcs) AS avg_price
+            FROM   Data0465 INNER JOIN
+         dbo.Data0053 AS Data0053_1 ON dbo.Data0465.D0053_PTR = Data0053_1.RKEY  
+       GROUP BY dbo.Data0465.heard_ptr) AS derivedtbl_1 ON dbo.data0414.d415_ptr = derivedtbl_1.heard_ptr
+WHERE     (data0492.TTYPE = 3)AND
+          (data0006.ENT_DATETIME > @fm_date) AND 
+          (data0006.ENT_DATETIME <= @end_date)
+
+update data0006    --更新本期正常重检创建作业单的带入成本(去掉自身带入成本连加)
+set PLANNED_QTY=             --data0006.PLANNED_QTY+
+Data0006_1.MATL_COST+Data0006_1.OVHD_COST+Data0006_1.PLANNED_QTY
+FROM  dbo.Data0006 INNER JOIN
+      dbo.Data0006 AS Data0006_1 ON dbo.Data0006.rma_ptr = Data0006_1.RKEY
+WHERE    (data0006.ENT_DATETIME > @fm_date)
+     AND (data0006.ENT_DATETIME <= @end_date)
+
+update data0053  --更新本期完工成本中的报废成本每PCS
+set cost_pcs=(Data0464.scap_cost + Data0464.outsource_cost)/Data0464.QUAN_PROD
+FROM     dbo.Data0053 INNER JOIN
+         dbo.data0416 ON dbo.Data0053.NPAD_PTR = dbo.data0416.rkey INNER JOIN
+         dbo.Data0464 ON dbo.Data0053.RKEY = dbo.Data0464.d0053_ptr
+WHERE     
+ (dbo.Data0416.sys_DATE > @fm_date) AND
+ (dbo.Data0416.sys_DATE <= @end_date) AND 
+ (dbo.Data0053.QUANTITY > 0) and
+ (Data0416.type =2) and
+ (data0464.D0451_PTR=@rkey451) 
+
+ update data0053                 --更新本期过数入库的作业单,本期生产带入成本
+ set matl_ovhd_pcs=data0053.matl_ovhd_pcs+data0006.PLANNED_QTY
+ FROM Data0053 inner join data0006
+ on data0053.WORK_ORDER_PTR=data0006.rkey
+ WHERE (data0053.RMA_PTR in (1,2)) AND  
+      (data0053.MFG_DATE > @fm_date) AND 
+      (data0053.MFG_DATE <= @end_date) and
+      (data0006.ENT_DATETIME > @fm_date) AND 
+      (data0006.ENT_DATETIME <= @end_date)
+
+
+update data0448         --清除已核算期末在制品每PCS材料成本,制造费用
+set  Data0448.ACT_MATL_COST_PER_PCS = 0,
+     Data0448.ACT_OVHD_COST_PER_PCS = 0
+WHERE (dbo.Data0448.D0444_PTR = @rkey444_end_date)
+
+update data0448       --更新期末在制品每PCS材料成本,制造费用
+set  Data0448.ACT_MATL_COST_PER_PCS = d1.matl_pcs_cost,
+     Data0448.ACT_OVHD_COST_PER_PCS = d1.ovhd_pcs_cost
+FROM dbo.Data0448 INNER JOIN
+          (SELECT WO_PTR AS rkey06, SUM(matl_pcs + bring_matl_pcs) AS matl_pcs_cost, 
+               SUM(ovhd_pcs + bring_ovhd_pcs) AS ovhd_pcs_cost
+         FROM data0410
+        where data0410.d0451_ptr<=@rkey451 and data0410.TO_DEPT_PTR is not null
+         GROUP BY WO_PTR) d1 ON dbo.Data0448.WO_PTR = d1.rkey06
+WHERE (dbo.Data0448.D0444_PTR = @rkey444_end_date)
+
+
+update data0449  --更新上期期末已存在的库存，成本不能再次更新
+set ACT_MATL_COST_PER_PCS= Data0449_1.ACT_MATL_COST_PER_PCS,
+    ACT_OVHD_COST_PER_PCS= Data0449_1.ACT_OVHD_COST_PER_PCS 
+FROM         dbo.Data0449 INNER JOIN
+           dbo.Data0449 AS Data0449_1 ON dbo.Data0449.d0053_ptr = Data0449_1.d0053_ptr
+WHERE     (dbo.Data0449.D0444_PTR = @rkey444_end_date) AND (Data0449_1.D0444_PTR = @rkey444_fm_date)
+
+update data0449   --更新本期新增入库的期末产成品每PCS材料成本,制造费用,及报废成本
+set  Data0449.ACT_MATL_COST_PER_PCS = ISNULL(dbo.Data0006.MATL_COST + dbo.Data0006.PLANNED_QTY,0)+ dbo.Data0053.cost_pcs,
+     Data0449.ACT_OVHD_COST_PER_PCS = ISNULL(dbo.Data0006.OVHD_COST,0)
+FROM   dbo.Data0449 INNER JOIN  dbo.Data0053 ON dbo.Data0449.d0053_ptr = dbo.Data0053.RKEY
+                    INNER JOIN dbo.data0416 ON dbo.Data0053.NPAD_PTR = dbo.data0416.rkey 
+           LEFT OUTER JOIN  dbo.Data0006 ON dbo.Data0449.WO_PTR = dbo.Data0006.RKEY
+WHERE (dbo.Data0449.D0444_PTR = @rkey444_end_date) and
+      (data0416.sys_date > @fm_date)  --入库日期为本期新增的库存
+
+update data0464                  --更新本期完成成品材料成本,制造费用
+set  Data0464.matl_cost = data0006.matl_cost*data0464.quan_prod,
+     Data0464.ovhd_cost = data0006.ovhd_cost*data0464.quan_prod
+FROM dbo.Data0464 INNER JOIN data0006 ON dbo.Data0464.WO_PTR = data0006.rkey
+WHERE (dbo.Data0464.d0451_ptr = @rkey451)
+
+update data0372           --更新成品期末数量及成本数据
+set  Data0372.closed_cost_per_pcs=
+ ISNULL(Data0006.MATL_COST +data0006.ovhd_cost+ dbo.Data0006.PLANNED_QTY,0)+ dbo.Data0053.cost_pcs
+FROM data0372 INNER JOIN 
+      dbo.Data0053 ON dbo.Data0372.d0053_ptr = dbo.Data0053.RKEY LEFT OUTER JOIN
+      dbo.Data0006 ON dbo.Data0372.WO_PTR = dbo.Data0006.RKEY
+WHERE (Data0372.D0451_PTR =@rkey451)  and (open_quantity=0)    
+
+update data0444      --更新期末在线产品截数成本数据444
+set Data0444.MATL_CST_IN_WIP_CLOSED=d1.MATL_COST,
+     Data0444.OVHD_CST_IN_WIP_CLOSED=d1.OVHD_COST
+FROM Data0444 INNER JOIN
+          (SELECT Data0448.D0444_PTR, 
+               SUM(dbo.Data0448.QUANTITY * dbo.Data0448.ACT_MATL_COST_PER_PCS) 
+               AS MATL_COST, 
+               SUM(dbo.Data0448.QUANTITY * dbo.Data0448.ACT_OVHD_COST_PER_PCS) 
+               AS OVHD_COST
+         FROM data0448
+        where data0448.d0444_ptr=@rkey444_end_date
+         GROUP BY Data0448.D0444_PTR) d1 ON 
+      Data0444.RKEY = d1.D0444_PTR               
+where data0444.rkey=@rkey444_end_date
+
+update data0444    --更新期末库存成品实际成本数据444
+set Data0444.matl_cst_in_fg_closed=d1.MATL_COST,
+     Data0444.ovhd_cst_in_fg_closed=d1.OVHD_COST
+FROM Data0444 INNER JOIN
+          (SELECT Data0449.D0444_PTR, 
+               SUM(Data0449.QUANTITY * Data0449.ACT_MATL_COST_PER_PCS) 
+               AS MATL_COST, 
+               SUM(Data0449.QUANTITY * Data0449.ACT_OVHD_COST_PER_PCS) 
+               AS OVHD_COST
+         FROM data0449
+        where (data0449.d0444_ptr=@rkey444_end_date) 
+         GROUP BY Data0449.D0444_PTR) d1 ON 
+      Data0444.RKEY = d1.D0444_PTR         
+where data0444.rkey=@rkey444_end_date
+
+update data0451     --更新本期制造费用合计 451人工输入的实际制造费用
+set data0451.ovhd_cst_in_wip_occured=d1.ovhd_cost,
+      ovhd1_cost=d1.tovhd_1,
+      ovhd2_cost=d1.tovhd_2,
+      ovhd3_cost=d1.tovhd_3
+from data0451 inner join
+        (select d0451_ptr,sum(ovhd_1+ovhd_2+ovhd_3) as ovhd_cost,
+                                    sum(ovhd_1) as tovhd_1,
+                                    sum(ovhd_2) as tovhd_2,
+                                    sum(ovhd_3) as tovhd_3
+         from data0424
+         where data0424.d0451_ptr=@rkey451
+        group by d0451_ptr) d1
+ on  data0451.rkey=d1.d0451_ptr      
+
+update data0451
+set 
+ Data0451.MATL_CST_IN_WIP_OPEN = Data0444.MATL_CST_IN_WIP_CLOSED, 
+ Data0451.OVHD_CST_IN_WIP_OPEN = Data0444.OVHD_CST_IN_WIP_CLOSED,--更新本期期初在线成品标准成本451,//15.1
+-- Data0451.matl_cst_in_sfg_open = Data0444.matl_cst_in_sfg_closed, 
+-- Data0451.ovhd_cst_in_sfg_open = Data0444.ovhd_cst_in_sfg_closed,
+ Data0451.matl_cst_in_fg_open=data0444.matl_cst_in_fg_closed,
+ Data0451.ovhd_cst_in_fg_open=data0444.ovhd_cst_in_fg_closed,
+ data0451.stock_matl_cost=data0444.MATL_CST_IN_STOCK_CLOSED,
+ data0451.stock_matl_in_wip_cost=data0444.MATL_CST_IN_dept_CLOSED
+FROM dbo.Data0444 INNER JOIN
+      dbo.Data0451 ON dbo.Data0444.CUT_DATE = dbo.Data0451.FM_DATE
+where data0451.rkey=@rkey451                  --更新本期期初,成品数据451//16.1
+
+update data0451
+set 
+ Data0451.MATL_CST_IN_WIP_closed = Data0444.MATL_CST_IN_WIP_CLOSED, 
+ Data0451.OVHD_CST_IN_WIP_closed = Data0444.OVHD_CST_IN_WIP_CLOSED, --更新期末在线成品标准成本451//15.2
+-- Data0451.matl_cst_in_sfg_closed = Data0444.matl_cst_in_sfg_closed, 
+-- Data0451.ovhd_cst_in_sfg_closed = Data0444.ovhd_cst_in_sfg_closed,
+ Data0451.matl_cst_in_fg_closed = Data0444.matl_cst_in_fg_closed, 
+ Data0451.ovhd_cst_in_fg_closed = Data0444.ovhd_cst_in_fg_closed,
+ data0451.closed_stock_matl_cost=data0444.MATL_CST_IN_STOCK_CLOSED,
+ data0451.closed_stock_matl_in_wip_cost=data0444.MATL_CST_IN_dept_CLOSED
+FROM dbo.Data0444 INNER JOIN
+      dbo.Data0451 ON dbo.Data0444.CUT_DATE = dbo.Data0451.end_date
+where data0451.rkey=@rkey451                     --更新本期期末,成品标准成本451//16.2,16.3
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];17    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+ALTER PROCEDURE [dbo].[wzpr451];17   --返回内层产品有分配记录的所有过数记录(次次外层)
+@rkey451 int
+AS
+SELECT     TOP (100) PERCENT dbo.data0410.WO_PTR, dbo.data0410.STEP,
+dbo.data0410.QTY, dbo.data0410.bring_matl_pcs, dbo.data0410.bring_ovhd_pcs
+FROM         dbo.data0410 INNER JOIN
+                      dbo.Data0006 ON dbo.data0410.WO_PTR = dbo.Data0006.RKEY INNER JOIN
+                      dbo.Data0025 ON dbo.Data0006.BOM_PTR = dbo.Data0025.RKEY INNER JOIN
+                      dbo.Data0025 AS Data0025_1 ON dbo.Data0025.PARENT_PTR = Data0025_1.RKEY INNER JOIN
+                      dbo.Data0025 AS Data0025_3 ON Data0025_1.PARENT_PTR = Data0025_3.RKEY
+WHERE     (dbo.data0410.D0451_PTR = @rkey451) AND (Data0025_3.PARENT_PTR IS  NULL) and
+exists(  SELECT     Data0025_4.PARENT_PTR, Data0025_4.BOM_STEP
+        FROM          dbo.Data0025 AS Data0025_4 INNER JOIN
+                               dbo.Data0025 AS Data0025_5 ON Data0025_4.PARENT_PTR = Data0025_5.RKEY INNER JOIN
+                               dbo.Data0025 AS Data0025_6 ON Data0025_5.PARENT_PTR = Data0025_6.RKEY INNER JOIN
+                               dbo.Data0025 AS Data0025_7 ON Data0025_6.PARENT_PTR = Data0025_7.RKEY
+        WHERE      (Data0025_7.PARENT_PTR IS NULL) and data0410.step=Data0025_4.BOM_STEP and
+             Data0025.RKEY=Data0025_4.PARENT_PTR
+        GROUP BY Data0025_4.PARENT_PTR, Data0025_4.BOM_STEP)
+ORDER BY dbo.data0410.WO_PTR, dbo.data0410.STEP
+
+
+
+
+GO
+/****** 对象:  NumberedStoredProcedure [dbo].[wzpr451];18    脚本日期: 06/10/2014 13:50:35 ******/
+SET ANSI_NULLS OFF
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+/****************************************************************************/
+/******将Data0441中的报废成本按照数量或面积比例分摊到Data0464完工成本中******/
+/*********本期有完工入库的作业单报废成本分摊到对应的作业单完工成本中*********/
+/*本期没有完工入库的报废成本按数量或面积比例分摊到所有作业单的完工入库成本中*/
+/****************************************************************************/
+ALTER PROCEDURE [dbo].[wzpr451];18
+ @d0451_ptr int
+AS
+DECLARE @ERROR INT,@ERRMSG VARCHAR(100)
+
+--BEGIN TRAN SP_TEST
+
+UPDATE Data0464
+SET outsource_cost=0,scap_cost=0
+WHERE D0451_PTR=@d0451_ptr
+IF @@ERROR<>0
+BEGIN
+  SET @ERROR = 39999
+  SET @ERRMSG = '分摊报废成本前重置资料失败'
+  GOTO ERROR
+END
+
+/****************将本期报废成本分摊到完工成本中(先更新有本期完工入库的作业单)BEGIN****************/
+
+--根据作业单汇总本期报废成本&作业单带入成本Data0006.PLANNED_QTY
+SELECT t441.wo_ptr,
+	SUM(IsNull(t441.TOT_STD_MATL_COST,0)) as total_MATL_COST,SUM(IsNull(t441.TOT_STD_OVHD_COST,0)) as total_OVHD_COST,
+	SUM(IsNull(t441.QTY_REJECTED,0)*IsNull(t6.PLANNED_QTY,0)) as Other_COST
+INTO #total_COST
+FROM Data0441 t441
+INNER JOIN Data0006 t6 ON t441.wo_ptr=t6.RKEY
+WHERE t441.d0451_ptr=@d0451_ptr
+  AND EXISTS(SELECT 1 FROM Data0464 t464 WHERE t464.d0451_ptr=t441.d0451_ptr AND t464.wo_ptr=t441.wo_ptr)
+GROUP BY t441.wo_ptr
+
+--根据作业单汇总本期完工数量
+SELECT t464.wo_ptr,SUM(IsNull(t464.QUAN_PROD,0)) as total_qty
+INTO #total_QUAN_PROD
+FROM Data0464 t464
+WHERE t464.d0451_ptr=@d0451_ptr
+  AND EXISTS(SELECT 1 FROM Data0441 t441 WHERE t441.d0451_ptr=t464.d0451_ptr AND t441.wo_ptr=t464.wo_ptr)
+GROUP BY t464.wo_ptr
+
+--将本期报废成本、带入成本分摊到对应作业单的完工成本中
+UPDATE t464
+SET outsource_cost = CASE tmp1.total_qty WHEN 0 THEN 0
+						ELSE outsource_cost+(IsNull(t464.QUAN_PROD,0)*IsNull(tmp2.Other_COST,0))/tmp1.total_qty
+					 END,
+	scap_cost = CASE tmp1.total_qty WHEN 0 THEN 0
+					ELSE scap_cost+IsNull(t464.QUAN_PROD,0)*((tmp2.total_MATL_COST+tmp2.total_OVHD_COST))/tmp1.total_qty
+				END
+FROM Data0464 t464
+INNER JOIN #total_QUAN_PROD tmp1 ON t464.WO_PTR=tmp1.WO_PTR
+INNER JOIN #total_COST tmp2 ON t464.WO_PTR=tmp2.WO_PTR
+WHERE t464.d0451_ptr=@d0451_ptr
+  AND EXISTS(SELECT 1 FROM Data0441 t441 WHERE t441.d0451_ptr=t464.d0451_ptr AND t441.wo_ptr=t464.wo_ptr)
+IF @@ERROR<>0
+BEGIN
+  SET @ERROR = 39998
+  SET @ERRMSG = '分摊本期有完工入库的作业单报废成本失败'
+  GOTO ERROR
+END
+/****************将本期报废成本分摊到完工成本中(先更新有本期完工入库的作业单)END****************/
+
+---------------------------------------------------------------------------------------------------------
+
+/********************将本期报废成本分摊到完工成本中(本期无入库的作业单)BEGIN********************/
+Declare @total_MATL_COST Decimal(18,9), @total_OVHD_COST Decimal(18,9), @Totalsquare Decimal(18,9), @Other_COST Decimal(18,9)
+
+--汇总本期报废材料成本&制造费用&带入成本(本期无入库的作业单)
+SELECT @total_MATL_COST=SUM(IsNull(t441.TOT_STD_MATL_COST,0)),@total_OVHD_COST=SUM(IsNull(t441.TOT_STD_OVHD_COST,0)),
+	   @Other_COST=SUM(IsNull(t441.QTY_REJECTED,0)*IsNull(t6.PLANNED_QTY,0))
+FROM Data0441 t441
+INNER JOIN Data0006 t6 ON t441.wo_ptr=t6.RKEY
+WHERE t441.d0451_ptr=@d0451_ptr
+  AND NOT EXISTS(SELECT 1 FROM Data0464 t464 WHERE t464.d0451_ptr=t441.d0451_ptr AND t464.wo_ptr=t441.wo_ptr)
+
+--总完工面积
+SELECT @Totalsquare=SUM(IsNull(t464.[square],0))
+FROM Data0464 t464
+WHERE t464.d0451_ptr=@d0451_ptr
+
+UPDATE Data0464
+SET outsource_cost = CASE @Totalsquare WHEN 0 THEN 0
+						ELSE IsNull(outsource_cost,0)+(ISNULL([square],0)*IsNull(@Other_COST,0))/@Totalsquare
+					 END,
+	scap_cost = CASE @Totalsquare WHEN 0 THEN 0
+					ELSE IsNull(scap_cost,0)+(ISNULL([square],0)*(IsNull(@total_MATL_COST,0)+IsNull(@total_OVHD_COST,0)))/@Totalsquare
+				END
+WHERE d0451_ptr=@d0451_ptr
+IF @@ERROR<>0
+BEGIN
+  SET @ERROR = 39997
+  SET @ERRMSG = '分摊本期无完工入库的作业单报废成本失败'
+  GOTO ERROR
+END
+/********************将本期报废成本分摊到完工成本中(本期无入库的作业单)END********************/
+--COMMIT TRAN SP_TEST
+RETURN
+	ERROR:
+	RAISERROR @ERROR @ERRMSG
+--	ROLLBACK TRAN SP_TEST

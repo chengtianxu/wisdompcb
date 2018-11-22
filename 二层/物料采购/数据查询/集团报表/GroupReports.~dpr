@@ -1,0 +1,30 @@
+program GroupReports;
+
+uses
+  Forms,
+  main in 'main.pas' {frmMain},
+  BaseForm in 'BaseForm.pas' {frmBaseForm},
+  condition in 'condition.pas' {frmCondition},
+  Report1 in 'Report1.pas' {frmReport1},
+  Report2 in 'Report2.pas' {frmReport2},
+  Report3 in 'Report3.pas' {frmReport3},
+  Report4 in 'Report4.pas' {frmReport4},
+  Report5 in 'Report5.pas' {frmReport5},
+  Report6 in 'Report6.pas' {frmReport6},
+  Report7 in 'Report7.pas' {frmReport7},
+  Report8 in 'Report8.pas' {frmReport8},
+  Report9 in 'Report9.pas' {frmReport9},
+  Report10 in 'Report10.pas' {frmReport10},
+  Report11 in 'Report11.pas' {frmReport11},
+  Report12 in 'Report12.pas' {frmReport12},
+  Report13 in 'Report13.pas' {frmReport13};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.Title := '集团报表';
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmCondition, frmCondition);
+  Application.Run;
+end.

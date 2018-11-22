@@ -1,0 +1,55 @@
+unit Unit3;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Grids, DBGridEh, Mask, DBCtrls;
+
+type
+  TForm3 = class(TForm)
+    lbl1: TLabel;
+    dbedtSALES_ORDER: TDBEdit;
+    lbl2: TLabel;
+    dbedtPARTS_ORDERED: TDBEdit;
+    lbl3: TLabel;
+    dbedtPARTS_ORDERED1: TDBEdit;
+    lbl4: TLabel;
+    dbedtSCH_DATE: TDBEdit;
+    dbgrdh1: TDBGridEh;
+    btn1: TBitBtn;
+    btn2: TBitBtn;
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+
+
+implementation
+
+uses
+   damo;
+
+{$R *.dfm}
+
+procedure TForm3.btn1Click(Sender: TObject);
+begin
+ DM.qry2.Edit;
+ DM.qry2.Post;
+ Application.MessageBox('修改成功！','提示',0+64) ;
+ //DM.qry2.Close;
+end;
+
+procedure TForm3.btn2Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.
+ 

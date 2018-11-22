@@ -1,0 +1,965 @@
+unit Frm_Edit_u;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, ExtCtrls, Grids, DBGridEh, ComCtrls, StdCtrls, DBCtrls,
+  DB, Mask, ADODB, Menus, IdBaseComponent, IdComponent, IdTCPConnection,
+  IdTCPClient, IdFTP;
+
+type
+  TFrm_Edit = class(TForm)
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    DBGridEh1: TDBGridEh;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    Label6: TLabel;
+    DBEdit6: TDBEdit;
+    DBRadioGroup1: TDBRadioGroup;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    DBEdit7: TDBEdit;
+    EdtGrp: TEdit;
+    SpeedButton3: TSpeedButton;
+    Label12: TLabel;
+    EdtUnit: TEdit;
+    SpeedButton4: TSpeedButton;
+    Label13: TLabel;
+    EdtDept: TEdit;
+    SpeedButton5: TSpeedButton;
+    Label14: TLabel;
+    DBMemo1: TDBMemo;
+    Label7: TLabel;
+    DBMemo2: TDBMemo;
+    Label15: TLabel;
+    DBEdit3: TDBEdit;
+    Label16: TLabel;
+    DBEdit8: TDBEdit;
+    CheckBox1: TCheckBox;
+    TabSheet2: TTabSheet;
+    IdFTP1: TIdFTP;
+    DBGridEh2: TDBGridEh;
+    PopupMenu1: TPopupMenu;
+    ftp1: TMenuItem;
+    ftp2: TMenuItem;
+    ftp3: TMenuItem;
+    pnl1: TPanel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    lbl5: TLabel;
+    btn3: TButton;
+    edtftpip: TEdit;
+    edtftpusername: TEdit;
+    edtftppassword: TEdit;
+    edtftpdir: TEdit;
+    dlgOpen1: TOpenDialog;
+    ADS0080: TADODataSet;
+    DataSource1: TDataSource;
+    ADS0080rkey: TAutoIncField;
+    ADS0080rkey0008: TIntegerField;
+    ADS0080ProdFileName: TStringField;
+    ADS0080uploaddate: TDateTimeField;
+    ADS0080remark: TStringField;
+    dlgSave1: TSaveDialog;
+    N1: TMenuItem;
+    Pnl2: TPanel;
+    Label17: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    N2: TMenuItem;
+    ADS0080rkey73: TIntegerField;
+    ADS0080user_full_name: TStringField;
+    ADS0080user_login_name: TStringField;
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure EdtGrpEnter(Sender: TObject);
+    procedure EdtUnitEnter(Sender: TObject);
+    procedure EdtDeptEnter(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure EdtGrpExit(Sender: TObject);
+    procedure EdtUnitExit(Sender: TObject);
+    procedure EdtDeptExit(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure DBEdit5KeyPress(Sender: TObject; var Key: Char);
+    procedure DBGridEh1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEdit5Enter(Sender: TObject);
+    procedure DBEdit5Exit(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure ftp1Click(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
+    procedure ftp2Click(Sender: TObject);
+    procedure ADS0080BeforeDelete(DataSet: TDataSet);
+    procedure DBGridEh2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure ftp3Click(Sender: TObject);
+    procedure DataSource1DataChange(Sender: TObject; Field: TField);
+    procedure N1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure DBEdit1Exit(Sender: TObject);
+  private
+     FPR_GRP_POINTER,Funit_ptr,FDEPT_PTR:string;
+     FinValid:boolean;
+     FoldProc: TWndMethod;
+     procedure NtPast(var Msg:TMessage);
+  public
+    Ftag:integer;
+    rkey08:integer;
+    procedure init;
+  end;
+
+var
+  Frm_Edit: TFrm_Edit;
+
+implementation
+ uses common,DM_u,Pick_Item_Single,ConstVar, IniFiles;
+{$R *.dfm}
+
+procedure TFrm_Edit.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (key=vk_return) and not (self.ActiveControl is TDBmemo) then
+  self.SelectNext(self.ActiveControl,true,true);
+end;
+
+procedure TFrm_Edit.init;
+begin
+   DM.D08_1.LockType:=ltBatchOptimistic;
+
+   if ((Ftag=0) or (Ftag=4)) then
+   begin
+     self.Caption:='产品编码新增';
+     DM.D08_1.Parameters[0].Value:=-1;
+     DM.D08_1.Open;
+     DM.D08_1.Append;
+     DM.D08_1TTYPE.Value:=1;
+     if Ftag=4 then
+     begin
+               if Ftag=4 then
+       begin
+         EdtUnit.ReadOnly := True;
+         SpeedButton4.Enabled := True;
+          //DBGridEh1.ReadOnly:=true;
+          //复制字段
+          DM.D08_1PROD_CODE.Value := DM.D08PROD_CODE.Value;
+          DM.D08_1PRODUCT_NAME.Value := DM.D08PRODUCT_NAME.Value;
+          DM.D08_1PRODUCT_DESC.Value := DM.D08PRODUCT_DESC.Value;
+          DM.D08_1PR_GRP_POINTER.Value :=DM.D08PR_GRP_POINTER.Value;
+          DM.D08_1unit_ptr.Value := DM.D08unit_ptr.Value;
+          dm.D08_1DEPT_PTR.Value := dm.D08DEPT_PTR.Value;
+          DM.D08_1new_price.Value :=  DM.D08new_price.Value;
+          DM.D08_1qty_onhand.Value := DM.D08qty_onhand.Value;
+          DM.D08_1min_qty.Value := dm.D08min_qty.Value;
+          dm.D08_1TTYPE.Value := DM.D08TTYPE.Value;
+          DM.D08_1remark.Value := dm.D08remark.Value;
+          dm.D08_1WORKHOUSE.Value := DM.D08WORKHOUSE.Value;
+          //复制字段
+          EdtGrp.Text:=DM.D08PR_GRP_CODE.AsString;
+          EdtGrp.Tag:=DM.D08_1PR_GRP_POINTER.AsInteger;
+
+          Label12.Caption:=DM.D08PRODUCT_GROUP_NAME.AsString;
+
+          EdtUnit.Text:=DM.D08Unit_code.AsString;
+          EdtUnit.Tag:=DM.D08_1Unit_ptr.AsInteger;
+
+          Label13.Caption:=DM.D08Unit_NAME.AsString;
+
+          EdtDept.Text:=DM.D08Dept_code.AsString;
+          EdtDept.Tag:=DM.D08_1Dept_ptr.AsInteger;
+          
+          Label14.Caption:=DM.D08Dept_NAME.AsString;
+
+       end;
+     end;
+     DM.wzcp01.Parameters[0].Value:=-1;
+     DM.wzcp01.Open;
+
+   end
+   else if (Ftag=1) or (Ftag=3) then
+   begin
+
+     if Ftag=3 then DM.D08_1.LockType:=ltReadOnly;
+
+     if Ftag=1 then
+     begin
+       self.Caption:='产品编码编辑';
+       EdtUnit.ReadOnly := True;
+       SpeedButton4.Enabled := True;
+       //SpeedButton4.Enabled := False;
+       DM.Tmp.Close;
+       DM.Tmp.SQL.Text:='select top 1 rkey from data0053 where cust_part_ptr='+DM.D08RKEY.AsString+
+                        ' union all '+
+                        'select top 1 rkey from wzcp0063 where prod_ptr='+DM.D08RKEY.AsString;
+       DM.Tmp.Open;
+       DBGridEh1.ReadOnly:=not DM.Tmp.IsEmpty;
+       DM.Tmp.Close;
+     end;
+
+     DM.D08_1.Parameters[0].Value:=Dm.D08RKEY.Value;
+     DM.D08_1.Open;
+
+     DM.wzcp01.Parameters[0].Value:=Dm.D08RKEY.Value;
+     DM.wzcp01.Open;
+     
+     ADS0080.Parameters[0].Value := DM.D08RKEY.Value;
+     ADS0080.Open;
+
+     EdtGrp.Text:=DM.D08PR_GRP_CODE.AsString;
+     EdtGrp.Tag:=DM.D08_1PR_GRP_POINTER.AsInteger;
+     Label12.Caption:=DM.D08PRODUCT_GROUP_NAME.AsString;
+
+     EdtUnit.Text:=DM.D08Unit_code.AsString;
+     EdtUnit.Tag:=DM.D08_1Unit_ptr.AsInteger;
+     Label13.Caption:=DM.D08Unit_NAME.AsString;
+
+     EdtDept.Text:=DM.D08Dept_code.AsString;
+     EdtDept.Tag:=DM.D08_1Dept_ptr.AsInteger;
+     Label14.Caption:=DM.D08Dept_NAME.AsString;
+
+     if Ftag=3 then
+     begin
+       self.Caption:='产品编码查看';
+       EdtGrp.Enabled:=false;
+       EdtUnit.Enabled:=false;
+       EdtDept.Enabled:=false;
+       SpeedButton3.Enabled:=false;
+       SpeedButton4.Enabled:=false;
+       SpeedButton5.Enabled:=false;
+       SpeedButton1.Enabled:=false;
+
+       DBGridEh1.ReadOnly:=true;
+     end;
+
+
+   end;
+
+
+
+
+   
+   DBMemo1.MaxLength:=DBMemo1.Field.Size;
+end;
+
+procedure TFrm_Edit.SpeedButton2Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TFrm_Edit.EdtGrpEnter(Sender: TObject);
+begin
+  FPR_GRP_POINTER:=EdtGrp.Text;
+end;
+
+procedure TFrm_Edit.EdtUnitEnter(Sender: TObject);
+begin
+  Funit_ptr:=EdtUnit.Text;
+end;
+
+procedure TFrm_Edit.EdtDeptEnter(Sender: TObject);
+begin
+  FDEPT_PTR:=EdtDept.Text;
+end;
+
+procedure TFrm_Edit.SpeedButton3Click(Sender: TObject);
+var
+  InputVar: PDlgInput ;
+begin
+  frmPick_Item_Single := TfrmPick_Item_Single.Create(application) ;
+  try
+    if TComponent(Sender).Tag=0 then
+    begin
+     // InputVar.KeyField:='pr_grp_code';
+     // InputVar.InPut_value:=EdtGrp.text;
+      InputVar.Fields := 'pr_grp_code/组别代码/120,product_group_name/组别名称/250';
+      InputVar.Sqlstr :='select * from data0007 order by 2';
+    end else if TComponent(Sender).Tag=1 then begin
+     // InputVar.InPut_value:=EdtUnit.text;
+      InputVar.Fields := 'unit_code/单位代码/200,unit_name/单位名称/200';
+      InputVar.Sqlstr := 'select rkey,unit_code,unit_name from data0002 order by 2';
+    end else begin
+     // InputVar.InPut_value:=EdtDept.text;
+      InputVar.Fields := 'dept_code/部门代码/200,dept_name/部门名称/250';
+      InputVar.Sqlstr := 'select rkey,dept_code,dept_name from data0034 where active_flag=0 and ttype in (4,5) order by 2';
+    end;
+
+    InputVar.AdoConn := DM.ADOCon;
+    frmPick_Item_Single.InitForm_New(InputVar) ;
+    if frmPick_Item_Single.ShowModal=mrok then
+    begin
+      if TComponent(Sender).Tag=0 then
+      begin
+        EdtGrp.Text := frmPick_Item_Single.adsPick.FieldValues['pr_grp_code'];
+        Label12.Caption:=frmPick_Item_Single.adsPick.FieldValues['product_group_name'];
+        EdtGrp.Tag:=frmPick_Item_Single.adsPick.FieldValues['rkey'];
+      end else if TComponent(Sender).Tag=1 then begin
+        EdtUnit.Text := frmPick_Item_Single.adsPick.FieldValues['unit_code'];
+        Label13.Caption:=frmPick_Item_Single.adsPick.FieldValues['unit_name'];
+        EdtUnit.Tag:=frmPick_Item_Single.adsPick.FieldValues['rkey'];
+      end else begin
+        EdtDept.Text := frmPick_Item_Single.adsPick.FieldValues['dept_code'];
+        Label14.Caption:=frmPick_Item_Single.adsPick.FieldValues['dept_name'];
+        EdtDept.Tag:=frmPick_Item_Single.adsPick.FieldValues['rkey'];
+      end;
+    end;
+  finally
+    frmPick_Item_Single.adsPick.Close;
+    frmPick_Item_Single.Free ;
+  end;
+
+end;
+
+procedure TFrm_Edit.EdtGrpExit(Sender: TObject);
+begin
+  if (FPR_GRP_POINTER<>EdtGrp.Text) and (EdtGrp.Text<>'') then
+  begin
+    DM.Tmp.Close;
+    DM.Tmp.SQL.Text:='select * from data0007 where pr_grp_code='''+EdtGrp.Text+'''';
+    DM.Tmp.Open;
+    if DM.Tmp.IsEmpty then
+    begin
+      showmessage('产品组代码不存在...');
+      EdtGrp.SetFocus;
+      FPR_GRP_POINTER:='';
+      FinValid:=true;
+      abort;
+    end else begin
+      Label12.Caption:=DM.Tmp.fieldbyname('product_group_name').AsString;
+      EdtGrp.Tag:=DM.Tmp.fieldbyname('rkey').AsInteger;
+      FinValid:=false;
+    end;
+  end;
+end;
+
+procedure TFrm_Edit.EdtUnitExit(Sender: TObject);
+begin
+  if (FUnit_ptr<>EdtUnit.Text) and (EdtUnit.Text<>'') then
+  begin
+    DM.Tmp.Close;
+    DM.Tmp.SQL.Text:='select rkey,unit_code,unit_name from data0002 where unit_code='''+EdtUnit.Text+'''';
+    DM.Tmp.Open;
+    if DM.Tmp.IsEmpty then
+    begin
+      showmessage('单位代码不存在...');
+      EdtUnit.SetFocus;
+      FUnit_ptr:='';
+      FinValid:=true;
+      abort;
+    end else begin
+      Label13.Caption:=DM.Tmp.fieldbyname('unit_name').AsString;
+      EdtUnit.Tag:=DM.Tmp.fieldbyname('rkey').AsInteger;
+      FinValid:=false;
+    end;
+  end;
+end;
+
+procedure TFrm_Edit.EdtDeptExit(Sender: TObject);
+begin
+  if (FDept_ptr<>EdtDept.Text)  and (EdtDept.Text<>'') then
+  begin
+    DM.Tmp.Close;
+    DM.Tmp.SQL.Text:='select rkey,dept_code,dept_name from data0034 where active_flag=0 and ttype in (4,5) and dept_code='''+EdtDept.Text+'''';
+    DM.Tmp.Open;
+    if DM.Tmp.IsEmpty then
+    begin
+      showmessage('部门代码不存在...');
+      EdtDept.SetFocus;
+      FDept_ptr:='';
+      FinValid:=true;
+      abort;
+    end else begin
+      Label14.Caption:=DM.Tmp.fieldbyname('dept_name').AsString;
+      EdtDept.Tag:=DM.Tmp.fieldbyname('rkey').AsInteger;
+      FinValid:=false;
+    end;
+  end;
+end;
+
+procedure TFrm_Edit.SpeedButton1Click(Sender: TObject);
+var Qty:real;
+begin
+  DBEdit1.SetFocus;
+  if DBEdit1.Text='' then
+  begin
+    showmessage('产品编码不能为空...');
+    DBEdit1.SetFocus;
+    exit;
+  end;
+  if DBEdit2.Text='' then
+  begin
+    showmessage('产品名称不能为空...');
+    DBEdit2.SetFocus;
+    exit;
+  end;
+  if DBMemo1.text='' then
+  begin
+    showmessage('产品规格不能为空...');
+    DBMemo1.SetFocus;
+    exit;
+  end;
+  if EdtGrp.Text='' then
+  begin
+    showmessage('产品组别不能为空...');
+    EdtGrp.SetFocus;
+    exit;
+  end;
+  if EdtUnit.Text='' then
+  begin
+    showmessage('存货单位不能为空...');
+    EdtUnit.SetFocus;
+    exit;
+  end;
+  if EdtDept.Text='' then
+  begin
+    showmessage('所属部门不能为空...');
+    EdtDept.SetFocus;
+    exit;
+  end;
+  if (Ftag =0) or (Ftag =4 )then
+   begin
+      if DM.ADOCon.Connected then
+      begin
+            DM.Tmp.Close;
+            DM.Tmp.SQL.Clear;
+            DM.Tmp.SQL.Text:='select PROD_CODE from data0008 where PROD_CODE= '''+trim(DBEdit1.Text)+'''';
+            DM.Tmp.Open;
+            if not DM.Tmp.IsEmpty then
+            begin
+              showmessage('已存在您输入的产品编码，请输入新的产品编码，或编辑原有的产品编码。');
+              DBEdit1.SetFocus;
+              abort;
+            end;
+            DM.Tmp.Close;
+            DM.Tmp.SQL.Clear;
+            DM.Tmp.SQL.Text:='select getdate() as createdate ';
+            DM.Tmp.Open;
+            dm.D08_1create_date.Value := DM.Tmp.fieldbyname('createdate').Value;
+            DM.D08_1create_user_ptr.Value := StrToInt(common.user_ptr);
+
+      end;
+   end;
+
+  if DBEdit5.Field.AsFloat>DBEdit6.Field.AsFloat then
+  begin
+    showmessage('最小库存不能超过最大库存...');
+    DBEdit5.SetFocus;
+    exit;
+  end;
+  if FinValid then exit;
+
+  if trim(DBEdit5.Text)='' then DBEdit5.Text:='0';
+  if trim(DBEdit6.Text)='' then DBEdit6.Text:='0';
+  if trim(DBEdit7.Text)='' then DBEdit7.Text:='0';
+
+
+  Qty:=0;
+  if not DBGridEh1.ReadOnly then
+  begin
+     DM.wzcp01.First;
+     while not DM.wzcp01.Eof do
+     begin
+       if DM.wzcp01qty_on_hand.AsFloat<0 then
+       begin
+         showmessage('初始库存不能小于0');
+         exit;
+       end;
+       Qty:=Qty+DM.wzcp01qty_on_hand.AsFloat;
+       DM.wzcp01.Next;
+     end;
+  end;
+
+  DM.ADOCon.BeginTrans;
+  DM.D08_1.Edit;
+  DM.D08_1PR_GRP_POINTER.Value:=EdtGrp.Tag;
+  DM.D08_1Unit_ptr.Value:=EdtUnit.Tag;
+  DM.D08_1Dept_ptr.Value:=EdtDept.Tag;
+  DM.D08_1PROD_CODE.Value:=Trim(DBEdit1.Text);
+
+  if CheckBox1.Checked=True then
+  begin
+    DM.D08_1if_control.Value :=True;
+  end
+  else
+  begin
+    DM.D08_1if_control.Value :=False;
+  end;
+
+  if not DBGridEh1.ReadOnly then
+    DM.D08_1qty_onhand.Value:=Qty;
+  DM.D08_1.Post;
+  try
+    DM.D08_1.UpdateBatch(arAll);
+    if CheckBox1.Checked=True then
+    begin
+      if Ftag in[0,4] then
+      begin
+        with DM.tmp2 do
+        begin
+           Close;
+           SQL.Text :='insert into wzcp0100 values('+rkey73+ ','+ DM.D08_1RKEY.AsString+')';
+//           ShowMessage(SQL.Text);
+           ExecSQL;
+        end;
+      end;
+    end
+    else
+    begin
+      if Ftag in [1] then
+      begin
+        with DM.tmp2 do
+        begin
+           Close;
+           SQL.Text :='delete wzcp0100 where  PROC_PTR='+ DM.D08RKEY.AsString;
+//           ShowMessage(SQL.Text);
+           ExecSQL;
+        end;
+      end;
+    end;
+    if not DBGridEh1.ReadOnly then
+    begin
+       DM.Tmp.Close;
+       DM.Tmp.SQL.Text:='delete from wzcp0001 where proc_ptr='+DM.D08_1RKEY.AsString;
+       DM.Tmp.ExecSQL;
+       DM.wzcp01.First;
+       while not DM.wzcp01.Eof do
+       begin
+         if DM.wzcp01qty_on_hand.AsCurrency>0 then
+         begin
+           DM.Tmp.SQL.Text:='insert into wzcp0001 (proc_ptr,location_ptr,qty_on_hand) values('+
+                          DM.D08_1RKEY.AsString+','+DM.wzcp01rkey16.AsString+','+DM.wzcp01qty_on_hand.AsString+')';
+           DM.Tmp.ExecSQL;
+         end;
+         DM.wzcp01.Next;
+       end;
+    end;
+    if Ftag=1 then
+    begin
+      if DBEdit1.Text <> DM.D08PROD_CODE.AsString then
+      begin
+        DM.Tmp.Close;
+        DM.Tmp.SQL.Text := 'insert into data0318(CUSTOMER_PART_PTR, TRANS_TYPE, TRANS_DESCRIPTION,'+
+        ' FROM_STRING, TO_STRING, USER_PTR, TRANS_DATE, PROGRAM_SOURCE,file_number ) values('+ DM.D08RKEY.AsString+
+        ',081,'+'''工程编码'''+','+ QuotedStr(dm.D08PROD_CODE.AsString)+','+ QuotedStr(Trim(DBEdit1.Text))+','+
+        rkey73+','+ QuotedStr(DateTimeToStr(getsystem_date(DM.Tmp1,0)))+',124,''wzcp008.exe'')';
+//        ShowMessage(DM.Tmp.SQL.Text);
+        DM.Tmp.ExecSQL;
+      end;
+
+      if DBEdit2.Text <> DM.D08PRODUCT_NAME.AsString then
+      begin
+        DM.Tmp.Close;
+        DM.Tmp.SQL.Text := 'insert into data0318(CUSTOMER_PART_PTR, TRANS_TYPE, TRANS_DESCRIPTION,'+
+        ' FROM_STRING, TO_STRING, USER_PTR, TRANS_DATE, PROGRAM_SOURCE,file_number ) values('+ DM.D08RKEY.AsString+
+        ',081,'+'''产品名称'''+','+ QuotedStr(DM.D08PRODUCT_NAME.AsString)+','+ QuotedStr(DBEdit2.Text)+','+
+        rkey73+','+ QuotedStr(DateTimeToStr(getsystem_date(DM.Tmp1,0)))+',124,''wzcp008.exe'')';
+        DM.Tmp.ExecSQL;
+      end;
+      if DBMemo1.Text <> DM.D08PRODUCT_DESC.AsString then
+      begin
+        DM.Tmp.Close;
+        DM.Tmp.SQL.Text := 'insert into data0318(CUSTOMER_PART_PTR, TRANS_TYPE, TRANS_DESCRIPTION,'+
+        ' FROM_STRING, TO_STRING, USER_PTR, TRANS_DATE, PROGRAM_SOURCE,file_number ) values('+ DM.D08RKEY.AsString+
+        ',081,'+'''产品规格'''+','+ QuotedStr(DM.D08PRODUCT_DESC.AsString)+','+ QuotedStr(DBMemo1.Text)+','+
+        rkey73+','+ QuotedStr(DateTimeToStr(getsystem_date(DM.Tmp1,0)))+',124,''wzcp008.exe'')';
+        DM.Tmp.ExecSQL;
+      end;
+      if DBEdit8.Text <> DM.D08specific_location.AsString then
+      begin
+        DM.Tmp.Close;
+        DM.Tmp.SQL.Text := 'insert into data0318(CUSTOMER_PART_PTR, TRANS_TYPE, TRANS_DESCRIPTION,'+
+        ' FROM_STRING, TO_STRING, USER_PTR, TRANS_DATE, PROGRAM_SOURCE,file_number ) values('+ DM.D08RKEY.AsString+
+        ',081,'+'''存放位置'''+','+ QuotedStr(DM.D08specific_location.AsString)+','+ QuotedStr(DBEdit8.Text)+','+
+        rkey73+','+ QuotedStr(DateTimeToStr(getsystem_date(DM.Tmp1,0)))+',124,''wzcp008.exe'')';
+        DM.Tmp.ExecSQL;
+      end;
+      if DBMemo2.Text <> DM.D08remark.AsString then
+      begin
+        DM.Tmp.Close;
+        DM.Tmp.SQL.Text := 'insert into data0318(CUSTOMER_PART_PTR, TRANS_TYPE, TRANS_DESCRIPTION,'+
+        ' FROM_STRING, TO_STRING, USER_PTR, TRANS_DATE, PROGRAM_SOURCE,file_number ) values('+ DM.D08RKEY.AsString+
+        ',081,'+'''备注'''+','+ QuotedStr(DM.D08remark.AsString)+','+ QuotedStr(DBMemo2.Text)+','+
+        rkey73+','+ QuotedStr(DateTimeToStr(getsystem_date(DM.Tmp1,0)))+',124,''wzcp008.exe'')';
+        DM.Tmp.ExecSQL;
+      end;
+    end;
+    DM.ADOCon.CommitTrans;
+
+    rkey08:=DM.D08_1RKEY.AsInteger;
+    modalresult:=mrok;
+  except
+    on E: Exception do
+    begin
+      DM.ADOCon.RollbackTrans;
+      showmessage('数据保存发生错误:'+E.Message);
+    end;
+  end;
+end;
+
+procedure TFrm_Edit.DBEdit5KeyPress(Sender: TObject; var Key: Char);
+begin
+  if key='-' then begin key:=#0;abort;end;
+end;
+
+procedure TFrm_Edit.DBGridEh1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+ if (ssAlt in Shift)  and  (Key=86) then
+   showmessage(DM.wzcp01.SQL.Text);
+end;
+
+procedure TFrm_Edit.NtPast(var Msg: TMessage);
+begin
+  if Msg.Msg=WM_PASTE then ShowMessage('你不能粘贴') else FoldProc(Msg);
+end;
+
+procedure TFrm_Edit.DBEdit5Enter(Sender: TObject);
+begin
+  FoldProc := TDBEdit(sender).WindowProc;
+  TDBEdit(sender).WindowProc:=NtPast;
+end;
+
+procedure TFrm_Edit.DBEdit5Exit(Sender: TObject);
+begin
+  TDBEdit(sender).WindowProc:=FoldProc;
+end;
+
+procedure TFrm_Edit.FormActivate(Sender: TObject);
+begin
+//  if ((strtoint(vprev)=4) and (Ftag=1))or((strtoint(vprev) in [2,4]) and ((Ftag=0))or(Ftag=4)) then
+//  begin
+//    CheckBox1.Enabled := True;
+//  end
+//  else
+//  begin
+//    CheckBox1.Enabled:=False;
+//  end;
+  DM.D08_1.Open;
+  if DM.D08_1if_control.Value=True then
+  begin
+    CheckBox1.Checked := True;
+  end;
+
+end;
+
+procedure TFrm_Edit.ftp1Click(Sender: TObject);
+var
+  LIni: TIniFile;
+  LIniFileName: string;
+begin
+  pnl1.Visible := True;
+  pnl1.BringToFront;
+  LIniFileName := ExtractFilePath(ParamStr(0)) + 'pinban.ini';
+  LIni := TIniFile.Create(LIniFileName);
+  try
+    edtftpip.Text := LIni.ReadString('CustFileFTP','IP',edtftpip.Text);
+    edtftpusername.Text := LIni.ReadString('CustFileFTP','UserName',edtftpusername.Text);
+    edtftppassword.Text := LIni.ReadString('CustFileFTP','PassWord',edtftppassword.Text);
+    edtftpdir.Text := LIni.ReadString('CustFileFTP','Dir',edtftpdir.Text);
+  finally
+    LIni.Free;
+  end;
+
+end;
+
+procedure TFrm_Edit.btn3Click(Sender: TObject);
+var
+  LIni: TIniFile;
+  LIniFileName: string;
+begin
+
+  LIniFileName := ExtractFilePath(ParamStr(0)) + 'pinban.ini';
+  LIni := TIniFile.Create(LIniFileName);
+  try
+    LIni.WriteString('CustFileFTP','IP',edtftpip.Text);
+    LIni.WriteString('CustFileFTP','UserName',edtftpusername.Text);
+    LIni.WriteString('CustFileFTP','PassWord',edtftppassword.Text);
+    LIni.WriteString('CustFileFTP','Dir',edtftpdir.Text);
+        IdFTP1.Host := LIni.ReadString('CustFileFTP','IP',edtftpip.Text);
+    IdFTP1.Username := LIni.ReadString('CustFileFTP','UserName',edtftpusername.Text);
+    IdFTP1.Password := LIni.ReadString('CustFileFTP','PassWord',edtftppassword.Text);
+
+    try
+      IdFTP1.Connect();
+      if idftp1.Connected then
+      begin
+        ShowMessage('连接成功') ;
+      end
+      else
+      begin
+        ShowMessage('连接ftp不成功,请检查ftp连接是否正确');
+        Exit;
+      end;
+      IdFTP1.Disconnect ;
+    except
+      ShowMessage('FTP链接失败');
+      Exit;
+    end;
+  finally
+    LIni.Free;
+  end;
+  pnl1.Visible := False;
+
+end;
+
+procedure TFrm_Edit.ftp2Click(Sender: TObject);
+var
+  LIni: TIniFile;
+  LIniFileName: string;
+  LDir: WideString;
+begin
+  if Trim(DBEdit1.Text) = '' then
+  begin
+    ShowMessage('请先确定工程编码');
+    Exit;
+  end;
+  if idftp1.Connected then IdFTP1.Disconnect;
+  LIniFileName := ExtractFilePath(ParamStr(0)) + 'pinban.ini';
+  LIni := TIniFile.Create(LIniFileName);
+  try
+    IdFTP1.Host := LIni.ReadString('CustFileFTP','IP',edtftpip.Text);
+    IdFTP1.Username := LIni.ReadString('CustFileFTP','UserName',edtftpusername.Text);
+    IdFTP1.Password := LIni.ReadString('CustFileFTP','PassWord',edtftppassword.Text);
+    LDir := LIni.ReadString('CustFileFTP','Dir',edtftpdir.Text);
+
+    try
+      IdFTP1.Connect();
+      if IdFTP1.Connected then
+      begin
+        if Trim(LDir) <> '' then
+        begin
+          try
+            if LDir[Length(LDir)] <> '\' then LDir := LDir + '\';
+            IdFTP1.ChangeDir(LDir);
+          except
+            ShowMessage('文件夹路径不正确');
+            Exit;
+          end;
+        end;
+        if dlgOpen1.Execute then
+        begin
+          with DM.Tmp do
+          begin
+            Close;
+            SQL.Text := ' select rkey0008,ProdFileName from wzcp0080 where  '+
+                         '  ProdFileName ='+quotedstr(LDir + ExtractFileName(dlgOpen1.FileName));
+
+            Open;
+          end;
+
+          if not DM.Tmp.IsEmpty then
+          begin
+//            if MessageBoxA(Handle,'是否覆盖原有资料？','提示',MB_YESNO) <> id_yes then
+//            begin
+//              Exit;
+//            end;
+            ShowMessage('文件名重复，请重新上传文件');
+            Exit;
+          end;
+
+          IdFTP1.Put(dlgOpen1.FileName, ExtractFileName(dlgOpen1.FileName));
+
+          ADS0080.Append;
+          ADS0080.FieldByName('ProdFileName').AsString := LDir + ExtractFileName(dlgOpen1.FileName);
+          ADS0080.FieldByName('uploaddate').AsDateTime := getsystem_date(DM.Tmp,0);
+          ADS0080.FieldByName('rkey0008').AsInteger := DM.D08RKEY.Value;
+          ADS0080.FieldByName('rkey73').Value := rkey73;
+          ADS0080.Post;
+        end;
+      end;
+    except
+      ShowMessage('FTP链接失败,上传失败');
+      Exit;
+    end;
+  finally
+    if IdFTP1.Connected then IdFTP1.Disconnect;
+    LIni.Free;
+  end;
+
+end;
+
+procedure TFrm_Edit.ADS0080BeforeDelete(DataSet: TDataSet);
+begin
+  Abort;
+end;
+
+procedure TFrm_Edit.DBGridEh2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Ord(Key) in [38,40,45] then
+  begin
+    Key:=0;
+  end;
+//  if (Key in [40]) or (Key in [45]) then
+//  begin
+//    Abort;
+//  end;
+end;
+
+procedure TFrm_Edit.ftp3Click(Sender: TObject);
+var
+  LIni: TIniFile;
+  LIniFileName: string;
+  LDir: string;
+begin
+  if ADS0080.IsEmpty then
+  begin
+    ShowMessage('还没有上传文件');
+    Exit;
+  end;
+  if idftp1.Connected then IdFTP1.Disconnect;
+  LIniFileName := ExtractFilePath(ParamStr(0)) + 'pinban.ini';
+  LIni := TIniFile.Create(LIniFileName);
+  try
+    IdFTP1.Host := LIni.ReadString('CustFileFTP','IP',edtftpip.Text);
+    IdFTP1.Username := LIni.ReadString('CustFileFTP','UserName',edtftpusername.Text);
+    IdFTP1.Password := LIni.ReadString('CustFileFTP','PassWord',edtftppassword.Text);
+//    LDir := ExtractFilePath(dbtxtCustFileName.Caption); //LIni.ReadString('CustFileFTP','Dir',edtftpdir.Text);
+    LDir := ExtractFilePath(ADS0080ProdFileName.AsString);
+
+//    LDir := LIni.ReadString('CustFileFTP','Dir',edtftpdir.Text);
+//   ADS0080.FieldByName('ProdFileName').AsString := LDir + ExtractFileName(dlgOpen1.FileName);
+    try
+      IdFTP1.Connect();
+      if IdFTP1.Connected then
+      begin
+        if Trim(LDir) <> '' then IdFTP1.ChangeDir(LDir);
+        dlgSave1.FileName := ExtractFileName(ADS0080ProdFileName.AsString);
+//        dlgSave1.FileName := ExtractFileName(dbtxtCustFileName.Caption);
+        if dlgSave1.Execute then
+        begin
+          with DM.Tmp do
+          begin
+            Close;
+            SQL.Text := ' select rkey0008,ProdFileName from wzcp0080 where  '+
+                         '  ProdFileName ='+quotedstr(LDir + ExtractFileName(dlgSave1.FileName));
+            Open;
+          end;
+
+          if not DM.Tmp.IsEmpty then
+          begin
+            if MessageBoxA(Handle,'是否覆盖原有资料？','提示',MB_YESNO) <> id_yes then
+            begin
+              Exit;
+            end;
+          end;
+          
+//          IdFTP1.Get(ExtractFileName(dbtxtCustFileName.Caption),dlgSave1.FileName,True);
+          IdFTP1.Get(ExtractFileName(ADS0080ProdFileName.AsString),dlgSave1.FileName,True,False);
+
+        end;
+//        ShowMessage(ExtractFileName(ADS0080ProdFileName.AsString));
+//        ShowMessage(LDir);
+      end;
+    except
+      ShowMessage('FTP链接失败或ftp服务器上的文件不存在,下载失败');
+      Exit;
+    end;
+  finally
+    if IdFTP1.Connected then IdFTP1.Disconnect;
+    LIni.Free;
+  end;
+
+end;
+
+procedure TFrm_Edit.DataSource1DataChange(Sender: TObject; Field: TField);
+begin
+//if ADS0080.State in [dsEdit] then
+//  ADS0080.Post;
+end;
+
+procedure TFrm_Edit.N1Click(Sender: TObject);
+begin
+
+  Pnl2.Visible :=True;
+  Edit1.SetFocus;
+  Edit1.Text := ADS0080remark.AsString;
+end;
+
+procedure TFrm_Edit.Button1Click(Sender: TObject);
+begin
+
+  ADS0080.Edit;
+
+  ADS0080.FieldByName('remark').Value:= Edit1.Text;
+
+  ADS0080.Post;
+  Pnl2.Visible := False;
+end;
+
+procedure TFrm_Edit.PopupMenu1Popup(Sender: TObject);
+begin
+
+  N1.Enabled := (Ftag in[1,3]) and (not (ADS0080.IsEmpty)) and ( StrToInt(vprev) in[2,3,4]);
+  ftp1.Enabled := Ftag in[1,3] ;
+  ftp2.Enabled := (Ftag in[1,3]) and ( StrToInt(vprev) in[2,3,4]);
+  ftp3.Enabled := (Ftag in[1,3]) and (not (ADS0080.IsEmpty)) ;
+  N2.Enabled :=  (Ftag in[1,3]) and (not (ADS0080.IsEmpty)) and (StrToInt(vprev) in[3]) ;
+end;
+
+procedure TFrm_Edit.N2Click(Sender: TObject);
+var
+  LIni: TIniFile;
+  LIniFileName: string;
+  LDir: string;
+begin
+  if idftp1.Connected then IdFTP1.Disconnect;
+  LIniFileName := ExtractFilePath(ParamStr(0)) + 'pinban.ini';
+  LIni := TIniFile.Create(LIniFileName);
+  try
+    IdFTP1.Host := LIni.ReadString('CustFileFTP','IP',edtftpip.Text);
+    IdFTP1.Username := LIni.ReadString('CustFileFTP','UserName',edtftpusername.Text);
+    IdFTP1.Password := LIni.ReadString('CustFileFTP','PassWord',edtftppassword.Text);
+//    LDir := ExtractFilePath(dbtxtCustFileName.Caption); //LIni.ReadString('CustFileFTP','Dir',edtftpdir.Text);
+    LDir := ADS0080ProdFileName.AsString;
+    try
+
+      IdFTP1.Connect();
+
+      if IdFTP1.Connected then
+      begin
+        with DM.Tmp do
+        begin
+          Close;
+          SQL.Text :=' delete wzcp0080 where rkey='+ ADS0080rkey.AsString;
+          ExecSQL;
+        end;
+        idftp1.Delete(LDir);
+
+      end;
+      ADS0080.Close;
+      ADS0080.Open;
+    except
+      ShowMessage('FTP链接失败或ftp服务器上的文件不存在,删除失败');
+      Exit;
+    end;
+  finally
+    if IdFTP1.Connected then IdFTP1.Disconnect;
+    LIni.Free;
+  end;
+end;
+
+procedure TFrm_Edit.DBEdit1Exit(Sender: TObject);
+begin
+//     if trm(DBEdit1.text)=''  then Exit
+//     else
+//      DBEdit1.text:=Trim(DBEdit1.)
+end;
+
+end.

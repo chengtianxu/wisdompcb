@@ -1,0 +1,65 @@
+select  top 10 * from [192.168.1.253].sj_v20_live.dbo.Data0273
+order by RKEY desc 
+
+
+sp_help Data0273
+
+
+
+sp_help Data0273
+
+select * into #d25 from Data0025 
+
+select * from #d25
+where #d25.CUSTOMER_PTR  is null
+
+drop table #D273 
+delete from Data0273 
+
+
+select data0273.RKEY,#d25.CUSTOMER_PTR , #d25.RKEY as CUSTOMER_PART_PTR, d025.rkey as COPYFROMCUST_PTR,ENTERED_BY,VERIFIED_BY,
+ENTERED_DATE,VERIFIED_DATE,STATUS,SOURCE,TEXT1,TEXT2,TEXT3,TEXT4,ECN_NO,text,data0273.remark,
+Tooling_close,last_modi_by_ptr,last_modi_date,DEPT1,DEPT2,DEPT3,DEPT4,DEPT5,DEPT6,
+DEPT7,DEPT8,DEPT9,DEPT10,DEPT11,DEPT12,DEPT13,DEPT14,DEPT15,ECNB1,ECNB2,ECNB3,ECNB4,ECNB5,
+ECNA1,ECNA2,ECNA3,ECNA4,ECNA5,ECNSTART,del,del_empl_ptr,del_date into #D273  from sj_v20_live.dbo.Data0273
+left join sj_v20_live.dbo.data0050 on Data0273.customer_part_ptr =data0050.rkey 
+left join sj_v20_live.dbo.Data0025 on Data0025.ANCESTOR_PTR =data0050.rkey  and data0025.PARENT_PTR=0
+left join #d25 on #d25.RKEY =sj_v20_live.dbo.data0025.RKEY 
+left join sj_v20_live.dbo.data0050 d50 on Data0273.COPYFROMCUST_PTR =d50.rkey 
+left join sj_v20_live.dbo.Data0025 d025 on d025.ANCESTOR_PTR =d50.rkey  and d025.PARENT_PTR=0
+where  #d25.RKEY  is not null and COPYFROMCUST_PTR  in (select RKEY from #d25)
+and CUSTOMER_PART_PTR in (select RKEY from #d25)  and Data0273.RKEY not in (889,
+1550)
+
+
+SET IDENTITY_INSERT data0273 ON
+insert into Data0273( RKEY,CUSTOMER_PTR,CUSTOMER_PART_PTR,COPYFROMCUST_PTR,ENTERED_BY,VERIFIED_BY,
+ENTERED_DATE,VERIFIED_DATE,STATUS,SOURCE,TEXT1,TEXT2,TEXT3,TEXT4,ECN_NO,text,remark,
+Tooling_close,last_modi_by_ptr,last_modi_date,DEPT1,DEPT2,DEPT3,DEPT4,DEPT5,DEPT6,
+DEPT7,DEPT8,DEPT9,DEPT10,DEPT11,DEPT12,DEPT13,DEPT14,DEPT15,ECNB1,ECNB2,ECNB3,ECNB4,ECNB5,
+ECNA1,ECNA2,ECNA3,ECNA4,ECNA5,ECNSTART,del,del_empl_ptr,del_date)
+select 
+RKEY,CUSTOMER_PTR, CUSTOMER_PART_PTR,COPYFROMCUST_PTR,ENTERED_BY,VERIFIED_BY,
+ENTERED_DATE,VERIFIED_DATE,STATUS,SOURCE,TEXT1,TEXT2,TEXT3,TEXT4,ECN_NO,text,remark,
+Tooling_close,last_modi_by_ptr,last_modi_date,DEPT1,DEPT2,DEPT3,DEPT4,DEPT5,DEPT6,
+DEPT7,DEPT8,DEPT9,DEPT10,DEPT11,DEPT12,DEPT13,DEPT14,DEPT15,ECNB1,ECNB2,ECNB3,ECNB4,ECNB5,
+ECNA1,ECNA2,ECNA3,ECNA4,ECNA5,ECNSTART,del,del_empl_ptr,del_date from #d273
+WHERE NOT EXISTS(SELECT RKEY FROM Data0273 WHERE Data0273.RKEY=#d273.RKEY)
+
+set identity_insert data0273 off
+
+
+
+select 
+data0273.RKEY,#d25.CUSTOMER_PTR , CUSTOMER_PART_PTR,COPYFROMCUST_PTR,ENTERED_BY,VERIFIED_BY,
+ENTERED_DATE,VERIFIED_DATE,STATUS,SOURCE,TEXT1,TEXT2,TEXT3,TEXT4,ECN_NO,text,data0273.remark,
+Tooling_close,last_modi_by_ptr,last_modi_date,DEPT1,DEPT2,DEPT3,DEPT4,DEPT5,DEPT6,
+DEPT7,DEPT8,DEPT9,DEPT10,DEPT11,DEPT12,DEPT13,DEPT14,DEPT15,ECNB1,ECNB2,ECNB3,ECNB4,ECNB5,
+ECNA1,ECNA2,ECNA3,ECNA4,ECNA5,ECNSTART,del,del_empl_ptr,del_date from sj_v20_live.dbo.Data0273
+left join sj_v20_live.dbo.data0050 on Data0273.customer_part_ptr =data0050.rkey 
+left join sj_v20_live.dbo.Data0025 on Data0025.ANCESTOR_PTR =data0050.rkey  and data0025.PARENT_PTR=0
+left join #d25 on #d25.RKEY =sj_v20_live.dbo.data0025.RKEY 
+
+
+
+select * from data0050 where rkey=7070

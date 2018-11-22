@@ -1,0 +1,247 @@
+object Frm_Parmeter: TFrm_Parmeter
+  Left = 450
+  Top = 216
+  BorderStyle = bsDialog
+  Caption = #36873#25321#21442#25968
+  ClientHeight = 471
+  ClientWidth = 490
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 490
+    Height = 49
+    Align = alTop
+    TabOrder = 0
+    object labelKey: TLabel
+      Left = 88
+      Top = 19
+      Width = 39
+      Height = 13
+      Alignment = taRightJustify
+      Caption = #25628#32034#65306
+    end
+    object CheckBox1: TCheckBox
+      Left = 336
+      Top = 17
+      Width = 97
+      Height = 17
+      Caption = #20840#36873
+      TabOrder = 1
+      OnClick = CheckBox1Click
+    end
+    object edtKey: TEdit
+      Left = 123
+      Top = 15
+      Width = 142
+      Height = 21
+      TabOrder = 0
+      OnChange = edtKeyChange
+      OnKeyPress = edtKeyKeyPress
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 49
+    Width = 490
+    Height = 381
+    Align = alClient
+    DataSource = DataSource1
+    Flat = True
+    FooterColor = clWindow
+    FooterFont.Charset = ANSI_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = #23435#20307
+    FooterFont.Style = []
+    ImeName = #20013#25991' ('#31616#20307') - '#25628#29399#25340#38899#36755#20837#27861
+    TabOrder = 1
+    TitleFont.Charset = ANSI_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    TitleHeight = 20
+    OnCellClick = DBGridEh1CellClick
+    OnDblClick = DBGridEh1DblClick
+    OnKeyDown = DBGridEh1KeyDown
+    OnTitleClick = DBGridEh1TitleClick
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'IsSelected'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'PARAMETER_NAME'
+        Footers = <>
+        ReadOnly = True
+      end
+      item
+        EditButtons = <>
+        FieldName = 'PARAMETER_DESC'
+        Footers = <>
+        ReadOnly = True
+      end
+      item
+        EditButtons = <>
+        FieldName = 'UNIT_NAME'
+        Footers = <>
+        ReadOnly = True
+        Width = 46
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DATA_TYPE'
+        Footers = <>
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CATEGORY_PTR'
+        Footers = <>
+        Width = 81
+      end>
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 430
+    Width = 490
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 2
+    object OKBtn: TButton
+      Left = 119
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #30830#23450'(Y)'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object CancelBtn: TButton
+      Left = 247
+      Top = 8
+      Width = 75
+      Height = 25
+      Cancel = True
+      Caption = #21462#28040'(&C)'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object ads278: TADODataSet
+    AutoCalcFields = False
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    CommandText = 
+      'declare @IsSelected bit '#13#10'select  @IsSelected as IsSelected, Dat' +
+      'a0278.PARAMETER_NAME, Data0278.PARAMETER_DESC,  dbo.Data0002.UNI' +
+      'T_NAME, '#13#10'        case Data0278.DATA_TYPE when 1 then '#39#25968#23383#39' when ' +
+      '2 then '#39#23383#31526#39' end as DATA_TYPE,Data0278.rkey,'#13#10'           case dbo' +
+      '.Data0278.CATEGORY_PTR when 2 then '#39#20840#23616#39' when 3 then '#39#21046#31243#39' else '#39#20854 +
+      #23427#39' end as CATEGORY_PTR'#13#10'FROM   dbo.Data0278  LEFT OUTER JOIN'#13#10'  ' +
+      '     dbo.Data0002 ON dbo.Data0278.UNIT_PTR = dbo.Data0002.RKEY'#13#10 +
+      'where 1=1  '#13#10
+    Parameters = <>
+    Left = 320
+    Top = 240
+    object ads278IsSelected: TBooleanField
+      DisplayLabel = #36873#20013
+      FieldName = 'IsSelected'
+    end
+    object ads278PARAMETER_NAME: TStringField
+      DisplayLabel = #21442#25968#20195#30721
+      FieldName = 'PARAMETER_NAME'
+      Size = 10
+    end
+    object ads278PARAMETER_DESC: TStringField
+      DisplayLabel = #21442#25968#21517#31216
+      FieldName = 'PARAMETER_DESC'
+    end
+    object ads278UNIT_NAME: TStringField
+      DisplayLabel = #21333#20301
+      FieldName = 'UNIT_NAME'
+    end
+    object ads278rkey: TIntegerField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ads278DATA_TYPE: TStringField
+      DisplayLabel = #31867#22411
+      FieldName = 'DATA_TYPE'
+      ReadOnly = True
+      Size = 4
+    end
+    object ads278CATEGORY_PTR: TStringField
+      DisplayLabel = #21442#25968#31867#22411
+      FieldName = 'CATEGORY_PTR'
+      ReadOnly = True
+      Size = 4
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ads278clientds
+    Left = 144
+    Top = 240
+  end
+  object ads278clientds: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'ads278provide'
+    Left = 208
+    Top = 240
+    object ads278clientdsIsSelected: TBooleanField
+      DisplayLabel = #36873#20013
+      FieldName = 'IsSelected'
+    end
+    object ads278clientdsPARAMETER_NAME: TStringField
+      DisplayLabel = #21442#25968#20195#30721
+      FieldName = 'PARAMETER_NAME'
+      Size = 10
+    end
+    object ads278clientdsPARAMETER_DESC: TStringField
+      DisplayLabel = #21442#25968#21517#31216
+      FieldName = 'PARAMETER_DESC'
+    end
+    object ads278clientdsUNIT_NAME: TStringField
+      DisplayLabel = #21333#20301
+      FieldName = 'UNIT_NAME'
+    end
+    object ads278clientdsrkey: TIntegerField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ads278clientdsDATA_TYPE: TStringField
+      DisplayLabel = #31867#22411
+      FieldName = 'DATA_TYPE'
+      ReadOnly = True
+      Size = 4
+    end
+    object ads278clientdsCATEGORY_PTR: TStringField
+      DisplayLabel = #21442#25968#31867#22411
+      FieldName = 'CATEGORY_PTR'
+      ReadOnly = True
+      Size = 4
+    end
+  end
+  object ads278provide: TDataSetProvider
+    DataSet = ads278
+    Left = 264
+    Top = 240
+  end
+end

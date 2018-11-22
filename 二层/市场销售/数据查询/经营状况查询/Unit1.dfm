@@ -1,0 +1,713 @@
+object Form1: TForm1
+  Left = -4
+  Top = -4
+  BorderStyle = bsSingle
+  Caption = #32463#33829#29366#20917#26597#35810
+  ClientHeight = 714
+  ClientWidth = 1024
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  ShowHint = True
+  WindowState = wsMaximized
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 16
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 65
+    Width = 1024
+    Height = 649
+    Align = alClient
+    DataSource = DataSource2
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clNavy
+    FooterFont.Height = -13
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = [fsBold]
+    FooterRowCount = 1
+    FrozenCols = 1
+    ParentFont = False
+    ReadOnly = True
+    SumList.Active = True
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    UseMultiTitle = True
+    Columns = <
+      item
+        EditButtons = <>
+        Footer.FieldName = 'date1'
+        Footer.Font.Charset = DEFAULT_CHARSET
+        Footer.Font.Color = clRed
+        Footer.Font.Height = -13
+        Footer.Font.Name = 'MS Sans Serif'
+        Footer.Font.Style = [fsBold]
+        Footer.Value = #21512'  '#35745
+        Footer.ValueType = fvtStaticText
+        Footers = <>
+        Width = 67
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.FieldName = 'f1'
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end
+      item
+        EditButtons = <>
+        Footer.Alignment = taRightJustify
+        Footer.ValueType = fvtSum
+        Footers = <>
+        Width = 90
+      end>
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1024
+    Height = 65
+    Align = alTop
+    TabOrder = 1
+    object SpeedButton1: TSpeedButton
+      Left = 497
+      Top = 8
+      Width = 41
+      Height = 41
+      Hint = #36864#20986
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00388888888877
+        F7F787F8888888888333333F00004444400888FFF444448888888888F333FF8F
+        000033334D5007FFF4333388888888883338888F0000333345D50FFFF4333333
+        338F888F3338F33F000033334D5D0FFFF43333333388788F3338F33F00003333
+        45D50FEFE4333333338F878F3338F33F000033334D5D0FFFF43333333388788F
+        3338F33F0000333345D50FEFE4333333338F878F3338F33F000033334D5D0FFF
+        F43333333388788F3338F33F0000333345D50FEFE4333333338F878F3338F33F
+        000033334D5D0EFEF43333333388788F3338F33F0000333345D50FEFE4333333
+        338F878F3338F33F000033334D5D0EFEF43333333388788F3338F33F00003333
+        4444444444333333338F8F8FFFF8F33F00003333333333333333333333888888
+        8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
+        333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
+        0000}
+      NumGlyphs = 2
+      ParentFont = False
+      OnClick = SpeedButton1Click
+    end
+    object SpeedButton2: TSpeedButton
+      Left = 415
+      Top = 8
+      Width = 41
+      Height = 41
+      Hint = #26597#35810
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Glyph.Data = {
+        36080000424D3608000000000000360400002800000020000000200000000100
+        080000000000000400000000000000000000000100000001000000006000F8C8
+        98000098C800C89860009860300060300000F8F8C8000060980000C8F80000F8
+        F800F8F8F8006030300000690000660000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000130000A0F51700000000000000E400F712000035A6FC00770000001300
+        0700A7FC7700080613000083A600FC7700000000000035A5FC0077FFFF000000
+        7C00010000000000000000000000000000000000000000000000000000000000
+        310000000000008BF20000640000660018001618000078011300001816001800
+        78000113000010161800000000000000C000F7120000C8F3EB007770F5001200
+        0000ECFD7F0002000000000000001300E8000100000001000A0000884000F877
+        A000F51700000100000000998400E6775400F71200000101010001D8F8001200
+        450090FB7700801FF80077FFFF00FFFF6000F8120000AD84E6007760F8001200
+        D80084E677000000000000FFFF0000003C008BF200003C8BF200001800000000
+        00000000000044F8120000400000000000000000000028F81200000000000000
+        00000000000000000000000C000000000200000000000101120000872B00F877
+        0000ECFD7F00000000000002000000006C00001A0200A8F51700007FFF00FFFF
+        000000000000A8F51700000500000000870031E6770084F8120000218600E677
+        9800F81200006713000010FFFF0000007C00010000003C8BF200000000000000
+        7000F8120000ACF8120000D8F8001200100030001000F8400000105F5400E677
+        7C0001000000D0F8120000D8F80012000800000000000E0000000A0A0A0A0A0A
+        0A0A0A0404040A0A0A0A0A0A0A0B0B0B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A040403030305050A0A0A0B050303040B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        04030303030303030505050303030303040B0A0A0A0A0A0A0A0A0A0A0A0A0A04
+        0303030300000000000004030303030303040B0A0A0A0A0A0A0A0A0A0A0A0403
+        030300000202020202020000030303030303040B0A0A0A0A0A0A0A0A0A0A0403
+        030002080808080808080802000303030303040B0A0A0A0A0A0A0A0A0A040303
+        07020808020707070702080802000303030303040B0A0A0A0A0A0A0A0A040307
+        02080207010101010101070208020003030303040B0A0A0A0A0A0A0A04030307
+        080807040301010101010607020800030303040B0A0A0A0A0A0A0A0A04030702
+        0902030304030101010604040208020003040B0A0A0A0A0A0A0A0A0A04030708
+        09070303030403010106040307020800040B0A0A0A0A0A0A0A0A0A0403030709
+        0807030303040301010106040702080200000000000000000A0A0A0403030709
+        080703040403010101060604070209080202020202020202000A0A0403030709
+        080704030301010606040403070209090909090909090908000A0A0403030709
+        0807030101010604040303010702080200070707070707070A0A0A0403030708
+        090204030101060403030303020802000B0A0A0A0A0A0A0A0A0A0A0403030107
+        0908070403010106040404070208070304040A0A0A0A0A0A0A0A0A0403030107
+        08090207040301010606070208020703040B0A0A0A0A0A0A0A0A0A0A04030101
+        0708090802070707070202080800030303040B0A0A0A0A0A0A0A0A0A04030106
+        010708090908080808080802000303030303040B0A0A0A0A0A0A0A0A0A040301
+        06010707080909090808070703030303030303040B0A0A0A0A0A0A0A0A040303
+        010101030707070707070303030303030303030B0A0A0A0A0A0A0A0A0A0A0403
+        030303030303030B0B0B0B030303030303030B0A0A0A0A0A0A0A0A0A0A0A0A04
+        040303030304040A0A0A0A0B0B0303030B0B0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A040404040A0A0A0B0B0A0A0A0B0B0B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A0A0A0A0A0A0A0A04030B0B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A0A0A0A0A0A0A0A040103040B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A0A0A0A0A0A0A0A0A040103040B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A0A0A0A0A0A0A0A0A040101030B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A0A0A0A0A0A0A0A0A0A040101030B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A0A0A0A0A0A0A0A0A0A0A0404010B0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A0A
+        0A0A0A0A0A0A0A0A0A0A0A0A0A040B0A0A0A0A0A0A0A0A0A0A0A}
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = SpeedButton2Click
+    end
+    object Label1: TLabel
+      Left = 14
+      Top = 15
+      Width = 65
+      Height = 13
+      Caption = #26597#30475#24180#26376#65306
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object SpeedButton3: TSpeedButton
+      Left = 456
+      Top = 8
+      Width = 41
+      Height = 41
+      Hint = #23548#20986
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      Glyph.Data = {
+        36080000424D3608000000000000360400002800000020000000200000000100
+        080000000000000400000000000000000000000100000001000000180000D8D8
+        D80010A0680000607000C0C0C000105018008880800038A0B00070707000A0A0
+        A000F8F8F800B0B0B0005050500050787800484840003030300060A068002860
+        C00080B0B8002828280030905800F0F0F00018907000105858004078D0000028
+        30002848780070C0B80038A09800E8E8E8000848500048B8F000B8F0C0001048
+        A000D0D0D0005878B800003818009090900080D8F80078D0A0002088580058C0
+        E8004070B0001840700040704800A8A8A80040A0680068606000202020002070
+        380060C8C8002858B00088F0C00060C89800287848004088A80020485800E0E0
+        E000A8E0A800506060003098D000C8C8C8002038400000704000487850003048
+        980038A0600078A0E0006090D000389058002880500030A0D80028303000B0E8
+        F80058C898001878A000488098002088C00090B0F8007878780068A0F0003058
+        800030A0D00028485000186838005890E0000870580040403800B8B8B8000898
+        5800003048001010100070C8E00028A8680060888000189898004078C0000868
+        68009898980080C0D80088E0E000107870005858580068A8880050A0C0002898
+        6000306038004098D0002868780080C8980058A870001840880060C8F0002840
+        48000060580078707800488878001848300070B8D00008381800189088002858
+        68004090C0001020280080808000080808003870C0003060900088D8A8006060
+        600040A8A8000040480088888800004020006088E00030688800007878000070
+        7000305898001818180038383800A098A0004040400048708000085060009090
+        98006868680038A8B8000030200088E0F80020487000407850002078400030A8
+        70004848480088889000787070009098900080D0A0003898580038A0680048A0
+        68001848A000C0651A00000000000000C000F7120000C8F3EB007770F5001200
+        0000ECFD7F0002000000000000001300E8000100000001000A0000884000F877
+        90004C1A00000100000000998400E6775400F71200000101010001D8F8001200
+        450090FB7700801FF80077FFFF00FFFF6000F8120000AD84E6007760F8001200
+        D80084E677000000000000FFFF0000003000F1F5000030F1F500001800000000
+        00000000000044F8120000400000000000000000000028F81200000000000000
+        00000000000000000000000C000000000200000000000101120000872B00F877
+        0000ECFD7F00000000000002000000006C00001A0200984C1A00007FFF00FFFF
+        000000000000984C1A00000500000000870031E6770084F8120000218600E677
+        9800F81200006713000010FFFF00000020000100000030F1F500000000000000
+        7000F8120000ACF8120000D8F8001200100030001000F8400000105F5400E677
+        200001000000D0F8120000D8F80012000800000000000E0000000A0A0A0A0A0A
+        13131313131313131313131313131313131313130A0A0A0A0A0A0A0A0A0A0A13
+        139A9A9A9A9A9A9A9A9A9A9A9A9A9A9A9A9A9A13130A0A0A0A0A0A0A0A0A1313
+        4F8462626262626262626262626262626262669A13130A0A0A0A0A0A0A0A130B
+        25090909090909090909090909090909090909669A130A0A0A0A0A0A0A0A1322
+        09090909090909090909090909090909090909090C130A0A0A0A0A0A0A0A1322
+        2D2D9A9A9A9A9A9A0E8E8E8E8E57578E8E8E2D2D0C130A0A0A0A0A0A0A0A1301
+        0B0B0B0B0B0B0B0B0B2D099D8484849B918D092D0C130A0A0A0A0A0A0A0A1301
+        58585858585858580B2D62064F08089C7C8462090C130A0A0A0A0A0A0A0A1339
+        0404040404040404582D624F9266666692087C250C130A0A0A0A0A0A0A0A1339
+        040481818181818113131313133030301313924F8E300A0A0A0A0A0A0A0A1339
+        3D3D3D3D3D3D3D3D13668F873E13138C8E9A662F8C300A0A0A0A0A0A0A0A131D
+        2222222222222222133B5C476837383E138E9A0C0F8B0A0A0A0A0A0A0A0A131D
+        01010101010101011371954D521F296B1E138E9A135B0A0A0A0A0A0A0A0A131D
+        3939737373737373137B76634D3C07937824138E305B0A0A0A0A0A0A0A0A1315
+        393939393939393939484C497A61162814547713307D0A0A0A0A0A0A0A0A1315
+        1D1D1D1D1D1D1D1D1D137926123F59A142459877137D0A0A0A0A0A0A0A0A130A
+        1515151515151515151553701B5D02692EA0453177130A0A0A0A0A0A0A0A130A
+        0A0A8484848484848484136C1C809E99A06E2E360594130A0A0A0A0A0A0A130A
+        0A0A0A0A0A0A0A0A0A0A0A136A6D2035029F4685567219130A0A0A0A0A0A130A
+        0A0A0A0A0A0A0A0A0A0A0A0A13979E344A2800658889035A130A0A0A0A0A130A
+        0A0A0A0A0A0A0A0A0A0A0A0A0A132C273A670D8272904BA21A130A0A0A0A130A
+        0A0A84848484848484848484848413401074645E83962A7E55130A0A0A0A130A
+        15151515151515151515151515151513751732517F2A601844130A0A0A0A1315
+        1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D13835F215043118A130A0A0A0A0A1315
+        39393939393939393939393939393939391383334E866F130A0A0A0A0A0A131D
+        393973737373737373737373737373737373132B2341130A0A0A0A0A0A0A131D
+        010101010101010101010101010101010101011313130A0A0A0A0A0A0A0A131D
+        222222222222222222222222222222222222222281130A0A0A0A0A0A0A0A1315
+        1D3D3D3D3D3D3D3D3D3D3D3D3D3D3D3D3D3D3D3D4F130A0A0A0A0A0A0A0A1313
+        0A1D04040404040404040404040404040404040B13130A0A0A0A0A0A0A0A0A13
+        13151D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D2213130A0A0A0A0A0A0A0A0A0A0A
+        13131313131313131313131313131313131313130A0A0A0A0A0A}
+      ParentFont = False
+      OnClick = SpeedButton3Click
+    end
+    object Label2: TLabel
+      Left = 546
+      Top = 24
+      Width = 449
+      Height = 16
+      AutoSize = False
+      Caption = #27880#65306#25152#26377#37329#39069#24050#32463#21253#21547#24037#20855#36153#29992#24182#19988#24050#32463#36716#25442#25104#26412#20301#24065
+    end
+    object Label3: TLabel
+      Left = 189
+      Top = 15
+      Width = 20
+      Height = 16
+      AutoSize = False
+      Caption = #21040
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 14
+      Top = 43
+      Width = 65
+      Height = 13
+      Caption = #23458#25143#20195#30721#65306
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object SpeedButton4: TSpeedButton
+      Left = 168
+      Top = 40
+      Width = 23
+      Height = 22
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        0400000000008000000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+        777000000000000077000FFFFFFFFFF070000FFFFFFF000080070FFFFFF08778
+        08770FFFFF0877F880770FFFFF07777870770FFFFF07F77870770FFFFF08FF78
+        80770FFFFFF0877807770FFFFFFF000077770FFFFFFFFFF077770FFFFFFF0000
+        77770FFFFFFF070777770FFFFFFF007777770000000007777777}
+      OnClick = SpeedButton4Click
+    end
+    object Label5: TLabel
+      Left = 196
+      Top = 44
+      Width = 39
+      Height = 13
+      Caption = #24037#21378#65306
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object SpeedButton5: TSpeedButton
+      Left = 290
+      Top = 40
+      Width = 23
+      Height = 22
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        0400000000008000000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+        777000000000000077000FFFFFFFFFF070000FFFFFFF000080070FFFFFF08778
+        08770FFFFF0877F880770FFFFF07777870770FFFFF07F77870770FFFFF08FF78
+        80770FFFFFF0877807770FFFFFFF000077770FFFFFFFFFF077770FFFFFFF0000
+        77770FFFFFFF070777770FFFFFFF007777770000000007777777}
+      OnClick = SpeedButton5Click
+    end
+    object Edit1: TEdit
+      Left = 79
+      Top = 40
+      Width = 90
+      Height = 21
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnKeyPress = Edit1KeyPress
+    end
+    object dtp1: TDateTimePicker
+      Left = 80
+      Top = 8
+      Width = 97
+      Height = 24
+      Date = 38600.000000000000000000
+      Time = 38600.000000000000000000
+      TabOrder = 1
+    end
+    object dtp2: TDateTimePicker
+      Left = 215
+      Top = 8
+      Width = 97
+      Height = 24
+      Date = 38600.000000000000000000
+      Time = 38600.000000000000000000
+      TabOrder = 2
+    end
+    object Edit2: TEdit
+      Left = 233
+      Top = 40
+      Width = 58
+      Height = 21
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      OnKeyPress = Edit1KeyPress
+    end
+  end
+  object ADOConnection1: TADOConnection
+    CommandTimeout = 180
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=wisdompcb1077;Persist Security Info' +
+      '=True;User ID=sa;Initial Catalog=sj_v20_live;Use Procedure for P' +
+      'repare=1;Auto Translate=True;Packet Size=4096;Workstation ID=W11' +
+      '9;Use Encryption for Data=False;Tag with column collation when p' +
+      'ossible=False'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 224
+    Top = 144
+  end
+  object adosp1: TADOStoredProc
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    CommandTimeout = 180
+    ProcedureName = 'ep406;3'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@date1'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+      end
+      item
+        Name = '@date2'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+      end
+      item
+        Name = '@cust'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 12
+      end
+      item
+        Name = '@Factory'
+        DataType = ftString
+        Size = 10
+      end>
+    Prepared = True
+    Left = 336
+    Top = 184
+  end
+  object ADOStoredProc1: TADOStoredProc
+    Connection = ADOConnection1
+    Filtered = True
+    ProcedureName = 'ep406;2'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@order'
+        Attributes = [paNullable]
+        DataType = ftWord
+        Precision = 3
+        Value = 0
+      end>
+    Left = 336
+    Top = 224
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOStoredProc1
+    Left = 304
+    Top = 224
+  end
+  object tmp: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 464
+    Top = 224
+  end
+  object DataSource2: TDataSource
+    DataSet = adosp1
+    Left = 184
+    Top = 304
+  end
+end

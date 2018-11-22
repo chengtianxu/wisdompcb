@@ -1,0 +1,1 @@
+select row_number() over(order by rkey) as NumID,rkey from data0010

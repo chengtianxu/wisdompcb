@@ -1,0 +1,24 @@
+object DM: TDM
+  OldCreateOrder = False
+  Left = 377
+  Top = 236
+  Height = 252
+  Width = 286
+  object con1: TADOConnection
+    ConnectionString = 
+      'FILE NAME=C:\Program Files\Common Files\System\Ole DB\Data Links' +
+      '\DG_172.18.0.8.udl'
+    LoginPrompt = False
+    Provider = 
+      'C:\Program Files\Common Files\System\Ole DB\Data Links\DG_172.18' +
+      '.0.8.udl'
+    Left = 64
+    Top = 56
+  end
+  object qry_temp: TADOQuery
+    Connection = con1
+    Parameters = <>
+    Left = 160
+    Top = 80
+  end
+end

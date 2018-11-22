@@ -1,0 +1,895 @@
+object Form_main: TForm_main
+  Left = 197
+  Top = 228
+  Width = 963
+  Height = 712
+  Caption = #23458#25143#21697#36136#32034#36180
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 947
+    Height = 36
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Label4: TLabel
+      Left = 537
+      Top = 15
+      Width = 52
+      Height = 13
+      Alignment = taRightJustify
+      Caption = #32034#36180#32534#21495
+    end
+    object BitBtn1: TBitBtn
+      Left = 3
+      Top = 4
+      Width = 55
+      Height = 29
+      Hint = #36864#20986
+      Caption = #36864#20986
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      TabStop = False
+      OnClick = BitBtn1Click
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00388888888877
+        F7F787F8888888888333333F00004444400888FFF444448888888888F333FF8F
+        000033334D5007FFF4333388888888883338888F0000333345D50FFFF4333333
+        338F888F3338F33F000033334D5D0FFFF43333333388788F3338F33F00003333
+        45D50FEFE4333333338F878F3338F33F000033334D5D0FFFF43333333388788F
+        3338F33F0000333345D50FEFE4333333338F878F3338F33F000033334D5D0FFF
+        F43333333388788F3338F33F0000333345D50FEFE4333333338F878F3338F33F
+        000033334D5D0EFEF43333333388788F3338F33F0000333345D50FEFE4333333
+        338F878F3338F33F000033334D5D0EFEF43333333388788F3338F33F00003333
+        4444444444333333338F8F8FFFF8F33F00003333333333333333333333888888
+        8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
+        333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
+        0000}
+      NumGlyphs = 2
+    end
+    object BitBtn3: TBitBtn
+      Left = 58
+      Top = 4
+      Width = 55
+      Height = 29
+      Hint = #36864#20986
+      Caption = #21047#26032
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      TabStop = False
+      OnClick = BitBtn3Click
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        04000000000080000000120B0000120B00001000000010000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DADADADADADA
+        DADABFBFBDADADADADADDADADBFADADADADAADADAD000DADADADDADAD0FBF0DA
+        DADAADAD0F7FBF0DADADDAD0F7F87BF0DADAAD0F7F87BFB70DADD0F7F87BFB78
+        80DA000F87BFB78880ADDAD00BFB78880ADAADADA0B7888740ADDADADA088804
+        440AADADADA000A04440DADADADADADA0440ADADADADADADA00D}
+    end
+    object BitBtn4: TBitBtn
+      Left = 113
+      Top = 4
+      Width = 55
+      Height = 29
+      Hint = #37325#26032#23450#20041#26597#35810#26465#20214
+      Caption = #26597#35810
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = BitBtn4Click
+      Glyph.Data = {
+        C6050000424DC605000000000000360400002800000014000000140000000100
+        08000000000090010000C40E0000C40E0000000100000000000000000000E8E0
+        0000D0A000006060600038383800F0700000B8B8C00020202000A8B0B000F0F0
+        F800B8400000C0600800A0A0A000E0E0E800D8D8E000B8100000D0D8D800C0A0
+        8800B8300000F8F8080098989800B0504000B0908800B8706000E0A86000E0D8
+        C000F070380088888800F0D8B0005858580008101000E0D0B000B8504000E8C8
+        A000F0B85000E8D8A800C8C8C800D8982000D8C0B00050505000C8803800F0C8
+        8800F8500800D8A040007078780008080800E8C0880028283000F8980000E8F0
+        F00040404000B0B8B800B8A0A000C0682800E0A87800F0800000C8D0D000C898
+        8000E0A88000D8904800E0E0E000F0A0000070707000E0783000B0888800E8D0
+        6800C8B8A800C8700800D8885000B850180028282000B8887800F0F0D8001818
+        1800F070180090909000D8C05800E8B09800F8F0E000F8F0F00048484800B8C0
+        C800F0C06000F8F8F800F8805800F8F0C80080808000B8906000B0B0B000D090
+        5000F8600000D8D0C800E0A05800B8585800B8B00000B8481000D0D0B000D078
+        3000C0702000F0A86800C0602000E8E8E800A8A8A800F0C0B800B0201000F0A8
+        4000E0B89000B8B8B80068686800F0F0E800F0982000D8D0A800E8C88000F0E0
+        C000B8380800F0800800D8E0E000C0C0C000F0680800B0B0B800C0601800E0B8
+        7800F0981000C8781800C0C8C80010101800C8A09000E0B8600030303000F0F0
+        F000C0B8B80028282800E8E0E000F0F8F8003838400078787800F0D8B800D8C8
+        B800F0C89000E0E8E800B8601000D0883800F8680800D8D0B800E8D08800C8C8
+        D000D0D0D000B8B0B00058586000D8D8D8002820200010101000E8E8F000F8F8
+        F000D8D0D000B8786000B8480000F0780000F0880000E0B08000B8C0C000B818
+        0000C0A88800B8300800B0504800F0E0B000E8D0B000F0D08800F8501000F880
+        0800ECFD7F0002000000000000001300E8000100000001000A0000884000F877
+        78004B1B00000100000000998400E6775400F71200000101010001D8F8001200
+        450090FB7700801FF80077FFFF00FFFF6000F8120000AD84E6007760F8001200
+        D80084E677000000000000FFFF0000003800A8F8000038A8F800001800000000
+        00000000000044F8120000400000000000000000000028F81200000000000000
+        00000000000000000000000C000000000200000000000101120000872B00F877
+        0000ECFD7F00000000000002000000006C00001A0200804B1B00007FFF00FFFF
+        000000000000804B1B00000500000000870031E6770084F8120000218600E677
+        9800F81200006713000010FFFF00000020000100000038A8F800000000000000
+        7000F8120000ACF8120000D8F8001200100030001000F8400000105F5400E677
+        200001000000D0F8120000D8F80012000800000000000E0000005331B2861D86
+        1D861D861D861DF81DC57431F62C9824801414572C572C6C2C6C6C1D6C6C77B2
+        6CB2B26C2CDF1232DF6C6CF86CF86C861D1B006C1D0E94530E8A6E8A24240E24
+        24240E6F6CB294800E531D31550E4C245524242424515551B26C322453318655
+        248A0E557780000086576C002CB20E5398536C31305A55F8CC1424511486B2F3
+        1D802453535386534C229457536F066F06242CB2806C065353551D5353511D53
+        638C12152477248680F8245353318653531D7755358D35121B57066FF66C2453
+        98536C535380240EAA6F631557123551B26C24535353945353B2065398554D35
+        776F0624C56C065353551D53536C6F53535355246F152451806C245353319453
+        532480535353246F7E8D531D946C245398536C53535314F85353AA2453531480
+        576C245353532C5353555314C557776F14002C246C5706535355575353315353
+        551B6CF857146E146C2C24535331866C775353555353535353225A35C5B20653
+        9853570E57535353535353535353AA08143153315353986C866C2C6C6C1D941D
+        861D8680775398535355}
+    end
+    object Edit1: TEdit
+      Left = 594
+      Top = 10
+      Width = 121
+      Height = 21
+      TabOrder = 3
+      OnChange = Edit1Change
+    end
+    object BitBtn2: TBitBtn
+      Left = 168
+      Top = 4
+      Width = 55
+      Height = 29
+      Hint = #23548#20986#25968#25454#21040'Excel'
+      Caption = #23548#20986
+      ParentShowHint = False
+      PopupMenu = PopupMenu2
+      ShowHint = True
+      TabOrder = 4
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        04000000000080000000120B0000120B00001000000010000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DADADADADADA
+        DADAADADADADADADADADDADADADADAD00000000000000006666007777777706E
+        EF0AA0E6666606EEF0ADDA0E66606EEF060AADA0E606EEF0000DDADA006EEF0A
+        DADAADAD06EEF00DADADDAD06EEF0670DADAAD06EEF0E6670DADD06EEF0A0E66
+        70DA0FFFF0ADA0EEEE0D00000ADADA00000AADADADADADADADAD}
+    end
+    object BitBtn6: TBitBtn
+      Left = 278
+      Top = 4
+      Width = 106
+      Height = 29
+      Hint = #37325#26032#23450#20041#26597#35810#26465#20214
+      Caption = #23457#25209#27969#31243#23450#20041
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      OnClick = BitBtn6Click
+      Glyph.Data = {
+        36050000424D3605000000000000360400002800000010000000100000000100
+        08000000000000010000000000000000000000010000000000000000980058C8
+        F800F0F8F80020A8D8000890B800A0E0F8002878900080C8E0003070800088F0
+        F8007090D00068A8D800E0F0F80080D8F800D8F0F80048C0E8001020A000A0E0
+        F000D0E8F800C8F0F80060C0F00078D0F8002080A0004070C80040B8D80088E0
+        F800A8A8E000A0F8F8003860B8003048B00010A0D00090F8F800C0F8F80070D8
+        F80060C0E00090D8F800B8F8F8000098C800C8E0F00050B8D80088D0E800A8D8
+        E80078D0F00030B0E00078C8E00050C8E80048B8F000B0F8F8005898D8001088
+        B000B8E0F00098F8F80098E8F800F8F8F80068D8F00080E8F80048B8D8000808
+        980078E0F80080D8F00030B0D80060D0F800B8E8F80058C0E0001828A80090F0
+        F80070C0E000E8F8F800A0D8E80040B8E80058C8F00050C0F000A8F8F8000090
+        C00070E0F800D0F8F80020B0D800A8E8F80060D0F00020A0D000D8F8F80088E8
+        F8001880A80068B8E8000898C80008109800E0F8F80080E0F80060C8F80038B8
+        E00098D8F80070E0F00068D0F80038B0E8001820A0001888B00078D8F800C8F8
+        F80058D0F00050B8E00048B8E000B0E8F8001830A80028B0D80080C8E80090D0
+        E800A8D8F0001010980000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000100000000
+        000000130000E0291600000000000000E400F712000035A6FC00770000001300
+        0700A7FC7700080613000083A600FC7700000000000035A5FC0077FFFF000000
+        7800010000000000000000000000000000000000000000000000000000000000
+        01000000000000000000003F890043008000B5150000780113000080B5001500
+        78000113000078B51500000000000000200000000000E4F812000070F5001200
+        0000ECFD7F000200000000000000130094000000000001000A0000884000F877
+        E000291600000100000000998400E6775400F71200000101010001D8F8001200
+        450090FB7700801FF80077FFFF00FFFF6000F8120000AD84E6007760F8001200
+        D80084E677000000000000FFFF000000C40048EE0000C448EE00001800000000
+        00000000000044F8120000400000000000000000000028F81200000000000000
+        00000000000000000000000C000000000200000000000101120000872B00F877
+        0000ECFD7F00000000000002000000003A00001A0200E8291600007FFF00FFFF
+        000000000000E8291600000500000000870031E6770084F8120000218600E677
+        9800F81200006713000010FFFF000000780001000000C448EE00000000000000
+        7000F8120000ACF8120000D8F8001200100030001000F8400000105F5400E677
+        780001000000D0F8120000D8F80012000800000000000E0000003535354B3535
+        354B3535354B3535354B350A0A35353535353535353535353535692E168CF80A
+        C23535353535354B35358F4B5C335C184FB49C0A26353535353518184B5C335C
+        3390332E188C3535354B8F25265B5C335A0A17335A338C35353522E0695A3390
+        33006633335C220A35358F188F4B5A220033C53333334BF83535222E5C264B5A
+        4B330A0A4B5C354F69358F225C1853225A3526004B3326359C35225C3390335C
+        332E3500354B3535220A8F3333335A3390335C0A001853225326223333333333
+        4B334B33691835353535534B4B4B4B2253224F22532235353535354F2222225A
+        353535353535354B353535353535353535353535353535353535}
+    end
+    object BitBtn5: TBitBtn
+      Left = 384
+      Top = 4
+      Width = 55
+      Height = 29
+      Caption = #24110#21161
+      TabOrder = 6
+      OnClick = BitBtn5Click
+      Glyph.Data = {
+        42010000424D4201000000000000760000002800000011000000110000000100
+        040000000000CC00000000000000000000001000000010000000000000000000
+        BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+        7777700000007777777777777777700000007777777444777777700000007777
+        7774447777777000000077777777777777777000000077777774487777777000
+        0000777777744877777770000000777777774477777770000000777777777448
+        7777700000007777744778448777700000007777448777444777700000007777
+        4487774447777000000077777447784487777000000077777744444877777000
+        0000777777777777777770000000777777777777777770000000777777777777
+        777770000000}
+    end
+    object DateTimePicker1: TDateTimePicker
+      Left = 636
+      Top = 12
+      Width = 81
+      Height = 21
+      Date = 43052.707010949070000000
+      Time = 43052.707010949070000000
+      TabOrder = 7
+    end
+    object DateTimePicker2: TDateTimePicker
+      Left = 744
+      Top = 12
+      Width = 77
+      Height = 21
+      Date = 43052.707172638890000000
+      Time = 43052.707172638890000000
+      TabOrder = 8
+    end
+    object BitBtn7: TBitBtn
+      Left = 223
+      Top = 4
+      Width = 55
+      Height = 29
+      Caption = #27719#24635
+      TabOrder = 9
+      OnClick = BitBtn7Click
+      Glyph.Data = {
+        26040000424D2604000000000000360000002800000012000000120000000100
+        180000000000F0030000C40E0000C40E00000000000000000000C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C00000C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C00000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        0000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C00000C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C00000000000000000000000
+        00000000000000000000C0C0C0C0C0C00000C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C00000004D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D4D00
+        0000C0C0C0C0C0C00000C0C0C000000086868686868686868686868686868686
+        86864D4D4D00FFFF00FFFF00FFFF00FFFF00FFFF008000868686868686C0C0C0
+        0000C0C0C000800000800000800000800000800000800000800033993300FFFF
+        00FFFF00FFFF00FFFF00FFFF008000008000868686C0C0C00000C0C0C033CC33
+        33CC3333CC3300660000660033CC0033CC33339900009933C0C0C0C0C0C0C0C0
+        C0339933339933008000868686C0C0C00000C0C0C033CC3333CC335555554242
+        4229292908080833CC3333CC33C0C0C0555555333333080808C0C0C033993300
+        8000868686C0C0C00000C0C0C033CC3333CC3386868686868655555529292900
+        CC3300CC33C0C0C0868686555555333333C0C0C0339933008000868686C0C0C0
+        0000C0C0C033CC3333CC33A4A0A099999986868655555533CC3333CC00C0C0C0
+        B2B2B2969696666666C0C0C0339933008000868686C0C0C00000C0C0C033CC33
+        33CC3333CC3300FF0000FF0000CC3300CC0000CC3333CC00C0C0C0C0C0C0C0C0
+        C0339933009933008000000000C0C0C00000C0C0C000FF0000FF0000FF0000FF
+        0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000
+        0000C0C0C0C0C0C00000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        0000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C00000C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C00000C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+        C0C0C0C0C0C0C0C00000}
+    end
+    object BitBtn8: TBitBtn
+      Left = 440
+      Top = 4
+      Width = 85
+      Height = 29
+      Caption = #24494#20449#20851#27880
+      TabOrder = 10
+      OnClick = BitBtn8Click
+      Glyph.Data = {
+        36050000424D3605000000000000360000002800000014000000100000000100
+        20000000000000050000000000000000000000000000000000004BB869FF4BB8
+        69FF4BB869FF4BB869FF4BB869FF4BB869FF4BB869FF4BB869FF4BB869FF4AB8
+        68FF4AB768FF4AB868FF4DB86AFF4EB86BFF4EB96BFF4CB869FF4FB86BFF7AC7
+        8FFF4AB767FF4AB768FF4BB869FF4BB869FF4AB868FF4BB768FF4BB869FF4BB8
+        69FF4BB869FF4BB869FF4AB768FF4AB868FF60BE79FFA6DAB4FFD5ECDCFFEBF5
+        EEFFE7F4EAFFCAE9D2FFDEF1E3FFB0DEBDFF49B767FF4AB768FF4BB869FF4BB8
+        69FF4AB667FF4AB767FF4BB869FF4BB869FF4BB869FF4BB869FF4AB768FF88CE
+        9BFFF0F8F2FFFDFEFDFFFDFEFEFFFEFEFEFFFEFEFEFFFEFEFEFFFDFDFEFFDDF0
+        E3FF64C07EFF4AB767FF4BB869FF4BB869FF68C180FF56BA71FF4AB768FF4AB7
+        68FF4BB769FF4BB868FF75C68CFFF7FAF8FFFEFEFEFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFDFFE0F2E6FF58BB74FF4BB869FF4AB8
+        68FF8BCF9EFFDEF0E3FF9BD6ACFF9ED7AFFFB8E1C3FF9AD6ABFFCCE9D5FFFDFD
+        FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE
+        FFFFFDFEFEFFA7DBB6FF4AB767FF4AB768FF7EC992FFFBFDFCFFFEFEFEFFFEFE
+        FEFFFDFEFDFFB5DFC1FFF2F9F5FFFEFEFEFFFFFFFFFFFEFEFEFFFEFEFEFFFFFF
+        FFFFFFFFFFFFFEFEFEFFFEFEFEFFFFFFFFFFFEFEFFFFD6EDDDFF4AB767FF82CB
+        95FFF0F8F2FFFDFEFDFFFFFFFFFFFFFFFFFFFEFEFEFFBFE3C9FFEAF6EEFFFEFE
+        FEFFFFFFFFFFE0E0E0FFD6D6D6FFFEFEFEFFFEFEFEFFD5D5D5FFE0E0E0FFFEFE
+        FEFFFEFEFEFFCFEAD6FF63BF7CFFEEF7F0FFFEFEFEFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFEFEFEFFE9F5EDFFB9E1C4FFFCFEFDFFFEFEFFFFA6A6A6FF8B8B8BFFFDFD
+        FDFFFEFEFEFF8D8D8DFFA5A5A5FFFDFDFDFFFDFEFDFF93D2A4FFADDCBAFFFEFE
+        FEFFFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFFFEFEFEFFB3DEC0FFDEF0
+        E3FFFCFDFDFFF7F7F8FFF6F6F6FFFEFEFEFFFEFEFEFFF6F6F6FFF9F9F9FFFCFD
+        FDFFC5E7CFFF50B86DFFD3ECDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFF6FAF8FFAFDCBCFFC5E5CFFFF5FAF7FFFDFEFEFFFDFE
+        FEFFFDFEFDFFFDFDFDFFEFF8F1FFACDDB9FF55BB71FF4AB768FFD1EBD8FFFEFE
+        FEFFFEFFFEFFFEFEFEFFFAFAFAFFFCFCFCFFFFFFFFFFFFFFFFFFFCFDFEFFF3F6
+        F5FFD2EBDAFFB0DDBCFFBBE2C6FFC9E8D2FFAFDEBCFF8FD2A2FF65C17DFF4CB7
+        68FF4AB768FF4BB869FFA5DAB3FFFDFDFDFFFEFEFEFFF2F2F2FF717171FF9D9D
+        9DFFFFFFFFFFFFFFFFFFE3E3E3FF6B6B6BFFB1B1B1FFFCFDFCFFF2F9F4FFDDF0
+        E3FF50B86CFF4BB768FF4AB868FF4BB768FF4BB869FF4BB869FF5CBC77FFEBF6
+        EFFFFDFDFDFFF7F7F7FF929292FFB6B6B6FFFFFFFFFFFFFFFFFFEDEDEDFF8B8B
+        8BFFC6C6C6FFFDFDFDFFFCFDFDFF96D4A8FF4AB768FF4BB869FF4BB869FF4BB8
+        69FF4BB869FF4BB869FF4AB767FF78C78DFFEEF7F1FFFDFDFEFFFCFCFCFFFCFD
+        FCFFFEFEFEFFFFFFFFFFFDFEFEFFFCFCFBFFFCFDFDFFFBFDFBFFACDCBAFF4DB7
+        6AFF4AB767FF4BB869FF4BB869FF4BB869FF4BB869FF4BB869FF4AB868FF4BB7
+        69FF65C07DFFC1E4CAFFF8FBF9FFFDFDFDFFFEFEFEFFFFFFFFFFFDFDFDFFFBFD
+        FCFFD9EFE0FF82CC97FF4CB769FF4BB768FF4BB768FF4BB869FF4BB869FF4BB8
+        69FF4BB869FF4BB869FF4BB869FF4BB869FF4AB767FF4BB869FF5DBD78FF86CE
+        9AFF9FD7AEFFA3D9B1FF91D2A3FF6BC383FF4EB86BFF4AB768FF4AB768FF4BB8
+        69FF4BB869FF4BB869FF4BB869FF4BB869FF4BB869FF4BB869FF}
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 36
+    Width = 947
+    Height = 638
+    Align = alClient
+    Caption = 'Panel2'
+    TabOrder = 1
+    object Splitter1: TSplitter
+      Left = 1
+      Top = 265
+      Width = 945
+      Height = 3
+      Cursor = crVSplit
+      Align = alTop
+      Color = clAqua
+      ParentColor = False
+    end
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 945
+      Height = 264
+      Align = alTop
+      Caption = 'Panel3'
+      TabOrder = 0
+      object DBGridEh1: TDBGridEh
+        Left = 1
+        Top = 1
+        Width = 943
+        Height = 262
+        Align = alClient
+        DataSource = DM.DS597
+        FooterColor = clWindow
+        FooterFont.Charset = ANSI_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -13
+        FooterFont.Name = #23435#20307
+        FooterFont.Style = []
+        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghRowHighlight]
+        PopupMenu = PopupMenu1
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = #23435#20307
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridEh1DrawColumnCell
+        OnKeyDown = DBGridEh1KeyDown
+        OnTitleClick = DBGridEh1TitleClick
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'spNumber'
+            Footers = <>
+            Title.Caption = #32534#21495
+            Title.Color = clRed
+            Width = 63
+          end
+          item
+            EditButtons = <>
+            FieldName = 'USER_FULL_NAME'
+            Footers = <>
+            Title.Caption = #21019#24314#20154#21592
+            Width = 58
+          end
+          item
+            EditButtons = <>
+            FieldName = 'EntryTime'
+            Footers = <>
+            Title.Caption = #21019#24314#26102#38388
+            Width = 81
+          end
+          item
+            EditButtons = <>
+            FieldName = 'ABBR_NAME'
+            Footers = <>
+            Title.Caption = #23458#25143
+            Width = 95
+          end
+          item
+            EditButtons = <>
+            FieldName = 'CURR_NAME'
+            Footers = <>
+            Title.Caption = #24065#31181
+            Width = 50
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Number'
+            Footers = <>
+            Title.Caption = #25968#37327
+            Width = 38
+          end
+          item
+            EditButtons = <>
+            FieldName = 'spmoney'
+            Footers = <>
+            Title.Caption = #37329#39069
+            Width = 67
+          end
+          item
+            EditButtons = <>
+            FieldName = 'debita'
+            Footers = <>
+            Title.Caption = #36130#21153#25187#27454
+            Width = 56
+          end
+          item
+            EditButtons = <>
+            FieldName = 'ABBR_NAME_1'
+            Footers = <>
+            Title.Caption = #24037#21378
+            Width = 80
+          end
+          item
+            EditButtons = <>
+            FieldName = 'yw05'
+            Footers = <>
+            Title.Caption = #20027#31649#19994#21153#21592
+            Width = 73
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Remarks'
+            Footers = <>
+            Title.Caption = #23458#35785#22791#27880
+            Width = 62
+          end
+          item
+            EditButtons = <>
+            FieldName = 'submit_date'
+            Footers = <>
+            Title.Caption = #25552#20132#26102#38388
+            Width = 80
+          end
+          item
+            EditButtons = <>
+            FieldName = 'ywexplain'
+            Footers = <>
+            Title.Caption = #22791#27880
+            Width = 50
+          end
+          item
+            EditButtons = <>
+            FieldName = 'v_status'
+            Footers = <>
+            Title.Caption = #23457#25209#29366#24577
+            Width = 60
+          end
+          item
+            EditButtons = <>
+            FieldName = 'USER_FULL_NAME_1'
+            Footers = <>
+            Title.Caption = #24403#21069#23457#25209#20154#21592
+          end>
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 268
+      Width = 945
+      Height = 369
+      Align = alClient
+      Caption = 'Panel4'
+      TabOrder = 1
+      object DBGridEh3: TDBGridEh
+        Left = 4
+        Top = 60
+        Width = 900
+        Height = 284
+        Align = alCustom
+        DataSource = DM.DataSource2
+        FooterColor = clWindow
+        FooterFont.Charset = ANSI_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -13
+        FooterFont.Name = #23435#20307
+        FooterFont.Style = []
+        ReadOnly = True
+        TabOrder = 2
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = #23435#20307
+        TitleFont.Style = []
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'CUST_CODE'
+            Footers = <>
+            Title.Caption = #23458#25143#20195#30721
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'ABBR_NAME'
+            Footers = <>
+            Title.Caption = #23458#25143#31616#31216
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'spmonth'
+            Footers = <>
+            Title.Caption = #26376#20221
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Number'
+            Footers = <>
+            Title.Caption = #25968#37327
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'CURR_NAME'
+            Footers = <>
+            Title.Caption = #24065#31181
+            Width = 46
+          end
+          item
+            EditButtons = <>
+            FieldName = 'spUnitPrice'
+            Footers = <>
+            Title.Caption = #39044#20272#21333#20215
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'spliable'
+            Footers = <>
+            Title.Caption = #23458#25143#25285#24403
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'company'
+            Footers = <>
+            Title.Caption = #21333#20301
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'explain'
+            Footers = <>
+            Title.Caption = #25253#24223#35828#26126
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'xingtai'
+            Footers = <>
+            Title.Caption = #24418#24577
+            Width = 37
+          end
+          item
+            EditButtons = <>
+            FieldName = 'rec_no'
+            Footers = <>
+            Title.Caption = #21378#20869#21608#26399
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'MANU_PART_DESC'
+            Footers = <>
+            Title.Caption = #23458#25143#26009#21495
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'MANU_PART_NUMBER'
+            Footers = <>
+            Title.Caption = #26412#21378#32534#21495
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'remark'
+            Footers = <>
+            Title.Caption = #21046#36896#21378#21035
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'condate'
+            Footers = <>
+            Title.Caption = #30830#35748#26102#38388
+            Width = 70
+          end>
+      end
+      object DBGridEh2: TDBGridEh
+        Left = 1
+        Top = 1
+        Width = 943
+        Height = 339
+        Align = alClient
+        DataSource = DM.DS609
+        FooterColor = clWindow
+        FooterFont.Charset = ANSI_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -13
+        FooterFont.Name = #23435#20307
+        FooterFont.Style = []
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = #23435#20307
+        TitleFont.Style = []
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'condate'
+            Footers = <>
+            Title.Caption = #30830#35748#26085#26399
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'remark'
+            Footers = <>
+            Title.Caption = #21046#36896#21378#21035
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'MANU_PART_NUMBER'
+            Footers = <>
+            Title.Caption = #26412#21378#32534#21495
+            Width = 104
+          end
+          item
+            EditButtons = <>
+            FieldName = 'MANU_PART_DESC'
+            Footers = <>
+            Title.Caption = #23458#25143#26009#21495
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'rec_no'
+            Footers = <>
+            Title.Caption = #21378#20869#21608#26399
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'xingtai'
+            Footers = <>
+            Title.Caption = #20135#21697#24418#24577
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'explain'
+            Footers = <>
+            Title.Caption = #25253#24223#35828#26126
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'company'
+            Footers = <>
+            Title.Caption = #21333#20301
+            Width = 44
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Number'
+            Footers = <>
+            Title.Caption = #25968#37327
+            Width = 50
+          end
+          item
+            EditButtons = <>
+            FieldName = 'spUnitPrice'
+            Footers = <>
+            Title.Caption = #39044#20272#21333#20215
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'spliable'
+            Footers = <>
+            Title.Caption = #23458#26381#25285#24403
+            Width = 70
+          end
+          item
+            EditButtons = <>
+            FieldName = 'spmonth'
+            Footers = <>
+            Title.Caption = #32034#36180'PCBA'#29983#20135#26376#20221
+            Width = 131
+          end>
+      end
+      object Panel5: TPanel
+        Left = 1
+        Top = 340
+        Width = 943
+        Height = 28
+        Align = alBottom
+        TabOrder = 1
+        object CheckBox1: TCheckBox
+          Left = 130
+          Top = 7
+          Width = 65
+          Height = 17
+          Caption = #26410#25552#20132
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+          OnClick = CheckBox1Click
+        end
+        object CheckBox2: TCheckBox
+          Left = 313
+          Top = 7
+          Width = 65
+          Height = 17
+          Caption = #35780#23457#20013
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+          OnClick = CheckBox1Click
+        end
+        object CheckBox3: TCheckBox
+          Left = 490
+          Top = 7
+          Width = 65
+          Height = 17
+          Caption = #24050#35780#23457
+          Checked = True
+          State = cbChecked
+          TabOrder = 2
+          OnClick = CheckBox1Click
+        end
+        object CheckBox4: TCheckBox
+          Left = 675
+          Top = 7
+          Width = 65
+          Height = 17
+          Caption = #36864#22238
+          Checked = True
+          State = cbChecked
+          TabOrder = 3
+          OnClick = CheckBox1Click
+        end
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 404
+    Top = 128
+    object N1: TMenuItem
+      Caption = #26032#22686
+      OnClick = N1Click
+    end
+    object N2: TMenuItem
+      Caption = #32534#36753
+      OnClick = N2Click
+    end
+    object N3: TMenuItem
+      Caption = #26597#30475
+      OnClick = N3Click
+    end
+    object N4: TMenuItem
+      Caption = #25552#20132
+      Enabled = False
+      OnClick = N4Click
+    end
+    object N5: TMenuItem
+      Caption = '-'
+      Enabled = False
+    end
+    object N6: TMenuItem
+      Caption = #21462#28040#25552#20132
+      Enabled = False
+      OnClick = N6Click
+    end
+    object N9: TMenuItem
+      Caption = #23457#25209#29366#24577
+      OnClick = N9Click
+    end
+    object N7: TMenuItem
+      Caption = #21024#38500
+      OnClick = N7Click
+    end
+    object N8: TMenuItem
+      Caption = #25171#21360#25253#34920
+      OnClick = N8Click
+    end
+    object N10: TMenuItem
+      Caption = #25253#34920#23450#20041
+      Enabled = False
+      OnClick = N10Click
+    end
+    object N11: TMenuItem
+      Caption = #31614#21333#25171#21360
+      OnClick = N11Click
+    end
+    object N13: TMenuItem
+      Caption = #26376'+'#26412#21378#32534#21495#32479#35745
+      OnClick = N13Click
+    end
+    object N15: TMenuItem
+      Caption = #36131#20219#20998#25674
+      OnClick = N15Click
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 237
+    Top = 9
+    object N12: TMenuItem
+      Caption = #23548#20986
+      OnClick = N12Click
+    end
+    object N14: TMenuItem
+      Caption = #23548#20986#26126#32454
+      OnClick = N14Click
+    end
+  end
+end

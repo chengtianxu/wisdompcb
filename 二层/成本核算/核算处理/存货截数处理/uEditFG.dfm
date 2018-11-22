@@ -1,0 +1,96 @@
+object frmEditFG: TfrmEditFG
+  Left = 334
+  Top = 237
+  Width = 342
+  Height = 272
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = #20462#25913#20135#25104#21697#23384#36135#26723#26696
+  Color = clBtnFace
+  Font.Charset = GB2312_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 55
+    Top = 24
+    Width = 26
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #25968#37327
+    FocusControl = DBEdit1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 29
+    Top = 64
+    Width = 52
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #25910#36135#26085#26399
+    FocusControl = DBEdit2
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object DBEdit1: TDBEdit
+    Left = 88
+    Top = 19
+    Width = 65
+    Height = 21
+    DataField = 'quantity'
+    DataSource = frmshowFG.DataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+  end
+  object DBEdit2: TDBEdit
+    Left = 91
+    Top = 59
+    Width = 174
+    Height = 21
+    DataField = 'indate'
+    DataSource = frmshowFG.DataSource1
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+  end
+  object BitBtn1: TBitBtn
+    Left = 72
+    Top = 152
+    Width = 75
+    Height = 25
+    Caption = #30830#23450
+    TabOrder = 2
+    Kind = bkOK
+  end
+  object BitBtn2: TBitBtn
+    Left = 190
+    Top = 152
+    Width = 75
+    Height = 25
+    Caption = #21462#28040
+    TabOrder = 3
+    Kind = bkCancel
+  end
+end

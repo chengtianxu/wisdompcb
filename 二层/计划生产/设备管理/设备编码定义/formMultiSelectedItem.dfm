@@ -1,0 +1,170 @@
+object frmMultiSelectedItem: TfrmMultiSelectedItem
+  Left = 443
+  Top = 255
+  Width = 778
+  Height = 523
+  Caption = #36873#25321
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnl1: TPanel
+    Left = 0
+    Top = 448
+    Width = 770
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 0
+    object btnOK: TButton
+      Left = 240
+      Top = 7
+      Width = 75
+      Height = 25
+      Caption = #30830#23450
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object btnCancel: TButton
+      Left = 354
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #21462#28040
+      TabOrder = 1
+      OnClick = btnCancelClick
+    end
+    object CheckBox1: TCheckBox
+      Left = 17
+      Top = 4
+      Width = 97
+      Height = 17
+      Caption = #20840#36873
+      TabOrder = 2
+      OnClick = CheckBox1Click
+    end
+  end
+  object pnl2: TPanel
+    Left = 0
+    Top = 0
+    Width = 770
+    Height = 448
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'pnl2'
+    TabOrder = 1
+    object Dgh1: TDBGridEh
+      Left = 0
+      Top = 33
+      Width = 770
+      Height = 415
+      Hint = #21452#20987#30830#23450#13#10#22238#36710#30830#23450#13#10#20851#38381#21462#28040
+      Align = alClient
+      DataSource = ds1
+      FooterColor = clWindow
+      FooterFont.Charset = ANSI_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -13
+      FooterFont.Name = #23435#20307
+      FooterFont.Style = []
+      PopupMenu = PopupMenu1
+      TabOrder = 0
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = #23435#20307
+      TitleFont.Style = []
+      OnColEnter = Dgh1ColEnter
+      OnDblClick = Dgh1DblClick
+      OnEnter = Dgh1Enter
+      OnGetCellParams = Dgh1GetCellParams
+      OnKeyPress = Dgh1KeyPress
+    end
+    object Panel1: TPanel
+      Left = 0
+      Top = 0
+      Width = 770
+      Height = 33
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 1
+      object FieldLabel: TLabel
+        Left = 24
+        Top = 8
+        Width = 70
+        Height = 13
+        Caption = 'FieldLabel'
+      end
+      object bt1: TSpeedButton
+        Left = 219
+        Top = 4
+        Width = 23
+        Height = 22
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF005656560056565600FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005656
+          560092DC00007AB9000026262600FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003E3E
+          3E007AB90000AAFF25007AB9000026262600FFFFFF00FFFFFF00FFFFFF000000
+          0000000000000000000000000000000000000000000056565600FFFFFF00FFFF
+          FF003E3E3E0062960000AAFF25006296000056565600FFFFFF00FFFFFF003E3E
+          3E007AB900007AB90000629600006296000056565600FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF005656560092DC000092DC000056565600FFFFFF00FFFFFF003E3E
+          3E00C6FF6B008FFF6B007AB900006E6E6E00B6B6B600FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF007A7A7A007AB90000AAFF250026262600FFFFFF00FFFFFF003E3E
+          3E00D4FF8E00ABFF8E00B8FF48006296000056565600FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF007A7A7A007AB90000D4FF8E0026262600FFFFFF00FFFFFF003E3E
+          3E00E2FFB100AAAAAA0092DC0000AAFF25006296000056565600FFFFFF00FFFF
+          FF00FFFFFF00565656007AB90000AAFF250026262600FFFFFF00FFFFFF005656
+          560056565600B6B6B6005656560092DC0000D4FF8E0062960000565656003E3E
+          3E003E3E3E006296000092DC000092DC000056565600FFFFFF00FFFFFF005656
+          5600FFFFFF00FFFFFF00FFFFFF00565656007AB90000D4FF8E007AB900007AB9
+          00007AB900007AB9000092DC0000629600007A7A7A00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00565656007AB9000092DC0000AAFF
+          2500AAFF2500AAFF25007AB9000056565600FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF007A7A7A00565656005656
+          560056565600565656007A7A7A00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+          FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
+      end
+      object Edit1: TEdit
+        Left = 95
+        Top = 5
+        Width = 121
+        Height = 21
+        TabOrder = 0
+        OnChange = Edit1Change
+      end
+    end
+  end
+  object ds1: TDataSource
+    DataSet = DM.Selected0417
+    Left = 120
+    Top = 72
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 328
+    Top = 112
+    object mniNCanSelected: TMenuItem
+      Caption = #21462#28040#36873#25321
+      OnClick = mniNCanSelectedClick
+    end
+  end
+end

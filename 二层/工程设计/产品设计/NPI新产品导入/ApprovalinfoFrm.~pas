@@ -1,0 +1,27 @@
+unit ApprovalinfoFrm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGridEh;
+
+type
+  TFrm_Approvalinfo = class(TForm)
+    DBGridEh1: TDBGridEh;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_Approvalinfo: TFrm_Approvalinfo;
+
+implementation
+
+uses damo;
+
+{$R *.dfm}
+
+end.

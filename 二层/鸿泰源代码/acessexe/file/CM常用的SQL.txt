@@ -1,0 +1,277 @@
+sp_decrypt 存诸过程名
+Value :=dbcalc1.value - dbcalc3.value;
+  Value :=dbtext17.fieldvalue - dbtext101.fieldvalue;
+
+    select getdate() as vdt  --服务器时间
+           ,@@SERVERNAME as sname9  --服务器计算机名
+           ,HOST_NAME ( ) as sname10  --返回工作站标识号
+           ,HOST_NAME ( ) as sname11  --返回工作站名称
+           ,@@CPU_BUSY as cpub9   --毫秒
+           ,@@LANGUAGE as language9   --语言
+           ,@@VERSION as rev9   --版本
+           ,@@MAX_CONNECTIONS as conn9   --最大联接数
+
+--后台运行不慢，但前台运行慢，要删除表的索引重建，因为索引时间久了，但产生碎片原因
+
+--查找数据库id的方法：（假设数据库名为scm02）
+SELECT dbid FROM master.dbo.sysdatabases WHERE (name = 'dict')
+select db_id('数据库名')
+DB_ID ( [ 'database_name' ] ) 
+
+SET IDENTITY_INSERT 表名 ON
+insert into 表名(字段,字段,字段) values (64,'han','guo')--要指明自动增值列名
+SET IDENTITY_INSERT 表名OFF 
+必须把需要插入的列名列出来 不然报错
+
+select IDENT_CURRENT( '(Product' )
+SET IDENTITY_INSERT [TABLE] [ON|OFF] 
+重置标识列字段值
+DBCC CHECKIDENT(TABLE, [RESEED|NORESEED], 200)
+DBCC CHECKIDENT(Product, RESEED, 210) 
+
+
+IF OBJECT_ID(N'dbo.t1',N'U') IS NOT NULL --表
+    DROP TABLE dbo.t1;
+
+IF not EXISTS ( --字段
+SELECT name
+FROM syscolumns
+WHERE (name = 'out_dept_ptr') AND (id IN
+          (SELECT id
+         FROM sysobjects
+         WHERE name = 'data0017'))) 
+begin
+alter table data0017 add out_dept_ptr int null
+--外发工序
+end
+
+
+IF NOT EXISTS(
+	SELECT a.name FROM syscolumns a inner join sysobjects b on a.id=b.id
+	WHERE a.name = 'tstate' AND b.name = 'data0068') 
+begin
+ALTER TABLE DATA0068 ADD tstate tinyint default(0) not null
+end
+go
+
+--存储过程改名
+IF EXISTS (SELECT name 
+	   FROM   sysobjects 
+	   WHERE  name = 'ep209B'
+	   AND 	  type = 'P')
+   DROP PROCEDURE ep209B --删除以前的存取过程
+IF EXISTS (SELECT name 
+	   FROM   sysobjects 
+	   WHERE  name = 'ep209'
+	   AND 	  type = 'P')
+EXEC  SP_RENAME  'ep209','ep209B','OBJECT' --删除以前的存取过程
+GO
+--触发器
+IF EXISTS (SELECT name 
+	   FROM   sysobjects 
+	   WHERE  name = 'data0060_1' 
+	   AND 	  type = 'TR')
+    DROP TRIGGER data0060_1
+GO
+
+--删除临时表
+If exists(Select 1 From tempdb..sysobjects Where id=object_id('tempdb..#tmp'))  drop table #tmp 
+
+--索引
+IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[Data0917]') AND name = N'IX_Data0917')
+CREATE NONCLUSTERED INDEX [IX_Data0917] ON [dbo].[Data0917] 
+(
+	[Rkey28] ASC
+)WITH (IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+GO
+--外键
+IF EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Data0917_Data0028]') AND parent_object_id = OBJECT_ID(N'[dbo].[Data0917]'))
+ALTER TABLE [dbo].[Data0917]  drop [FK_Data0917_Data0028] 
+go
+
+
+
+
+
+declare @oldname varchar(50) --过程
+select @oldname='EP1051-'+convert(varchar(8),year(getdate())*10000+month(getdate())*100+day(getdate()))
+IF EXISTS (SELECT name 	FROM   sysobjects 	WHERE  name = 'EP1051' AND  type = 'P')
+	IF not EXISTS (SELECT name 	FROM   sysobjects 	WHERE  name = @oldname	AND  type = 'P')
+		exec sp_rename 'EP1051',@oldname
+	else drop proc EP1051
+
+IF EXISTS (SELECT name 	FROM   sysobjects   --视图	
+WHERE  name = 'vdata0022_1' AND  type = 'V')
+  drop view [vdata0022_1]
+
+
+事务
+隐性
+set implicit_transactions on
+IF @@TRANCOUNT > 0 COMMIT TRAN
+set implicit_transactions off
+
+
+显性
+1 开始事务: begin transaction
+2 提交事务：commit transaction
+3 回滚事务: rollback transaction
+
+
+当 SET NOCOUNT 为 ON 时，不返回计数（表示受 Transact-SQL 语句影响的行数）。当 SET NOCOUNT 为 OFF 时，返回计数。
+如果存储过程中包含的一些语句并不返回许多实际的数据，则该设置由于大量减少了网络流量，因此可显著提高性能。
+
+
+IDENT_CURRENT 返回为任何会话和任何作用域中的特定表最后生成的标识值。IDENT_CURRENT 不受作用域和会话的限制，而受限于指定的表。IDENT_CURRENT 返回为任何会话和作用域中的特定表所生成的值。
+@@IDENTITY 返回为当前会话的所有作用域中的任何表最后生成的标识值。
+SCOPE_IDENTITY 返回为当前会话和当前作用域中的任何表最后生成的标识值
+
+if @@version like 'Microsoft SQL Server 2005%'
+or @@version like 'Microsoft SQL Server 2008%'
+or @@version like '%SQL Server 2012%'
+or @@version like '%Denali%'
+   EXEC ('select
+    SERVERPROPERTY(''ServerName''),
+    SYSTEM_USER,
+    DB_NAME(),
+    ISNULL(SCHEMA_NAME(), ''dbo'')')
+else 
+   EXEC ('select
+    SERVERPROPERTY(''ServerName''),
+    SYSTEM_USER,
+    DB_NAME(),
+    ISNULL(USER_NAME(), ''dbo'')')
+
+SELECT
+dtb.name AS [Name],
+dtb.database_id AS [ID],
+CAST(case when dtb.name in ('master','model','msdb','tempdb') then 1 else dtb.is_distributor end AS bit) AS [IsSystemObject],
+CAST(has_dbaccess(dtb.name) AS bit) AS [IsAccessible]
+FROM
+master.sys.databases AS dtb 
+ORDER BY
+[Name] ASC
+
+--修改有限制的字段
+if exists(select so.name
+   FROM sysobjects so
+   inner JOIN sysconstraints sc ON so.id = sc.constid
+   WHERE object_name(so.parent_obj) ='data0016' and so.name='loca_code'
+   )
+begin
+  alter table data0016 drop constraint loca_code
+  alter table data0016 alter column code nvarchar(10) not null
+  ALTER TABLE [dbo].[Data0016] ADD  CONSTRAINT [loca_code] UNIQUE NONCLUSTERED 
+  (
+	[CODE] ASC
+  )
+  
+END
+
+--游标
+declare myCursor1 cursor for
+select step_number
+from data0038 inner join data0025 on data0038.source_ptr=data0025.rkey
+	inner join data0034 t1 on data0038.dept_ptr=t1.rkey
+	inner join data0034 t2 on t1.dept_ptr=t2.rkey
+where source_ptr=@d25rkey and flow_no=@flowno and t2.rkey=@dptrkey
+order by step_number
+
+open mycursor1
+fetch next from mycursor1 into @tempstep
+set @tempautorkey=1
+while @@fetch_status=0
+begin
+	if @tempstep=@stepno
+	begin
+		select @retno=
+			case when @rowcount<=1 then '' 
+			else '('+convert(varchar(18),@tempautorkey)+'/'+convert(varchar(18),@rowcount)+')' end
+	end
+	fetch next from mycursor1 into @tempstep
+	set @tempautorkey=@tempautorkey+1
+end
+
+close mycursor1
+deallocate mycursor1
+
+
+创建一个文件夹 并且在里面加个MDF
+
+ 
+
+use master 
+go 
+if exists (select * from sysdatabases where name='bbsDB') 
+drop database bbsDB 
+go 
+exec xp_cmdshell 'mkdir d:/project' 
+create database bbsDB 
+on 
+( 
+name='bbsDB_data', 
+filename='d:/project/bbsDB_data.mdf', 
+size=10, 
+filegrowth=20% 
+) 
+log on 
+( 
+name='bbsDB_log', 
+filename='d:/project/bbsDB_log.ldf', 
+size=3, 
+maxsize=20, 
+filegrowth=10% 
+) 
+go
+
+
+两种内联方式
+
+select COUNT(*) 
+FROM dbo.Data0006 
+INNER JOIN  dbo.data0416  
+INNER JOIN  dbo.Data0053 ON dbo.data0416.rkey = dbo.Data0053.NPAD_PTR 
+ON dbo.Data0006.RKEY = dbo.Data0053.WORK_ORDER_PTR 
+
+select COUNT(*) 
+FROM dbo.Data0006 
+INNER JOIN  dbo.Data0053 ON dbo.Data0006.RKEY = dbo.Data0053.WORK_ORDER_PTR 
+INNER JOIN  dbo.data0416 ON dbo.data0416.rkey = dbo.Data0053.NPAD_PTR 
+
+
+SELECT TOP 100 PERCENT ... order ...
+因为作为子查询，如果有order ...，规定必须有TOP，所以就用SELECT TOP 100 PERCENT
+
+
+
+--表结构
+SELECT   
+表名=D.NAME, 
+表说明=ISNULL(F.VALUE, ' '),   --CASE   WHEN   A.COLORDER=1   THEN   ISNULL(F.VALUE, ' ')   ELSE   ' '   END, 
+栏位序号=   A.COLORDER, 
+栏位名=   A.NAME, 
+标识=   CASE   WHEN   COLUMNPROPERTY(   A.ID,A.NAME, 'ISIDENTITY ')=1   THEN   '√ 'ELSE   ' '   END, 
+主鍵=   CASE   WHEN   EXISTS(SELECT   1   FROM   SYSOBJECTS   WHERE   XTYPE= 'PK '   AND   PARENT_OBJ=A.ID   AND   NAME   IN   ( 
+SELECT   NAME   FROM   SYSINDEXES   WHERE   INDID   IN( 
+SELECT   INDID   FROM   SYSINDEXKEYS   WHERE   ID   =   A.ID   AND   COLID=A.COLID)))   THEN   '√ '   ELSE   ' '   END, 
+类型=   B.NAME, 
+点用位元位数=   A.LENGTH, 
+长度=   COLUMNPROPERTY(A.ID,A.NAME, 'PRECISION '), 
+小数位数=   ISNULL(COLUMNPROPERTY(A.ID,A.NAME, 'SCALE '),0), 
+允许空 =   CASE   WHEN   A.ISNULLABLE=1   THEN   '√ 'ELSE   ' '   END, 
+预设值=   ISNULL(E.TEXT, ' '), 
+栏位说明=   ISNULL(G.[VALUE], ' ') 
+FROM  SYSCOLUMNS A 
+LEFT JOIN SYSTYPES B ON A.XUSERTYPE=B.XUSERTYPE 
+INNER JOIN SYSOBJECTS D ON A.ID=D.ID AND D.XTYPE= 'U ' AND D.NAME <> 'DTPROPERTIES ' 
+LEFT JOIN SYSCOMMENTS E ON A.CDEFAULT=E.ID 
+LEFT JOIN sys.extended_properties G ON A.ID=G.major_id AND A.COLID=G.minor_id     
+LEFT JOIN sys.extended_properties F ON D.ID=F.major_id   AND   F.minor_id=0 
+--where d.name like :tmptb and a.name like :tmpcl
+where d.name like 'data0002'
+ORDER   BY  表名,栏位序号
+
+出现对象EP087的定义在编译后已更改
+要对原来的存储过程进行重新编译
+EXEC sp_recompile ep087
+

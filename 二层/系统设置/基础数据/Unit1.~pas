@@ -1,0 +1,34 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, Grids, DBGridEh, ExtCtrls, Menus;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    btn1: TBitBtn;
+    btn2: TBitBtn;
+    btn3: TBitBtn;
+    btn4: TBitBtn;
+    btn5: TBitBtn;
+    lbl1: TLabel;
+    edt1: TEdit;
+    dbgrdh1: TDBGridEh;
+    pm1: TPopupMenu;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

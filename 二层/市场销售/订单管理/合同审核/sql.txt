@@ -1,0 +1,7 @@
+select 15,'合同编号','合同编号','WZ2011010',	4,	'data0696'
+
+
+
+select * from data0419
+insert into data0419(seq_no,description,prev_tp,programe,verno,manu_ptr)
+select 8,	'合同审核',	'W/R/$',	'contract_control.exe',	'1.1.2.5',	2

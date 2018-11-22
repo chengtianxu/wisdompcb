@@ -1,0 +1,79 @@
+object FrmFAEdit: TFrmFAEdit
+  Left = 511
+  Top = 261
+  BorderStyle = bsDialog
+  Caption = 'FA'#27979#35797#32467#26524#32534#36753
+  ClientHeight = 364
+  ClientWidth = 671
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 36
+    Width = 64
+    Height = 16
+    Caption = #24037#24207#20195#30721
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 90
+    Width = 169
+    Height = 16
+    Caption = 'FA'#27979#35797#32467#26524
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Button1: TButton
+    Left = 229
+    Top = 320
+    Width = 75
+    Height = 25
+    Caption = #30830#23450
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 313
+    Top = 320
+    Width = 75
+    Height = 25
+    Caption = #21462#28040
+    TabOrder = 1
+    OnClick = Button2Click
+  end
+  object Edit1: TEdit
+    Left = 89
+    Top = 32
+    Width = 201
+    Height = 21
+    TabOrder = 2
+    Text = 'Edit1'
+  end
+  object Memo1: TMemo
+    Left = 8
+    Top = 120
+    Width = 553
+    Height = 161
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 3
+  end
+end

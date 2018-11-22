@@ -1,0 +1,89 @@
+object frmShenPi: TfrmShenPi
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = #23457#25209#25805#20316
+  ClientHeight = 400
+  ClientWidth = 426
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl1: TLabel
+    Left = 112
+    Top = 19
+    Width = 66
+    Height = 21
+    Caption = #25805#20316#65306
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = #23435#20307
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lbl2: TLabel
+    Left = 184
+    Top = 19
+    Width = 88
+    Height = 21
+    Caption = #36890#36807#23457#25209
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -21
+    Font.Name = #23435#20307
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lbl3: TLabel
+    Left = 16
+    Top = 51
+    Width = 84
+    Height = 13
+    Caption = #23457#25209#22791#27880#35760#24405#65306
+  end
+  object lbl4: TLabel
+    Left = 16
+    Top = 256
+    Width = 84
+    Height = 13
+    Caption = #36755#20837#26412#27425#22791#27880#65306
+  end
+  object mmo1: TMemo
+    Left = 16
+    Top = 70
+    Width = 399
+    Height = 174
+    TabStop = False
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object btn1: TButton
+    Left = 159
+    Top = 329
+    Width = 97
+    Height = 49
+    Caption = #30830#23450#25805#20316
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
+    OnClick = btn1Click
+  end
+  object mmo2: TMemo
+    Left = 16
+    Top = 275
+    Width = 399
+    Height = 41
+    TabOrder = 0
+  end
+end

@@ -1,0 +1,1308 @@
+unit main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls,Excel2000,ClipBrd, ComObj,DB, ADODB;
+
+type
+  Tform1 = class(TForm)
+    DBGrid1: TDBGrid;
+    PopupMenu1: TPopupMenu;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    PopupMenu2: TPopupMenu;
+    N13: TMenuItem;
+    PopupMenu3: TPopupMenu;
+    N5: TMenuItem;
+    N1: TMenuItem;
+    N3: TMenuItem;
+    Panel1: TPanel;
+    vpass: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    lblFilter: TLabel;
+    edtFilter: TEdit;
+    RadioGroup1: TRadioGroup;
+    PopupMenu5: TPopupMenu;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    N14: TMenuItem;
+    N2: TMenuItem;
+    BtFlds: TBitBtn;
+    PMFlds: TPopupMenu;
+    N16: TMenuItem;
+    N4: TMenuItem;
+    N11: TMenuItem;
+    BitBtn6: TBitBtn;
+    PopupMenu4: TPopupMenu;
+    MenuItem2: TMenuItem;
+    N12: TMenuItem;
+    Panel2: TPanel;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    N15: TMenuItem;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure N3Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure N10Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure N5Click(Sender: TObject);
+    procedure N6Click(Sender: TObject);
+    procedure N7Click(Sender: TObject);
+    procedure shenhe(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
+    procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure N13Click(Sender: TObject);
+    procedure click(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure DBGrid1TitleClick(Column: TColumn);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure edtFilterChange(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure BtFldsClick(Sender: TObject);
+    procedure N16Click(Sender: TObject);
+    procedure PopupMenu5Popup(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure RadioGroup2Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure N12Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure N15Click(Sender: TObject);
+    procedure PrintMo(Sender: TObject);
+  private
+   PreColumn: TColumn;   //add by lms
+   OldGridWnd : TWndMethod;
+    field_name:string;
+   procedure NewGridWnd(var Message : TMessage);
+   procedure item_click(sender: TObject);
+    { Private declarations }
+  public
+    sys_time :string ;
+    sqltext :string;
+   sys_longdate,sys_shortdate:tdatetime;
+   empl_ptr:integer;
+   empl_name:String;
+   function find_error(number:string):boolean;
+   procedure update_04out(v_seed: string);
+   procedure update_04in(v_seed: string);
+   Procedure GridRemoveRow(StrGrid: TStringGrid; DelRow: Integer);
+   procedure CopyDbDataToExcel(Args:array of const);
+
+    { Public declarations }
+  end;
+
+var
+  form1: Tform1;
+
+implementation
+uses damo,remain_form,remaout_form,selout_form,selnow_form,unit_catser,
+unit_numcat, Unit_ser,unit_remser,DateUtils,MulPrinUnit1
+,common, remain_form2,report2_form,selin_form;
+
+{$R *.dfm}
+
+procedure Tform1.NewGridWnd(var Message: TMessage);
+var
+ IsNeg : Boolean;
+begin
+if Message.Msg = WM_MOUSEWHEEL then
+ begin
+   IsNeg := Short(Message.WParamHi) < 0;
+   if IsNeg then
+     DBGrid1.DataSource.DataSet.MoveBy(1)
+   else
+     DBGrid1.DataSource.DataSet.MoveBy(-1)
+ end
+ else
+   OldGridWnd(Message);
+end;
+
+procedure Tform1.CopyDbDataToExcel(Args:array of const);
+var
+ iCount, jCount, v_cloumn: Integer;
+ XLApp: Variant;
+ Sheet: Variant;
+ I: Integer;
+begin
+ Screen.Cursor := crHourGlass;
+ if not VarIsEmpty(XLApp) then
+ begin
+   XLApp.DisplayAlerts := False;
+   XLApp.Quit;
+   VarClear(XLApp);
+ end;
+ try
+   XLApp := CreateOleObject('Excel.Application');
+ except
+   Screen.Cursor := crDefault;
+   Exit;
+ end;
+ XLApp.WorkBooks.Add;
+ XLApp.SheetsInNewWorkbook := High(Args) + 1;
+
+ for I := Low(Args) to High(Args) do
+ begin
+   XLApp.WorkBooks[1].WorkSheets[I+1].Name := self.Caption;
+   Sheet := XLApp.Workbooks[1].WorkSheets[self.Caption];
+   if not TDBGrid(Args[I].VObject).DataSource.DataSet.Active then
+    begin
+     Screen.Cursor := crDefault;
+     Exit;
+    end;
+   TDBGrid(Args[I].VObject).DataSource.DataSet.DisableControls;
+   TDBGrid(Args[I].VObject).DataSource.DataSet.first;
+
+   v_cloumn:=0;
+   for iCount := 0 to TDBGrid(Args[I].VObject).Columns.Count - 1 do
+    if TDBGrid(Args[I].VObject).Columns.Items[iCount].Visible=true then
+     Sheet.Cells[1, iCount + 1 - v_cloumn] :=
+     TDBGrid(Args[I].VObject).Columns.Items[iCount].Title.Caption
+    else
+     inc(v_cloumn);
+
+   jCount := 1;
+   while not TDBGrid(Args[I].VObject).DataSource.DataSet.Eof do
+   begin
+     v_cloumn:=0;
+     for iCount := 0 to TDBGrid(Args[I].VObject).Columns.Count - 1 do
+      if TDBGrid(Args[I].VObject).Columns.Items[iCount].Visible=true then
+       Sheet.Cells[jCount + 1, iCount + 1 - v_cloumn] :=
+       TDBGrid(Args[I].VObject).Columns.Items[iCount].Field.AsString
+      else
+       inc(v_cloumn);
+     Inc(jCount);
+     TDBGrid(Args[I].VObject).DataSource.DataSet.Next;
+   end;
+
+   XlApp.Visible := True;
+   TDBGrid(Args[I].VObject).DataSource.DataSet.EnableControls;
+ end;
+ Screen.Cursor := crDefault;
+end;
+
+Procedure tform1.GridRemoveRow(StrGrid: TStringGrid; DelRow: Integer);
+Var Row: Integer;
+begin
+  If DelRow<=StrGrid.RowCount then
+  Begin
+    For Row := DelRow To StrGrid.RowCount-1 do
+     strgrid.Rows[Row-1].Assign(StrGrid.Rows[Row]);
+     StrGrid.RowCount:=StrGrid.RowCount-1;
+  End;
+end;
+
+function tform1.find_error(number:string):boolean;
+begin
+ with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select rkey from data0558');
+   sql.Add('where rema_number='''+number+'''');
+   open;
+   if not IsEmpty then result:= true
+    else result:=false;
+  end;
+end;
+procedure tform1.update_04in(v_seed: string);
+var
+ i,v_length:integer;
+ v_last,new_seed:string;
+begin
+  v_length:=length(v_seed);
+  for i:=1 to v_length do
+  if (v_seed[i] in ['1'..'9']) then
+  begin
+   v_last:=inttostr(strtoint(copy(v_seed,i,v_length-i+1))+1);
+   new_seed:=copy(v_seed,1,i-1)+v_last;
+   break;
+  end;
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select seed_value from data0004');
+   sql.Add('where rkey= 22');
+   open;
+   edit;
+   dm.ADOQ.FieldByName('seed_value').Value:=new_seed;
+   post;
+  end;
+end;
+
+procedure tform1.update_04out(v_seed: string);
+var
+ i,v_length:integer;
+ v_last,new_seed:string;
+begin
+  v_length:=length(v_seed);
+  for i:=1 to v_length do
+  if (v_seed[i] in ['1'..'9']) then
+  begin
+   v_last:=inttostr(strtoint(copy(v_seed,i,v_length-i+1))+1);
+   new_seed:=copy(v_seed,1,i-1)+v_last;
+   break;
+  end;
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select seed_value from data0004');
+   sql.Add('where rkey=23');
+   open;
+   edit;
+   dm.ADOQ.FieldByName('seed_value').Value:=new_seed;
+   post;
+  end;
+end;
+
+procedure Tform1.BitBtn1Click(Sender: TObject);
+begin
+application.Terminate;
+end;
+
+procedure Tform1.N3Click(Sender: TObject);
+
+begin
+
+   if (strtoint(vprev)=1) or (strtoint(vprev)=3)  then
+   messagedlg('对不起!您只有该程序的可读权限',mtinformation,[mbok],0)
+  else
+ begin
+ try
+ form_remain:=tform_remain.Create(self);
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select abbr_name from data0015');
+   open;
+   while  not eof do
+   begin
+    form_remain.ComboBox1.Items.Add(fieldbyname('abbr_name').Value);
+    next;
+   end;
+
+
+   dm.TemADOQuery1.close;
+   dm.TemADOQuery1.sql.clear;
+   dm.TemADOQuery1.sql.Text:=
+   'select TOP 1 RKEY15,abbr_name from data0558,data0015'+#13+
+   'where  data0558.rkey15=data0015.rkey'+#13+
+   'ORDER BY data0558.RKEY DESC';
+   dm.TemADOQuery1.open;
+
+
+
+   //form_remain.ComboBox1.ItemIndex:=form_remain.ComboBox1.Items.IndexOf('深圳双面'); //表示深圳双面
+   //form_remain.key15.Caption:='1';//表示深圳双面的主键值
+   form_remain.ComboBox1.Text:=dm.TemADOQuery1.fieldbyname('abbr_name').AsString;
+   form_remain.key15.Caption:=dm.TemADOQuery1.fieldbyname('RKEY15').AsString;
+  end;
+
+
+ with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select location from data0016 where location_type=0');
+   open;
+   while not eof do
+   begin
+    form_remain.ComboBox2.Items.Add(fieldbyname('location').Value);
+    next;
+   end;
+
+   dm.TemADOQuery1.close;
+   dm.TemADOQuery1.sql.Clear;
+   dm.TemADOQuery1.sql.Text:=
+   'select TOP 1 RKEY16,location from data0558,data0016'+#13+
+   'where  data0558.rkey16=data0016.rkey'+#13+
+   'ORDER BY data0558.RKEY DESC';
+   dm.TemADOQuery1.open;
+
+   //form_remain.ComboBox2.ItemIndex:=form_remain.ComboBox2.Items.IndexOf('铜板仓');
+   //form_remain.key16.Caption:='1';    //表示铜板仓的位置主键值
+  form_remain.ComboBox2.Text:=dm.TemADOQuery1.fieldbyname('location').AsString;
+  form_remain.key16.Caption:=dm.TemADOQuery1.fieldbyname('RKEY16').AsString;
+  end;
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select seed_value from data0004 ');
+   sql.Add('where rkey= 22');
+   open;
+   //form_remain.Edit1.Text:=fieldbyname('seed_value').Value;
+  end;
+  form_remain.ShowModal;
+finally
+form_remain.Free;
+end;
+end;
+end;
+
+procedure Tform1.N8Click(Sender: TObject);
+begin
+try
+ form_numcat:=tform_numcat.Create(application);
+ form_numcat.Caption:='余料规格增加';
+ if form_numcat.ShowModal=mrok then
+  with dm.ADO556add  do
+   begin
+   open;
+   append;
+   dm.ADO556addMAT_CODE.Value:=form_numcat.Edit1.Text;
+   dm.ADO556add.FieldByName('mat_desc').AsString:=form_numcat.Edit2.Text;
+   dm.ADO556addLEN_SIZE.AsString:=form_numcat.edit3.Text;
+   dm.ADO556addWEI_SIZE.AsString:=form_numcat.Edit4.Text;
+   dm.ADO556addTDATE.AsString:=form1.sys_time;
+   dm.ADO556addEMPL_BY_PTR.AsString:= user_ptr;
+   //dm.ADO556addEMPL_BY_PTR.AsInteger:= 10000;
+   dm.ADO556addRKEY17.AsString:=form_numcat.key17.Caption;
+   dm.ADO556addREMARK.Value:=form_numcat.edit5.Text;
+   dm.ADO556addSTD_COST.AsString:=form_numcat.Edit6.Text;
+
+   //dm.ADO556addREMARK.AsString:=form_numcat.Edit6.Text;
+   //dm.ADO556addREMARK.AsString:=form_numcat.Edit6.Text;
+   
+   
+   post;
+   dm.ADOD556.Close;
+   dm.ADOD556.Open;
+   dm.ADOD556.locate('key556',dm.ADO556addRKEY.Value,[]);
+  end;
+finally
+ form_numcat.Free;
+end;
+end;
+
+procedure Tform1.N9Click(Sender: TObject);
+begin
+ if (strtoint(vprev)=1) or (strtoint(vprev)=3)  then
+   messagedlg('对不起!您只有该程序的可读权限',mtinformation,[mbok],0)
+  else
+  begin
+ try
+  form_numcat:=tform_numcat.Create(application);
+  form_numcat.Caption:='余料规格编辑';
+  with form_numcat do
+  begin
+  inv_code.text:=dm.ADOD556INV_PART_NUMBER.Value;
+  edit7.Text:= dm.ADOd556INV_DESCRIPTION.Value;
+
+  edit1.Text:=dm.ADOD556MAT_CODE.Value;
+  edit2.Text:=dm.ADOD556mat_desc.Value;
+  edit3.Text:=dm.ADOD556LEN_SIZE.AsString;
+  edit4.Text:=dm.ADOD556WEI_SIZE.AsString;
+  edit5.Text:=dm.ADOD556REMARK.Value;
+  if (strtoint(vprev)=4)  then
+  begin
+  edit6.Visible:=True;
+  label9.Visible:=True;
+
+  Edit9.Visible:=True;
+  Label10.Visible:=True;
+
+  end;
+  edit6.Text:=dm.ADOD556QUAN_ON_HAND.AsString;
+  edit9.Text:=dm.ADOD556PeiLiaoDan.AsString;
+  if  dm.ADOD556Status.Value=1 then
+  begin
+  edit1.Enabled:=False;
+  edit2.Enabled:=False;
+  edit3.Enabled:=False;
+  edit4.Enabled:=False;
+  edit5.Enabled:=False;
+  edit6.Enabled:=False;
+  edit9.Enabled:=False;
+  end;
+
+ // edit2.ReadOnly:=true;
+  bitbtn1.Enabled:=false;
+  end;
+
+ if form_numcat.ShowModal=mrok then
+ begin
+  dm.ADOD556.Edit;
+  dm.ADOD556MAT_CODE.Value:=form_numcat.Edit1.Text;
+  dm.ADOD556mat_desc.Value:=form_numcat.edit2.Text;
+  if form_numcat.edit3.Modified then
+  dm.ADOd556LEN_SIZE.AsString:=form_numcat.edit3.Text;
+  if form_numcat.Edit4.Modified then
+  dm.ADOD556WEI_SIZE.AsString:=form_numcat.Edit4.Text;
+  if form_numcat.Edit5.Modified then
+  dm.ADOD556REMARK.Value:=form_numcat.Edit5.Text;
+  if form_numcat.Edit6.Modified then
+  dm.ADOD556QUAN_ON_HAND.AsString:=form_numcat.Edit6.Text;
+  if form_numcat.Edit9.Modified then
+   dm.ADOD556PeiLiaoDan.AsString:=form_numcat.Edit9.Text;
+  dm.ADOD556.Post;
+ end;
+ finally
+  form_numcat.Free;
+ end;
+ end;
+end;
+
+procedure Tform1.N10Click(Sender: TObject);
+begin
+  if (strtoint(vprev)<>4)  then
+   messagedlg('对不起!您没有该程序的可写权限',mtinformation,[mbok],0)
+  else
+  begin
+ if messagedlg('确定要删除该纪录吗?',mtconfirmation,[mbyes,mbno],0)=mryes then
+ try
+ dm.ADOConnection1.BeginTrans;
+
+ {
+
+  with dm.ADOQ do
+ begin
+  close;
+  sql.Clear;
+  sql.Add('delete from data0557 ');
+  sql.Add('where D556_PTR='+dm.ADOD556key556.AsString);
+  ExecSQL;
+ end;
+
+
+ with dm.ADOQ do
+ begin
+  close;
+  sql.Clear;
+  sql.Add('delete from data0556 ');
+  sql.Add('where rkey='+dm.ADOD556key556.AsString);
+  ExecSQL;
+ end;
+ dm.ADOD556.Close;
+ dm.ADOD556.Open;     }
+
+ with dm.ADOQ3 do
+ begin
+      close;
+      Parameters.ParamByName('rkey').Value:=dm.ADOD556key556.AsInteger;
+      open;
+
+
+ end;
+
+ BitBtn2Click(Sender);
+
+
+
+
+ dm.ADOConnection1.CommitTrans;
+ except
+ on e :exception do
+  begin
+   dm.ADOConnection1.RollbackTrans;
+   showmessage(e.Message);
+  end;
+ end;
+ end;
+end;
+
+procedure Tform1.BitBtn2Click(Sender: TObject);
+begin
+dm.ADOD556.Close;
+dm.ADOD556.CommandText:=self.sqltext;
+dm.ADOD556.Open;
+end;
+
+procedure Tform1.BitBtn3Click(Sender: TObject);
+begin
+CopyDbDataToExcel([DBGrid1]);
+end;
+
+
+procedure Tform1.N5Click(Sender: TObject);
+begin
+try
+ form_remaout:=tform_remaout.Create(self);
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select abbr_name from data0015');
+   open;
+   while  not eof do
+   begin
+    form_remaout.ComboBox1.Items.Add(fieldbyname('abbr_name').Value);
+    next;
+   end;
+   //form_remaout.ComboBox1.ItemIndex:=form_remaout.ComboBox1.Items.IndexOf('深圳双面'); //表示深圳双面
+   //form_remaout.key15.Caption:='1';//表示深圳双面的主键值
+   form_remaout.ComboBox1.ItemIndex:=1; //默认深圳五株
+   form_remaout.key15.Caption:='1';//表示深圳双面的主键值
+  end;
+ with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select location from data0016 where location_type=0');
+   open;
+   while not eof do
+   begin
+    form_remaout.ComboBox2.Items.Add(fieldbyname('location').Value);
+    next;
+   end;
+   form_remaout.ComboBox2.ItemIndex:=18; //默认余料仓
+   form_remaout.key16.Caption:='50';    //表示余料仓的位置主键值
+  // form_remaout.ComboBox2.ItemIndex:=-1;//默认值为空
+  end;
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select seed_value from data0004 ');
+   sql.Add('where rkey= 23');
+   open;
+   form_remaout.Edit1.Text:=fieldbyname('seed_value').Value;
+  end;
+  form_remaout.ShowModal;
+finally
+form_remaout.Free;
+end;
+end;
+
+procedure Tform1.N6Click(Sender: TObject);
+begin
+ try
+ form_selout:=tform_selout.Create(application);
+ form_selout.ShowModal;
+ finally
+ dm.ADOOUT557.Filtered:=false;
+ form_selout.Free;
+ end;
+end;
+
+procedure Tform1.N7Click(Sender: TObject);
+begin
+ try
+ form_selnow:=tform_selnow.Create(application);
+ form_selnow.ShowModal;
+ finally
+ form_selnow.Free;
+ end;
+end;
+
+procedure Tform1.shenhe(Sender: TObject);
+begin
+try
+ form_remaout:=tform_remaout.Create(self);
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select abbr_name from data0015');
+   open;
+   while  not eof do
+   begin
+    form_remaout.ComboBox1.Items.Add(fieldbyname('abbr_name').Value);
+    next;
+   end;
+   form_remaout.ComboBox1.ItemIndex:=form_remaout.ComboBox1.Items.IndexOf('深圳双面'); //表示深圳双面
+   form_remaout.key15.Caption:='1';//表示深圳双面的主键值
+  end;
+ with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select location from data0016');
+   open;
+   while not eof do
+   begin
+    form_remaout.ComboBox2.Items.Add(fieldbyname('location').Value);
+    next;
+   end;
+   form_remaout.ComboBox2.ItemIndex:=form_remaout.ComboBox2.Items.IndexOf('铜板仓');
+   form_remaout.key16.Caption:='1';    //表示铜板仓的位置主键值
+  end;
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select seed_value from data0004 ');
+   sql.Add('where rkey= 23');
+   open;
+   form_remaout.Edit1.Text:=fieldbyname('seed_value').Value;
+  end;
+  form_remaout.ShowModal;
+finally
+form_remaout.Free;
+end;
+end;
+
+procedure Tform1.FormCreate(Sender: TObject);
+
+begin
+
+  if not App_Init(dm.ADOConnection1) then
+  begin
+    ShowMsg('程序起动失败请联系管理员',1);
+    application.Terminate;
+  end;
+  Caption := application.Title;
+
+  //user_ptr.Caption := user_ptr;
+  //vprev.Caption := vprev;
+
+
+  DateSeparator := '-';
+  ShortDateFormat := 'yyyy-mm-dd';
+
+ OldGridWnd := DBGrid1.WindowProc;
+ DBGrid1.WindowProc := NewGridWnd;
+
+ dm.ADOD556.Filtered:= False;
+ dm.ADOD556.Filter:='QUAN_ON_HAND>0';
+ dm.ADOD556.Filtered:= True;
+
+ dm.ADOD556.Filtered:= False;
+ dm.ADOD556.Filter:='statu=''待审核''';
+ dm.ADOD556.Filtered:= True;
+
+end;
+
+procedure Tform1.FormShow(Sender: TObject);
+var i:integer;
+    item:TmenuItem;
+begin
+{if not dm.ADOConnection1.Connected then
+ begin
+  if trim(vprev.Caption)='' then  close;
+  dm.adoconnection1.ConnectionString := db_ptr.Caption;
+  dm.Adoconnection1.Connected := true;
+
+end;   }
+
+
+  if dm.ADOConnection1.Connected then
+ begin
+ dm.ADOD556.Close;
+   dm.ADOD556.Parameters.ParamByName('v0').Value:=9;
+   dm.ADOD556.Parameters.ParamByName('v1').Value:=9;
+   dm.ADOD556.Open;
+ end;
+
+
+
+ {  with dm.ADOQuery3 do
+   begin
+    close;
+    Parameters.ParamByName('p1').Value:=571;
+    open;
+    //empl_ptr := fieldvalues['EMPLOYEE_PTR'];
+      empl_ptr :=571;
+   end; }
+
+
+  
+ dm.ADOD556.Filtered:= False;
+ dm.ADOD556.Filter:='QUAN_ON_HAND>0';
+ dm.ADOD556.Filtered:= True;  
+
+
+
+
+  dm.ADOD556.Open;
+  sqltext:=dm.ADOD556.CommandText;
+  field_name:='mat_code';  
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add( 'select getdate() as v_dt' );
+   open;
+   sys_time:=fieldvalues['v_dt'];
+   sys_longdate := fieldvalues['v_dt']; //长格式
+  end;
+
+  PreColumn := DBGrid1.Columns[0];  // add by lms
+
+   for i := 1 to dbGrid1.Columns.Count do
+  begin
+    item := TmenuItem.Create(self);
+    item.Caption := dbGrid1.Columns[i - 1].Title.Caption;
+    item.Checked :=dbGrid1.Columns[i - 1].Visible ;
+    item.OnClick := item_click ;
+    PMFlds.Items.Add(item) ;
+  end;
+
+
+ 
+
+
+end;
+
+procedure Tform1.PopupMenu1Popup(Sender: TObject);
+begin
+if dm.ADOD556.IsEmpty then
+ begin
+ n9.Enabled:=false;
+ n10.Enabled:=false;
+ end
+ else
+ begin
+ n9.Enabled:=true;
+ n10.Enabled:=true;
+ end;
+end;
+
+procedure Tform1.DBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+IF (ssalt in shift) and ((KEY=ORD('S')) OR (KEY=ORD('s')))
+then showmessage(dm.ADOD556.CommandText);
+
+  //if (ssAlt in  Shift) and (key=86)  then
+  // showmessage(dm.ADOD556.CommandText);
+
+end;
+
+procedure Tform1.BitBtn4Click(Sender: TObject);
+begin
+popupmenu2.Popup(mouse.CursorPos.X,mouse.CursorPos.Y);
+end;
+
+procedure Tform1.DBGrid1DblClick(Sender: TObject);
+begin
+ try
+ Form_selin:=tform_selin.Create(application);
+ Form_selin.ShowModal;
+ finally
+ dm.ADOIN557.Filtered:=false;
+ Form_selin.Free;
+ end;
+end;
+
+procedure Tform1.N13Click(Sender: TObject);
+begin
+ try
+
+ form_ser:=tform_ser.Create(application);
+ form_ser.ShowModal;
+
+
+ finally
+ form_ser.Free;
+ end;
+end;
+
+procedure Tform1.click(Sender: TObject);
+begin
+try
+ form_remain:=tform_remain.Create(self);
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select abbr_name from data0015');
+   open;
+   while  not eof do
+   begin
+    form_remain.ComboBox1.Items.Add(fieldbyname('abbr_name').Value);
+    next;
+   end;
+   //form_remain.ComboBox1.ItemIndex:=form_remain.ComboBox1.Items.IndexOf('深圳双面'); //表示深圳双面
+   form_remain.ComboBox1.ItemIndex:=1; //默认深圳五株
+   form_remain.key15.Caption:='1';//表示深圳双面的主键值
+  end;
+ with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select location from data0016 where location_type=0');
+   open;
+   while not eof do
+   begin
+    form_remain.ComboBox2.Items.Add(fieldbyname('location').Value);
+    next;
+   end;
+  form_remain.ComboBox2.ItemIndex:=18; //默认余料仓
+  form_remain.key16.Caption:='50';    //表示余料仓的位置主键值
+  end;
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select seed_value from data0004 ');
+   sql.Add('where rkey= 22');
+   open;
+   //form_remain.Edit1.Text:=fieldbyname('seed_value').Value;
+   
+  end;
+  form_remain.ShowModal;
+finally
+form_remain.Free;
+end;
+end;
+
+procedure Tform1.BitBtn5Click(Sender: TObject);
+begin
+popupmenu3.Popup(mouse.CursorPos.X,mouse.CursorPos.Y);
+end;
+
+procedure Tform1.N1Click(Sender: TObject);
+begin
+try
+ form_remser:=tform_remser.Create(application);
+ //form_remser.show;
+ if form_remser.ShowModal = mrok then
+finally
+end;
+end;
+
+procedure Tform1.DBGrid1TitleClick(Column: TColumn);
+var
+ i :byte;
+begin
+dm.ADOD556.Sort:=column.FieldName;
+  for i:=0 to dbgrid1.FieldCount-1 do
+   if dbgrid1.Columns[i].Title.Color= clred then
+   begin
+    dbgrid1.Columns[i].Title.Color:= clbtnface;
+    break;
+   end;
+  column.Title.Color:=clred;
+
+
+
+  {}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
+  if (column.FieldName <>'LEN_SIZE') and
+   (column.FieldName <> 'WEI_SIZE') and
+   (column.FieldName <> 'QUAN_ON_HAND') and
+   (column.FieldName <> 'STD_COST')  and
+   (column.FieldName <> 'TDATE')then
+ dm.ADOD556.IndexFieldNames:=column.FieldName;
+
+
+ if (column.ReadOnly) and (field_name<>column.FieldName) then
+ begin
+  lblFilter.Caption:=column.Title.Caption;
+  self.field_name:=column.FieldName;
+  edtFilter.SetFocus;
+  PreColumn.Title.Color := clBtnFace;
+  Column.Title.Color := clred;
+  PreColumn := column;
+ end
+else
+ edtFilter.SetFocus;
+
+
+
+
+end;
+
+procedure Tform1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+form_remser.Free;
+end;
+
+procedure Tform1.edtFilterChange(Sender: TObject);
+begin
+ if trim(edtFilter.text)<>'' then
+  dm.ADOD556.Filter := field_name+' like ''%'+trim(edtFilter.text)+'%'''
+ else
+  dm.ADOD556.filter := '';
+end;
+
+procedure Tform1.RadioGroup1Click(Sender: TObject);
+begin
+      if RadioGroup1.ItemIndex=0 then
+     begin
+          dm.ADOD556.Filtered:= False;
+          dm.ADOD556.Filter:='QUAN_ON_HAND=0';
+          dm.ADOD556.Filtered:= True;
+     end
+     else
+     begin
+          dm.ADOD556.Filtered:= False;
+          dm.ADOD556.Filter:='QUAN_ON_HAND>0';
+          dm.ADOD556.Filtered:= True;
+     end;
+end;
+
+procedure Tform1.N2Click(Sender: TObject);
+begin
+
+  if (strtoint(vprev)=1) or (strtoint(vprev)=3)  then
+   messagedlg('对不起!您只有该程序的可读权限',mtinformation,[mbok],0)
+  else
+  begin
+  try
+ form_remain2:=tform_remain2.Create(self);
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select abbr_name from data0015');
+   open;
+   while  not eof do
+   begin
+    form_remain2.ComboBox1.Items.Add(fieldbyname('abbr_name').Value);
+    next;
+   end;
+   dm.TemADOQuery1.close;
+   dm.TemADOQuery1.sql.clear;
+   dm.TemADOQuery1.sql.Text:=
+   'select TOP 1 RKEY15,abbr_name from data0558,data0015'+#13+
+   'where  data0558.rkey15=data0015.rkey'+#13+
+   'ORDER BY data0558.RKEY DESC';
+   dm.TemADOQuery1.open;
+
+
+
+   //form_remain.ComboBox1.ItemIndex:=form_remain.ComboBox1.Items.IndexOf('深圳双面'); //表示深圳双面
+   //form_remain.key15.Caption:='1';//表示深圳双面的主键值
+   form_remain2.ComboBox1.Text:=dm.TemADOQuery1.fieldbyname('abbr_name').AsString;
+   form_remain2.key15.Caption:=dm.TemADOQuery1.fieldbyname('RKEY15').AsString;
+  end;
+ with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select location from data0016 where location_type=0');
+   open;
+   while not eof do
+   begin
+    form_remain2.ComboBox2.Items.Add(fieldbyname('location').Value);
+    next;
+   end;
+   dm.TemADOQuery1.close;
+   dm.TemADOQuery1.sql.Clear;
+   dm.TemADOQuery1.sql.Text:=
+   'select TOP 1 RKEY16,location from data0558,data0016'+#13+
+   'where  data0558.rkey16=data0016.rkey'+#13+
+   'ORDER BY data0558.RKEY DESC';
+   dm.TemADOQuery1.open;
+
+   //form_remain.ComboBox2.ItemIndex:=form_remain.ComboBox2.Items.IndexOf('铜板仓');
+   //form_remain.key16.Caption:='1';    //表示铜板仓的位置主键值
+  form_remain2.ComboBox2.Text:=dm.TemADOQuery1.fieldbyname('location').AsString;
+  form_remain2.key16.Caption:=dm.TemADOQuery1.fieldbyname('RKEY16').AsString;
+  end;
+  with dm.ADOQ do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select seed_value from data0004 ');
+   sql.Add('where rkey= 22');
+   open;
+   form_remain2.Edit1.Text:=fieldbyname('seed_value').Value;
+  end;
+  form_remain2.ShowModal;
+finally
+form_remain2.Free;
+end;
+end;
+end;
+
+procedure Tform1.BtFldsClick(Sender: TObject);
+begin
+PMFlds.Popup(mouse.CursorPos.x,mouse.CursorPos.y);
+end;
+
+procedure Tform1.item_click(sender: TObject);
+var
+  i:byte;
+begin
+  (sender as tmenuItem).Checked := not ((sender as tmenuItem).Checked);
+  if (sender as tmenuItem).Checked then
+  begin
+    for i := 0 to dbGrid1.FieldCount - 1 do
+    if dbGrid1.Columns[i].Title.Caption = (sender as tmenuItem).Caption then
+    begin
+      dbGrid1.Columns[i].Visible := true;
+      break;
+    end;
+  end else begin
+    for i := 0 to dbGrid1.FieldCount - 1 do
+    if dbGrid1.Columns[i].Title.Caption = (sender as tmenuItem).Caption then
+    begin
+      dbGrid1.Columns[i].Visible := false;
+      break;
+    end;
+  end;
+end;
+
+procedure Tform1.N16Click(Sender: TObject);
+var
+ i:byte;
+ bm:tbookmark;
+begin
+
+   //if (strtoint(vprev)=1) or (strtoint(vprev)=3) then
+   if (strtoint(vprev)<>4)  then
+   messagedlg('对不起!您没有该程序的可写权限',mtinformation,[mbok],0)
+  else
+  try
+    dm.ADOD556.DisableControls;
+    bm:=dbgrid1.DataSource.DataSet.GetBookmark;
+    for  i:=0 to dbgrid1.SelectedRows.Count-1 do
+    begin
+      dbgrid1.DataSource.DataSet.Bookmark :=dbgrid1.SelectedRows.Items[i];
+      dm.ADO556Update.Close;
+      dm.ADO556Update.Parameters[0].Value := dm.ADOD556key556.Value;
+      dm.ADO556Update.Open;
+      dm.ADO556Update.Edit;
+      if dm.ADO556UpdateSTATUS.Value=0 then
+      begin
+        dm.ADO556UpdateSTATUS.Value:=1;
+        dm.ADO556UpdateAUDITED_ptr.Value:=StrToInt(user_ptr);
+        //dm.ADO556UpdateAUDITED_ptr.Value:=9;
+        dm.ADO556UpdateAUDITED_DATE.Value:=self.sys_longdate;
+        dm.ADO556Update.Post;
+      end;
+      dm.ADOD556.Next;
+    end;
+    dbgrid1.DataSource.DataSet.GotoBookmark(bm);
+    dbgrid1.DataSource.DataSet.FreeBookmark(bm);
+    dm.ADOD556.EnableControls;
+    finally
+    dm.ADOD556.Close;
+    dm.ADOD556.Open;
+    end;
+end;
+
+procedure Tform1.PopupMenu5Popup(Sender: TObject);
+begin
+
+
+
+ if dbgrid1.SelectedRows.Count>1 then
+ begin
+   //MenuItem1.Enabled:=true;
+   N2.Enabled:=true;
+   N6.Enabled:=true;
+   N14.Enabled:=true;
+   N7.Enabled:=true;
+ end
+ else
+ begin
+  if dbgrid1.SelectedRows.Count=0 then
+  dbgrid1.SelectedRows.CurrentRowSelected:=true;
+ if dm.ADOD556.IsEmpty then
+ begin
+ // MenuItem1.Enabled:=true;
+  n2.Enabled:=true;
+  N6.Enabled:=false;
+  N14.Enabled:=false;
+  N7.Enabled:=false;
+  N16.Enabled:=false;
+  N4.Enabled:=false;
+end
+else
+  begin
+  //MenuItem1.Enabled:=true;
+  n2.Enabled:=true;
+  N6.Enabled:=true;
+  N14.Enabled:=true;
+  N16.Enabled:=true;
+  N7.Enabled:=true;
+   case
+   dm.ADOD556STATUS.Value of
+   0 : N16.Enabled:=True;
+   1 : N16.Enabled:=false;
+   end;
+  end;
+  end;
+
+
+
+
+
+  end;
+
+procedure Tform1.N4Click(Sender: TObject);
+begin
+ form_report2:=Tform_report2.Create(application);
+ form_report2.aq457.Close;
+ form_report2.aq457.Parameters[0].Value:=dm.ADOD556key556.Value;
+ form_report2.aq457.Open;
+
+ form_report2.ppReport2.Reset;
+ form_report2.ppReport2.Template.FileName:=
+   StringReplace(UpperCase(extractfilepath(paramstr(0))),'EXEC\','NIERP\REPORT\',[rfReplaceAll])+'yuliao2.rtm';
+ form_report2.ppReport2.Template.LoadFromFile;
+ form_report2.ppReport2.SaveAsTemplate:=False;
+
+ form_report2.ppReport2.Print;
+ form_report2.Free;
+end;
+
+procedure Tform1.RadioGroup2Click(Sender: TObject);
+begin
+ {if RadioGroup2.ItemIndex=0 then
+     begin
+          dm.ADOD556.Filtered:= False;
+          dm.ADOD556.Filter:='statu=''待审核''';
+          dm.ADOD556.Filtered:= True;
+     end
+     else
+     begin
+          dm.ADOD556.Filtered:= False;
+          dm.ADOD556.Filter:='statu=''已审核''';
+          dm.ADOD556.Filtered:= True;
+     end;     }
+end;
+
+procedure Tform1.MenuItem2Click(Sender: TObject);
+begin
+try
+form_report2:= Tform_report2.Create(application);
+form_report2.ppReport2.Reset;
+form_report2.ppReport2.Template.FileName :=
+  stringReplace(UpperCase(extractfilepath(paramstr(0))),'EXEC\','NIERP\REPORT\',[rfReplaceAll])+
+    'yuliao2.rtm';
+form_report2.ppReport2.Template.LoadFromFile;
+form_report2.ppReport2.SaveAsTemplate:=true;
+Form_report2.ppdesigner1.ShowModal;
+finally
+form_report2.Free;
+end;
+end;
+
+procedure Tform1.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+
+begin
+   { D1:=FormatdateTime('yyyymmdd',Now);
+    D2:=FormatdateTime('YYYYMMDD',dm.ADOD556.FieldByName('EXPIRE_DATE').AsDateTime);
+    //D3:=Trunc(StrToDateTime(D2)-StrToDateTime(D1));
+
+    ts_from:=datetimetotimestamp(StrToDateTime(D2));
+    ts_to:=datetimetotimestamp(StrToDateTime(D1));
+    nDays:=ts_from.Date-ts_to.Date;   }
+
+
+    if   dm.ADOD556.FieldByName('D3').AsInteger<0 then
+    begin
+    DBGrid1.Canvas.Font.Color := clRed;
+    DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+    end;
+end;
+
+
+
+procedure Tform1.N12Click(Sender: TObject);
+begin
+form_report2:=Tform_report2.Create(application);
+ form_report2.ADODataSet2.Close;
+ form_report2.ADODataSet2.Open;
+
+ form_report2.ppReport2.Reset;
+ form_report2.ppReport2.Template.FileName:=
+   StringReplace(UpperCase(extractfilepath(paramstr(0))),'EXEC\','NIERP\REPORT\',[rfReplaceAll])+'yuliao3.rtm';
+ form_report2.ppReport2.Template.LoadFromFile;
+ form_report2.ppReport2.SaveAsTemplate:=False;
+
+ form_report2.ppReport2.Print;
+ form_report2.Free;
+end;
+
+procedure Tform1.CheckBox1Click(Sender: TObject);
+begin
+dm.ADOD556.Close;
+if checkbox1.Checked then
+ dm.ADOD556.Parameters.ParamValues['v0']:=9
+else
+ dm.ADOD556.Parameters.ParamValues['v0']:=0;
+
+if checkbox2.Checked then
+ dm.ADOD556.Parameters.ParamValues['v1']:=9
+else
+ dm.ADOD556.Parameters.ParamValues['v1']:=1;
+
+dm.ADOD556.Open;
+end;
+
+procedure Tform1.N15Click(Sender: TObject);
+var i,j,control,k:integer;
+begin
+  {dm.TemADOQuery1.close ;
+  dm.TemADOQuery1.SQL.Clear ;
+  dm.TemADOQuery1.SQL.Add('select COST_CONTROL1 from data0192');  //COST_CONTROL2
+  dm.TemADOQuery1.Open ;
+  control:=dm.TemADOQuery1.FieldByName('COST_CONTROL1').asinteger; //=0必须审核再打印（去掉勾选）
+  dm.TemADOQuery1.close ; }
+  MulPrinForm1 := TMulPrinForm1.Create(application) ;
+
+  try
+    MulPrinForm1.StG1.Cells[0,0] := '序列号';
+    MulPrinForm1.StG2.Cells[0,0] := '序列号';
+   
+
+    dm.ADOD556.First ;
+    while not dm.ADOD556.Eof do
+    begin
+         if ( (dm.ADOD556.FieldByName('Statu').AsString ='已审核') ) then
+      begin
+        MulPrinForm1.StG1.RowCount := MulPrinForm1.StG1.RowCount + 1;
+        MulPrinForm1.StG1.Cells[0,MulPrinForm1.StG1.RowCount - 2] := dm.ADOD556key556.AsString;
+      end;
+      dm.ADOD556.Next ;
+    end;
+
+    if MulPrinForm1.showmodal = mrOk then
+    begin
+
+
+      if MulPrinForm1.StG2.RowCount > 2 then
+      begin
+          for i := 1 to MulPrinForm1.StG2.RowCount - 2 do
+          begin
+          PrintMo(Sender);
+          end;
+          BitBtn2Click(Sender);
+      end;
+      end;
+
+
+  finally
+    MulPrinForm1.Free ;
+  end;
+
+
+end;
+
+
+
+
+procedure Tform1.PrintMo(Sender: TObject);
+begin
+ form_report2:=Tform_report2.Create(application);
+ form_report2.aq457.Close;
+ form_report2.aq457.Parameters[0].Value:= DBGrid1.DataSource.DataSet.Fieldbyname('key556').asstring;
+ form_report2.aq457.Open;
+
+ form_report2.ppReport2.Reset;
+ form_report2.ppReport2.Template.FileName:=
+   StringReplace(UpperCase(extractfilepath(paramstr(0))),'EXEC\','NIERP\REPORT\',[rfReplaceAll])+'yuliao2.rtm';
+ form_report2.ppReport2.Template.LoadFromFile;
+ form_report2.ppReport2.SaveAsTemplate:=False;
+
+ form_report2.ppReport2.Print;
+ form_report2.Free;
+end;
+
+
+end.

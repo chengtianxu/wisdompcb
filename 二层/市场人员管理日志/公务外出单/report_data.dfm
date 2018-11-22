@@ -1,0 +1,940 @@
+object Form_Report: TForm_Report
+  Left = 318
+  Top = 106
+  Width = 650
+  Height = 393
+  Caption = 'Form_Report'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ppDesigner1: TppDesigner
+    Caption = 'ReportBuilder'
+    DataSettings.SessionType = 'BDESession'
+    DataSettings.AllowEditSQL = False
+    DataSettings.CollationType = ctASCII
+    DataSettings.DatabaseType = dtParadox
+    DataSettings.IsCaseSensitive = True
+    DataSettings.SQLType = sqBDELocal
+    Position = poScreenCenter
+    Report = ppReport1
+    IniStorageType = 'IniFile'
+    IniStorageName = '($WINSYS)\RBuilder.ini'
+    WindowHeight = 400
+    WindowLeft = 100
+    WindowTop = 50
+    WindowWidth = 600
+    WindowState = wsMaximized
+    Left = 272
+    Top = 120
+  end
+  object ppDB723: TppDBPipeline
+    DataSource = DataSource1
+    UserName = 'DB723'
+    Left = 192
+    Top = 88
+    object ppDB723ppField1: TppField
+      FieldAlias = 'LogNo'
+      FieldName = 'LogNo'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 0
+    end
+    object ppDB723ppField2: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'salesID'
+      FieldName = 'salesID'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 1
+    end
+    object ppDB723ppField3: TppField
+      FieldAlias = 'CUSTOMER_NAME'
+      FieldName = 'CUSTOMER_NAME'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 2
+    end
+    object ppDB723ppField4: TppField
+      FieldAlias = 'BILLING_ADDRESS_1'
+      FieldName = 'BILLING_ADDRESS_1'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 3
+    end
+    object ppDB723ppField5: TppField
+      FieldAlias = 'apply_date'
+      FieldName = 'apply_date'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 4
+    end
+    object ppDB723ppField6: TppField
+      FieldAlias = 'goout_date'
+      FieldName = 'goout_date'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 5
+    end
+    object ppDB723ppField7: TppField
+      FieldAlias = 'return_date'
+      FieldName = 'return_date'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 6
+    end
+    object ppDB723ppField8: TppField
+      FieldAlias = 'ent_date'
+      FieldName = 'ent_date'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 7
+    end
+    object ppDB723ppField9: TppField
+      FieldAlias = 'goout_reason'
+      FieldName = 'goout_reason'
+      FieldLength = 500
+      DisplayWidth = 500
+      Position = 8
+    end
+    object ppDB723ppField10: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'AuditID'
+      FieldName = 'AuditID'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 9
+    end
+    object ppDB723ppField11: TppField
+      FieldAlias = 'Audit_Date'
+      FieldName = 'Audit_Date'
+      FieldLength = 0
+      DataType = dtDateTime
+      DisplayWidth = 18
+      Position = 10
+    end
+    object ppDB723ppField12: TppField
+      FieldAlias = 'AuditRemark'
+      FieldName = 'AuditRemark'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 11
+    end
+    object ppDB723ppField13: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'status'
+      FieldName = 'status'
+      FieldLength = 0
+      DataType = dtLongint
+      DisplayWidth = 10
+      Position = 12
+    end
+    object ppDB723ppField14: TppField
+      FieldAlias = 'status_c'
+      FieldName = 'status_c'
+      FieldLength = 6
+      DisplayWidth = 6
+      Position = 13
+    end
+    object ppDB723ppField15: TppField
+      FieldAlias = 'USER_FULL_NAME'
+      FieldName = 'USER_FULL_NAME'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 14
+    end
+    object ppDB723ppField16: TppField
+      FieldAlias = 'USER_LOGIN_NAME'
+      FieldName = 'USER_LOGIN_NAME'
+      FieldLength = 15
+      DisplayWidth = 15
+      Position = 15
+    end
+    object ppDB723ppField17: TppField
+      FieldAlias = 'USER_FULL_NAME_A'
+      FieldName = 'USER_FULL_NAME_A'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 16
+    end
+    object ppDB723ppField18: TppField
+      FieldAlias = 'USER_LOGIN_NAME_A'
+      FieldName = 'USER_LOGIN_NAME_A'
+      FieldLength = 15
+      DisplayWidth = 15
+      Position = 17
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = dm.ADO723
+    Left = 96
+    Top = 80
+  end
+  object ppDB73: TppDBPipeline
+    DataSource = DataSource2
+    UserName = 'DB73'
+    Left = 192
+    Top = 120
+    object ppDB73ppField1: TppField
+      FieldAlias = 'EMPLOYEE_NAME'
+      FieldName = 'EMPLOYEE_NAME'
+      FieldLength = 16
+      DisplayWidth = 16
+      Position = 0
+    end
+    object ppDB73ppField2: TppField
+      FieldAlias = 'DEPT_NAME'
+      FieldName = 'DEPT_NAME'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 1
+    end
+    object ppDB73ppField3: TppField
+      FieldAlias = 'TPOSTION'
+      FieldName = 'TPOSTION'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 2
+    end
+    object ppDB73ppField4: TppField
+      FieldAlias = 'EMPL_CODE'
+      FieldName = 'EMPL_CODE'
+      FieldLength = 10
+      DisplayWidth = 10
+      Position = 3
+    end
+  end
+  object DataSource2: TDataSource
+    DataSet = dm.ADO73
+    Left = 96
+    Top = 112
+  end
+  object DataSource3: TDataSource
+    DataSet = ADOQuery1
+    Left = 96
+    Top = 144
+  end
+  object ADOQuery1: TADOQuery
+    Active = True
+    Connection = dm.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from data0493')
+    Left = 136
+    Top = 24
+    object ADOQuery1Company_Name: TStringField
+      FieldName = 'Company_Name'
+      Size = 50
+    end
+    object ADOQuery1Company_Name2: TStringField
+      FieldName = 'Company_Name2'
+      Size = 50
+    end
+    object ADOQuery1Company_Name3: TStringField
+      FieldName = 'Company_Name3'
+      Size = 50
+    end
+    object ADOQuery1ship_address: TStringField
+      FieldName = 'ship_address'
+      Size = 50
+    end
+    object ADOQuery1Company_Icon: TBlobField
+      FieldName = 'Company_Icon'
+    end
+    object ADOQuery1SITE_INFO_ADD_1: TStringField
+      FieldName = 'SITE_INFO_ADD_1'
+      FixedChar = True
+      Size = 50
+    end
+    object ADOQuery1SITE_INFO_ADD_2: TStringField
+      FieldName = 'SITE_INFO_ADD_2'
+      FixedChar = True
+      Size = 50
+    end
+    object ADOQuery1SITE_INFO_ADD_3: TStringField
+      FieldName = 'SITE_INFO_ADD_3'
+      FixedChar = True
+      Size = 50
+    end
+    object ADOQuery1SITE_INFO_PHONE: TStringField
+      FieldName = 'SITE_INFO_PHONE'
+      FixedChar = True
+      Size = 30
+    end
+  end
+  object ppDB493: TppDBPipeline
+    DataSource = DataSource3
+    UserName = 'DB493'
+    Left = 192
+    Top = 152
+    object ppDB493ppField1: TppField
+      FieldAlias = 'Company_Name'
+      FieldName = 'Company_Name'
+      FieldLength = 0
+      DisplayWidth = 0
+      Position = 0
+    end
+    object ppDB493ppField2: TppField
+      FieldAlias = 'Company_Name2'
+      FieldName = 'Company_Name2'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 1
+    end
+    object ppDB493ppField3: TppField
+      FieldAlias = 'Company_Name3'
+      FieldName = 'Company_Name3'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 2
+    end
+    object ppDB493ppField4: TppField
+      FieldAlias = 'ship_address'
+      FieldName = 'ship_address'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 3
+    end
+    object ppDB493ppField5: TppField
+      FieldAlias = 'Company_Icon'
+      FieldName = 'Company_Icon'
+      FieldLength = 0
+      DataType = dtBLOB
+      DisplayWidth = 10
+      Position = 4
+      Searchable = False
+      Sortable = False
+    end
+    object ppDB493ppField6: TppField
+      FieldAlias = 'SITE_INFO_ADD_1'
+      FieldName = 'SITE_INFO_ADD_1'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 5
+    end
+    object ppDB493ppField7: TppField
+      FieldAlias = 'SITE_INFO_ADD_2'
+      FieldName = 'SITE_INFO_ADD_2'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 6
+    end
+    object ppDB493ppField8: TppField
+      FieldAlias = 'SITE_INFO_ADD_3'
+      FieldName = 'SITE_INFO_ADD_3'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 7
+    end
+    object ppDB493ppField9: TppField
+      FieldAlias = 'SITE_INFO_PHONE'
+      FieldName = 'SITE_INFO_PHONE'
+      FieldLength = 30
+      DisplayWidth = 30
+      Position = 8
+    end
+  end
+  object ppReport1: TppReport
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'Letter'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 279401
+    PrinterSetup.mmPaperWidth = 215900
+    PrinterSetup.PaperSize = 1
+    SaveAsTemplate = True
+    Template.FileName = 'D:\SJSYS\NIERP\Report\wzpr723.rtm'
+    AllowPrintToFile = True
+    DeviceType = 'Screen'
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    PreviewFormSettings.WindowState = wsMaximized
+    PreviewFormSettings.ZoomSetting = zs100Percent
+    SavePrinterSetup = True
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    Left = 272
+    Top = 72
+    Version = '7.01'
+    mmColumnWidth = 0
+    object ppHeaderBand1: TppHeaderBand
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppDetailBand1: TppDetailBand
+      PrintHeight = phDynamic
+      mmBottomOffset = 0
+      mmHeight = 137848
+      mmPrintPosition = 0
+      object ppShape1: TppShape
+        UserName = 'Shape1'
+        mmHeight = 83079
+        mmLeft = 3440
+        mmTop = 28046
+        mmWidth = 177271
+        BandType = 4
+      end
+      object ppLine1: TppLine
+        UserName = 'Line1'
+        Weight = 0.750000000000000000
+        mmHeight = 3969
+        mmLeft = 3175
+        mmTop = 41010
+        mmWidth = 177800
+        BandType = 4
+      end
+      object ppLine2: TppLine
+        UserName = 'Line2'
+        Weight = 0.750000000000000000
+        mmHeight = 529
+        mmLeft = 3969
+        mmTop = 87842
+        mmWidth = 176213
+        BandType = 4
+      end
+      object ppLine3: TppLine
+        UserName = 'Line3'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 12700
+        mmLeft = 27252
+        mmTop = 28046
+        mmWidth = 35983
+        BandType = 4
+      end
+      object ppLine4: TppLine
+        UserName = 'Line4'
+        Weight = 0.750000000000000000
+        mmHeight = 2646
+        mmLeft = 3175
+        mmTop = 33602
+        mmWidth = 177536
+        BandType = 4
+      end
+      object ppLine7: TppLine
+        UserName = 'Line7'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 12700
+        mmLeft = 76465
+        mmTop = 28310
+        mmWidth = 20902
+        BandType = 4
+      end
+      object ppLine8: TppLine
+        UserName = 'Line8'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 5821
+        mmLeft = 87577
+        mmTop = 28046
+        mmWidth = 32808
+        BandType = 4
+      end
+      object ppLine9: TppLine
+        UserName = 'Line9'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 5821
+        mmLeft = 114036
+        mmTop = 28046
+        mmWidth = 25929
+        BandType = 4
+      end
+      object ppLine10: TppLine
+        UserName = 'Line10'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 5556
+        mmLeft = 123296
+        mmTop = 28310
+        mmWidth = 27517
+        BandType = 4
+      end
+      object ppLabel1: TppLabel
+        UserName = 'Label1'
+        Caption = #30003#35831#20154#21592
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4868
+        mmLeft = 6879
+        mmTop = 28840
+        mmWidth = 16933
+        BandType = 4
+      end
+      object ppLabel2: TppLabel
+        UserName = 'Label2'
+        Caption = #22806#20986#26102#38388
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4826
+        mmLeft = 6615
+        mmTop = 35719
+        mmWidth = 16933
+        BandType = 4
+      end
+      object ppDBText1: TppDBText
+        UserName = 'DBText1'
+        DataField = 'USER_FULL_NAME'
+        DataPipeline = ppDB723
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB723'
+        mmHeight = 4763
+        mmLeft = 27781
+        mmTop = 29104
+        mmWidth = 23019
+        BandType = 4
+      end
+      object ppLabel4: TppLabel
+        UserName = 'Label4'
+        Caption = #37096#38376
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 77523
+        mmTop = 28575
+        mmWidth = 8467
+        BandType = 4
+      end
+      object ppLabel5: TppLabel
+        UserName = 'Label5'
+        Caption = #32844#20301
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 114565
+        mmTop = 28575
+        mmWidth = 8467
+        BandType = 4
+      end
+      object ppLine11: TppLine
+        UserName = 'Line11'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 5556
+        mmLeft = 141288
+        mmTop = 28310
+        mmWidth = 26194
+        BandType = 4
+      end
+      object ppLine12: TppLine
+        UserName = 'Line12'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 5821
+        mmLeft = 152400
+        mmTop = 28046
+        mmWidth = 25400
+        BandType = 4
+      end
+      object ppLabel6: TppLabel
+        UserName = 'Label6'
+        Caption = #24037#21495
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 142346
+        mmTop = 29104
+        mmWidth = 8467
+        BandType = 4
+      end
+      object ppLabel7: TppLabel
+        UserName = 'Label7'
+        Caption = #22806#20986#20107#30001#65306
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4233
+        mmLeft = 6615
+        mmTop = 42069
+        mmWidth = 20638
+        BandType = 4
+      end
+      object ppLabel8: TppLabel
+        UserName = 'Label8'
+        Caption = #22791#27880#65306
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4826
+        mmLeft = 7408
+        mmTop = 88900
+        mmWidth = 12700
+        BandType = 4
+      end
+      object ppLabel9: TppLabel
+        UserName = 'Label9'
+        Caption = #20844#21153#22806#20986#21333
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 16
+        Font.Style = []
+        Transparent = True
+        mmHeight = 6350
+        mmLeft = 79375
+        mmTop = 13758
+        mmWidth = 28310
+        BandType = 4
+      end
+      object ppLabel10: TppLabel
+        UserName = 'Label10'
+        Caption = #30003#35831#26085#26399#65306
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4826
+        mmLeft = 10848
+        mmTop = 22754
+        mmWidth = 21167
+        BandType = 4
+      end
+      object ppLabel11: TppLabel
+        UserName = 'Label11'
+        Caption = #32534#21495#65306
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4826
+        mmLeft = 95779
+        mmTop = 22225
+        mmWidth = 12700
+        BandType = 4
+      end
+      object ppLabel13: TppLabel
+        UserName = 'Label13'
+        Caption = #23457#25209#65306
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 10319
+        mmTop = 111919
+        mmWidth = 12700
+        BandType = 4
+      end
+      object ppDBText4: TppDBText
+        UserName = 'DBText4'
+        DataField = 'DEPT_NAME'
+        DataPipeline = ppDB73
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB73'
+        mmHeight = 4763
+        mmLeft = 88371
+        mmTop = 28575
+        mmWidth = 24606
+        BandType = 4
+      end
+      object ppDBText5: TppDBText
+        UserName = 'DBText5'
+        DataField = 'EMPL_CODE'
+        DataPipeline = ppDB73
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB73'
+        mmHeight = 5027
+        mmLeft = 154517
+        mmTop = 28575
+        mmWidth = 22225
+        BandType = 4
+      end
+      object ppLabel14: TppLabel
+        UserName = 'Label14'
+        Caption = '1.'#21592#24037#22240#20844#22806#20986#65292#38656#32463#37096#38376#21516#24847#21518#65292#26041#21487#22806#20986#65292#22806#20986#26102#24517#39035#22635#20889#12298#20844#21153#22806#20986#21333#12299#65307
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4826
+        mmLeft = 21167
+        mmTop = 89165
+        mmWidth = 152400
+        BandType = 4
+      end
+      object ppLabel15: TppLabel
+        UserName = 'Label15'
+        Caption = '2.'#21592#24037#12298#20844#21153#22806#20986#21333#12299#22635#20889#22909#21518#65292#38656#20132#19982#37096#38376#20027#31649#25110#32773#32463#29702#30830#35748#65307
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4826
+        mmLeft = 21167
+        mmTop = 94192
+        mmWidth = 122767
+        BandType = 4
+      end
+      object ppLabel16: TppLabel
+        UserName = 'Label16'
+        Caption = '3.'#20445#23433#22312#20154#21592#22806#20986#26102#65292#25910#22238#12298#20844#21153#22806#20986#21333#12299#65292#28982#21518#20132#19982#20154#21147#36164#28304#37096#65294
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4826
+        mmLeft = 20902
+        mmTop = 99219
+        mmWidth = 127000
+        BandType = 4
+      end
+      object ppDBMemo1: TppDBMemo
+        UserName = 'DBMemo1'
+        CharWrap = False
+        DataField = 'goout_reason'
+        DataPipeline = ppDB723
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB723'
+        mmHeight = 43392
+        mmLeft = 27781
+        mmTop = 42598
+        mmWidth = 139436
+        BandType = 4
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmLeading = 0
+      end
+      object ppDBText7: TppDBText
+        UserName = 'DBText7'
+        DataField = 'goout_date'
+        DataPipeline = ppDB723
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB723'
+        mmHeight = 5027
+        mmLeft = 29104
+        mmTop = 35719
+        mmWidth = 47361
+        BandType = 4
+      end
+      object ppLabel17: TppLabel
+        UserName = 'Label17'
+        Caption = #39044#35745#36820#22238#26102#38388
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 77523
+        mmTop = 35719
+        mmWidth = 25400
+        BandType = 4
+      end
+      object ppDBText8: TppDBText
+        UserName = 'DBText8'
+        DataField = 'return_date'
+        DataPipeline = ppDB723
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB723'
+        mmHeight = 4763
+        mmLeft = 105834
+        mmTop = 35719
+        mmWidth = 46831
+        BandType = 4
+      end
+      object ppDBText9: TppDBText
+        UserName = 'DBText9'
+        DataField = 'apply_date'
+        DataPipeline = ppDB723
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB723'
+        mmHeight = 4763
+        mmLeft = 33602
+        mmTop = 22754
+        mmWidth = 45508
+        BandType = 4
+      end
+      object ppDBText10: TppDBText
+        UserName = 'DBText10'
+        DataField = 'LogNo'
+        DataPipeline = ppDB723
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB723'
+        mmHeight = 4763
+        mmLeft = 109009
+        mmTop = 22225
+        mmWidth = 39688
+        BandType = 4
+      end
+      object ppDBText3: TppDBText
+        UserName = 'DBText3'
+        DataField = 'USER_FULL_NAME_A'
+        DataPipeline = ppDB723
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = #23435#20307
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB723'
+        mmHeight = 4763
+        mmLeft = 23548
+        mmTop = 112184
+        mmWidth = 20638
+        BandType = 4
+      end
+      object ppDBText6: TppDBText
+        UserName = 'DBText6'
+        DataField = 'Company_Name'
+        DataPipeline = ppDB493
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 16
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB493'
+        mmHeight = 6879
+        mmLeft = 60061
+        mmTop = 5556
+        mmWidth = 79904
+        BandType = 4
+      end
+      object ppLine5: TppLine
+        UserName = 'Line5'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 7408
+        mmLeft = 103981
+        mmTop = 33867
+        mmWidth = 14552
+        BandType = 4
+      end
+      object ppDBText2: TppDBText
+        UserName = 'DBText2'
+        DataField = 'TPOSTION'
+        DataPipeline = ppDB73
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB73'
+        mmHeight = 4763
+        mmLeft = 123825
+        mmTop = 28575
+        mmWidth = 17198
+        BandType = 4
+      end
+    end
+    object ppFooterBand1: TppFooterBand
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+  end
+end

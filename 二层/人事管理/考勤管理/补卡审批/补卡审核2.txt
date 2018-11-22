@@ -1,0 +1,76 @@
+
+
+
+
+
+select  top 10 cast (0 as bit) as selected,b.departmentname,b.employeecode,b.chinesename,reqtime,reqperson,reqinfo,
+case  reqtype when 0 then '补卡'when 1 then '请假'when 2 then '修改工时' end as  [事务类型],
+case  reqstate when 0 then '未提交'when 1 then '提交'when 2 then '已经审核'when 3then '退回' end as  [处理状态],
+dealperson,dealtime,req_starttime,req_endtime,req_cardtime,zbhour,jbhour,askforleaverk,a.rkey,employeeid,reqstate,reqtype
+ from req a  join v_employeemsg b on a.employeeid=b.rkey
+reqtime
+
+
+select top 1 * from dbo.OriginalCheckData
+where remark='手工补卡'
+
+select  top 1 * from dbo.AskLeaveRegister
+where  curstatus=0
+
+
+
+
+
+select  top 1 * from dbo.AskLeaveRegister
+
+declare @req_rkey int
+declare @reqtype int
+set @req_rkey =11
+set  @reqtype=1
+
+if @reqtype=0 then 
+begin
+ insert into OriginalCheckData
+	(employeecard,card_time,date_e,time_e,dev_id,employeeid,classid,
+	signdesc,querysign,remark)
+	select b.cardno,a.reqtime,
+	substring(convert (nvarchar(20),reqtime,120),1,10),
+	substring(convert (nvarchar(20),reqtime,120),12,8),
+	a.employeeid,0,0,0,0,'手工补卡'
+	from 
+	(select * from req where rkey=11 and reqtype=0)  as  a join employeemsg b  
+	on a.employeeid=b.rkey
+end
+
+if @reqtype=1 then 
+begin
+ insert into AskLeaveRegister
+	(employeeid,leavetype,startdate,starttime,enddate,endtime,registerman,
+	leavereason,remark,makedate,curstatus)
+	select a.employeeid,a.askforleaverk,
+    convert(datetime,convert (nvarchar(20),a.req_starttime,23),120),
+     a.req_starttime,
+convert (datetime,convert(nvarchar(20),a.req_endtime,23),120),
+    a.req_endtime,a.req_endtime,
+    3,reqinfo,reqinfo,getdate(),1
+	from 
+	(select  * from req where  rkey=3 and reqtype=1 )  as  a join employeemsg b  
+	on a.employeeid=b.rkey
+end
+if @reqtype=2 then 
+begin
+
+update onoffdutydata
+set rwt=isnull((select zbhour from req where reqtype=2),0),
+rot=isnull((select jbhour from req where reqtype=2),0),
+yt=1,ytnote='修改工时',
+locked=1,ct1=null,ct2=null,ct3=null,kt1=null,
+kt2=null,kt3=null,zt1=null,zt2=null,zt3=null
+from onoffdutydata 
+where checkdate=(select req_cardtime from req where reqtype=2)
+and employeeid= (select employeeid from req where reqtype=2) 
+
+end
+
+update req set reqstate=2,dealperson=data05_per,dealtime=getdate()
+from req where rkey=req_rkey

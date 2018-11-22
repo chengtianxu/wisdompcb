@@ -1,0 +1,440 @@
+破解SQL2005(SQL2008)的存储过程的存储过程  
+
+问题一： DAC连接问题
+自己尝试了n次，最后总结一下连接步骤：
+1 先用有sysadmin角色的用户登陆SQL Server Management Studio；
+2 在工具栏上选数据库引擎查询；服务器名称改为 ADMIN:服务器名称 ；选项>连接属性>连接到数据库 改为加密存储过程所在的数据库；连接
+3 运行解密的存储过程；
+问题二： 可用的存储过程解密代码
+SQLServer2005里怎样对使用with encryption选项创建的存储过程解密
+--王成辉翻译整理，转贴请注明出自微软BI开拓者www.windbi.com
+--原帖地址
+SQLServer2005里使用with encryption选项创建的存储过程仍然和sqlserver2000里一样，都是使用XOR进行了的加密。和2000不一样的是，在2005的系统表syscomments里已经查不到加密过的密文了。要查密文必须使用DAC（专用管理员连接）连接到数据库后，在系统表sys.sysobjvalues查询，该表的列imageval存储了相应的密文。具体可以使用下面的查询：
+SELECT imageval FROM sys.sysobjvalues WHERE objid = object_id(@procedure) AND 
+valclass = 1 AND subobjid = 1
+下面是解密的存储过程，具体代码如下(这是版本4.0，最新的，修正很长的存储过程解密出来是空白的问题)：
+
+
+
+Create PROCEDURE [dbo].[sp__windbi$decrypt]
+(@procedure sysname = NULL, @revfl int = 1)
+AS
+/*
+王成辉翻译整理，转贴请注明出自微软BI开拓者www.windbi.com
+调用形式为：
+exec dbo.sp__windbi$decrypt @procedure,0
+如果第二个参数使用1的话，会给出该存储过程的一些提示。
+--版本4.0  修正存储过程过长解密出来是空白的问题
+*/
+SET NOCOUNT ON
+IF @revfl = 1
+BEGIN
+PRINT '警告：该存储过程会删除并重建原始的存储过程。'
+PRINT ' 在运行该存储过程之前确保你的数据库有一个备份。'
+PRINT ' 该存储过程通常应该运行在产品环境的一个备份的非产品环境下。'
+PRINT ' 为了运行这个存储过程，将参数@refl的值更改为0。'
+RETURN 0
+END
+DECLARE @intProcSpace bigint, @t bigint, @maxColID smallint,@procNameLength int
+select @maxColID = max(subobjid) FROM
+sys.sysobjvalues WHERE objid = object_id(@procedure)
+--select @maxColID as 'Rows in sys.sysobjvalues'
+select @procNameLength = datalength(@procedure) + 29
+DECLARE @real_01 nvarchar(max)
+DECLARE @fake_01 nvarchar(max)
+DECLARE @fake_encrypt_01 nvarchar(max)
+DECLARE @real_decrypt_01 nvarchar(max),@real_decrypt_01a nvarchar(max)
+declare @objtype varchar(2),@ParentName nvarchar(max)
+select @real_decrypt_01a = ''
+--提取对象的类型如是存储过程还是函数，如果是触发器，还要得到其父对象的名称
+select @objtype=type,@parentname=object_name(parent_object_id)
+from sys.objects where [object_id]=object_id(@procedure)
+-- 从sys.sysobjvalues里提出加密的imageval记录
+SET @real_01=(SELECT top 1 imageval FROM sys.sysobjvalues WHERE objid =
+object_id(@procedure) and valclass = 1 order by subobjid)
+
+--创建一个临时表
+create table #output ( [ident] [int] IDENTITY (1, 1) NOT NULL ,
+[real_decrypt] NVARCHAR(MAX) )
+--开始一个事务，稍后回滚
+BEGIN TRAN
+--更改原始的存储过程，用短横线替换
+if @objtype='P'
+  SET @fake_01='ALTER PROCEDURE '+ @procedure +' WITH ENCRYPTION AS select 1
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/'
+else if @objtype='FN'
+  SET @fake_01='ALTER FUNCTION '+ @procedure +'() RETURNS INT WITH ENCRYPTION AS BEGIN RETURN 1
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/ END'
+else if @objtype='V'
+  SET @fake_01='ALTER view '+ @procedure +' WITH ENCRYPTION AS select 1 as col
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/'
+else if @objtype='TR'
+  SET @fake_01='ALTER trigger '+ @procedure +' ON '+@parentname+'WITH ENCRYPTION AFTER INSERT AS RAISERROR (''N'',16,10)
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/'
+EXECUTE (@fake_01)
+--从sys.sysobjvalues里提出加密的假的
+SET @fake_encrypt_01=(SELECT top 1 imageval FROM sys.sysobjvalues WHERE objid =
+object_id(@procedure) and valclass = 1 order by subobjid )
+if @objtype='P'
+  SET @fake_01='Create PROCEDURE '+ @procedure +' WITH ENCRYPTION AS select 1
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/'
+else if @objtype='FN'
+  SET @fake_01='CREATE FUNCTION '+ @procedure +'() RETURNS INT WITH ENCRYPTION AS BEGIN RETURN 1
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/ END'
+else if @objtype='V'
+  SET @fake_01='Create view '+ @procedure +' WITH ENCRYPTION AS select 1 as col
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/'
+else if @objtype='TR'
+  SET @fake_01='Create trigger '+ @procedure +' ON '+@parentname+'WITH ENCRYPTION AFTER INSERT AS RAISERROR (''N'',16,10)
+  /*'+REPLICATE(cast('*'as nvarchar(max)), datalength(@real_01) /2 - @procNameLength)+'*/'
+--开始计数
+SET @intProcSpace=1
+--使用字符填充临时变量
+SET @real_decrypt_01 = replicate(cast('A'as nvarchar(max)), (datalength(@real_01) /2 ))
+--循环设置每一个变量，创建真正的变量
+--每次一个字节
+SET @intProcSpace=1
+--如有必要，遍历每个@real_xx变量并解密
+WHILE @intProcSpace<=(datalength(@real_01)/2)
+BEGIN
+--真的和假的和加密的假的进行异或处理
+SET @real_decrypt_01 = stuff(@real_decrypt_01, @intProcSpace, 1,
+NCHAR(UNICODE(substring(@real_01, @intProcSpace, 1)) ^
+(UNICODE(substring(@fake_01, @intProcSpace, 1)) ^
+UNICODE(substring(@fake_encrypt_01, @intProcSpace, 1)))))
+SET @intProcSpace=@intProcSpace+1
+END
+
+
+--通过sp_helptext逻辑向表#output里插入变量
+insert #output (real_decrypt) select @real_decrypt_01
+--select real_decrypt AS '#output chek' from #output --测试
+-- -------------------------------------
+--开始从sp_helptext提取
+-- -------------------------------------
+declare @dbname sysname
+,@BlankSpaceAdded int
+,@BasePos int
+,@CurrentPos int
+,@TextLength int
+,@LineId int
+,@AddOnLen int
+,@LFCR int --回车换行的长度
+,@DefinedLength int
+,@SyscomText nvarchar(max)
+,@Line nvarchar(255)
+Select @DefinedLength = 255
+SELECT @BlankSpaceAdded = 0 --跟踪行结束的空格。注意Len函数忽略了多余的空格
+CREATE TABLE #CommentText
+(LineId int
+,Text nvarchar(255) collate database_default)
+--使用#output代替sys.sysobjvalues
+DECLARE ms_crs_syscom CURSOR LOCAL
+FOR SELECT real_decrypt from #output
+ORDER BY ident
+FOR READ ONLY
+--获取文本
+SELECT @LFCR = 2
+SELECT @LineId = 1
+OPEN ms_crs_syscom
+FETCH NEXT FROM ms_crs_syscom into @SyscomText
+WHILE @@fetch_status >= 0
+BEGIN
+SELECT @BasePos = 1
+SELECT @CurrentPos = 1
+SELECT @TextLength = LEN(@SyscomText)
+WHILE @CurrentPos != 0
+BEGIN
+--通过回车查找行的结束
+SELECT @CurrentPos = CHARINDEX(char(13)+char(10), @SyscomText,
+@BasePos)
+--如果找到回车
+IF @CurrentPos != 0
+BEGIN
+--如果@Lines的长度的新值比设置的大就插入@Lines目前的内容并继续
+While (isnull(LEN(@Line),0) + @BlankSpaceAdded +
+@CurrentPos-@BasePos + @LFCR) > @DefinedLength
+BEGIN
+SELECT @AddOnLen = @DefinedLength-(isnull(LEN(@Line),0) +
+@BlankSpaceAdded)
+INSERT #CommentText VALUES
+( @LineId,
+isnull(@Line, N'') + isnull(SUBSTRING(@SyscomText,
+@BasePos, @AddOnLen), N''))
+SELECT @Line = NULL, @LineId = @LineId + 1,
+@BasePos = @BasePos + @AddOnLen, @BlankSpaceAdded = 0
+END
+SELECT @Line = isnull(@Line, N'') +
+isnull(SUBSTRING(@SyscomText, @BasePos, @CurrentPos-@BasePos + @LFCR), N'')
+SELECT @BasePos = @CurrentPos+2
+INSERT #CommentText VALUES( @LineId, @Line )
+SELECT @LineId = @LineId + 1
+SELECT @Line = NULL
+END
+ELSE
+--如果回车没找到
+BEGIN
+IF @BasePos <= @TextLength
+BEGIN
+--如果@Lines长度的新值大于定义的长度
+While (isnull(LEN(@Line),0) + @BlankSpaceAdded +
+@TextLength-@BasePos+1 ) > @DefinedLength
+BEGIN
+SELECT @AddOnLen = @DefinedLength -
+(isnull(LEN(@Line),0) + @BlankSpaceAdded)
+INSERT #CommentText VALUES
+( @LineId,
+isnull(@Line, N'') + isnull(SUBSTRING(@SyscomText,
+@BasePos, @AddOnLen), N''))
+SELECT @Line = NULL, @LineId = @LineId + 1,
+@BasePos = @BasePos + @AddOnLen, @BlankSpaceAdded =
+0
+END
+SELECT @Line = isnull(@Line, N'') +
+isnull(SUBSTRING(@SyscomText, @BasePos, @TextLength-@BasePos+1 ), N'')
+if LEN(@Line) < @DefinedLength and charindex(' ',
+@SyscomText, @TextLength+1 ) > 0
+BEGIN
+SELECT @Line = @Line + ' ', @BlankSpaceAdded = 1
+END
+END
+END
+END
+FETCH NEXT FROM ms_crs_syscom into @SyscomText
+END
+IF @Line is NOT NULL
+INSERT #CommentText VALUES( @LineId, @Line )
+select Text from #CommentText order by LineId
+CLOSE ms_crs_syscom
+DEALLOCATE ms_crs_syscom
+DROP TABLE #CommentText
+-- -------------------------------------
+--结束从sp_helptext提取
+-- -------------------------------------
+--删除用短横线创建的存储过程并重建原始的存储过程
+ROLLBACK TRAN
+DROP TABLE #output
+go
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER PROCEDURE [dbo].[sp__windbi$decrypt]
+(@procedure sysname = NULL, @revfl int = 1)
+AS
+/*
+王成辉翻译整理，转贴请注明出自微软BI开拓者www.windbi.com
+目前这个存储过程只能解密存储过程，至于解密函数、触发器、视图的存储过程本网站会进一步关注，调用形式为：
+exec dbo.sp__windbi$decrypt @procedure,0
+如果第二个参数使用1的话，会给出该存储过程的一些提示。
+--版本2.0
+*/
+SET NOCOUNT ON
+IF @revfl = 1
+BEGIN
+PRINT '警告：该存储过程会删除并重建原始的存储过程。'
+PRINT ' 在运行该存储过程之前确保你的数据库有一个备份。'
+PRINT ' 该存储过程通常应该运行在产品环境的一个备份的非产品环境下。'
+PRINT ' 为了运行这个存储过程，将参数@refl的值更改为0。'
+RETURN 0
+END
+DECLARE @intProcSpace bigint, @t bigint, @maxColID smallint,@intEncrypted 
+tinyint,@procNameLength int
+select @maxColID = max(subobjid),@intEncrypted = imageval FROM 
+sys.sysobjvalues WHERE objid = object_id(@procedure)
+GROUP BY imageval
+--select @maxColID as 'Rows in sys.sysobjvalues'
+select @procNameLength = datalength(@procedure) + 29
+DECLARE @real_01 nvarchar(max)
+DECLARE @fake_01 nvarchar(max)
+DECLARE @fake_encrypt_01 nvarchar(max)
+DECLARE @real_decrypt_01 nvarchar(max),@real_decrypt_01a nvarchar(max)
+declare @objtype varchar(2),@ParentName nvarchar(max)
+select @real_decrypt_01a = ''
+--提取对象的类型如是存储过程还是函数，如果是触发器，还要得到其父对象的名称
+select @objtype=type,@parentname=object_name(parent_object_id)
+from sys.objects where [object_id]=object_id(@procedure)
+-- 从sys.sysobjvalues里提出加密的imageval记录
+SET @real_01=(SELECT top 1 imageval FROM sys.sysobjvalues WHERE objid = 
+object_id(@procedure) and valclass = 1 order by subobjid)
+--创建一个临时表
+create table #output ( [ident] [int] IDENTITY (1, 1) NOT NULL ,
+[real_decrypt] NVARCHAR(MAX) )
+--开始一个事务，稍后回滚
+BEGIN TRAN
+--更改原始的存储过程，用短横线替换
+if @objtype='P'
+  SET @fake_01='ALTER PROCEDURE '+ @procedure +' WITH ENCRYPTION AS 
+  '+REPLICATE('-', 40003 - @procNameLength)
+else if @objtype='FN'
+  SET @fake_01='ALTER FUNCTION '+ @procedure +'() RETURNS INT WITH ENCRYPTION AS BEGIN RETURN 1 
+  /*'+REPLICATE('*', datalength(@real_01) /2 - @procNameLength)+'*/ END'
+else if @objtype='V'
+  SET @fake_01='ALTER view '+ @procedure +' WITH ENCRYPTION AS select 1 as col
+  /*'+REPLICATE('*', datalength(@real_01) /2 - @procNameLength)+'*/'
+else if @objtype='TR'
+  SET @fake_01='ALTER trigger '+ @procedure +' ON '+@parentname+' WITH ENCRYPTION AFTER INSERT AS RAISERROR (''N'',16,10)
+  /*'+REPLICATE('*', datalength(@real_01) /2 - @procNameLength)+'*/'
+EXECUTE (@fake_01)
+--从sys.sysobjvalues里提出加密的假的
+SET @fake_encrypt_01=(SELECT top 1 imageval FROM sys.sysobjvalues WHERE objid = 
+object_id(@procedure) and valclass = 1 order by subobjid )
+if @objtype='P'
+  SET @fake_01='Create PROCEDURE '+ @procedure +' WITH ENCRYPTION AS 
+  '+REPLICATE('-', 40003 - @procNameLength)
+else if @objtype='FN'
+  SET @fake_01='CREATE FUNCTION '+ @procedure +'() RETURNS INT WITH ENCRYPTION AS BEGIN RETURN 1 
+  /*'+REPLICATE('*', datalength(@real_01) /2 - @procNameLength)+'*/ END'
+else if @objtype='V'
+  SET @fake_01='Create view '+ @procedure +' WITH ENCRYPTION AS select 1 as col
+  /*'+REPLICATE('*', datalength(@real_01) /2 - @procNameLength)+'*/'
+else if @objtype='TR'
+  SET @fake_01='Create trigger '+ @procedure +' ON '+@parentname+' WITH ENCRYPTION AFTER INSERT AS RAISERROR (''N'',16,10)
+  /*'+REPLICATE('*', datalength(@real_01) /2 - @procNameLength)+'*/'
+--开始计数
+SET @intProcSpace=1
+--使用字符填充临时变量
+SET @real_decrypt_01 = replicate(N'A', (datalength(@real_01) /2 ))
+--循环设置每一个变量，创建真正的变量
+--每次一个字节
+SET @intProcSpace=1
+--如有必要，遍历每个@real_xx变量并解密
+WHILE @intProcSpace<=(datalength(@real_01)/2)
+BEGIN
+--真的和假的和加密的假的进行异或处理
+SET @real_decrypt_01 = stuff(@real_decrypt_01, @intProcSpace, 1,
+NCHAR(UNICODE(substring(@real_01, @intProcSpace, 1)) ^
+(UNICODE(substring(@fake_01, @intProcSpace, 1)) ^
+UNICODE(substring(@fake_encrypt_01, @intProcSpace, 1)))))
+SET @intProcSpace=@intProcSpace+1
+END
+--通过sp_helptext逻辑向表#output里插入变量
+insert #output (real_decrypt) select @real_decrypt_01
+-- select real_decrypt AS '#output chek' from #output --测试
+-- -------------------------------------
+--开始从sp_helptext提取
+-- -------------------------------------
+declare @dbname sysname
+,@BlankSpaceAdded int
+,@BasePos int
+,@CurrentPos int
+,@TextLength int
+,@LineId int
+,@AddOnLen int
+,@LFCR int --回车换行的长度
+,@DefinedLength int
+,@SyscomText nvarchar(4000)
+,@Line nvarchar(255)
+Select @DefinedLength = 255
+SELECT @BlankSpaceAdded = 0 --跟踪行结束的空格。注意Len函数忽略了多余的空格
+CREATE TABLE #CommentText
+(LineId int
+,Text nvarchar(255) collate database_default)
+--使用#output代替sys.sysobjvalues
+DECLARE ms_crs_syscom CURSOR LOCAL
+FOR SELECT real_decrypt from #output
+ORDER BY ident
+FOR READ ONLY
+--获取文本
+SELECT @LFCR = 2
+SELECT @LineId = 1
+OPEN ms_crs_syscom
+FETCH NEXT FROM ms_crs_syscom into @SyscomText
+WHILE @@fetch_status >= 0
+BEGIN
+SELECT @BasePos = 1
+SELECT @CurrentPos = 1
+SELECT @TextLength = LEN(@SyscomText)
+WHILE @CurrentPos != 0
+BEGIN
+--通过回车查找行的结束
+SELECT @CurrentPos = CHARINDEX(char(13)+char(10), @SyscomText, 
+@BasePos)
+--如果找到回车
+IF @CurrentPos != 0
+BEGIN
+--如果@Lines的长度的新值比设置的大就插入@Lines目前的内容并继续
+While (isnull(LEN(@Line),0) + @BlankSpaceAdded + 
+@CurrentPos-@BasePos + @LFCR) > @DefinedLength
+BEGIN
+SELECT @AddOnLen = @DefinedLength-(isnull(LEN(@Line),0) + 
+@BlankSpaceAdded)
+INSERT #CommentText VALUES
+( @LineId,
+isnull(@Line, N'') + isnull(SUBSTRING(@SyscomText, 
+@BasePos, @AddOnLen), N''))
+SELECT @Line = NULL, @LineId = @LineId + 1,
+@BasePos = @BasePos + @AddOnLen, @BlankSpaceAdded = 0
+END
+SELECT @Line = isnull(@Line, N'') + 
+isnull(SUBSTRING(@SyscomText, @BasePos, @CurrentPos-@BasePos + @LFCR), N'')
+SELECT @BasePos = @CurrentPos+2
+INSERT #CommentText VALUES( @LineId, @Line )
+SELECT @LineId = @LineId + 1
+SELECT @Line = NULL
+END
+ELSE
+--如果回车没找到
+BEGIN
+IF @BasePos <= @TextLength
+BEGIN
+--如果@Lines长度的新值大于定义的长度
+While (isnull(LEN(@Line),0) + @BlankSpaceAdded + 
+@TextLength-@BasePos+1 ) > @DefinedLength
+BEGIN
+SELECT @AddOnLen = @DefinedLength - 
+(isnull(LEN(@Line),0) + @BlankSpaceAdded)
+INSERT #CommentText VALUES
+( @LineId,
+isnull(@Line, N'') + isnull(SUBSTRING(@SyscomText, 
+@BasePos, @AddOnLen), N''))
+SELECT @Line = NULL, @LineId = @LineId + 1,
+@BasePos = @BasePos + @AddOnLen, @BlankSpaceAdded = 
+0
+END
+SELECT @Line = isnull(@Line, N'') + 
+isnull(SUBSTRING(@SyscomText, @BasePos, @TextLength-@BasePos+1 ), N'')
+if LEN(@Line) < @DefinedLength and charindex(' ', 
+@SyscomText, @TextLength+1 ) > 0
+BEGIN
+SELECT @Line = @Line + ' ', @BlankSpaceAdded = 1
+END
+END
+END
+END
+FETCH NEXT FROM ms_crs_syscom into @SyscomText
+END
+IF @Line is NOT NULL
+INSERT #CommentText VALUES( @LineId, @Line )
+select Text from #CommentText order by LineId
+CLOSE ms_crs_syscom
+DEALLOCATE ms_crs_syscom
+DROP TABLE #CommentText
+-- -------------------------------------
+--结束从sp_helptext提取
+-- -------------------------------------
+--删除用短横线创建的存储过程并重建原始的存储过程
+ROLLBACK TRAN
+DROP TABLE #output

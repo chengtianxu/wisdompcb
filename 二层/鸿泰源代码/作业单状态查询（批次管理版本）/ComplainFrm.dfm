@@ -1,0 +1,453 @@
+object Frm_Complain: TFrm_Complain
+  Left = 207
+  Top = 187
+  Width = 906
+  Height = 480
+  Caption = #23458#25143#25237#35785
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 0
+    Top = 280
+    Width = 890
+    Height = 8
+    Cursor = crVSplit
+    Align = alBottom
+    Color = clAqua
+    ParentColor = False
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 890
+    Height = 280
+    Align = alClient
+    DataSource = DataSource1
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = #23435#20307
+    FooterFont.Style = []
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    OnKeyDown = DBGridEh1KeyDown
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'LOG_NUMBER'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'MANU_PART_NUMBER'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'MANU_PART_DESC'
+        Footers = <>
+        Width = 200
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CUST_CODE'
+        Footers = <>
+        Width = 71
+      end
+      item
+        EditButtons = <>
+        FieldName = 'QTY'
+        Footers = <>
+        Width = 44
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Unit_Name'
+        Footers = <>
+        Width = 40
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DEFECT_MAIN'
+        Footers = <>
+        Width = 88
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CYCLES'
+        Footers = <>
+        Width = 43
+      end
+      item
+        EditButtons = <>
+        FieldName = 'dept_names'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'EFFECT_TP'
+        Footers = <>
+        Width = 60
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Tstatus'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'SHIP_DATE'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'LOG_DATE'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Ent_EMPLOYEE_NAME'
+        Footers = <>
+        Width = 61
+      end
+      item
+        EditButtons = <>
+        FieldName = 'DEALT_DATE'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Dealt_EMPLOYEE_NAME'
+        Footers = <>
+        Width = 58
+      end
+      item
+        EditButtons = <>
+        FieldName = 'CLOSED_DATE'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Close_EMPLOYEE_NAME'
+        Footers = <>
+        Width = 53
+      end
+      item
+        EditButtons = <>
+        FieldName = 'Ssend'
+        Footers = <>
+        Width = 60
+      end>
+  end
+  object DBGridEh2: TDBGridEh
+    Left = 0
+    Top = 288
+    Width = 890
+    Height = 154
+    Align = alBottom
+    DataSource = DataSource2
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = #23435#20307
+    FooterFont.Style = []
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'rec_no'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'file_name'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'in_date'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'remark'
+        Footers = <>
+      end>
+  end
+  object ADODataSet1: TADODataSet
+    Connection = frmMain.ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    AfterScroll = ADODataSet1AfterScroll
+    CommandText = 
+      'SELECT Data0101.*, Data0010.CUST_CODE, Data0010.CUSTOMER_NAME, '#13 +
+      #10'      case data0101.STATUS when 0 then '#39#24453#25552#20132#39' when 1 then '#39#24050#25552#20132#39' ' +
+      'when 2 then '#39#24050#21463#29702#39' when 3 then '#39#24050#32467#26696#39' end as Tstatus,'#13#10'      case ' +
+      'data0101.if_send when 0 then  '#39#26410#21457#36865#39'  when 1 then '#39#24050#21457#36865#39' end  as S' +
+      'send,'#13#10'      Data0005.EMPLOYEE_NAME AS Close_EMPLOYEE_NAME, Data' +
+      '0025.MANU_PART_NUMBER, '#13#10'      Data0025.MANU_PART_DESC, '#13#10'      ' +
+      'Data0005_1.EMPLOYEE_NAME AS Dealt_EMPLOYEE_NAME, '#13#10'      Data000' +
+      '5_2.EMPLOYEE_NAME AS Ent_EMPLOYEE_NAME,'#13#10'      Data0002.Unit_Nam' +
+      'e,derivedtb.dept_names '#13#10'FROM Data0101 INNER JOIN'#13#10'      Data001' +
+      '0 ON Data0101.CUSTOMER_PTR = Data0010.RKEY INNER JOIN'#13#10'      Dat' +
+      'a0025 ON '#13#10'      Data0101.CUSTOMER_PART_PTR = Data0025.RKEY LEFT' +
+      ' OUTER JOIN'#13#10'      Data0002 ON'#13#10'      Data0101.unit_ptr=Data0002' +
+      '.rkey  LEFT OUTER JOIN'#13#10'      Data0005 Data0005_2 ON '#13#10'      Dat' +
+      'a0101.CSI_USER_PTR = Data0005_2.RKEY LEFT OUTER JOIN'#13#10'      Data' +
+      '0005 Data0005_1 ON '#13#10'      Data0101.DEALT_BY_PTR = Data0005_1.RK' +
+      'EY LEFT OUTER JOIN'#13#10'      Data0005 ON Data0101.CLOSED_BY_PTR = D' +
+      'ata0005.RKEY LEFT OUTER JOIN'#13#10'      (select SOURCE_PTR,[dept_nam' +
+      'es]=STUFF'#13#10'                      ((SELECT '#39','#39' + convert(varchar,' +
+      'dept_name)'#13#10'                      FROM  dbo.Data0034  INNER JOIN' +
+      #13#10'                      Data0118 ON Data0118.resp_dept_ptr=Data0' +
+      '034.rkey  '#13#10'                      where  SOURCE_PTR=tb.source_pt' +
+      'r FOR XML PATH('#39#39')), 1, 1, '#39#39')'#13#10'from data0118 as tb'#13#10'GROUP BY so' +
+      'urce_PTR) AS derivedtb on data0101.rkey=derivedtb.source_ptr   '#13 +
+      #10'where 1=1'
+    Parameters = <>
+    Left = 648
+    Top = 136
+    object ADODataSet1RKEY: TIntegerField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object ADODataSet1LOG_NUMBER: TStringField
+      DisplayLabel = #25237#35785#32534#21495
+      FieldName = 'LOG_NUMBER'
+      FixedChar = True
+      Size = 10
+    end
+    object ADODataSet1CUSTOMER_PART_PTR: TIntegerField
+      FieldName = 'CUSTOMER_PART_PTR'
+    end
+    object ADODataSet1CSI_USER_PTR: TIntegerField
+      FieldName = 'CSI_USER_PTR'
+    end
+    object ADODataSet1CUSTOMER_PTR: TIntegerField
+      FieldName = 'CUSTOMER_PTR'
+    end
+    object ADODataSet1LOG_DATE: TDateTimeField
+      DisplayLabel = #24314#26723#26085#26399
+      FieldName = 'LOG_DATE'
+    end
+    object ADODataSet1SHIP_DATE: TDateTimeField
+      DisplayLabel = #20986#36135#26085#26399
+      FieldName = 'SHIP_DATE'
+    end
+    object ADODataSet1QTY: TFloatField
+      DisplayLabel = #25968#37327
+      FieldName = 'QTY'
+    end
+    object ADODataSet1EFFECT_TP: TStringField
+      DisplayLabel = #25237#35785#32423#21035
+      FieldName = 'EFFECT_TP'
+      FixedChar = True
+      Size = 2
+    end
+    object ADODataSet1ANALYSIS: TStringField
+      DisplayLabel = #21407#22240#20998#26512
+      FieldName = 'ANALYSIS'
+      Size = 600
+    end
+    object ADODataSet1AFTER_ACTION: TStringField
+      DisplayLabel = #25913#21892#34892#21160
+      FieldName = 'AFTER_ACTION'
+      Size = 600
+    end
+    object ADODataSet1STATUS: TSmallintField
+      FieldName = 'STATUS'
+    end
+    object ADODataSet1CLOSED_BY_PTR: TIntegerField
+      FieldName = 'CLOSED_BY_PTR'
+    end
+    object ADODataSet1CLOSED_DATE: TDateTimeField
+      DisplayLabel = #32467#26696#26085#26399
+      FieldName = 'CLOSED_DATE'
+    end
+    object ADODataSet1DEALT_BY_PTR: TIntegerField
+      FieldName = 'DEALT_BY_PTR'
+    end
+    object ADODataSet1DEALT_DATE: TDateTimeField
+      DisplayLabel = #21463#29702#26085#26399
+      FieldName = 'DEALT_DATE'
+    end
+    object ADODataSet1LOSS_AMT: TIntegerField
+      DisplayLabel = #32463#27982#25439#22833#20272#35745
+      FieldName = 'LOSS_AMT'
+    end
+    object ADODataSet1RESULT: TStringField
+      DisplayLabel = #25237#35785#32467#26696#20449#24687
+      FieldName = 'RESULT'
+      Size = 600
+    end
+    object ADODataSet1CONTENT: TStringField
+      DisplayLabel = #25237#35785#20869#23481#25551#36848
+      FieldName = 'CONTENT'
+      Size = 600
+    end
+    object ADODataSet1DEFECT_MAIN: TWideStringField
+      DisplayLabel = #20027#35201#32570#38519
+      FieldName = 'DEFECT_MAIN'
+      Size = 50
+    end
+    object ADODataSet1CYCLES: TWideStringField
+      DisplayLabel = #21608#26399
+      FieldName = 'CYCLES'
+      Size = 50
+    end
+    object ADODataSet1UNIT_PTR: TIntegerField
+      FieldName = 'UNIT_PTR'
+    end
+    object ADODataSet1if_send: TBooleanField
+      FieldName = 'if_send'
+    end
+    object ADODataSet1CUST_CODE: TStringField
+      DisplayLabel = #23458#25143#20195#30721
+      FieldName = 'CUST_CODE'
+      Size = 50
+    end
+    object ADODataSet1CUSTOMER_NAME: TStringField
+      DisplayLabel = #23458#25143#21517#31216
+      FieldName = 'CUSTOMER_NAME'
+      Size = 100
+    end
+    object ADODataSet1Ssend: TStringField
+      DisplayLabel = #26159#21542#21457#36865
+      FieldName = 'Ssend'
+      ReadOnly = True
+      Size = 6
+    end
+    object ADODataSet1Close_EMPLOYEE_NAME: TStringField
+      DisplayLabel = #32467#26696#20154
+      FieldName = 'Close_EMPLOYEE_NAME'
+      Size = 16
+    end
+    object ADODataSet1MANU_PART_NUMBER: TStringField
+      DisplayLabel = #26412#21378#32534#21495
+      FieldName = 'MANU_PART_NUMBER'
+    end
+    object ADODataSet1MANU_PART_DESC: TStringField
+      DisplayLabel = #23458#25143#22411#21495
+      FieldName = 'MANU_PART_DESC'
+      Size = 100
+    end
+    object ADODataSet1Dealt_EMPLOYEE_NAME: TStringField
+      DisplayLabel = #21463#29702#20154
+      FieldName = 'Dealt_EMPLOYEE_NAME'
+      Size = 16
+    end
+    object ADODataSet1Ent_EMPLOYEE_NAME: TStringField
+      DisplayLabel = #24314#26723#20154
+      FieldName = 'Ent_EMPLOYEE_NAME'
+      Size = 16
+    end
+    object ADODataSet1Unit_Name: TStringField
+      DisplayLabel = #21333#20301
+      FieldName = 'Unit_Name'
+    end
+    object ADODataSet1dept_names: TMemoField
+      DisplayLabel = #36131#20219#37096#38376
+      FieldName = 'dept_names'
+      ReadOnly = True
+      BlobType = ftMemo
+    end
+    object ADODataSet1Tstatus: TStringField
+      DisplayLabel = #29366#24577
+      FieldName = 'Tstatus'
+      ReadOnly = True
+      Size = 6
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ADODataSet1
+    Left = 440
+    Top = 112
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 560
+    Top = 192
+    object N1: TMenuItem
+      Caption = #25171#24320#25991#20214
+      OnClick = N1Click
+    end
+  end
+  object ADO148: TADOQuery
+    Connection = frmMain.ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey0101'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      'select rkey,rec_no, SOURCE_PTR, file_name, in_date, remark'
+      ' from Data0148'
+      'where SOURCE_PTR=:rkey0101'
+      'order by rec_no')
+    Left = 408
+    Top = 311
+    object ADO148rkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ADO148rec_no: TIntegerField
+      DisplayLabel = #24207#21495
+      FieldName = 'rec_no'
+    end
+    object ADO148SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ADO148file_name: TStringField
+      DisplayLabel = #25991#20214#21517
+      FieldName = 'file_name'
+      Size = 50
+    end
+    object ADO148in_date: TDateTimeField
+      DisplayLabel = #19978#20256#26085#26399
+      FieldName = 'in_date'
+    end
+    object ADO148remark: TStringField
+      DisplayLabel = #22791#27880
+      FieldName = 'remark'
+      Size = 50
+    end
+  end
+  object DataSource2: TDataSource
+    DataSet = ADO148
+    Left = 440
+    Top = 319
+  end
+  object temp: TADOQuery
+    Connection = frmMain.ADOConnection1
+    Parameters = <>
+    Left = 488
+    Top = 319
+  end
+end

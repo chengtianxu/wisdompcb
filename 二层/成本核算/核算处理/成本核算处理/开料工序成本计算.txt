@@ -1,0 +1,22 @@
+SELECT dbo.Data0006.CUT_NO, dbo.data0410.DEPT_PTR, dbo.data0410.MATL_AMOUNT, 
+      dbo.data0410.matl_pcs, dbo.data0410.QTY, d1.cost_pcs
+FROM dbo.data0410 INNER JOIN
+      dbo.Data0006 ON dbo.data0410.WO_PTR = dbo.Data0006.RKEY INNER JOIN
+          (SELECT TOP 100 PERCENT dbo.Data0468.CUT_NO, dbo.Data0468.DEPT_PTR, 
+ SUM((Data0207.QUANTITY * Data0022.tax_price * Data0456.exch_rate)
+                / (1 + Data0022.TAX_2 * 0.01) / data0492.ISSUED_QTY) 
+               AS cost_pcs
+         FROM dbo.Data0207 INNER JOIN
+               dbo.Data0468 ON 
+               dbo.Data0207.D0468_PTR = dbo.Data0468.RKEY INNER JOIN
+               dbo.Data0022 ON 
+               dbo.Data0207.D0022_PTR = dbo.Data0022.RKEY INNER JOIN
+               dbo.Data0456 ON 
+               dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY INNER JOIN
+               dbo.data0492 ON dbo.Data0468.CUT_NO = dbo.data0492.CUT_NO
+         WHERE (dbo.Data0207.TDATE > CONVERT(DATETIME, '2006-11-01 00:00:00', 102))
+         GROUP BY dbo.Data0468.CUT_NO, dbo.Data0468.DEPT_PTR
+         ORDER BY dbo.Data0468.CUT_NO, dbo.Data0468.DEPT_PTR) d1 ON 
+      dbo.Data0006.CUT_NO = d1.CUT_NO AND 
+      dbo.data0410.DEPT_PTR = d1.DEPT_PTR
+WHERE (dbo.data0410.D0451_PTR = 269)

@@ -1,0 +1,204 @@
+unit main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Menus, Buttons, Grids, ExtCtrls,Excel2000,ClipBrd, ComObj,DB, ADODB,
+  Spin,DateUtils;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    SGrid1: TStringGrid;
+    SpeedButton1: TSpeedButton;
+    PopupMenu1: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    SGrid2: TStringGrid;
+    SpinEdit1: TSpinEdit;
+    Label1: TLabel;
+    SpeedButton2: TSpeedButton;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure SGrid1DblClick(Sender: TObject);
+    procedure SGrid1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure SpinEdit1Change(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+
+   procedure update_sgrid(const v_year :integer);
+   function find_closed(cut_date:tdatetime):boolean;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+uses unit_expense,dmao,common;
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  if not App_Init(dm.ADOConnection1) then
+   begin
+    ShowMsg('程序启动失败，请联系系统管理员！','提示',1);
+    application.Terminate;
+   end;
+
+  self.Caption :=Application.Title;
+   
+//   user_ptr:='5';
+//   vprev:='4';
+//   dm.ADOConnection1.Open;
+
+  DateSeparator := '-';
+  ShortDateFormat := 'yyyy-mm-dd';
+end;
+
+function TForm1.find_closed(cut_date: tdatetime): boolean;
+begin
+result:=false;
+with dm.adoquery1 do
+begin
+ close;
+ sql.Text:='select CLOSED from data0444'+#13+
+           'where CUT_DATE='''+datetostr(cut_date)+'''';
+ open;
+ if fieldvalues['CLOSED']='Y' then
+ result:=true;
+end;
+end;
+
+procedure tform1.update_sgrid(const v_year : integer);
+var
+ i,j :integer;
+begin
+ dm.ADOQ451.Close;
+ dm.ADOQ451.Parameters[0].Value:=v_year;
+ dm.ADOQ451.Open;
+if dm.ADOQ451.RecordCount>0 then
+ begin
+  dm.ADOQ451.First;
+  sgrid1.RowCount:=dm.ADOQ451.RecordCount+1;
+  sgrid2.RowCount:=sgrid1.RowCount;
+  while  not dm.ADOQ451.Eof do
+  for i:=1 to dm.ADOQ451.RecordCount do
+  begin
+   sgrid1.Cells[0,i]:=inttostr(i);
+   sgrid2.Cells[0,i]:=dm.ADOQ451rkey.AsString;
+   for j:=1 to dm.ADOQ451.FieldCount-2 do
+    sgrid1.Cells[j,i]:=dm.ADOQ451.Fields[j-1].AsString;
+   dm.ADOQ451.Next;
+  end;
+ end
+else
+ begin
+  sgrid1.RowCount:=2;
+  sgrid2.RowCount:=2;
+  sgrid1.Rows[1].Text:='';
+  sgrid2.Rows[1].Text:='';
+ end;
+end;
+
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+begin
+application.Terminate;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+
+begin
+ if  dm.ADOConnection1.Connected then
+ begin
+
+ sgrid1.Cells[0,0]:='序号';
+ sgrid1.Cells[1,0]:='核算开始时间';
+ sgrid1.Cells[2,0]:='核算结束时间';
+ sgrid1.Cells[3,0]:='核算人';
+ sgrid1.Cells[4,0]:='处理时间';
+ self.SpinEdit1.Value:=yearof(now);
+ Update_sgrid(SpinEdit1.Value);
+ end;//对应if connetciotnstring
+end;
+
+procedure TForm1.N1Click(Sender: TObject);
+begin
+if dm.ADOQ451.Locate('rkey',strtoint(SGrid2.Cells[0,form1.SGrid1.Row]),[]) then
+if not self.find_closed(dm.ADOQ451END_DATE.Value) then
+ try
+  form_expense:=tform_expense.Create(application);
+  form_expense.showmodal;
+ finally
+  form_expense.Free;
+ end
+else
+ messagedlg('该期间已核算订单成本不能再修改了',mterror,[mbcancel],0); 
+end;
+
+procedure TForm1.N2Click(Sender: TObject);
+begin
+  try
+   form_expense:=tform_expense.Create(application);
+   form_expense.BitBtn1.Enabled:=false;
+   form_expense.BitBtn2.Enabled:=false;
+   form_expense.BitBtn5.Enabled:=false;
+   form_expense.DBGridEh1.ReadOnly:=true;
+   form_expense.ShowModal;
+  finally
+   form_expense.Free;
+  end;
+end;
+
+procedure TForm1.SGrid1DblClick(Sender: TObject);
+begin
+ form1.N2Click(sender);
+end;
+
+procedure TForm1.SGrid1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+ column,row:longint;
+ begin
+ if button=mbright then
+ begin
+  SGrid1.MouseToCell(x,y,column,row);
+  if (row>0)and (trim(sgrid1.Cells[0,1])<>'') then SGrid1.Row:=row;
+ end;
+end;
+
+
+procedure TForm1.SpinEdit1Change(Sender: TObject);
+begin
+ Update_sgrid(SpinEdit1.Value);
+end;
+
+procedure TForm1.PopupMenu1Popup(Sender: TObject);
+begin
+if trim(sgrid1.Cells[0,sgrid1.Row])<> '' then
+ begin
+  n1.Enabled:=true;
+  n2.Enabled:=true;
+ end
+else
+ begin
+  n1.Enabled:=false;
+  n2.Enabled:=false;
+ end;
+end;
+
+procedure TForm1.SpeedButton2Click(Sender: TObject);
+begin
+ Update_sgrid(SpinEdit1.Value);
+end;
+
+end.

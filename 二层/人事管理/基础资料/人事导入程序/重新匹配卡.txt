@@ -1,0 +1,20 @@
+select rkey,employeecode,cardno
+from employeemsg
+where employeecode in 
+('37211','37988')
+
+6045	37211	0013699699
+6810	37988	0013705970
+
+dbo.employeecard_eastriver_rcd_error
+select * from dbo.OriginalCheckData
+where employeecard in 
+(
+'0013699699',
+'0013705970')
+and date_e>='2012-09-01'
+
+update OriginalCheckData
+set employeeid=6810 from OriginalCheckData 
+where employeecard='0013705970'
+and date_e>='2012-09-01'

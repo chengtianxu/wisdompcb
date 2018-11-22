@@ -1,0 +1,365 @@
+object FrmMain7: TFrmMain7
+  Left = 229
+  Top = 229
+  Width = 696
+  Height = 480
+  Caption = #24050#30830#35748#24046#24322#26597#35810
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 0
+    Top = 0
+    Width = 688
+    Height = 65
+    Cursor = crArrow
+    Align = alTop
+  end
+  object Label2: TLabel
+    Left = 250
+    Top = 16
+    Width = 83
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = #24037#24207#20195#21495':'
+  end
+  object Label4: TLabel
+    Left = 80
+    Top = 17
+    Width = 55
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = #24320#22987#26085':'
+  end
+  object Label5: TLabel
+    Left = 80
+    Top = 40
+    Width = 55
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = #25130#27490#26085':'
+  end
+  object Label1: TLabel
+    Left = 251
+    Top = 41
+    Width = 83
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = #26448#26009#20195#21495':'
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 65
+    Width = 688
+    Height = 338
+    Align = alClient
+    DataSource = DataSource1
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'dept_code'
+        Title.Caption = #24037#24207#20195#21495
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'inv_part_number'
+        Title.Caption = #26448#26009#21517#31216
+        Width = 208
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'unit_code'
+        Title.Caption = #21333#20301
+        Width = 45
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CONF_DIF_QTY'
+        Title.Caption = #36229#25903#24046'(+)/'#33410#32422#24046'(-)'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CONF_DATE'
+        Title.Caption = #24046#24322#30830#35748#26085#26399
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'employee_name'
+        Title.Caption = #24046#24322#30830#35748#20154
+        Visible = True
+      end>
+  end
+  object BitBtn1: TBitBtn
+    Left = 6
+    Top = 5
+    Width = 24
+    Height = 24
+    TabOrder = 1
+    OnClick = BitBtn1Click
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00388888888877
+      F7F787F8888888888333333F00004444400888FFF444448888888888F333FF8F
+      000033334D5007FFF4333388888888883338888F0000333345D50FFFF4333333
+      338F888F3338F33F000033334D5D0FFFF43333333388788F3338F33F00003333
+      45D50FEFE4333333338F878F3338F33F000033334D5D0FFFF43333333388788F
+      3338F33F0000333345D50FEFE4333333338F878F3338F33F000033334D5D0FFF
+      F43333333388788F3338F33F0000333345D50FEFE4333333338F878F3338F33F
+      000033334D5D0EFEF43333333388788F3338F33F0000333345D50FEFE4333333
+      338F878F3338F33F000033334D5D0EFEF43333333388788F3338F33F00003333
+      4444444444333333338F8F8FFFF8F33F00003333333333333333333333888888
+      8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
+      333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
+      0000}
+    NumGlyphs = 2
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 403
+    Width = 688
+    Height = 19
+    Panels = <>
+    SimplePanel = False
+  end
+  object Edit1: TEdit
+    Left = 337
+    Top = 11
+    Width = 72
+    Height = 21
+    CharCase = ecUpperCase
+    TabOrder = 3
+    OnChange = Edit1Change
+    OnExit = Edit1Exit
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 142
+    Top = 11
+    Width = 100
+    Height = 21
+    CalAlignment = dtaLeft
+    Date = 37512.4226642708
+    Time = 37512.4226642708
+    DateFormat = dfShort
+    DateMode = dmComboBox
+    Kind = dtkDate
+    ParseInput = False
+    TabOrder = 4
+    OnCloseUp = DateTimePicker1CloseUp
+    OnExit = DateTimePicker1Exit
+  end
+  object DateTimePicker2: TDateTimePicker
+    Left = 142
+    Top = 37
+    Width = 101
+    Height = 21
+    CalAlignment = dtaLeft
+    Date = 37512.4226686806
+    Time = 37512.4226686806
+    DateFormat = dfShort
+    DateMode = dmComboBox
+    Kind = dtkDate
+    ParseInput = False
+    TabOrder = 5
+    OnCloseUp = DateTimePicker2CloseUp
+    OnExit = DateTimePicker2Exit
+  end
+  object Edit2: TEdit
+    Left = 338
+    Top = 37
+    Width = 167
+    Height = 21
+    TabOrder = 6
+    OnChange = Edit1Change
+    OnExit = Edit1Exit
+  end
+  object BitBtn7: TBitBtn
+    Left = 33
+    Top = 5
+    Width = 24
+    Height = 24
+    Hint = #25171#21360#20986#20179#21333
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
+    OnClick = IQC2Click
+    Glyph.Data = {
+      56070000424D5607000000000000360400002800000028000000140000000100
+      0800000000002003000000000000000000000001000000010000000000000000
+      80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+      A600000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00030303030303
+      0303030303030303030303030303030303030303030303030303030303030303
+      03030303030303030303030303030303030303030303030303FFFFFF03030303
+      030303030303FFFFFF0303030000000303030303030303030300000003030303
+      F8F8F8FFFFFFFFFFFFFFFFFFFFF8F8F8FFFF0300000000000000000000000000
+      00000000000303F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8FF0300FF070707
+      070707070707070707070707000303F8FF030303030303030303030303030303
+      F8FF0300FF070707070707070707070707070707000303F8FF03030303030303
+      0303030303030303F8FF0300FF0707070707070707070707F9F90707000303F8
+      FF030303030303030303030303030303F8FF0300FFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFF000303F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FF03F80000F8F8
+      F8F8F8F8F8F8F8F8F8F80000F80303F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8F8
+      F8030303030000000000000000000000000000030303030303F8F8F8F8F8F8F8
+      F8F8F8F8F8F8F8FF03030303030000FFFFFFFFFFFFFFFFFFFF00000303030303
+      03F8F8FF03FFFFFFFFFFFFFFFFF8F80303030303030300FF0000000000000000
+      FF000303030303030303F8FFF8F8F8F8F8F8F8F803F8FF0303030303030300FF
+      FFFFFFFFFFFFFFFFFF000303030303030303F8FF03FFFFFFFFFFFFFFFFF8FF03
+      03030303030300FF0000000000000000FF000303030303030303F8FFF8F8F8F8
+      F8F8F8F803F8FF0303030303030300FFFFFFFFFFFFFFFFFFFF00030303030303
+      0303F8FF03FFFF030303030303F8FF0303030303030300FF0000FFFFFFFFFFFF
+      FF000303030303030303F8FFF8F803030303030303F8FF0303030303030300FF
+      FFFFFFFFFFFFFFFFFF000303030303030303F8FFFFFFFFFFFFFFFFFFFFF8FF03
+      0303030303030000000000000000000000000303030303030303F8F8F8F8F8F8
+      F8F8F8F8F8F80303030303030303030303030303030303030303030303030303
+      0303030303030303030303030303030303030303030303030303030303030303
+      0303030303030303030303030303030303030303030303030303}
+    NumGlyphs = 2
+  end
+  object ADOData0455: TADOQuery
+    Connection = MainForm.ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select data0455.*,data0034.dept_code,data0034.dept_name,data0017' +
+        '.inv_part_number,'
+      
+        'data0017.inv_part_description,data0002.unit_code,data0005.employ' +
+        'ee_name'
+      'from data0455,data0017,data0034,data0002,data0005'
+      'where data0455.invent_ptr=data0017.rkey'
+      'and data0455.dept_ptr=data0034.rkey'
+      'and data0017.stock_unit_ptr=data0002.rkey'
+      'and data0455.conf_by=data0005.rkey'
+      
+        'order by data0034.dept_code,data0017.inv_part_number,data0455.co' +
+        'nf_date')
+    Left = 80
+    Top = 168
+    object ADOData0455RKEY: TAutoIncField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object ADOData0455DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object ADOData0455INVENT_PTR: TIntegerField
+      FieldName = 'INVENT_PTR'
+    end
+    object ADOData0455CONF_DIF_QTY: TFloatField
+      FieldName = 'CONF_DIF_QTY'
+      DisplayFormat = '#0.00'
+    end
+    object ADOData0455CONF_DATE: TDateTimeField
+      FieldName = 'CONF_DATE'
+    end
+    object ADOData0455CONF_BY: TIntegerField
+      FieldName = 'CONF_BY'
+    end
+    object ADOData0455dept_code: TStringField
+      FieldName = 'dept_code'
+      Size = 10
+    end
+    object ADOData0455dept_name: TStringField
+      FieldName = 'dept_name'
+      Size = 30
+    end
+    object ADOData0455inv_part_number: TStringField
+      FieldName = 'inv_part_number'
+      Size = 25
+    end
+    object ADOData0455inv_part_description: TStringField
+      FieldName = 'inv_part_description'
+      Size = 100
+    end
+    object ADOData0455unit_code: TStringField
+      FieldName = 'unit_code'
+      Size = 5
+    end
+    object ADOData0455employee_name: TStringField
+      FieldName = 'employee_name'
+      Size = 16
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOData0455
+    Left = 80
+    Top = 200
+  end
+  object MainMenu1: TMainMenu
+    Left = 120
+    Top = 200
+    object IQC1: TMenuItem
+      Caption = #25991#20214
+      object IQC2: TMenuItem
+        Caption = #21015#21360#30830#35748#24046#24322#34920
+        OnClick = IQC2Click
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object N4: TMenuItem
+        Caption = #36864#20986
+        OnClick = BitBtn1Click
+      end
+    end
+  end
+end

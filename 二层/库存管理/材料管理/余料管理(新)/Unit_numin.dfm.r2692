@@ -1,0 +1,250 @@
+object Form_numin: TForm_numin
+  Left = 493
+  Top = 272
+  Width = 468
+  Height = 405
+  Caption = #26032#22686#20837#20179#20313#26009
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 14
+    Top = 24
+    Width = 59
+    Height = 13
+    Caption = #20313#26009#20195#30721':'
+  end
+  object Label2: TLabel
+    Left = 14
+    Top = 48
+    Width = 59
+    Height = 13
+    Caption = #20313#26009#35268#26684':'
+  end
+  object Label3: TLabel
+    Left = 38
+    Top = 71
+    Width = 33
+    Height = 13
+    Caption = #32428#21521':'
+  end
+  object Label4: TLabel
+    Left = 214
+    Top = 74
+    Width = 33
+    Height = 13
+    Caption = #32463#21521':'
+  end
+  object Label6: TLabel
+    Left = 14
+    Top = 95
+    Width = 59
+    Height = 13
+    Caption = #20837#20179#25968#37327':'
+  end
+  object Label7: TLabel
+    Left = 179
+    Top = 74
+    Width = 26
+    Height = 13
+    Caption = #27627#31859
+  end
+  object Label8: TLabel
+    Left = 341
+    Top = 76
+    Width = 26
+    Height = 13
+    Caption = #27627#31859
+  end
+  object Label5: TLabel
+    Left = 249
+    Top = 25
+    Width = 130
+    Height = 13
+    Caption = #20313#26009#20195#30721#21487#20197#25163#24037#36755#20837
+    Color = clWhite
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label9: TLabel
+    Left = 215
+    Top = 98
+    Width = 33
+    Height = 13
+    Caption = #20215#26684':'
+  end
+  object Label10: TLabel
+    Left = 13
+    Top = 123
+    Width = 59
+    Height = 13
+    Caption = #21457#25918#25968#37327':'
+  end
+  object Label11: TLabel
+    Left = 11
+    Top = 146
+    Width = 46
+    Height = 13
+    Caption = #20379#24212#21830':'
+    Visible = False
+  end
+  object Label12: TLabel
+    Left = 179
+    Top = 124
+    Width = 33
+    Height = 13
+    Caption = #21333#20301':'
+    Visible = False
+  end
+  object Label13: TLabel
+    Left = 183
+    Top = 97
+    Width = 13
+    Height = 13
+    Caption = #24352
+  end
+  object Label14: TLabel
+    Left = 34
+    Top = 178
+    Width = 33
+    Height = 13
+    Caption = #31246#29575':'
+  end
+  object Label15: TLabel
+    Left = 185
+    Top = 178
+    Width = 33
+    Height = 13
+    Caption = #24065#31181':'
+  end
+  object Edit1: TEdit
+    Left = 79
+    Top = 20
+    Width = 161
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 0
+  end
+  object Edit2: TEdit
+    Left = 80
+    Top = 46
+    Width = 297
+    Height = 21
+    Enabled = False
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 1
+  end
+  object Edit3: TEdit
+    Left = 80
+    Top = 69
+    Width = 97
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 2
+  end
+  object Edit4: TEdit
+    Left = 247
+    Top = 71
+    Width = 89
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 3
+  end
+  object Edit5: TEdit
+    Left = 82
+    Top = 95
+    Width = 97
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 4
+    Text = '0'
+    OnKeyPress = Edit5KeyPress
+  end
+  object Button1: TButton
+    Left = 137
+    Top = 285
+    Width = 75
+    Height = 27
+    Caption = #30830#23450
+    TabOrder = 5
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 226
+    Top = 284
+    Width = 75
+    Height = 28
+    Caption = #21462#28040
+    TabOrder = 6
+    OnClick = Button2Click
+  end
+  object Edit6: TEdit
+    Left = 249
+    Top = 98
+    Width = 97
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 7
+    Text = '0'
+    OnKeyPress = Edit5KeyPress
+  end
+  object Edit7: TEdit
+    Left = 82
+    Top = 118
+    Width = 97
+    Height = 21
+    Enabled = False
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 8
+    Text = '0'
+    OnKeyPress = Edit5KeyPress
+  end
+  object Edit8: TEdit
+    Left = 82
+    Top = 146
+    Width = 97
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 9
+  end
+  object Edit9: TEdit
+    Left = 216
+    Top = 120
+    Width = 89
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 10
+  end
+  object Edit10: TEdit
+    Left = 81
+    Top = 175
+    Width = 97
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 11
+    Text = '0'
+    OnKeyPress = Edit5KeyPress
+  end
+  object Edit11: TEdit
+    Left = 226
+    Top = 173
+    Width = 97
+    Height = 21
+    ImeName = #26497#21697#20116#31508#36755#20837#27861'5.0'
+    TabOrder = 12
+    Text = '0'
+    OnKeyPress = Edit5KeyPress
+  end
+end

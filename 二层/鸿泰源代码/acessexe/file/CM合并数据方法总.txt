@@ -1,0 +1,91 @@
+
+/*********************************************************************************************
+ 
+合并数据方法总结	
+
+**********************************************************************************************/
+--示例数据
+if object_id('tb')is not null
+drop table tb
+go
+create table tb(col1 varchar(1),col2 int)
+insert into tb select 'a',1
+union all
+select 'a',2
+union all
+select 'b',1
+union all
+select 'b',2
+union all
+select 'b',3
+select * from tb
+
+/*
+1------------------游标法
+
+*/
+--定义一个表变量
+declare @t table(col1 varchar(10),col2 varchar(100))
+--定义一个按COL1，COL2排序的游标
+declare tb cursor for
+select col1,col2 from tb order by col1,col2
+declare @col1_old varchar(1),@col1 varchar(1),@col2 int,@s varchar(100)
+open tb
+fetch tb into @col1,@col2
+select @col1_old=@col1,@s=''
+while @@fetch_status=0
+begin
+if @col1=@col1_old
+select @s=@s+','+cast(@col2 as varchar(10))
+else
+begin
+insert into @t values(@col1_old,stuff(@S,1,1,''))
+select @s=','+cast(@col2 as varchar(10)),@col1_old=@col1
+end
+fetch tb into @col1,@col2
+
+end
+insert into @t values(@col1_old,stuff(@S,1,1,''))
+close tb
+deallocate tb
+
+select * from @t
+
+/*
+2--------------------函数合并法
+
+*/
+create function dbo.f_str(@col1 varchar(100))
+returns varchar(100)
+as 
+begin
+declare @s varchar(100)
+set @s =''
+select @s=@s+','+cast(col2 as varchar(100))
+  from tb
+where col1=@col1
+return (stuff(@s,1,1,''))
+end
+go
+-- drop function dbo.f_str
+
+select distinct col1,col2=dbo.f_str(col1) from tb order by col1
+
+/*
+3----------------------临时表法
+
+*/
+select col1,col2=cast(col2 as varchar(100))into # from tb
+order by col1,col2
+select * from #
+declare @col1 varchar(10),@col2 varchar(100)
+UPDATE # SET 
+    @col2=CASE WHEN @col1=col1 THEN @col2+','+col2 ELSE col2 END,
+    @col1=col1,
+    col2=@col2
+SELECT col1,col2=MAX(col2) FROM # GROUP BY col1
+
+select col1,col2=MAX(col2)  into tb2 from # GROUP BY col1
+
+
+http://bbs.csdn.net/topics/250054431

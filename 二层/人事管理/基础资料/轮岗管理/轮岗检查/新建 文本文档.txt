@@ -1,0 +1,24 @@
+
+
+
+
+select * from  dbo.employee_station_turn_remark
+
+
+select d.departmentname,b.employeecode,
+b.chinesename,c.item,a.* 
+from employee_station_turn_remark a
+join employeemsg b on a.employeeid=b.rkey
+join datadetail c on a.positionid=c.rkey
+join datadepartment d on a.departmentid=d.rkey
+join data0005 e on a.oper_0005=e.rkey
+ 
+
+
+
+select * from data0005
+where rkey=3
+
+
+select * from data0073
+where rkey=1

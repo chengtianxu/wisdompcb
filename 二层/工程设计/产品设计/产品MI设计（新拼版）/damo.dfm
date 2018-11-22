@@ -1,0 +1,2929 @@
+object DM: TDM
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Left = 661
+  Top = 113
+  Height = 679
+  Width = 654
+  object ADOConnection1: TADOConnection
+    ConnectionTimeout = 25
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 48
+    Top = 18
+  end
+  object ADS25: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltReadOnly
+    CommandText = 
+      'SELECT     dbo.Data0025.RKEY, dbo.Data0025.MANU_PART_NUMBER,'#13#10'  ' +
+      'dbo.Data0025.MANU_PART_DESC, dbo.Data0010.CUST_CODE, dbo.Data001' +
+      '0.ABBR_NAME, '#13#10'  dbo.Data0008.PROD_CODE, dbo.Data0008.PRODUCT_NA' +
+      'ME, '#13#10' dbo.Data0025.ANALYSIS_CODE_1, Data0005_3.EMPLOYEE_NAME AS' +
+      ' employee_createname, '#13#10' dbo.Data0025.CUSTPART_ENT_DATE, dbo.Dat' +
+      'a0025.PROD_ROUTE_PTR, dbo.data0025.quality_status,'#13#10' Data0005_1.' +
+      'EMPLOYEE_NAME AS employee_auditname, dbo.Data0025.AUDITED_DATE, ' +
+      #13#10' dbo.Data0025.TSTATUS, Data0005_2.EMPLOYEE_NAME AS employee_ed' +
+      'itname,cast(Data0025.REMARK AS VARCHAR(200)) REMARK,data0025.ENG' +
+      '_NOTE,cast(data0025.memo_text as VARCHAR(200)) as memo_text,'#13#10' d' +
+      'bo.Data0025.LAST_MODIFIED_DATE, dbo.Data0025.SAMPLE_NR, dbo.data' +
+      '0025.ORIG_CUSTOMER,'#13#10'   dbo.Data0025.ANALYSIS_CODE_2, dbo.Data00' +
+      '25.QTY_ON_HAND, dbo.Data0025.LAYERS, dbo.Data0025.green_flag, '#13#10 +
+      '   CASE Data0025.ONHOLD_SALES_FLAG WHEN 0 THEN '#39#26377#25928#39' WHEN 1 THEN ' +
+      #39#36807#26399#39' END AS overdue, '#13#10'  CASE Data0025.TSTATUS WHEN 0 THEN '#39#24453#21046#20316#39 +
+      ' WHEN 1 THEN '#39#24050#23457#26680#39' '#13#10'WHEN 2 THEN '#39#23457#36864#22238#39' WHEN 3 THEN '#39#24453#26816#26597#39' WHEN 4 ' +
+      'THEN '#39#24453#23457#26680#39' WHEN 5 THEN '#39#26816#36864#22238#39#13#10'                       WHEN 6 THEN' +
+      ' '#39#26410#25552#20132#39' END AS state,'#13#10' CASE Data0025.ttype WHEN 0 THEN '#39#37327#20135#39' WHEN' +
+      ' 1 THEN '#39#26679#26495#39' END AS batch_or_former,'#13#10' dbo.Data0025.CHECK_DATE, ' +
+      'dbo.Data0005.EMPLOYEE_NAME AS check_emplname,'#13#10'd10_2.CUST_CODE a' +
+      's ORIG_CUST_CODE'#13#10'FROM         dbo.Data0008 INNER JOIN'#13#10'        ' +
+      '              dbo.Data0025 ON dbo.Data0008.RKEY = dbo.Data0025.P' +
+      'ROD_CODE_PTR INNER JOIN'#13#10'                      dbo.Data0010 ON d' +
+      'bo.Data0025.CUSTOMER_PTR = dbo.Data0010.RKEY LEFT OUTER JOIN'#13#10'  ' +
+      '                    dbo.Data0005 ON dbo.Data0025.CHECK_BY_PTR = ' +
+      'dbo.Data0005.RKEY LEFT OUTER JOIN'#13#10'                      dbo.Dat' +
+      'a0005 AS Data0005_2 ON dbo.Data0025.LAST_MODIFIED_BY_PTR = Data0' +
+      '005_2.RKEY LEFT OUTER JOIN'#13#10'                      dbo.Data0005 A' +
+      'S Data0005_1 ON dbo.Data0025.AUDITED_BY_PTR = Data0005_1.RKEY LE' +
+      'FT OUTER JOIN'#13#10'                      dbo.Data0005 AS Data0005_3 ' +
+      'ON dbo.Data0025.CREATED_BY_EMPL_PTR = Data0005_3.RKEY'#13#10#9#9#9'left J' +
+      'OIN Data0010 d10_2 on Data0025.ORIG_CUSTOMER = d10_2.ABBR_NAME'#13#10 +
+      'where data0025.CUSTPART_ENT_DATE >=:dtpk1 and'#13#10'           data00' +
+      '25.CUSTPART_ENT_DATE-1 <=:dtpk2 and'#13#10'           data0025.parent_' +
+      'ptr is null and'#13#10'  data0025.tstatus <> :v6 and'#13#10'  data0025.tstat' +
+      'us <> :v0 and'#13#10'  data0025.tstatus <> :v3 and'#13#10'  data0025.tstatus' +
+      ' <> :v4 and'#13#10'  data0025.tstatus <> :v1 and'#13#10'  data0025.tstatus <' +
+      '> :v5 and'#13#10'  data0025.tstatus <> :v2 '#13#10
+    Parameters = <
+      item
+        Name = 'dtpk1'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = 37987d
+      end
+      item
+        Name = 'dtpk2'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = 39448d
+      end
+      item
+        Name = 'v6'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = 6
+      end
+      item
+        Name = 'v0'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = 9
+      end
+      item
+        Name = 'v3'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = 3
+      end
+      item
+        Name = 'v4'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = 4
+      end
+      item
+        Name = 'v1'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = 1
+      end
+      item
+        Name = 'v5'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = 9
+      end
+      item
+        Name = 'v2'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = 9
+      end>
+    Prepared = True
+    Left = 89
+    Top = 80
+    object ADS25rkey: TIntegerField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ADS25MANU_PART_NUMBER: TStringField
+      DisplayLabel = #26412#21378#32534#21495
+      DisplayWidth = 30
+      FieldName = 'MANU_PART_NUMBER'
+      Size = 30
+    end
+    object ADS25MANU_PART_DESC: TStringField
+      DisplayLabel = #23458#25143#22411#21495
+      DisplayWidth = 40
+      FieldName = 'MANU_PART_DESC'
+      Size = 80
+    end
+    object ADS25CUST_CODE: TStringField
+      DisplayLabel = #23458#25143#20195#30721
+      DisplayWidth = 8
+      FieldName = 'CUST_CODE'
+      Size = 10
+    end
+    object ADS25ABBR_NAME: TStringField
+      DisplayLabel = #23458#25143#31616#31216
+      FieldName = 'ABBR_NAME'
+      Size = 10
+    end
+    object ADS25PROD_CODE: TStringField
+      DisplayLabel = #31867#22411#20195#30721
+      DisplayWidth = 8
+      FieldName = 'PROD_CODE'
+      Size = 10
+    end
+    object ADS25PRODUCT_NAME: TStringField
+      DisplayLabel = #31867#22411#21517#31216
+      FieldName = 'PRODUCT_NAME'
+      Size = 30
+    end
+    object ADS25employee_createname: TStringField
+      DisplayLabel = #21019#24314#20154#21592
+      FieldName = 'employee_createname'
+      Size = 16
+    end
+    object ADS25CUSTPART_ENT_DATE: TDateTimeField
+      DisplayLabel = #21019#24314#26085#26399
+      FieldName = 'CUSTPART_ENT_DATE'
+    end
+    object ADS25employee_auditname: TStringField
+      DisplayLabel = #23457#26680#20154#21592
+      FieldName = 'employee_auditname'
+      Size = 16
+    end
+    object ADS25AUDITED_DATE: TDateTimeField
+      DisplayLabel = #23457#26680#26085#26399
+      FieldName = 'AUDITED_DATE'
+    end
+    object ADS25employee_editname: TStringField
+      DisplayLabel = #20462#35746#20154#21592
+      FieldName = 'employee_editname'
+      Size = 16
+    end
+    object ADS25LAST_MODIFIED_DATE: TDateTimeField
+      DisplayLabel = #20462#35746#26085#26399
+      FieldName = 'LAST_MODIFIED_DATE'
+    end
+    object ADS25SAMPLE_NR: TStringField
+      DisplayLabel = #26679#26495#32534#21495
+      FieldName = 'SAMPLE_NR'
+      Size = 15
+    end
+    object ADS25ANALYSIS_CODE_2: TStringField
+      DisplayLabel = #23458#25143#29289#26009#21495
+      FieldName = 'ANALYSIS_CODE_2'
+      Size = 50
+    end
+    object ADS25QTY_ON_HAND: TIntegerField
+      DisplayLabel = #29616#26377#24211#23384
+      FieldName = 'QTY_ON_HAND'
+    end
+    object ADS25overdue: TStringField
+      DisplayLabel = #38144#21806#29366#24577
+      FieldName = 'overdue'
+      ReadOnly = True
+      Size = 4
+    end
+    object ADS25state: TStringField
+      DisplayLabel = #23457#26680#29366#24577
+      FieldName = 'state'
+      ReadOnly = True
+      Size = 6
+    end
+    object ADS25batch_or_former: TStringField
+      DisplayLabel = #23646#24615
+      FieldName = 'batch_or_former'
+      ReadOnly = True
+      Size = 4
+    end
+    object ADS25LAYERS: TWordField
+      DisplayLabel = #23618#25968
+      FieldName = 'LAYERS'
+    end
+    object ADS25green_flag: TStringField
+      DisplayLabel = #29615#20445#26631#35782
+      FieldName = 'green_flag'
+      FixedChar = True
+      Size = 1
+    end
+    object ADS25TSTATUS: TWordField
+      FieldName = 'TSTATUS'
+    end
+    object ADS25PROD_ROUTE_PTR: TIntegerField
+      FieldName = 'PROD_ROUTE_PTR'
+    end
+    object ADS25ANALYSIS_CODE_1: TStringField
+      DisplayLabel = #20132#36135#23610#23544
+      FieldName = 'ANALYSIS_CODE_1'
+      Size = 30
+    end
+    object ADS25CHECK_DATE: TDateTimeField
+      DisplayLabel = #26816#26597#26085#26399
+      FieldName = 'CHECK_DATE'
+    end
+    object ADS25check_emplname: TStringField
+      DisplayLabel = #26816#26597#20154#21592
+      FieldName = 'check_emplname'
+      Size = 16
+    end
+    object ADS25quality_status: TBooleanField
+      FieldName = 'quality_status'
+    end
+    object ADS25ORIG_CUSTOMER: TStringField
+      FieldName = 'ORIG_CUSTOMER'
+      Size = 10
+    end
+    object ADS25ORIG_CUST_CODE: TStringField
+      FieldName = 'ORIG_CUST_CODE'
+      Size = 10
+    end
+    object ADS25ENG_NOTE: TStringField
+      FieldName = 'ENG_NOTE'
+      Size = 200
+    end
+    object ADS25REMARK: TStringField
+      FieldName = 'REMARK'
+      ReadOnly = True
+      Size = 200
+    end
+    object ADS25memo_text: TStringField
+      FieldName = 'memo_text'
+      ReadOnly = True
+      Size = 200
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ADS25
+    Left = 32
+    Top = 80
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    LockType = ltPessimistic
+    Parameters = <>
+    Prepared = True
+    Left = 167
+    Top = 24
+  end
+  object AQY0025: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'SELECT RKEY,MANU_PART_NUMBER, MANU_PART_DESC, PARENT_PTR,QTY_BOM' +
+        ', BOM_STEP,'
+      
+        '      CREATED_BY_EMPL_PTR, ENG_ROUTE_PTR, REMARK, ENG_NOTE, memo' +
+        '_text,'
+      
+        '      PROD_CODE_PTR, OPT_LOT_SIZE, EST_SCRAP, SHELF_LIFE, REVIEW' +
+        '_DAYS,'
+      
+        '      PARTS_NUM, SAMPLE_NR, PROD_ROUTE_PTR, CUSTOMER_PTR, MFG_LE' +
+        'AD_TIME,'
+      
+        '      LAST_SO_DATE, REPORT_UNIT_VALUE1, TSTATUS, CHECK_BY_PTR, C' +
+        'HECK_DATE,'
+      
+        '      AUDITED_BY_PTR, AUDITED_DATE, ALLOW_EDIT_FLAG, ONHOLD_SALE' +
+        'S_FLAG,'
+      
+        '      ONHOLD_RELEASE_FLAG, ONHOLD_PLANNING_FLAG, CUSTPART_ENT_DA' +
+        'TE,'
+      
+        '      LAST_MODIFIED_BY_PTR, LAST_MODIFIED_DATE, ANALYSIS_CODE_2,' +
+        'TUSAGE,'
+      
+        '      ANALYSIS_CODE_3,  LAYERS, green_flag, set_lngth, set_width' +
+        ',QTY_PARENTBOM,'
+      
+        '      set_qty, unit_sq, ANALYSIS_CODE_1, pcs_lngth, pcs_width, p' +
+        'cs_sq,nopb_flag,'
+      
+        '      ANALYSIS_CODE_5, spell_lngth, spell_width, spell_qty, spel' +
+        'l_sq, current_rev,'
+      
+        '      ANALYSIS_CODE_4, SO_UNIT, ttype, layers_info,QTY_ON_HAND,b' +
+        'arcode_flag,'
+      
+        '     REACH,layers_image,flod_number,ZDR_TYPE,CustFileName,RegNum' +
+        ','
+      
+        '     quality_status,quality_user,quality_date,grade_code,ORIG_CU' +
+        'STOMER,CPJS'
+      
+        '     ,MinRing,DiffMark,ProdGrade,RoHS,Compress,amp_mb,print2dkey' +
+        ',part_level'
+      'FROM dbo.Data0025'
+      'where rkey=:rkey'
+      ' '
+      ' '
+      ' ')
+    Left = 89
+    Top = 136
+    object AQY0025RKEY: TAutoIncField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object AQY0025MANU_PART_NUMBER: TStringField
+      DisplayWidth = 30
+      FieldName = 'MANU_PART_NUMBER'
+      Size = 30
+    end
+    object AQY0025MANU_PART_DESC: TStringField
+      DisplayWidth = 40
+      FieldName = 'MANU_PART_DESC'
+      Size = 80
+    end
+    object AQY0025PARENT_PTR: TIntegerField
+      FieldName = 'PARENT_PTR'
+    end
+    object AQY0025QTY_BOM: TWordField
+      FieldName = 'QTY_BOM'
+    end
+    object AQY0025BOM_STEP: TWordField
+      FieldName = 'BOM_STEP'
+    end
+    object AQY0025CREATED_BY_EMPL_PTR: TIntegerField
+      FieldName = 'CREATED_BY_EMPL_PTR'
+    end
+    object AQY0025ENG_ROUTE_PTR: TIntegerField
+      FieldName = 'ENG_ROUTE_PTR'
+    end
+    object AQY0025PROD_ROUTE_PTR: TIntegerField
+      FieldName = 'PROD_ROUTE_PTR'
+    end
+    object AQY0025REMARK: TMemoField
+      FieldName = 'REMARK'
+      BlobType = ftMemo
+    end
+    object AQY0025ENG_NOTE: TStringField
+      FieldName = 'ENG_NOTE'
+      Size = 200
+    end
+    object AQY0025memo_text: TMemoField
+      FieldName = 'memo_text'
+      BlobType = ftMemo
+    end
+    object AQY0025PROD_CODE_PTR: TIntegerField
+      FieldName = 'PROD_CODE_PTR'
+    end
+    object AQY0025OPT_LOT_SIZE: TIntegerField
+      FieldName = 'OPT_LOT_SIZE'
+    end
+    object AQY0025EST_SCRAP: TFloatField
+      FieldName = 'EST_SCRAP'
+    end
+    object AQY0025SHELF_LIFE: TIntegerField
+      FieldName = 'SHELF_LIFE'
+    end
+    object AQY0025REVIEW_DAYS: TSmallintField
+      FieldName = 'REVIEW_DAYS'
+    end
+    object AQY0025PARTS_NUM: TIntegerField
+      FieldName = 'PARTS_NUM'
+    end
+    object AQY0025SAMPLE_NR: TStringField
+      FieldName = 'SAMPLE_NR'
+      Size = 30
+    end
+    object AQY0025CUSTOMER_PTR: TIntegerField
+      FieldName = 'CUSTOMER_PTR'
+    end
+    object AQY0025MFG_LEAD_TIME: TSmallintField
+      FieldName = 'MFG_LEAD_TIME'
+    end
+    object AQY0025LAST_SO_DATE: TDateTimeField
+      FieldName = 'LAST_SO_DATE'
+    end
+    object AQY0025REPORT_UNIT_VALUE1: TBCDField
+      FieldName = 'REPORT_UNIT_VALUE1'
+      Precision = 9
+    end
+    object AQY0025TSTATUS: TWordField
+      FieldName = 'TSTATUS'
+    end
+    object AQY0025CHECK_BY_PTR: TIntegerField
+      FieldName = 'CHECK_BY_PTR'
+    end
+    object AQY0025CHECK_DATE: TDateTimeField
+      FieldName = 'CHECK_DATE'
+    end
+    object AQY0025AUDITED_BY_PTR: TIntegerField
+      FieldName = 'AUDITED_BY_PTR'
+    end
+    object AQY0025AUDITED_DATE: TDateTimeField
+      FieldName = 'AUDITED_DATE'
+    end
+    object AQY0025ALLOW_EDIT_FLAG: TStringField
+      FieldName = 'ALLOW_EDIT_FLAG'
+      FixedChar = True
+      Size = 1
+    end
+    object AQY0025ONHOLD_SALES_FLAG: TWordField
+      FieldName = 'ONHOLD_SALES_FLAG'
+    end
+    object AQY0025ONHOLD_RELEASE_FLAG: TWordField
+      FieldName = 'ONHOLD_RELEASE_FLAG'
+    end
+    object AQY0025ONHOLD_PLANNING_FLAG: TWordField
+      FieldName = 'ONHOLD_PLANNING_FLAG'
+    end
+    object AQY0025CUSTPART_ENT_DATE: TDateTimeField
+      FieldName = 'CUSTPART_ENT_DATE'
+    end
+    object AQY0025LAST_MODIFIED_BY_PTR: TIntegerField
+      FieldName = 'LAST_MODIFIED_BY_PTR'
+    end
+    object AQY0025LAST_MODIFIED_DATE: TDateTimeField
+      FieldName = 'LAST_MODIFIED_DATE'
+    end
+    object AQY0025ANALYSIS_CODE_2: TStringField
+      FieldName = 'ANALYSIS_CODE_2'
+      Size = 50
+    end
+    object AQY0025ANALYSIS_CODE_3: TStringField
+      FieldName = 'ANALYSIS_CODE_3'
+      Size = 50
+    end
+    object AQY0025LAYERS: TWordField
+      FieldName = 'LAYERS'
+    end
+    object AQY0025green_flag: TStringField
+      FieldName = 'green_flag'
+      FixedChar = True
+      Size = 1
+    end
+    object AQY0025set_lngth: TBCDField
+      FieldName = 'set_lngth'
+      Precision = 7
+      Size = 3
+    end
+    object AQY0025set_width: TBCDField
+      FieldName = 'set_width'
+      Precision = 7
+      Size = 3
+    end
+    object AQY0025set_qty: TIntegerField
+      FieldName = 'set_qty'
+    end
+    object AQY0025unit_sq: TFloatField
+      FieldName = 'unit_sq'
+      DisplayFormat = '0.00000000'
+    end
+    object AQY0025ANALYSIS_CODE_1: TStringField
+      FieldName = 'ANALYSIS_CODE_1'
+      Size = 30
+    end
+    object AQY0025pcs_lngth: TBCDField
+      FieldName = 'pcs_lngth'
+      Precision = 7
+      Size = 3
+    end
+    object AQY0025pcs_width: TBCDField
+      FieldName = 'pcs_width'
+      Precision = 7
+      Size = 3
+    end
+    object AQY0025pcs_sq: TFloatField
+      FieldName = 'pcs_sq'
+      DisplayFormat = '0.00000000'
+    end
+    object AQY0025ANALYSIS_CODE_5: TStringField
+      FieldName = 'ANALYSIS_CODE_5'
+      Size = 30
+    end
+    object AQY0025spell_lngth: TBCDField
+      FieldName = 'spell_lngth'
+      Precision = 7
+      Size = 3
+    end
+    object AQY0025spell_width: TBCDField
+      FieldName = 'spell_width'
+      Precision = 7
+      Size = 3
+    end
+    object AQY0025spell_qty: TIntegerField
+      FieldName = 'spell_qty'
+    end
+    object AQY0025spell_sq: TFloatField
+      FieldName = 'spell_sq'
+      DisplayFormat = '0.00000000'
+    end
+    object AQY0025ANALYSIS_CODE_4: TStringField
+      FieldName = 'ANALYSIS_CODE_4'
+      Size = 30
+    end
+    object AQY0025SO_UNIT: TStringField
+      FieldName = 'SO_UNIT'
+      Size = 6
+    end
+    object AQY0025ttype: TWordField
+      FieldName = 'ttype'
+    end
+    object AQY0025layers_info: TMemoField
+      FieldName = 'layers_info'
+      BlobType = ftMemo
+    end
+    object AQY0025QTY_ON_HAND: TIntegerField
+      FieldName = 'QTY_ON_HAND'
+    end
+    object AQY0025barcode_flag: TWordField
+      FieldName = 'barcode_flag'
+    end
+    object AQY0025current_rev: TStringField
+      DisplayLabel = #21348#32032#35201#27714#65288'Y/N'#65289
+      FieldName = 'current_rev'
+      FixedChar = True
+      Size = 10
+    end
+    object AQY0025QTY_PARENTBOM: TWordField
+      FieldName = 'QTY_PARENTBOM'
+    end
+    object AQY0025nopb_flag: TWordField
+      FieldName = 'nopb_flag'
+    end
+    object AQY0025TUSAGE: TBCDField
+      DisplayLabel = #22823#26009#21033#29992#29575
+      FieldName = 'TUSAGE'
+      Precision = 5
+      Size = 2
+    end
+    object AQY0025REACH: TBooleanField
+      FieldName = 'REACH'
+    end
+    object AQY0025layers_image: TBlobField
+      FieldName = 'layers_image'
+    end
+    object AQY0025flod_number: TIntegerField
+      FieldName = 'flod_number'
+    end
+    object AQY0025ZDR_TYPE: TWideStringField
+      FieldName = 'ZDR_TYPE'
+      Size = 50
+    end
+    object AQY0025quality_status: TBooleanField
+      FieldName = 'quality_status'
+    end
+    object AQY0025quality_user: TIntegerField
+      FieldName = 'quality_user'
+    end
+    object AQY0025quality_date: TDateTimeField
+      FieldName = 'quality_date'
+    end
+    object strngfldAQY0025grade_code: TStringField
+      FieldName = 'grade_code'
+      Size = 10
+    end
+    object strngfldAQY0025ORIG_CUSTOMER: TStringField
+      FieldName = 'ORIG_CUSTOMER'
+    end
+    object AQY0025CustFileName: TStringField
+      FieldName = 'CustFileName'
+      Size = 50
+    end
+    object AQY0025CPJS: TStringField
+      FieldName = 'CPJS'
+      Size = 30
+    end
+    object AQY0025RegNum: TIntegerField
+      FieldName = 'RegNum'
+    end
+    object AQY0025MinRing: TBCDField
+      FieldName = 'MinRing'
+      Precision = 10
+    end
+    object AQY0025DiffMark: TWideStringField
+      FieldName = 'DiffMark'
+    end
+    object AQY0025ProdGrade: TWideStringField
+      FieldName = 'ProdGrade'
+      Size = 8
+    end
+    object AQY0025RoHS: TBooleanField
+      FieldName = 'RoHS'
+    end
+    object AQY0025Compress: TStringField
+      FieldName = 'Compress'
+    end
+    object AQY0025amp_mb: TStringField
+      FieldName = 'amp_mb'
+      FixedChar = True
+      Size = 10
+    end
+    object AQY0025print2dkey: TIntegerField
+      FieldName = 'print2dkey'
+    end
+    object AQY0025part_level: TWordField
+      FieldName = 'part_level'
+    end
+  end
+  object DataSource2: TDataSource
+    DataSet = AQY0025
+    Left = 32
+    Top = 136
+  end
+  object ads502: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 'select *  from Data0502'#13#10'where source_ptr=:rkey'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    Left = 89
+    Top = 190
+    object ads502source_ptr: TIntegerField
+      FieldName = 'source_ptr'
+    end
+    object ads502sheet_BMP: TBlobField
+      FieldName = 'sheet_BMP'
+      BlobType = ftGraphic
+    end
+    object ads502pnl_bmp: TBlobField
+      FieldName = 'pnl_bmp'
+    end
+    object ads502pnl2_bmp: TBlobField
+      FieldName = 'pnl2_bmp'
+    end
+    object ads502TOTAL_PNLS_1: TSmallintField
+      FieldName = 'TOTAL_PNLS_1'
+    end
+    object ads502TOTAL_PNLS_2: TSmallintField
+      FieldName = 'TOTAL_PNLS_2'
+    end
+    object ads502UNIT_LEN: TFloatField
+      FieldName = 'UNIT_LEN'
+    end
+    object ads502UNIT_WTH: TFloatField
+      FieldName = 'UNIT_WTH'
+    end
+    object ads502UNIT_UNIT: TWordField
+      FieldName = 'UNIT_UNIT'
+    end
+    object ads502UNIT_NUM: TIntegerField
+      FieldName = 'UNIT_NUM'
+    end
+    object ads502SHT_LEN: TFloatField
+      FieldName = 'SHT_LEN'
+    end
+    object ads502SHT_WTH: TFloatField
+      FieldName = 'SHT_WTH'
+    end
+    object ads502TUSAGE: TBCDField
+      FieldName = 'TUSAGE'
+      Precision = 19
+    end
+    object ads502PNL_LEN: TFloatField
+      FieldName = 'PNL_LEN'
+    end
+    object ads502PNL_WTH: TFloatField
+      FieldName = 'PNL_WTH'
+    end
+    object ads502UPANEL: TSmallintField
+      FieldName = 'UPANEL'
+    end
+    object ads502PNL_LEN_2: TFloatField
+      FieldName = 'PNL_LEN_2'
+    end
+    object ads502PNL_WTH_2: TFloatField
+      FieldName = 'PNL_WTH_2'
+    end
+    object ads502UPANEL_2: TSmallintField
+      FieldName = 'UPANEL_2'
+    end
+    object ads502minspace1: TFloatField
+      FieldName = 'minspace1'
+    end
+    object ads502minspace2: TFloatField
+      FieldName = 'minspace2'
+    end
+    object ads502pnl_lenspace: TBCDField
+      FieldName = 'pnl_lenspace'
+      Precision = 5
+      Size = 2
+    end
+    object ads502pnl_wthspace: TBCDField
+      FieldName = 'pnl_wthspace'
+      Precision = 5
+      Size = 2
+    end
+    object ads502rkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ads502seet_szie: TStringField
+      FieldName = 'seet_szie'
+      Size = 30
+    end
+  end
+  object ads279: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 
+      'select source_PTR, PARAMETER_PTR, PARAMETER_VALUE'#13#10', IES_PROD,IE' +
+      'S_CRP'#13#10'from data0279'#13#10'where  IES_PROD=1 and'#13#10'            source_' +
+      'ptr= :rkey'#13#10'order by IES_CRP'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 89
+    Top = 242
+    object ads279source_PTR: TIntegerField
+      FieldName = 'source_PTR'
+    end
+    object ads279PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object ads279PARAMETER_VALUE: TStringField
+      DisplayLabel = #21442#25968#20540
+      FieldName = 'PARAMETER_VALUE'
+      OnChange = ads279PARAMETER_VALUEChange
+      OnValidate = ads279PARAMETER_VALUEValidate
+      Size = 30
+    end
+    object ads279IES_PROD: TSmallintField
+      FieldName = 'IES_PROD'
+    end
+    object ads279IES_CRP: TSmallintField
+      FieldName = 'IES_CRP'
+    end
+    object ads279PARAMETER_NAME: TStringField
+      DisplayLabel = #21442#25968#20195#30721
+      FieldKind = fkLookup
+      FieldName = 'PARAMETER_NAME'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PARAMETER_NAME'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 10
+      Lookup = True
+    end
+    object ads279PARAMETER_DESC: TStringField
+      DisplayLabel = #21442#25968#21517#31216
+      FieldKind = fkLookup
+      FieldName = 'PARAMETER_DESC'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PARAMETER_DESC'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads279SPEC_RKEY: TStringField
+      FieldKind = fkLookup
+      FieldName = 'SPEC_RKEY'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'SPEC_RKEY'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 2
+      Lookup = True
+    end
+    object ads279UNIT_NAME: TStringField
+      DisplayLabel = #21333#20301
+      FieldKind = fkLookup
+      FieldName = 'UNIT_NAME'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'UNIT_NAME'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads279datatype: TStringField
+      DisplayLabel = #31867#22411
+      FieldKind = fkLookup
+      FieldName = 'datatype'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'datatype'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 4
+      Lookup = True
+    end
+    object ads279status3: TWordField
+      FieldKind = fkLookup
+      FieldName = 'status3'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'STATUS3'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads279min_value: TFloatField
+      FieldKind = fkLookup
+      FieldName = 'min_value'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'min_value'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads279max_value: TFloatField
+      FieldKind = fkLookup
+      FieldName = 'max_value'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'max_value'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+  end
+  object DataSource3: TDataSource
+    DataSet = ads279
+    Left = 32
+    Top = 242
+  end
+  object ads278: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    CommandText = 
+      'select'#13#10' data0278.rkey,'#13#10' data0278.PARAMETER_NAME, '#13#10' data0278.P' +
+      'ARAMETER_DESC,'#13#10' Data0278.SPEC_RKEY,'#13#10' data0002.UNIT_NAME,'#13#10'case' +
+      ' data0278.DATA_TYPE'#13#10'when 1 then '#39#25968#23383#39' WHEN 2 THEN '#39#23383#31526#39#13#10'end as d' +
+      'atatype,'#13#10'data0278.STATUS3,data0278.min_value,data0278.max_value' +
+      #13#10'from data0278 inner join data0002'#13#10'on Data0278.UNIT_PTR = Data' +
+      '0002.RKEY'#13#10'where CATEGORY_PTR<>1'
+    Parameters = <>
+    Left = 139
+    Top = 244
+    object ads278rkey: TIntegerField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ads278PARAMETER_NAME: TStringField
+      FieldName = 'PARAMETER_NAME'
+      FixedChar = True
+      Size = 10
+    end
+    object ads278PARAMETER_DESC: TStringField
+      FieldName = 'PARAMETER_DESC'
+      FixedChar = True
+    end
+    object ads278SPEC_RKEY: TStringField
+      FieldName = 'SPEC_RKEY'
+      FixedChar = True
+      Size = 2
+    end
+    object ads278UNIT_NAME: TStringField
+      FieldName = 'UNIT_NAME'
+    end
+    object ads278datatype: TStringField
+      FieldName = 'datatype'
+      ReadOnly = True
+      Size = 4
+    end
+    object ads278STATUS3: TWordField
+      FieldName = 'STATUS3'
+    end
+    object ads278min_value: TFloatField
+      FieldName = 'min_value'
+    end
+    object ads278max_value: TFloatField
+      FieldName = 'max_value'
+    end
+  end
+  object ADOQuery2: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 228
+    Top = 24
+  end
+  object ADS38: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltBatchOptimistic
+    AfterScroll = ADS38AfterScroll
+    CommandText = 
+      'SELECT  data0038.rkey,data0038.SOURCE_PTR, data0038.DEPT_PTR, '#13#10 +
+      'data0038.DEF_ROUT_INST, data0038.STEP_NUMBER, '#13#10'data0038.tooling' +
+      '_rev, data0038.OUTP_SPFC,'#13#10'data0038.tool_old_rev, data0038.TOOL_' +
+      'REMARK,'#13#10'd34.PPC_CYCLE_TIME,data0038.grade_note'#13#10'FROM Data0038 I' +
+      'NNER JOIN Data0034 D34 ON Data0038.DEPT_PTR = D34.Rkey'#13#10'where Da' +
+      'ta0038.source_ptr=:rkey'#13#10'order by Data0038.step_number'#13#10
+    IndexFieldNames = 'step_number'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 89
+    Top = 296
+    object ADS38SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ADS38DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object ADS38DEF_ROUT_INST: TStringField
+      FieldName = 'DEF_ROUT_INST'
+      Size = 400
+    end
+    object ADS38STEP_NUMBER: TSmallintField
+      DisplayLabel = #24207#21495
+      FieldName = 'STEP_NUMBER'
+    end
+    object ADS38tooling_rev: TStringField
+      DisplayLabel = #24037#20855#29256#26412
+      FieldName = 'tooling_rev'
+      FixedChar = True
+      Size = 10
+    end
+    object ADS38OUTP_SPFC: TBCDField
+      DisplayLabel = #20135#20986#31995#25968
+      FieldName = 'OUTP_SPFC'
+      Precision = 19
+    end
+    object ADS38tool_old_rev: TStringField
+      FieldName = 'tool_old_rev'
+      Size = 10
+    end
+    object ADS38TOOL_REMARK: TStringField
+      FieldName = 'TOOL_REMARK'
+      Size = 50
+    end
+    object wdstrngfldADS38grade_note: TWideStringField
+      FieldName = 'grade_note'
+      Size = 2048
+    end
+    object ADS38dept_code: TStringField
+      DisplayLabel = #24037#24207#20195#30721
+      FieldKind = fkLookup
+      FieldName = 'dept_code'
+      LookupDataSet = ads34
+      LookupKeyFields = 'RKEY'
+      LookupResultField = 'DEPT_CODE'
+      KeyFields = 'DEPT_PTR'
+      Size = 10
+      Lookup = True
+    end
+    object ADS38dept_name: TStringField
+      DisplayLabel = #24037#24207#21517#31216
+      FieldKind = fkLookup
+      FieldName = 'dept_name'
+      LookupDataSet = ads34
+      LookupKeyFields = 'RKEY'
+      LookupResultField = 'DEPT_NAME'
+      KeyFields = 'DEPT_PTR'
+      Size = 30
+      Lookup = True
+    end
+    object ADS38BARCODE_ENTRY_FLAG: TStringField
+      DisplayLabel = #36807#25968
+      FieldKind = fkLookup
+      FieldName = 'BARCODE_ENTRY_FLAG'
+      LookupDataSet = ads34
+      LookupKeyFields = 'RKEY'
+      LookupResultField = 'BARCODE_ENTRY_FLAG'
+      KeyFields = 'DEPT_PTR'
+      Size = 1
+      Lookup = True
+    end
+    object intgrfldADS38PPC_CYCLE_TIME: TIntegerField
+      FieldName = 'PPC_CYCLE_TIME'
+    end
+    object ADS38rkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+  end
+  object DataSource4: TDataSource
+    DataSet = ADS38
+    Left = 34
+    Top = 296
+  end
+  object ads34: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    CommandText = 
+      'select RKEY, DEPT_CODE, DEPT_NAME, BARCODE_ENTRY_FLAG'#13#10'from data' +
+      '0034'#13#10'where TTYPE=1'
+    Parameters = <>
+    Left = 140
+    Top = 296
+  end
+  object ads494: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltBatchOptimistic
+    BeforePost = ads494BeforePost
+    CommandText = 
+      'SELECT D494.PARAMETER_PTR'#13#10#9' , D494.PARAMETER_VALUE'#13#10#9' , D494.cu' +
+      'stpart_ptr'#13#10#9' , d278.PARAMETER_Name AS Parameter_Readonly'#13#10#9' , d' +
+      '278.PARAMETER_DESC AS Parameter_DESC_ReadOnly'#13#10#9' , D494.step_num' +
+      'ber'#13#10#9' , D494.seq_no'#13#10#9' , D494.Doc_Flag'#13#10#9' , D494.after_flag'#13#10#9' ' +
+      ', D494.flow_spfc_flag'#13#10#9' , D494.outp_spfc_flag'#13#10#9' , d38.dept_ptr' +
+      #13#10#9' , d494.TaskTopLimt'#13#10#9' , d494.TaskLowLimt'#13#10#9' , D494.InnerTopL' +
+      'imt'#13#10#9' , d494.InnerLowLimt'#13#10#9' , D494.SpecialNote'#13#10#9' , d278.DATA_' +
+      'TYPE'#13#10#9' '#13#10'FROM'#13#10#9'Data0494 D494'#13#10#9'INNER JOIN data0038 D38'#13#10#9#9'ON D' +
+      '494.custpart_ptr = d38.SOURCE_PTR AND d494.step_number = d38.ste' +
+      'p_number'#13#10#9'INNER JOIN data0278 d278'#13#10#9#9'ON d278.rkey = d494.PARAM' +
+      'ETER_PTR'#13#10'WHERE'#13#10#9'custpart_ptr = :SOURCE_PTR'
+    IndexFieldNames = 'step_number;seq_no'
+    Parameters = <
+      item
+        Name = 'SOURCE_PTR'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 91
+    Top = 348
+    object ads494PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object ads494PARAMETER_VALUE: TStringField
+      DisplayLabel = #21442#25968#20540
+      FieldName = 'PARAMETER_VALUE'
+      OnChange = ads494PARAMETER_VALUEChange
+      OnValidate = ads494PARAMETER_VALUEValidate
+      Size = 30
+    end
+    object ads494custpart_ptr: TIntegerField
+      FieldName = 'custpart_ptr'
+    end
+    object ads494step_number: TSmallintField
+      DisplayLabel = #27493#39588
+      FieldName = 'step_number'
+    end
+    object ads494seq_no: TSmallintField
+      DisplayLabel = #24207#21495
+      FieldName = 'seq_no'
+    end
+    object ads494Doc_Flag: TStringField
+      DisplayLabel = #25171#21360
+      FieldName = 'Doc_Flag'
+      FixedChar = True
+      Size = 1
+    end
+    object ads494after_flag: TStringField
+      DisplayLabel = #21518#34917
+      FieldName = 'after_flag'
+      FixedChar = True
+      Size = 1
+    end
+    object ads494flow_spfc_flag: TStringField
+      DisplayLabel = #37325#28857
+      FieldName = 'flow_spfc_flag'
+      FixedChar = True
+      Size = 1
+    end
+    object strngfldads494outp_spfc_flag: TStringField
+      FieldName = 'outp_spfc_flag'
+      Size = 1
+    end
+    object ads494PARAMETER_NAME: TStringField
+      DisplayLabel = #21442#25968#20195#30721
+      FieldKind = fkLookup
+      FieldName = 'PARAMETER_NAME'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PARAMETER_NAME'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 10
+      Lookup = True
+    end
+    object ads494PARAMETER_DESC: TStringField
+      DisplayLabel = #21442#25968#21517#31216
+      FieldKind = fkLookup
+      FieldName = 'PARAMETER_DESC'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PARAMETER_DESC'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads494SPEC_RKEY: TStringField
+      FieldKind = fkLookup
+      FieldName = 'SPEC_RKEY'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'SPEC_RKEY'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 2
+      Lookup = True
+    end
+    object ads494UNIT_NAME: TStringField
+      DisplayLabel = #21333#20301
+      FieldKind = fkLookup
+      FieldName = 'UNIT_NAME'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'UNIT_NAME'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads494DATATYPE: TStringField
+      DisplayLabel = #31867#22411
+      FieldKind = fkLookup
+      FieldName = 'DATATYPE'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'datatype'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 4
+      Lookup = True
+    end
+    object ads494min_value: TFloatField
+      FieldKind = fkLookup
+      FieldName = 'min_value'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'min_value'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads494max_value: TFloatField
+      FieldKind = fkLookup
+      FieldName = 'max_value'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'max_value'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object intgrfldads494dept_ptr: TIntegerField
+      FieldName = 'dept_ptr'
+    end
+    object ads494Parameter_Readonly: TStringField
+      FieldName = 'Parameter_Readonly'
+      ReadOnly = True
+      Size = 10
+    end
+    object ads494Parameter_DESC_ReadOnly: TStringField
+      FieldName = 'Parameter_DESC_ReadOnly'
+    end
+    object fltfldads494TaskTopLimt: TFloatField
+      FieldName = 'TaskTopLimt'
+    end
+    object fltfldads494TaskLowLimt: TFloatField
+      FieldName = 'TaskLowLimt'
+    end
+    object fltfldads494InnerTopLimt: TFloatField
+      FieldName = 'InnerTopLimt'
+    end
+    object fltfldads494InnerLowLimt: TFloatField
+      FieldName = 'InnerLowLimt'
+    end
+    object ads494DATA_TYPE: TWordField
+      FieldName = 'DATA_TYPE'
+    end
+    object ads494SpecialNote: TStringField
+      FieldName = 'SpecialNote'
+      Size = 200
+    end
+  end
+  object DataSource5: TDataSource
+    DataSet = ads494
+    Left = 35
+    Top = 349
+  end
+  object ads89: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltReadOnly
+    CommandText = 
+      'SELECT TOP 100 PERCENT dbo.Data0278.PARAMETER_NAME, '#13#10'      dbo.' +
+      'Data0278.PARAMETER_DESC, dbo.data0089.tvalue, dbo.Data0002.UNIT_' +
+      'NAME, '#13#10'      dbo.Data0278.SPEC_RKEY,'#13#10'case data0278.DATA_TYPE'#13#10 +
+      'when 1 then '#39#25968#23383#39' WHEN 2 THEN '#39#23383#31526#39#13#10'end as datatype'#13#10'FROM dbo.dat' +
+      'a0089 INNER JOIN'#13#10'      dbo.Data0278 ON dbo.data0089.parameter_p' +
+      'tr = dbo.Data0278.RKEY INNER JOIN'#13#10'      dbo.Data0002 ON dbo.Dat' +
+      'a0278.UNIT_PTR = dbo.Data0002.RKEY'#13#10'where cust_part_ptr=:rkey'#13#10'O' +
+      'RDER BY dbo.data0089.rkey'#13#10
+    DataSource = DataSource1
+    MasterFields = 'rkey'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 92
+    Top = 403
+    object ads89PARAMETER_NAME: TStringField
+      DisplayLabel = #21442#25968#20195#30721
+      FieldName = 'PARAMETER_NAME'
+      FixedChar = True
+      Size = 10
+    end
+    object ads89PARAMETER_DESC: TStringField
+      DisplayLabel = #21442#25968#21517#31216
+      FieldName = 'PARAMETER_DESC'
+      FixedChar = True
+    end
+    object ads89tvalue: TStringField
+      DisplayLabel = #21442#25968#20540
+      FieldName = 'tvalue'
+      Size = 50
+    end
+    object ads89UNIT_NAME: TStringField
+      DisplayLabel = #21333#20301
+      FieldName = 'UNIT_NAME'
+    end
+    object ads89SPEC_RKEY: TStringField
+      FieldName = 'SPEC_RKEY'
+      FixedChar = True
+      Size = 2
+    end
+    object ads89datatype: TStringField
+      DisplayLabel = #31867#22411
+      FieldName = 'datatype'
+      ReadOnly = True
+      Size = 4
+    end
+  end
+  object DataSource6: TDataSource
+    DataSet = ads89
+    Left = 32
+    Top = 402
+  end
+  object DataSource7: TDataSource
+    DataSet = ADS279_0
+    Left = 203
+    Top = 245
+  end
+  object ADS279_0: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 
+      'select source_PTR, PARAMETER_PTR, PARAMETER_VALUE'#13#10', IES_PROD,IE' +
+      'S_CRP'#13#10'from data0279'#13#10'where  IES_PROD=0 and'#13#10'            source_' +
+      'ptr= :rkey'#13#10'order by IES_CRP'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 267
+    Top = 245
+    object ads279_0source_ptr: TIntegerField
+      FieldName = 'source_PTR'
+    end
+    object ads279_0PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object ads279_0PARAMETER_VALUE: TStringField
+      DisplayLabel = #21442#25968#20540
+      FieldName = 'PARAMETER_VALUE'
+      Size = 30
+    end
+    object ads279_0IES_PROD: TSmallintField
+      FieldName = 'IES_PROD'
+    end
+    object ads279_0IES_CRP: TSmallintField
+      FieldName = 'IES_CRP'
+    end
+    object ads279_0PARAMETER_NAME: TStringField
+      DisplayLabel = #21442#25968#20195#30721
+      FieldKind = fkLookup
+      FieldName = 'PARAMETER_NAME'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PARAMETER_NAME'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 10
+      Lookup = True
+    end
+    object ads279_0PARAMETER_DESC: TStringField
+      DisplayLabel = #21442#25968#21517#31216
+      FieldKind = fkLookup
+      FieldName = 'PARAMETER_DESC'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PARAMETER_DESC'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads279_0SPEC_RKEY: TStringField
+      FieldKind = fkLookup
+      FieldName = 'SPEC_RKEY'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'SPEC_RKEY'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 2
+      Lookup = True
+    end
+    object ads279_0UNIT_NAME: TStringField
+      DisplayLabel = #21333#20301
+      FieldKind = fkLookup
+      FieldName = 'UNIT_NAME'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'UNIT_NAME'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object ads279_0datatype: TStringField
+      DisplayLabel = #31867#22411
+      FieldKind = fkLookup
+      FieldName = 'datatype'
+      LookupDataSet = ads278
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'datatype'
+      KeyFields = 'PARAMETER_PTR'
+      Size = 4
+      Lookup = True
+    end
+  end
+  object AQ280: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT TOP 100 PERCENT data0280.rkey,Data0280.ENG_TABLE_NAME,'
+      '  Data0280.DATA_TYPE,Data0278.DATA_TYPE AS fx_type,'
+      '  Data0278_1.DATA_TYPE AS fy_type'
+      'FROM dbo.Data0280 INNER JOIN'
+      
+        '      dbo.Data0278 ON dbo.Data0280.FX = dbo.Data0278.RKEY LEFT O' +
+        'UTER JOIN'
+      
+        '      dbo.Data0278 Data0278_1 ON dbo.Data0280.FY = Data0278_1.RK' +
+        'EY'
+      'ORDER BY dbo.Data0280.ENG_TABLE_NAME')
+    Left = 157
+    Top = 84
+    object AQ280rkey: TIntegerField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object AQ280ENG_TABLE_NAME: TStringField
+      FieldName = 'ENG_TABLE_NAME'
+      Size = 10
+    end
+    object AQ280DATA_TYPE: TIntegerField
+      FieldName = 'DATA_TYPE'
+    end
+    object AQ280fx_type: TWordField
+      FieldName = 'fx_type'
+    end
+    object AQ280fy_type: TWordField
+      FieldName = 'fy_type'
+    end
+  end
+  object ADOStoredProc1: TADOStoredProc
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    ProcedureName = 'WZPR085;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@vptr'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@vtpx'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 2
+      end
+      item
+        Name = '@vtpy'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 2
+      end
+      item
+        Name = '@vcol0'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = #39#39
+      end
+      item
+        Name = '@vrow0'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = #39#39
+      end
+      item
+        Name = '@vcol'
+        Attributes = [paNullable]
+        DataType = ftFloat
+        Precision = 7
+        Value = 0.000000000000000000
+      end
+      item
+        Name = '@vrow'
+        Attributes = [paNullable]
+        DataType = ftFloat
+        Precision = 7
+        Value = 0.000000000000000000
+      end>
+    Left = 238
+    Top = 84
+    object ADOStoredProc1tvalue: TStringField
+      FieldName = 'tvalue'
+      Size = 50
+    end
+  end
+  object ADOQuery3: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 288
+    Top = 24
+  end
+  object ADOQuery4: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 349
+    Top = 24
+  end
+  object ADOQuery5: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'set_len_min'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'set_len_max'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'set_wth_min'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'set_wth_max'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'set_len_min1'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'set_len_max1'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'set_wth_min1'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'set_wth_max1'
+        Attributes = [paSigned]
+        DataType = ftBCD
+        NumericScale = 3
+        Precision = 7
+        Size = 19
+        Value = Null
+      end
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      'SELECT top 100 percent '
+      
+        'substring(manu_part_number,1,LEN(Data0025.MANU_PART_NUMBER) - 2)' +
+        ' as number,'
+      
+        'max(substring(manu_part_number,LEN(Data0025.MANU_PART_NUMBER) - ' +
+        '1,2)) as rev'
+      'FROM  Data0025 '
+      
+        'WHERE (((set_lngth >= :set_len_min) and (set_lngth <= :set_len_m' +
+        'ax) and '
+      
+        '  (set_width >= :set_wth_min) and (set_width <= :set_wth_max)) o' +
+        'r'
+      
+        '((set_lngth >= :set_len_min1) and (set_lngth <= :set_len_max1) a' +
+        'nd '
+      
+        '  (set_width >= :set_wth_min1) and (set_width <= :set_wth_max1))' +
+        ')'
+      '  and (rkey <> :rkey) and (ttype=0)'
+      ''
+      
+        'group by substring(manu_part_number,1,LEN(Data0025.MANU_PART_NUM' +
+        'BER) - 2)')
+    Left = 392
+    Top = 136
+  end
+  object AQ17: TADOQuery
+    Connection = ADOConnection1
+    Filtered = True
+    Parameters = <>
+    SQL.Strings = (
+      
+        'SELECT dbo.Data0017.INV_PART_NUMBER, dbo.Data0017.INV_PART_DESCR' +
+        'IPTION, '
+      
+        '      dbo.Data0002.UNIT_CODE, dbo.Data0456.ship_DATE, dbo.Data00' +
+        '23.ABBR_NAME, '
+      '      SUM(dbo.Data0022.QUAN_ON_HAND) AS quan_on_hand'
+      'FROM dbo.Data0022 INNER JOIN'
+      
+        '      dbo.Data0017 ON dbo.Data0022.INVENTORY_PTR = dbo.Data0017.' +
+        'RKEY INNER JOIN'
+      '      dbo.Data0002 ON '
+      
+        '      dbo.Data0022.LOCATION_PTR_FROM = dbo.Data0002.RKEY INNER J' +
+        'OIN'
+      
+        '      dbo.Data0456 ON dbo.Data0022.GRN_PTR = dbo.Data0456.RKEY I' +
+        'NNER JOIN'
+      
+        '      dbo.Data0023 ON dbo.Data0456.SUPP_PTR = dbo.Data0023.RKEY ' +
+        'INNER JOIN'
+      '      dbo.Data0496 ON dbo.Data0017.GROUP_PTR = dbo.Data0496.RKEY'
+      
+        'WHERE (dbo.Data0022.QUAN_ON_HAND > 0) AND (dbo.Data0496.quote_fl' +
+        'ag = 1)'
+      
+        'GROUP BY dbo.Data0017.INV_PART_NUMBER, dbo.Data0017.INV_PART_DES' +
+        'CRIPTION, '
+      
+        '      dbo.Data0002.UNIT_CODE, dbo.Data0456.ship_DATE, dbo.Data00' +
+        '23.ABBR_NAME'
+      'order by dbo.Data0017.INV_PART_NUMBER')
+    Left = 360
+    Top = 368
+  end
+  object AQtmp: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 408
+    Top = 368
+  end
+  object DS17: TDataSource
+    DataSet = AQ17
+    Left = 360
+    Top = 328
+  end
+  object DS20: TDataSource
+    DataSet = ADO20
+    Left = 208
+    Top = 408
+  end
+  object ADO20: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey10'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT [RKEY]'
+      '      ,[SOURCE_PTR]'
+      '      ,[file_name]'
+      '      ,[Indate]'
+      '      ,[remark]'
+      '  FROM [Data0020]'
+      'where'
+      '[source_ptr]=:rkey10')
+    Left = 256
+    Top = 408
+    object ADO20RKEY: TAutoIncField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object ADO20SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ADO20file_name: TStringField
+      DisplayLabel = #25991#26723#21517#31216
+      FieldName = 'file_name'
+      Size = 50
+    end
+    object ADO20Indate: TDateTimeField
+      DisplayLabel = #23384#26723#26085#26399
+      FieldName = 'Indate'
+    end
+    object ADO20remark: TStringField
+      DisplayLabel = #22791#27880
+      FieldName = 'remark'
+      Size = 150
+    end
+  end
+  object ads497: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltReadOnly
+    CommandText = 
+      'SELECT     dbo.Data0497.PARAMETER_PTR, dbo.Data0497.PARAMETER_VA' +
+      'LUE, '#13#10'    dbo.Data0497.SOURCE_PTR, dbo.Data0497.ROUTE_STEP_PTR,' +
+      ' dbo.Data0497.SEQ_NO, '#13#10'                      dbo.Data0038.DEPT_' +
+      'PTR, dbo.Data0038.STEP_NUMBER'#13#10'FROM         dbo.Data0038 INNER J' +
+      'OIN'#13#10'          dbo.Data0497 ON dbo.Data0038.RKEY = dbo.Data0497.' +
+      'ROUTE_STEP_PTR'#13#10'where data0038.source_ptr=:rkey'
+    IndexFieldNames = 'step_number;dept_ptr'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    Left = 139
+    Top = 347
+    object ads497PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object ads497PARAMETER_VALUE: TStringField
+      FieldName = 'PARAMETER_VALUE'
+      Size = 30
+    end
+    object ads497SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ads497ROUTE_STEP_PTR: TIntegerField
+      FieldName = 'ROUTE_STEP_PTR'
+    end
+    object ads497SEQ_NO: TIntegerField
+      FieldName = 'SEQ_NO'
+    end
+    object ads497DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object ads497STEP_NUMBER: TSmallintField
+      FieldName = 'STEP_NUMBER'
+    end
+  end
+  object ads564: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltBatchOptimistic
+    CommandText = 
+      'select rkey,rec_no, SOURCE_PTR, file_name, in_date, remark'#13#10' fro' +
+      'm Data0564'#13#10'where SOURCE_PTR=:rkey'#13#10'order by rec_no'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    Left = 269
+    Top = 296
+    object ads564rkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ads564rec_no: TIntegerField
+      DisplayLabel = #24207#21495
+      FieldName = 'rec_no'
+    end
+    object ads564SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ads564file_name: TStringField
+      DisplayLabel = #25991#20214#21517
+      FieldName = 'file_name'
+      Size = 50
+    end
+    object ads564in_date: TDateTimeField
+      DisplayLabel = #19978#20256#26085#26399
+      FieldName = 'in_date'
+    end
+    object ads564remark: TStringField
+      DisplayLabel = #22791#27880#35828#26126
+      FieldName = 'remark'
+      Size = 50
+    end
+  end
+  object DataSource8: TDataSource
+    DataSet = ads564
+    Left = 204
+    Top = 296
+  end
+  object ds0610: TDataSource
+    DataSet = ads0610
+    Left = 408
+    Top = 264
+  end
+  object ads0610: TADODataSet
+    Connection = ADOConnection1
+    CommandText = 'select * from DATA0610'
+    Parameters = <>
+    Left = 368
+    Top = 264
+  end
+  object aqy0610: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 408
+    Top = 216
+  end
+  object ADO31: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'rkey25'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'select SOURCE_PTR, STEP_NUMBER, DEPT_PTR, QA_CONFIRMATION, SCRAP' +
+        '_QTY_reason, '
+      
+        'gaffer_confirmation, FLOW_QTY, rece_gaffetconfir, technology_dif' +
+        'f '
+      'from DATA0031'
+      'where source_ptr=:rkey25'
+      'order by step_number')
+    Left = 200
+    Top = 168
+    object ADO31SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ADO31STEP_NUMBER: TSmallintField
+      FieldName = 'STEP_NUMBER'
+    end
+    object ADO31DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object ADO31QA_CONFIRMATION: TStringField
+      FieldName = 'QA_CONFIRMATION'
+      Size = 50
+    end
+    object ADO31SCRAP_QTY_reason: TStringField
+      FieldName = 'SCRAP_QTY_reason'
+      Size = 50
+    end
+    object ADO31gaffer_confirmation: TStringField
+      FieldName = 'gaffer_confirmation'
+      Size = 50
+    end
+    object ADO31rece_gaffetconfir: TStringField
+      FieldName = 'rece_gaffetconfir'
+      Size = 50
+    end
+    object ADO31technology_diff: TStringField
+      FieldName = 'technology_diff'
+      Size = 200
+    end
+    object ADO31FLOW_QTY: TStringField
+      FieldName = 'FLOW_QTY'
+      Size = 50
+    end
+  end
+  object ADS31: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    CommandText = 
+      'select data0031.SOURCE_PTR, data0031.STEP_NUMBER, data0031.DEPT_' +
+      'PTR, data0031.QA_CONFIRMATION, data0031.SCRAP_QTY_reason, '#13#10'data' +
+      '0031.gaffer_confirmation, data0031.FLOW_QTY, data0031.rece_gaffe' +
+      'tconfir, data0031.technology_diff,data0034.dept_name,data0025.MA' +
+      'NU_PART_NUMBER '#13#10'from DATA0031'#13#10'inner join data0034 on data0031.' +
+      'dept_ptr=data0034.rkey'#13#10'inner join data0025 on data0031.source_p' +
+      'tr=data0025.rkey'#13#10'where source_ptr=:rkey25'#13#10'order by step_number' +
+      #13#10
+    Parameters = <
+      item
+        Name = 'rkey25'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 296
+    Top = 176
+    object ADS31SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ADS31STEP_NUMBER: TSmallintField
+      FieldName = 'STEP_NUMBER'
+    end
+    object ADS31DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object ADS31QA_CONFIRMATION: TStringField
+      FieldName = 'QA_CONFIRMATION'
+      Size = 50
+    end
+    object ADS31SCRAP_QTY_reason: TStringField
+      FieldName = 'SCRAP_QTY_reason'
+      Size = 50
+    end
+    object ADS31gaffer_confirmation: TStringField
+      FieldName = 'gaffer_confirmation'
+      Size = 50
+    end
+    object ADS31rece_gaffetconfir: TStringField
+      FieldName = 'rece_gaffetconfir'
+      Size = 50
+    end
+    object ADS31technology_diff: TStringField
+      FieldName = 'technology_diff'
+      Size = 200
+    end
+    object ADS31dept_name: TStringField
+      FieldName = 'dept_name'
+      Size = 30
+    end
+    object ADS31MANU_PART_NUMBER: TStringField
+      DisplayWidth = 30
+      FieldName = 'MANU_PART_NUMBER'
+      Size = 30
+    end
+    object ADS31FLOW_QTY: TStringField
+      FieldName = 'FLOW_QTY'
+      Size = 50
+    end
+  end
+  object aq31: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'rkey25'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end
+      item
+        Name = 'rkey34'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'select * from data0031 where source_ptr=:rkey25 and dept_ptr=:rk' +
+        'ey34  ')
+    Left = 248
+    Top = 176
+    object aq31SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object aq31STEP_NUMBER: TSmallintField
+      FieldName = 'STEP_NUMBER'
+    end
+    object aq31DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object aq31QA_CONFIRMATION: TStringField
+      FieldName = 'QA_CONFIRMATION'
+      Size = 50
+    end
+    object aq31SCRAP_QTY_reason: TStringField
+      FieldName = 'SCRAP_QTY_reason'
+      Size = 50
+    end
+    object aq31gaffer_confirmation: TStringField
+      FieldName = 'gaffer_confirmation'
+      Size = 50
+    end
+    object aq31rece_gaffetconfir: TStringField
+      FieldName = 'rece_gaffetconfir'
+      Size = 50
+    end
+    object aq31technology_diff: TStringField
+      FieldName = 'technology_diff'
+      Size = 200
+    end
+    object aq31FLOW_QTY: TStringField
+      FieldName = 'FLOW_QTY'
+      Size = 50
+    end
+  end
+  object ADS38_1: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    CommandText = 
+      'SELECT rkey,SOURCE_PTR, DEPT_PTR, DEF_ROUT_INST, '#13#10'STEP_NUMBER, ' +
+      'tooling_rev, OUTP_SPFC,tool_old_rev'#13#10'FROM Data0038'#13#10'where source' +
+      '_ptr=:rkey'
+    IndexFieldNames = 'step_number'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 32
+    Top = 457
+    object ADS38_1rkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ADS38_1SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ADS38_1DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object ADS38_1DEF_ROUT_INST: TStringField
+      FieldName = 'DEF_ROUT_INST'
+      Size = 400
+    end
+    object ADS38_1STEP_NUMBER: TSmallintField
+      FieldName = 'STEP_NUMBER'
+    end
+    object ADS38_1tooling_rev: TStringField
+      FieldName = 'tooling_rev'
+      FixedChar = True
+      Size = 10
+    end
+    object ADS38_1OUTP_SPFC: TBCDField
+      FieldName = 'OUTP_SPFC'
+      Precision = 19
+    end
+    object ADS38_1tool_old_rev: TStringField
+      FieldName = 'tool_old_rev'
+      Size = 10
+    end
+  end
+  object ads279_1: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    CommandText = 
+      'select source_PTR, PARAMETER_PTR, PARAMETER_VALUE'#13#10', IES_PROD,IE' +
+      'S_CRP'#13#10'from data0279'#13#10'where  source_ptr= :rkey'#13#10'order by IES_CRP'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 86
+    Top = 457
+    object ads279_1source_PTR: TIntegerField
+      FieldName = 'source_PTR'
+    end
+    object ads279_1PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object ads279_1PARAMETER_VALUE: TStringField
+      FieldName = 'PARAMETER_VALUE'
+      Size = 30
+    end
+    object ads279_1IES_PROD: TSmallintField
+      FieldName = 'IES_PROD'
+    end
+    object ads279_1IES_CRP: TSmallintField
+      FieldName = 'IES_CRP'
+    end
+  end
+  object ads497_1: TADODataSet
+    Connection = ADOConnection1
+    CommandText = 
+      'select PARAMETER_PTR, PARAMETER_VALUE, SOURCE_PTR, ROUTE_STEP_PT' +
+      'R, SEQ_NO'#13#10'from data0497'#13#10'where ROUTE_STEP_PTR is null'
+    Parameters = <>
+    Left = 141
+    Top = 458
+    object ads497_1PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object ads497_1PARAMETER_VALUE: TStringField
+      FieldName = 'PARAMETER_VALUE'
+      Size = 30
+    end
+    object ads497_1SOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object ads497_1ROUTE_STEP_PTR: TIntegerField
+      FieldName = 'ROUTE_STEP_PTR'
+    end
+    object ads497_1SEQ_NO: TIntegerField
+      FieldName = 'SEQ_NO'
+    end
+  end
+  object ads494_1: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    CommandText = 
+      'SELECT PARAMETER_PTR,'#13#10' PARAMETER_VALUE,'#13#10' custpart_ptr,'#13#10' step_' +
+      'number,'#13#10' seq_no, Doc_Flag, after_flag, flow_spfc_flag'#13#10'FROM dbo' +
+      '.Data0494'#13#10'where custpart_ptr = :SOURCE_PTR '
+    IndexFieldNames = 'step_number;seq_no'
+    Parameters = <
+      item
+        Name = 'SOURCE_PTR'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    Left = 195
+    Top = 457
+    object ads494_1PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object ads494_1PARAMETER_VALUE: TStringField
+      FieldName = 'PARAMETER_VALUE'
+      Size = 30
+    end
+    object ads494_1custpart_ptr: TIntegerField
+      FieldName = 'custpart_ptr'
+    end
+    object ads494_1step_number: TSmallintField
+      FieldName = 'step_number'
+    end
+    object ads494_1seq_no: TSmallintField
+      FieldName = 'seq_no'
+    end
+    object ads494_1Doc_Flag: TStringField
+      FieldName = 'Doc_Flag'
+      FixedChar = True
+      Size = 1
+    end
+    object ads494_1after_flag: TStringField
+      FieldName = 'after_flag'
+      FixedChar = True
+      Size = 1
+    end
+    object ads494_1flow_spfc_flag: TStringField
+      FieldName = 'flow_spfc_flag'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object qryTmp: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 504
+    Top = 376
+  end
+  object ads82: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    CommandText = 'select grade_code from data0082'
+    Parameters = <>
+    Left = 424
+    Top = 80
+    object strngfldads82grade_code: TStringField
+      FieldName = 'grade_code'
+      Size = 10
+    end
+  end
+  object ds82: TDataSource
+    DataSet = ads82
+    Left = 472
+    Top = 80
+  end
+  object cmd1: TADOCommand
+    CommandText = 
+      ';WITH CTE(RKey,Lv,MANU_PART_NUMBER,PARENT_PTR) '#13#10' AS (SELECT RKe' +
+      'y,0,MANU_PART_NUMBER,PARENT_PTR '#13#10'FROM Data0025 WHERE RKey = :p1' +
+      ' UNION ALL  '#13#10'SELECT D25.RKey,CTE.Lv+1,D25.MANU_PART_NUMBER,d25.' +
+      'PARENT_PTR '#13#10'FROM Data0025 D25 INNER JOIN CTE ON D25.PARENT_PTR ' +
+      '= CTE.RKey ) '#13#10'UPDATE Data0025 SET part_level = CTE.lv FROM Data' +
+      '0025 D25'#13#10'INNER JOIN CTE ON CTE.RKEY = D25.RKEY'
+    Connection = ADOConnection1
+    Parameters = <
+      item
+        Name = 'p1'
+        Size = -1
+        Value = Null
+      end>
+    Left = 432
+    Top = 24
+  end
+  object qryFtp: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'IDKey'
+        DataType = ftString
+        Size = 2
+        Value = #39#39
+      end>
+    SQL.Strings = (
+      
+        'SELECT IDKey, FileName, Ftp_Ptr, FtpDir, Ftp_fileName, UploadTim' +
+        'e, UploadUser_d05ptr, GroupIDKey, BEnable from Tier3_CustomerFil' +
+        'es'
+      'where IDkey=:IDKey')
+    Left = 472
+    Top = 448
+    object qryFtpIDKey: TStringField
+      FieldName = 'IDKey'
+      FixedChar = True
+      Size = 38
+    end
+    object qryFtpFileName: TStringField
+      DisplayLabel = #25991#20214#21517
+      FieldName = 'FileName'
+      Size = 512
+    end
+    object qryFtpFtp_Ptr: TIntegerField
+      FieldName = 'Ftp_Ptr'
+    end
+    object qryFtpFtpDir: TStringField
+      FieldName = 'FtpDir'
+      Size = 1024
+    end
+    object qryFtpFtp_fileName: TStringField
+      FieldName = 'Ftp_fileName'
+      FixedChar = True
+      Size = 38
+    end
+    object qryFtpUploadTime: TDateTimeField
+      DisplayLabel = #19978#20256#26102#38388
+      FieldName = 'UploadTime'
+    end
+    object qryFtpUploadUser_d05ptr: TIntegerField
+      FieldName = 'UploadUser_d05ptr'
+    end
+    object qryFtpGroupIDKey: TStringField
+      FieldName = 'GroupIDKey'
+      FixedChar = True
+      Size = 38
+    end
+    object qryFtpBEnable: TBooleanField
+      FieldName = 'BEnable'
+    end
+  end
+  object dsFile: TDataSource
+    DataSet = qryFile
+    Left = 432
+    Top = 448
+  end
+  object qryFileList: TADOQuery
+    Connection = ADOConnection1
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      'select rkey25,FtpIDKey,FileType from Data0025_FileList'
+      'where groups = 0 and rkey25=:rkey')
+    Left = 512
+    Top = 448
+  end
+  object qryFile: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    OnCalcFields = qryFileCalcFields
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      
+        'SELECT Tier3_CustomerFiles.[FileName],Data0005.EMPLOYEE_NAME,Tie' +
+        'r3_CustomerFiles.UploadTime'
+      
+        #9#9',Data0025_FileList.filetype,Tier3_CustomerFiles.IDKey,Tier3_Cu' +
+        'stomerFiles.Ftp_fileName'
+      ' FROM Data0025_FileList '
+      
+        #9#9#9'inner join  Tier3_CustomerFiles on Data0025_FileList.FtpIDKey' +
+        ' = Tier3_CustomerFiles.IDKey'
+      
+        #9#9#9'INNER join Data0005 on Data0005.RKEY = Tier3_CustomerFiles.Up' +
+        'loadUser_d05ptr'
+      
+        'WHERE Data0025_FileList.groups = 0 and Data0025_FileList.rkey25=' +
+        ':rkey')
+    Left = 400
+    Top = 448
+    object qryFileFileName: TStringField
+      DisplayLabel = #25991#20214#21517
+      FieldName = 'FileName'
+      Size = 512
+    end
+    object qryFileEMPLOYEE_NAME: TStringField
+      DisplayLabel = #19978#20256#20154
+      FieldName = 'EMPLOYEE_NAME'
+      Size = 16
+    end
+    object qryFileUploadTime: TDateTimeField
+      DisplayLabel = #19978#20256#26102#38388
+      FieldName = 'UploadTime'
+    end
+    object qryFilefiletype: TWordField
+      FieldName = 'filetype'
+    end
+    object qryFilestrType: TStringField
+      DisplayLabel = #25991#20214#31867#22411
+      FieldKind = fkCalculated
+      FieldName = 'strType'
+      Calculated = True
+    end
+    object qryFileIDKey: TStringField
+      FieldName = 'IDKey'
+      FixedChar = True
+      Size = 38
+    end
+    object qryFileFtp_fileName: TStringField
+      FieldName = 'Ftp_fileName'
+      FixedChar = True
+      Size = 38
+    end
+  end
+  object qryFtp2: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'IDKey'
+        DataType = ftString
+        Size = 2
+        Value = #39#39
+      end>
+    SQL.Strings = (
+      
+        'SELECT IDKey, FileName, Ftp_Ptr, FtpDir, Ftp_fileName, UploadTim' +
+        'e, UploadUser_d05ptr, GroupIDKey, BEnable from Tier3_CustomerFil' +
+        'es'
+      'where IDkey=:IDKey')
+    Left = 480
+    Top = 504
+    object StringField1: TStringField
+      FieldName = 'IDKey'
+      FixedChar = True
+      Size = 38
+    end
+    object StringField2: TStringField
+      DisplayLabel = #25991#20214#21517
+      FieldName = 'FileName'
+      Size = 512
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'Ftp_Ptr'
+    end
+    object StringField3: TStringField
+      FieldName = 'FtpDir'
+      Size = 1024
+    end
+    object StringField4: TStringField
+      FieldName = 'Ftp_fileName'
+      FixedChar = True
+      Size = 38
+    end
+    object DateTimeField1: TDateTimeField
+      DisplayLabel = #19978#20256#26102#38388
+      FieldName = 'UploadTime'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'UploadUser_d05ptr'
+    end
+    object StringField5: TStringField
+      FieldName = 'GroupIDKey'
+      FixedChar = True
+      Size = 38
+    end
+    object BooleanField1: TBooleanField
+      FieldName = 'BEnable'
+    end
+  end
+  object dsFile2: TDataSource
+    DataSet = qryFile2
+    Left = 432
+    Top = 504
+  end
+  object qryFileList2: TADOQuery
+    Connection = ADOConnection1
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      
+        'select rkey25,FtpIDKey,filetype,groups,dept_ptr  from Data0025_F' +
+        'ileList'
+      'where groups = 1 and rkey25=:rkey')
+    Left = 528
+    Top = 504
+  end
+  object qryFile2: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    OnCalcFields = qryFileCalcFields
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      
+        'SELECT Tier3_CustomerFiles.[FileName],Data0005.EMPLOYEE_NAME,Tie' +
+        'r3_CustomerFiles.UploadTime'
+      
+        #9#9',Data0025_FileList.filetype,Tier3_CustomerFiles.IDKey,Tier3_Cu' +
+        'stomerFiles.Ftp_fileName'
+      #9#9',Data0034.DEPT_NAME,Data0034.DEPT_CODE'
+      ' FROM Data0025_FileList '
+      
+        #9#9#9'inner join  Tier3_CustomerFiles on Data0025_FileList.FtpIDKey' +
+        ' = Tier3_CustomerFiles.IDKey'
+      
+        #9#9#9'INNER join Data0005 on Data0005.RKEY = Tier3_CustomerFiles.Up' +
+        'loadUser_d05ptr'
+      
+        #9#9#9'LEFT join Data0034 on Data0034.rkey = Data0025_FileList.dept_' +
+        'ptr'
+      
+        'WHERE Data0025_FileList.groups = 1 and  Data0025_FileList.rkey25' +
+        '=:rkey ')
+    Left = 392
+    Top = 504
+    object qryFile2FileName: TStringField
+      DisplayLabel = #25991#20214#21517
+      FieldName = 'FileName'
+      Size = 512
+    end
+    object qryFile2EMPLOYEE_NAME: TStringField
+      DisplayLabel = #19978#20256#20154
+      FieldName = 'EMPLOYEE_NAME'
+      Size = 16
+    end
+    object qryFile2UploadTime: TDateTimeField
+      DisplayLabel = #19978#20256#26102#38388
+      FieldName = 'UploadTime'
+    end
+    object qryFile2filetype: TWordField
+      FieldName = 'filetype'
+    end
+    object qryFile2IDKey: TStringField
+      FieldName = 'IDKey'
+      FixedChar = True
+      Size = 38
+    end
+    object qryFile2Ftp_fileName: TStringField
+      FieldName = 'Ftp_fileName'
+      FixedChar = True
+      Size = 38
+    end
+    object qryFile2DEPT_CODE: TStringField
+      DisplayLabel = #24037#24207#20195#30721
+      FieldName = 'DEPT_CODE'
+      Size = 10
+    end
+  end
+  object qryPress: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      'SELECT rkey,rkey25,Seqno,Layer,Thickness'
+      ',MinThickness,MaxThickness '
+      'FROM data0864 where rkey25 = :rkey')
+    Left = 520
+    Top = 232
+    object qryPressrkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object qryPressrkey25: TIntegerField
+      FieldName = 'rkey25'
+    end
+    object qryPressSeqno: TWordField
+      DisplayLabel = #24207#21495
+      FieldName = 'Seqno'
+    end
+    object qryPressLayer: TStringField
+      DisplayLabel = #23618#21035
+      FieldName = 'Layer'
+    end
+    object qryPressThickness: TBCDField
+      DisplayLabel = #21402#24230
+      FieldName = 'Thickness'
+      Precision = 8
+      Size = 2
+    end
+    object qryPressMinThickness: TBCDField
+      DisplayLabel = #26368#23567#21402#24230
+      FieldName = 'MinThickness'
+      Precision = 8
+      Size = 2
+    end
+    object qryPressMaxThickness: TBCDField
+      DisplayLabel = #26368#22823#21402#24230
+      FieldName = 'MaxThickness'
+      Precision = 8
+      Size = 2
+    end
+  end
+  object dsPress: TDataSource
+    DataSet = qryPress
+    Left = 528
+    Top = 288
+  end
+  object ads26: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 
+      'select Data0026.RKEY,Data0026.MANU_BOM_PTR,Data0026.DEPT_PTR,Dat' +
+      'a0026.INVENTORY_PTR,Data0026.FLOW_NO,Data0026.D498_ptr'#13#10#9#9',Data0' +
+      '026.QTY_BOM,Data0026.ROUTE_STEP_NO,Data0026.DOC_FLAG,Data0026.VE' +
+      'NDOR,Data0026.supplier_ptr,Data0017.GROUP_PTR'#13#10#9#9',Data0034.DEPT_' +
+      'NAME,Data0017.INV_PART_NUMBER,Data0017.INV_NAME,Data0017.INV_DES' +
+      'CRIPTION,Data0002.UNIT_CODE'#13#10#9#9',Data0023.ABBR_NAME,Data0498.BOM_' +
+      'NAME'#13#10'from Data0026 '#13#10#9#9'inner join data0034 on Data0026.DEPT_PTR' +
+      ' = Data0034.RKEY'#13#10#9#9'inner join Data0017 on Data0026.INVENTORY_PT' +
+      'R = Data0017.RKEY'#13#10#9#9'INNER join Data0002 on Data0017.STOCK_UNIT_' +
+      'PTR = Data0002.RKEY'#13#10#9#9'LEFT join Data0023 on Data0026.supplier_p' +
+      'tr = Data0023.RKEY'#13#10#9#9'LEFT JOIN Data0498 ON Data0026.d498_PTR = ' +
+      'Data0498.RKEY                                '#13#10'where Data0026.FL' +
+      'OW_NO =1 AND  Data0026.MANU_BOM_PTR = :rkey26'#13#10
+    IndexFieldNames = 'ROUTE_STEP_NO'
+    Parameters = <
+      item
+        Name = 'rkey26'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    Left = 88
+    Top = 528
+    object ads26RKEY: TAutoIncField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object ads26MANU_BOM_PTR: TIntegerField
+      FieldName = 'MANU_BOM_PTR'
+    end
+    object ads26DEPT_PTR: TIntegerField
+      FieldName = 'DEPT_PTR'
+    end
+    object ads26INVENTORY_PTR: TIntegerField
+      FieldName = 'INVENTORY_PTR'
+    end
+    object ads26QTY_BOM: TFloatField
+      DisplayLabel = #29992#37327
+      FieldName = 'QTY_BOM'
+      DisplayFormat = '##0.#00000000'
+    end
+    object ads26ROUTE_STEP_NO: TSmallintField
+      DisplayLabel = #27493#39588#21495
+      FieldName = 'ROUTE_STEP_NO'
+    end
+    object ads26DOC_FLAG: TStringField
+      DisplayLabel = #26159#21542#21015#21360
+      FieldName = 'DOC_FLAG'
+      FixedChar = True
+      Size = 1
+    end
+    object ads26VENDOR: TStringField
+      DisplayLabel = #22791#27880
+      FieldName = 'VENDOR'
+      Size = 30
+    end
+    object ads26DEPT_NAME: TStringField
+      DisplayLabel = #37096#38376#21517#31216
+      FieldName = 'DEPT_NAME'
+      Size = 30
+    end
+    object ads26INV_PART_NUMBER: TStringField
+      DisplayLabel = #26448#26009#32534#30721
+      FieldName = 'INV_PART_NUMBER'
+      Size = 25
+    end
+    object ads26FLOW_NO: TSmallintField
+      FieldName = 'FLOW_NO'
+    end
+    object ads26UNIT_CODE: TStringField
+      DisplayLabel = #21333#20301
+      FieldName = 'UNIT_CODE'
+      Size = 5
+    end
+    object ads26supplier_ptr: TIntegerField
+      FieldName = 'supplier_ptr'
+    end
+    object ads26ABBR_NAME: TStringField
+      DisplayLabel = #20379#24212#21830
+      FieldName = 'ABBR_NAME'
+      Size = 16
+    end
+    object ads26INV_NAME: TStringField
+      DisplayLabel = #26448#26009#21517#31216
+      FieldName = 'INV_NAME'
+      Size = 30
+    end
+    object ads26INV_DESCRIPTION: TStringField
+      DisplayLabel = #26448#26009#35268#26684
+      FieldName = 'INV_DESCRIPTION'
+      Size = 70
+    end
+    object ads26GROUP_PTR: TIntegerField
+      FieldName = 'GROUP_PTR'
+    end
+    object ads26D498_ptr: TIntegerField
+      FieldName = 'D498_ptr'
+    end
+    object ads26BOM_NAME: TStringField
+      DisplayLabel = 'BOM'#31867#22411#21517
+      FieldName = 'BOM_NAME'
+      FixedChar = True
+      Size = 10
+    end
+  end
+  object ds26: TDataSource
+    DataSet = ads26
+    Left = 32
+    Top = 528
+  end
+  object ads498: TADODataSet
+    Connection = ADOConnection1
+    LockType = ltBatchOptimistic
+    CommandText = 
+      'SELECT DATA0034.RKey,DATA0034.DEPT_CODE, DATA0034.DEPT_NAME, Dat' +
+      'a0498.INV_GROUP_PTR, Data0498.BOM_NAME, '#13#10'      Data0498.FORMULA' +
+      ', Data0498.SEQ_NO, Data0496.GROUP_NAME, Data0496.GROUP_DESC, Dat' +
+      'a0496.SPEC_RKEY, '#13#10'      Data0498.DOC_FLAG, Data0498.RKEY AS MGR' +
+      'key,Data0498.required,Data0496.IsMaster'#13#10'FROM Data0498 '#13#10#9#9'INNER' +
+      ' JOIN DATA0034 ON Data0034.RKEY = Data0498.DEPT_PTR'#13#10#9#9'INNER JOI' +
+      'N Data0496 ON Data0496.RKEY = Data0498.INV_GROUP_PTR'#13#10'WHERE Data' +
+      '0496.IsMaster = 1 AND DATA0034.IS_COST_DEPT = 1'#13#10#9'AND DATA0034.R' +
+      'KEY = :rkey34'#13#10'ORDER BY  Data0498.SEQ_NO'
+    Parameters = <
+      item
+        Name = 'rkey34'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    Left = 136
+    Top = 528
+  end
+  object adsParamsInfo: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 
+      'select  M.rKey,M.Parameter_name,M.Parameter_Desc, M.Spec_Rkey,ca' +
+      'se M.Data_Type when 1 then '#39#25968#23383#22411#39' when 2 then '#39#23383#31526#22411#39' end as DataTy' +
+      'pe,M.Data_Type,'#13#10'U.unit_Code from data0278 M inner join Data0002' +
+      ' U on M.Unit_ptr=U.Rkey'#13#10
+    Parameters = <>
+    Left = 184
+    Top = 584
+  end
+  object aqEngTable: TADOQuery
+    Connection = ADOConnection1
+    LockType = ltBatchOptimistic
+    Parameters = <>
+    SQL.Strings = (
+      
+        ' select *, FXY=IsNull(Eng_table_name,'#39#39')+'#39'( '#39'+ rtrim(IsNull((sel' +
+        'ect Parameter_name from data0278 where rkey=M.FX),'#39#39'))+'#39' , '#39'+ rt' +
+        'rim(IsNull((select Parameter_name from data0278 where rkey=M.FY)' +
+        ','#39'1'#39'))+'#39' )'#39' from data0280 M order by Eng_table_name ')
+    Left = 264
+    Top = 560
+  end
+  object aqPubParams: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'F01'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'select D279.*,D278.Parameter_Name ,D278.Data_Type from data0279 ' +
+        'D279 '
+      'inner join data0278 D278 on D279.Parameter_ptr=D278.rKey'
+      'where  d279.ies_prod=1 and  D279.source_ptr=:F01')
+    Left = 328
+    Top = 560
+  end
+  object aqIESParams: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'F01'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      
+        'select D494.*,D278.Parameter_Name,D278.Data_Type from data0494 D' +
+        '494 inner join Data0278 D278 on D494.Parameter_ptr=D278.rKey'
+      'where custpart_ptr=:F01')
+    Left = 400
+    Top = 560
+  end
+  object adsBOMParams: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 
+      'select  * from data0497 '#13#10'where Route_Step_ptr in (select rkey f' +
+      'rom data0038 where source_ptr=:F01)'#13#10
+    Parameters = <
+      item
+        Name = 'F01'
+        DataType = ftInteger
+        Size = -1
+        Value = 0
+      end>
+    Left = 488
+    Top = 568
+    object adsBOMParamsRKEY: TAutoIncField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object adsBOMParamsPARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+    object adsBOMParamsPARAMETER_VALUE: TStringField
+      FieldName = 'PARAMETER_VALUE'
+      Size = 30
+    end
+    object adsBOMParamsSOURCE_PTR: TIntegerField
+      FieldName = 'SOURCE_PTR'
+    end
+    object adsBOMParamsFLOW_NO: TSmallintField
+      FieldName = 'FLOW_NO'
+    end
+    object adsBOMParamsROUTE_STEP_PTR: TIntegerField
+      FieldName = 'ROUTE_STEP_PTR'
+    end
+    object adsBOMParamsSEQ_NO: TIntegerField
+      FieldName = 'SEQ_NO'
+    end
+    object adsBOMParamsParam_Name: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Parameter_name'
+      LookupDataSet = adsParamsInfo
+      LookupKeyFields = 'rKey'
+      LookupResultField = 'Parameter_name'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object adsBOMParamsParam_Desc: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Param_Desc'
+      LookupDataSet = adsParamsInfo
+      LookupKeyFields = 'rKey'
+      LookupResultField = 'Parameter_Desc'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object adsBOMParamsDataType: TStringField
+      FieldKind = fkLookup
+      FieldName = 'DataType'
+      LookupDataSet = adsParamsInfo
+      LookupKeyFields = 'rKey'
+      LookupResultField = 'DataType'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object adsBOMParamsUnit: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Unit'
+      LookupDataSet = adsParamsInfo
+      LookupKeyFields = 'rKey'
+      LookupResultField = 'unit_Code'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object adsBOMParamsSpec_rKey: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Spec_rKey'
+      LookupDataSet = adsParamsInfo
+      LookupKeyFields = 'rKey'
+      LookupResultField = 'Spec_Rkey'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+    object adsBOMParamsData_Type: TIntegerField
+      FieldKind = fkLookup
+      FieldName = 'Data_Type'
+      LookupDataSet = adsParamsInfo
+      LookupKeyFields = 'rKey'
+      LookupResultField = 'Data_Type'
+      KeyFields = 'PARAMETER_PTR'
+      Lookup = True
+    end
+  end
+  object aqGroupParam: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'Invt'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      'select * from data0499 where INV_GROUP_PTR =:Invt')
+    Left = 104
+    Top = 584
+  end
+  object aqMaterials: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'F01'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'select rkey,inv_part_number,INV_NAME,INV_DESCRIPTION from data00' +
+        '17 where group_ptr=:F01')
+    Left = 32
+    Top = 584
+  end
+end

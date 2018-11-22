@@ -1,0 +1,992 @@
+unit main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, Menus,DB;
+
+type
+  TForm1 = class(TForm)
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    Label1: TLabel;
+    Edit1: TEdit;
+    BitBtn3: TBitBtn;
+    Label2: TLabel;
+    DBGrid1: TDBGrid;
+    RadioGroup1: TRadioGroup;
+    PopupMenu1: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    Panel2: TPanel;
+    Splitter1: TSplitter;
+    Panel3: TPanel;
+    DBGrid2: TDBGrid;
+    DBGrid3: TDBGrid;
+    N7: TMenuItem;
+    PopupMenu2: TPopupMenu;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    N10: TMenuItem;
+    mniPriceCheck: TMenuItem;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
+    procedure N1Click(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure Edit1Click(Sender: TObject);
+    procedure Edit1Exit(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure N5Click(Sender: TObject);
+    function  curr_auth(app: integer):boolean;
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormActivate(Sender: TObject);
+    procedure N6Click(Sender: TObject);
+    procedure N7Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
+    procedure PopupMenu2Popup(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure N10Click(Sender: TObject);
+    procedure DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure mniPriceCheckClick(Sender: TObject);
+  private
+    { Private declarations }
+
+    CONFIRM: string;
+    MesAddress:string;
+   // v_colwidth: array[0..9] of integer;
+    function chkPrice(ptr70:integer;ex_rate:Real):boolean;
+
+    function CreateJsonStr(TableName:array of string; DataSet: array of Tdataset):string;
+    function DataSettoJsonStr(DS:TDataSet): string;
+    function PostData(url:string;jsonstr:string):Boolean;
+    function PostDataByGetMethod(url:string):Boolean;
+    function CheckDataSuc(res:string):Boolean;
+//    function CheckUnAuth(url:string;JsonStr:string):Boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+const
+  IAuthPort = '/api/IFS/SynTable/SetMesPO';
+  ICheckUnAuthPort = '/api/IFS/SynTable/CheckMesPO';
+
+implementation
+USES DAMO, supplier_search, po_inspection,common,IdFTP , ADODB,ShellAPI,
+auth_info, annotation, supplier_info,stockqty_info, stdhistory_price,
+  PasFile,superobject,IniFiles,IdHTTP;
+{$R *.dfm}
+
+procedure TForm1.BitBtn1Click(Sender: TObject);
+begin
+   application.Terminate;
+end;
+
+procedure TForm1.RadioGroup1Click(Sender: TObject);
+begin
+if radiogroup1.ItemIndex=0 then
+ with dm.ADO70 do
+  begin
+   close;
+   sql.Delete(16);
+   sql.Insert(16,'and data0078.auth_flag=''Y''');
+   Parameters.ParamValues['rkey73'] := strtoint(rkey73);
+   open
+  end
+else
+ with dm.ADO70 do
+  begin
+   close;
+   sql.Delete(16);
+   sql.Insert(16,'');
+   Parameters.ParamValues['rkey73'] := strtoint(rkey73);
+   open
+  end;
+end;
+
+function TForm1.chkPrice(ptr70:integer;ex_rate:Real): boolean;
+var
+  inv_desc:string;
+begin
+  Result:=False;
+  inv_desc:='以下物料不含税价格上涨：'+#13;
+  dm.ADO71.DisableControls;
+  dm.ADO71.First;
+  while not dm.ADO71.Eof do
+  begin
+  with dm.ADOQuery1 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('SELECT TOP 1 Data0017.INV_PART_DESCRIPTION,(Data0071.PRICE*Data0070.EXCHANGE_RATE) AS PRICE_RMB');
+    SQL.Add('FROM Data0070 INNER JOIN Data0071 ON Data0070.RKEY=Data0071.PO_PTR');
+    SQL.Add('INNER JOIN Data0017 ON Data0071.INVT_PTR=Data0017.RKEY');
+    SQL.Add('WHERE Data0070.STATUS IN(5,6,7)');  //已审核,已收货,已完成
+    SQL.Add('AND Data0071.INVT_PTR = '+dm.ADO71INVT_PTR.AsString);
+    SQL.Add('AND Data0070.RKEY<>'+inttostr(ptr70));
+    SQL.Add('ORDER BY Data0070.PO_DATE DESC');
+    Open;
+  end;
+  IF not (dm.ADOQuery1.IsEmpty) then
+   IF dm.ADO71PRICE.Value*ex_rate - dm.ADOQuery1.FieldByName('PRICE_RMB').AsFloat > 0.1 then
+    begin
+      Result:=True;
+      inv_desc:=inv_desc+':'+dm.ADO71partnumber.Value+':'+dm.ADO71inv_part_number.Value;
+    end;
+
+   dm.ADO71.Next;
+  end;
+  dm.ADO71.First;
+  dm.ADO71.EnableControls;
+  if Result then  common.ShowMsg(inv_desc,1);
+end;
+
+procedure TForm1.N1Click(Sender: TObject);
+var
+  JsonStr:string;
+  DS:array of TDataSet;
+  TableName:array of string;
+  str,resultJson: ISuperObject;
+begin
+
+{if dbgrid1.SelectedRows.Count>1 then
+begin
+ for i := 0 to dbgrid1.SelectedRows.Count-1 do
+ begin
+  dbgrid1.DataSource.DataSet.Bookmark := dbgrid1.SelectedRows.Items[i];
+  if self.curr_auth(dm.ADO70SECOND_WHSE_PTR.Value) then
+   begin
+    chkPrice(DM.ADO71.FieldByName('INVT_PTR').AsInteger, DM.ADO70.FieldByName('RKEY').AsInteger, DM.ADO71.FieldByName('PRICE').AsFloat*DM.ADO70.FieldByName('EXCHANGE_RATE').AsFloat);
+    dm.ado70.Edit;
+    dm.ado70auth_date.AsString := server_date;   //授权日期服务器时间78短格式
+    dm.ADO70EXPIRED_DATE.Value := self.tuihui_date;  //最后审批日期长格式
+    dm.ADO70CONFIRMATION_NUMBER.Value := self.CONFIRM;//授权人姓名70
+    with dm.asp78 do
+     begin
+      Close;
+      Parameters[1].Value := dm.Ado70rkey.Value;
+      Open;
+     end;
+    while not dm.asp78.Eof do
+    begin
+     if dm.asp78ranking.Value-dm.Ado70ranking.Value=1 then
+      begin               //给下一个审批系统用户赋值
+       dm.ADO70SECOND_WHSE_PTR.Value:=dm.asp78user_ptr.Value;
+       break;
+      end
+     else
+      if dm.asp78.RecNo=dm.asp78.RecordCount then//如果是最后一条记录
+      dm.Ado70status.Value := 5;//表示采购购已经完成审批
+     dm.asp78.Next;
+    end;
+    try
+     dm.Ado70.Post;
+    except
+     messagedlg('审批操作不成，请退出后再来一次',mtinformation,[mbok],0);
+     dm.ADO70.Close;
+     dm.ADO70.Open;
+     break;
+    end;
+   end;
+ end;
+end
+else     //单一审批
+ begin }
+  if dm.ADO70auth_flag.Value='Y' then   //如果当前审批为Y
+  begin
+    chkPrice(DM.ADO70.FieldByName('RKEY').AsInteger, DM.ADO70.FieldByName('EXCHANGE_RATE').AsFloat);
+
+    DM.ADOConnection1.BeginTrans;
+    try
+      dm.ado70.Edit;
+      dm.ADO70auth_flag.Value := 'N';                 //78
+      dm.ado70auth_date.Value := common.getsystem_date(dm.ADOQuery1, 1);   //审批日期服务器时间短格式78
+      dm.ADO70EXPIRED_DATE.Value := common.getsystem_date(dm.ADOQuery1, 0);  //最后审批日期长格式70
+      dm.ADO70CONFIRMATION_NUMBER.Value := self.CONFIRM; //授权人姓名 70
+
+      with dm.asp78 do
+      begin
+        Close;
+        Parameters[1].Value := dm.Ado70rkey.Value;
+        Open;
+      end;
+      while not dm.asp78.Eof do
+      begin
+        if dm.asp78ranking.Value - dm.Ado70ranking.Value = 1 then
+        begin               //给下一个审批用户赋值
+          dm.ASP78.Edit;
+          dm.ASP78auth_flag.Value := 'Y';
+          dm.ASP78.Post;
+          dm.Ado70.Post;
+          break;
+        end
+        else if dm.asp78.RecNo = dm.asp78.RecordCount then//如果是最后一条记录
+        begin
+          dm.Ado70status.Value := 5; //表示请购已经完成审批
+          dm.Ado70.Post;
+
+          if (MesAddress <> '') then
+          begin
+            DM.ADOQuery1.Close;
+            DM.ADOQuery1.SQL.Text := 'SELECT DATA0070.*,DATA0005.EMPLOYEE_NAME FROM data0070  ' + #13 +
+                                '     INNER JOIN data0005 ON data0070.EMPLOYEE_POINTER = data0005.RKEY   ' + #13 +
+                                '      WHERE DATA0070.RKEY = ' + DM.ADO70RKEY.AsString;
+            DM.ADOQuery1.Open;
+            SetLength(TableName,2);
+            SetLength(DS, 2);
+            TableName[0]:= 'Data0070';
+            DS[0] := DM.ADOQuery1;
+            if DM.ADO70PO_TYPE.AsString = 'S' then
+            begin
+              TableName[1]:= 'Data0071';
+              DS[1] := DM.ADO71;
+            end
+            else
+            begin
+              TableName[1]:= 'Data0072';
+              DS[1] := DM.ADO72;
+            end;
+
+            JsonStr := CreateJsonStr(TableName,DS);
+//            ShowMessage(JsonStr);
+            if not PostData(MesAddress + IAuthPort, JsonStr) then Abort;
+          end;
+        end;
+        dm.asp78.Next;
+      end;
+      DM.ADOConnection1.CommitTrans;
+    except
+      DM.ADOConnection1.RollbackTrans;
+      messagedlg('审批操作不成，请联系管理员', mtinformation, [mbok], 0);
+
+      dm.ADO70.Close;
+      dm.ADO70.Open;
+    end;
+
+  end
+  else
+  begin
+   messagedlg('审批操作不成，当前审批人员不正确',mtinformation,[mbok],0);
+  END;
+// end;
+end;
+
+procedure TForm1.PopupMenu1Popup(Sender: TObject);
+begin
+if dm.ADO70.IsEmpty then
+ begin
+  n4.Enabled := false;
+  n5.Enabled := false;
+  N6.Enabled := FALSE;
+  n1.Enabled := false;
+  n2.Enabled := false;
+  n7.Enabled := false;
+ end
+else
+ begin
+  n4.Enabled := true;
+  n5.Enabled := true;
+  n7.Enabled := true;
+  if dm.Ado70auth_date.AsVariant <> null then    //已批准
+   begin
+    n1.Enabled := false;
+    n2.Enabled := true;
+    n6.Enabled := false;  //退回采购部
+   end
+  else                         //未批准
+   begin
+    n1.Enabled := true;
+    n2.Enabled := false;
+    n6.Enabled := true;   //退回采购部
+   end;
+ end;
+end;
+
+procedure TForm1.N2Click(Sender: TObject);
+var
+  TableName: array of string;
+  DS: array of TDataSet;
+  JsonStr:string;
+// i:word;
+begin
+{if dbgrid1.SelectedRows.Count>1 then
+begin
+ for i:=0 to dbgrid1.SelectedRows.Count-1 do
+  begin
+   dbgrid1.DataSource.DataSet.Bookmark := dbgrid1.SelectedRows.Items[i];
+   dm.ADO70.Edit;
+   dm.Ado70auth_date.AsVariant := null;   // 取消审批
+   dm.ADO70CONFIRMATION_NUMBER.Value:='';
+   dm.ADO70SECOND_WHSE_PTR.Value := dm.ADO70user_ptr.Value;//当前审批用户
+   if dm.Ado70status.Value = 5 then
+    dm.ADO70STATUS.Value := 1;
+   try                              //如果已全部审批那么变成待审批状态
+    dm.Ado70.Post;
+   except
+    messagedlg('取消审批操作不成，请退出后再来一次',mtinformation,[mbok],0);
+    dm.ADO70.Close;
+    dm.ADO70.Open;
+    break;
+   end;
+  end;
+end
+else
+ begin  }
+   if (MesAddress <> '') then
+   begin
+      JsonStr:= 'ID='+ DM.ADO70RKEY.AsString + '&Type=undo';
+     if not PostDataByGetMethod(MesAddress + ICheckUnAuthPort+'?'+JsonStr) then
+     begin
+       ShowMessage('采购订单已在供应商打印条码，不能取消审核！！');
+       Exit;
+     end;
+   end;
+   dm.ADOConnection1.BeginTrans;
+  try
+    dm.ADO70.Edit;
+    dm.Ado70auth_date.AsVariant := null;   // 取消审批
+    dm.ADO70CONFIRMATION_NUMBER.Value := '';
+    dm.ADO70auth_flag.Value := 'Y';
+    if dm.Ado70status.Value = 5 then
+      dm.ADO70STATUS.Value := 1;
+                    //如果已全部审批那么变成待审批状态
+    dm.Ado70.Post;
+    dm.ADO70.Refresh;
+    if (dm.ADO70STATUS.Value = 1) and (MesAddress <> '') then
+    begin
+      DM.ADOQuery1.Close;
+      DM.ADOQuery1.SQL.Text := 'SELECT DATA0070.*,DATA0005.EMPLOYEE_NAME FROM data0070  ' + #13 +
+                    '     INNER JOIN data0005 ON data0070.EMPLOYEE_POINTER = data0005.RKEY   ' + #13 +
+                    '      WHERE DATA0070.RKEY = ' + DM.ADO70RKEY.AsString;
+      DM.ADOQuery1.Open;
+      SetLength(TableName, 1);
+      SetLength(DS, 1);
+      TableName[0] := 'Data0070';
+      DS[0] := DM.ADOQuery1;
+
+      JsonStr := CreateJsonStr(TableName, DS);
+      if not PostData(MesAddress + IAuthPort, JsonStr) then Abort;
+    end;
+
+    with dm.asp78 do
+    begin
+      Close;
+      Parameters[1].Value := dm.Ado70rkey.Value;
+      Open;
+    end;
+    while not dm.asp78.Eof do
+    begin
+      if dm.asp78ranking.Value - dm.Ado70ranking.Value = 1 then
+      begin               //给下一个审批用户赋值
+        dm.ASP78.Edit;
+        dm.ASP78auth_flag.Value := 'N';
+        dm.ASP78.Post;
+        break;
+      end;
+      dm.asp78.Next;
+    end;
+    DM.ADOConnection1.CommitTrans;
+  except
+    DM.ADOConnection1.RollbackTrans;
+    messagedlg('取消审批操作不成功，请检查！！', mtinformation, [mbok], 0);
+    dm.ADO70.Close;
+    dm.ADO70.Open;
+  end;
+
+// end;
+end;
+
+procedure TForm1.BitBtn3Click(Sender: TObject);
+begin
+try
+ form_supp:=tform_supp.Create(application);
+ form_supp.Edit1.Text := trim(edit1.Text);
+ if form_supp.ADOQuery1.IsEmpty then
+  begin
+   messagedlg('没有找到相关记录!',mtinformation,[mbcancel],0);
+   edit1.SetFocus;
+  end
+ else
+ if form_supp.ShowModal=mrok then
+  begin
+   edit1.Text := form_supp.ADOQuery1.FieldValues['code'];
+   edit1.Font.Color := clwindowtext;
+   label2.Caption := form_supp.ADOQuery1.FieldValues['supplier_name'];
+   with dm.Ado70 do
+    begin
+     close;
+     sql.Delete(17);
+     sql.Insert(17,'and data0070.supplier_pointer='+form_supp.ADOQuery1.fieldbyname('rkey').AsString);
+     open;
+    end;
+   dbgrid1.SetFocus;
+  end
+ else
+  edit1.SetFocus;
+finally
+ form_supp.free;
+end;
+end;
+
+procedure TForm1.Edit1Click(Sender: TObject);
+begin
+ IF edit1.Font.Color=clwindowtext then
+  begin
+   edit1.Font.Color := clblue;
+   edit1.SelectAll;
+  end;
+end;
+
+procedure TForm1.Edit1Exit(Sender: TObject);
+begin
+if (activecontrol.Name<>'BitBtn1') and (activecontrol.Name<>'BitBtn3')
+   and (trim(edit1.Text)<>'') then
+ try
+  form_supp:=tform_supp.Create(application);
+  form_supp.Edit1.Text := trim(edit1.Text);
+ if comparetext(trim(edit1.text),trim(form_supp.ADOQuery1.Fieldbyname('code').AsString))=0 then
+  begin
+   edit1.Text := form_supp.ADOQuery1.FieldValues['code'];
+   edit1.Font.Color := clwindowtext;
+   label2.Caption := form_supp.ADOQuery1.FieldValues['supplier_name'];
+   with dm.Ado70 do
+    begin
+     close;
+     sql.Delete(17);
+     sql.Insert(17,'and data0070.supplier_pointer='+form_supp.ADOQuery1.fieldbyname('rkey').AsString);
+     open;
+    end;
+  end
+ else
+  begin
+   messagedlg('供应商代码不正确,请重新输入或选择',mtinformation,[mbok],0);
+   label2.Caption := '';
+   edit1.SetFocus;
+  end;
+ finally
+  form_supp.Free;
+ end
+else
+if (activecontrol.Name<>'BitBtn1') and (activecontrol.Name<>'BitBtn3')
+  and (trim(edit1.Text)='') then
+ with dm.Ado70 do
+  begin
+   close;
+   sql.Delete(17);
+   sql.Insert(17,' ');
+   open;
+   label2.Caption:='';
+  end;
+end;
+
+procedure TForm1.N4Click(Sender: TObject);
+begin
+try
+ form13:=tform13.create(application);
+ form13.Edit1.Text := self.CONFIRM;
+ form13.showmodal;
+finally
+ form13.free;
+end;
+end;
+
+procedure TForm1.BitBtn2Click(Sender: TObject);
+begin
+ dm.Ado70.Close;
+ dm.Ado70.Open;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+ var
+   FilePath:string;
+   iniFile:TIniFile;
+begin
+if dm.Adoconnection1.Connected then
+ begin
+  dm.ADO70.Parameters.ParamValues['rkey73'] := strtoint(rkey73);
+  dm.ado70.Open;
+  dm.ADO200.Open;
+  dm.ADO71.Open;
+  dm.ADO72.Open;
+  with dm.ADOQuery1 do
+   begin
+    close;
+    sql.Clear;
+    sql.Add('select data0005.EMPLOYEE_NAME,data0073.employee_ptr from data0005,data0073');
+    sql.Add('where data0073.employee_ptr=data0005.rkey and');
+    sql.Add('data0073.rkey='+rkey73);
+    open;
+    confirm:=fieldvalues['EMPLOYEE_NAME']; //审批人员姓名
+
+   end;
+   FilePath := extractfilepath(paramstr(0)) + 'WISDOMPCB.ini';
+    try
+      iniFile := TIniFile.Create(FilePath);
+    except
+      ShowMessage('读取MES服务器地址文件失败，请检查文件是否存在！！');
+      exit;
+    end;
+    MesAddress:= iniFile.ReadString('MES服务器','域名','');
+ end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+if not app_init_2(dm.ADOConnection1) then
+ begin
+  showmsg('程序启动失败,请与管理员联系!',1);
+  application.Terminate;
+ end;
+  self.Caption:=application.Title;
+
+//  rkey73:='3022';
+//  user_ptr:='3300' ;
+
+  DateSeparator := '-';
+  ShortDateFormat := 'yyyy-mm-dd';
+end;
+
+procedure TForm1.N5Click(Sender: TObject);
+begin
+ try
+  form3 := tform3.Create(application);
+  dm.asp78.Close;
+  dm.asp78.Parameters[1].Value := dm.Ado70rkey.Value;
+  dm.asp78.Open;
+  form3.ShowModal;
+ finally
+  form3.Free;
+  dm.asp78.Close;
+ end;
+end;
+
+procedure TForm1.DBGrid1DblClick(Sender: TObject);
+begin
+if not dm.ADO70.IsEmpty then
+ n4click(sender);
+end;
+
+procedure TForm1.DBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+if (not dm.ADO70.IsEmpty) and (key=13) then
+ n4click(sender);
+if (chr(key)='S') and (ssalt in shift) then
+ showmessage(dm.Ado70.SQL.Text);
+end;
+
+function  Tform1.curr_auth(app: integer):boolean;
+begin
+ curr_auth:=false;
+ with dm.ADOQuery1 do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('select rkey from data0073');
+   sql.Add('where rpl_po_ptr ='+rkey73);
+   open;
+  end;
+ while not dm.ADOQuery1.Eof do
+  begin
+   if dm.ADOQuery1.FieldValues['rkey']=app then
+    begin
+     curr_auth:=true;
+     break;
+    end;
+   dm.ADOQuery1.Next;
+  end;
+end;
+
+procedure TForm1.FormActivate(Sender: TObject);
+var
+ rpl_pr:integer;
+begin
+ with dm.ADOQuery1 do
+  begin
+   close;
+   sql.Clear;
+   sql.Add('SELECT rpl_po_ptr FROM Data0073');
+   sql.Add('where RKEY ='+rkey73);
+   open;
+   rpl_pr := FieldValues['rpl_po_ptr'];
+  end;
+ if rpl_pr<>strtoint(rkey73) then
+ begin
+  with dm.ADOQuery1 do
+   begin
+    close;
+    sql.Clear;
+    sql.Add('SELECT user_full_name FROM Data0073');
+    sql.Add('where RKEY ='+inttostr(rpl_pr));
+    open;
+    messagedlg('您已经将采购购单审批授权给用户：'+fieldvalues['user_full_name']+
+    '请首先取消授权',mtinformation,[mbok],0);
+   end;
+  application.Terminate;
+ end;
+end;
+
+procedure TForm1.N6Click(Sender: TObject);
+begin
+ form11:=tform11.Create(application);
+  dm.adosp.close;
+  dm.adosp.Parameters[1].Value := 2070;
+  dm.adosp.Parameters[2].Value := dm.ADO70.FieldValues['rkey'];
+  dm.adosp.Open;
+  if not dm.adosp.IsEmpty then
+   form11.Memo1.Text := dm.adosp.FieldValues['memo_text'];
+
+  form11.Caption := '采购单退回原因: '+dm.ADO70PO_NUMBER.Value;
+  form11.Memo1.ReadOnly := false;
+  form11.Memo1.Color := clwindow;
+  form11.Button1.Visible := true;
+  if form11.ShowModal = mrok then
+   begin
+    if trim(form11.Memo1.Text) <> '' then
+     begin
+      if dm.adosp.IsEmpty then
+       begin
+        dm.adosp.Append;
+        dm.adosp.FieldValues['source_type']:=2070;
+        dm.adosp.FieldValues['file_pointer']:=dm.ADO70RKEY.Value;
+        dm.adosp.FieldValues['memo_text']:=form11.Memo1.Text;
+        dm.adosp.Post;
+       end
+      else
+       begin
+        dm.adosp.Edit;
+        dm.adosp.FieldValues['memo_text']:=form11.Memo1.Text;
+        dm.adosp.Post;
+       end;
+
+      dm.ADO70.Edit;
+      dm.ADO70STATUS.Value:=2;
+      dm.ADO70PRINT_TIME.Value:=common.getsystem_date(dm.ADOQuery1,0);
+      dm.ADO70STATE_TAX.Value:=StrToInt(common.user_ptr);
+      dm.ADO70.Post;
+
+      showmessage('退回操作成功');
+      dm.ADO70.Close;
+      dm.ADO70.Open;
+     end
+    else
+     messagedlg('对不起!退回原因为空导致退回操作不成功!',mterror,[mbcancel],0);
+   end;
+ form11.Free;
+end;
+
+procedure TForm1.N7Click(Sender: TObject);
+begin
+ form11:=tform11.Create(application);
+  dm.adosp.close;
+  dm.adosp.Parameters[1].Value := 2070;
+  dm.adosp.Parameters[2].Value := dm.ADO70RKEY.Value;
+  dm.adosp.Open;
+  if not dm.adosp.IsEmpty then
+   form11.Memo1.Text := dm.adosp.FieldValues['memo_text'];
+
+  form11.Caption := '采购单多行备注信息: '+dm.ADO70PO_NUMBER.Value;
+  form11.Memo1.ReadOnly := false;
+  form11.Memo1.Color := clwindow;
+  form11.Button1.Visible := true;
+  if form11.ShowModal = mrok then
+   begin
+    if trim(form11.Memo1.Text) <> '' then
+     begin
+      if dm.adosp.IsEmpty then
+       begin
+        dm.adosp.Append;
+        dm.adosp.FieldValues['source_type']:=2070;
+        dm.adosp.FieldValues['file_pointer']:=dm.ADO70RKEY.Value;
+        dm.adosp.FieldValues['memo_text']:=form11.Memo1.Text;
+        dm.adosp.Post;
+       end
+      else
+       begin
+        dm.adosp.Edit;
+        dm.adosp.FieldValues['memo_text']:=form11.Memo1.Text;
+        dm.adosp.Post;
+       end;
+     end
+    else
+     if not dm.adosp.IsEmpty then dm.adosp.Delete;
+   end;
+ form11.Free;
+end;
+
+procedure TForm1.N8Click(Sender: TObject);
+begin
+ form_invtsupp:=tform_invtsupp.Create(application);
+ form_invtsupp.ShowModal;
+ form_invtsupp.Free;
+end;
+
+procedure TForm1.PopupMenu2Popup(Sender: TObject);
+begin
+if dm.ADO71.IsEmpty then
+  begin
+    n8.Enabled:=false;
+    n9.Enabled:=false;
+    n10.Enabled:=false;
+  end
+else
+  begin
+    n8.Enabled:=true;
+    n9.Enabled:=true;
+    n10.Enabled:=true;
+  end;
+end;
+
+procedure TForm1.N9Click(Sender: TObject);
+begin
+ Form_stockqty:=TForm_stockqty.Create(application);
+ Form_stockqty.AQStockQty.Close;
+ Form_stockqty.AQStockQty.Parameters[0].Value:=trim(dm.ADO71partnumber.AsString);
+ Form_stockqty.AQStockQty.Parameters[1].Value:=Trim(dm.ADO71partnumber.AsString);
+ Form_stockqty.AQStockQty.Open;
+ Form_stockqty.ShowModal;
+ Form_stockqty.Free;
+end;
+
+procedure TForm1.N10Click(Sender: TObject);
+begin
+ Form_stdprice:= TForm_stdprice.Create(application);
+ form_stdprice.ADOstdprice.Close;
+ form_stdprice.ADOstdprice.Parameters.ParamByName('invt_ptr').Value:=dm.ADO71invt_ptr.AsInteger;
+ form_stdprice.ADOstdprice.Open;
+ form_stdprice.ShowModal;
+ form_stdprice.Free;
+end;
+
+procedure TForm1.DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+ if dm.ADO71CRITICAL_MATL.Value='是' then
+  DBGrid2.Canvas.Font.Color := clRed;
+
+  DBGrid2.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+
+procedure TForm1.mniPriceCheckClick(Sender: TObject);
+var
+  LTmp:TADOQuery;
+  LFTp: TIdFTP;
+  LFtpDir,LFileName,LFtpName:string;
+  LSaveDlg: TSaveDialog;
+  LFrm: TfrmFile;
+begin
+  LSaveDlg:= TSaveDialog.Create(nil);
+  LTmp:= TADOQuery.Create(nil);
+  LTmp.Connection:= dm.ADOConnection1;
+  LFtp:= TIdFTP.Create(nil);
+  try
+      with DM.qryFile do
+      begin
+        Close;
+        Parameters[0].Value:= DM.ADO70SUPPLIER_POINTER.Value;
+        Parameters[1].Value:= DM.ADO71INVT_PTR.Value;
+        Open;
+        if not IsEmpty then
+        begin
+          if RecordCount = 1 then
+          begin
+            LFileName:= Fields[0].AsString;
+            LFtpName:= Fields[1].AsString;
+            if not DirectoryExists('D:\FileTmp\') then
+            begin
+              if not CreateDir('D:\FileTmp\') then
+              begin
+                LSaveDlg.FileName:= LFileName;
+                if LSaveDlg.Execute then LFileName:= LSaveDlg.FileName
+                else Exit;
+              end
+              else  LFileName:= 'D:\FileTmp\' + LFileName;
+            end
+            else LFileName:= 'D:\FileTmp\' + LFileName;
+  //          LSaveDlg.FileName:= LFileName;
+  //          if LSaveDlg.Execute then
+  //          begin
+              with LTmp do
+              begin
+                Close;
+                SQL.Text:= 'SELECT top 1 Rkey, FtpIP, FtpUserName, FtpPassWord, FtpDir + isnull(SubDir_1,'''') + isnull(SubDir_2,'''') as FDir ' + #13+
+                           ' from tier3_ftplist where rkey = ' + DM.qryFile.Fields[2].AsString;
+                open;
+                if not IsEmpty then
+                begin
+                  LFtp.Host := Fields[1].AsString;
+                  LFtp.Username := Fields[2].AsString;
+                  LFtp.Password := Fields[3].AsString;
+                  LFtpDir := Trim(Fields[4].AsString);
+                end;
+              end;
+              try
+                if not LFtp.Connected then LFtp.Connect(True,10000);
+                if LFTp.Connected then
+                begin
+  //                LFTp.TransferType:= ftBinary;
+                  LFTp.Get(LFtpDir+LFtpName,LFileName,True);
+                  ShellExecute(0,'open',pchar(LFileName),nil,nil,SW_SHOWNORMAL);
+                end;
+              except
+                ShowMessage('FTP链接失败,下载失败');
+                Exit;
+              end;
+  //          end;
+          end
+          else
+          begin
+            LFrm:= TfrmFile.Create(nil);
+            try
+              LFrm.ShowModal;
+            finally
+              LFrm.Free;
+            end;
+          end;
+        end
+        else
+        begin
+          ShowMessage('未上传审批文件');
+          exit;
+        end;
+      end;
+  finally
+    if LFTp.Connected then LFTp.Disconnect;
+    LSaveDlg.Free;
+    LTmp.Free;
+    LFTp.Free;
+  end;
+end;
+
+function TForm1.CreateJsonStr(TableName:array of string;DataSet: array of TDataSet): string;
+var
+  i:Integer;
+  DS:TDataSet;
+  str:string;
+begin
+  Result:='';
+  str :='{';
+  if Length(DataSet) = 0 then exit;
+  for i:= 0 to Length(DataSet) -1 do
+  begin
+    DS:= DataSet[i];
+    if i =0 then str:= str + '"'+ TableName[i] + '":'
+    else  str:= str + ',"'+ TableName[i] + '":';
+    str:= str + DataSettoJsonStr(DS);
+  end;
+  str:=  str + '}';
+  Result:= str;
+end;
+
+function TForm1.DataSettoJsonStr(DS: TDataSet): string;
+var
+  i:Integer;
+  str:string;
+begin
+  Result:= '';
+  str:='[';
+  DS.First;
+  DS.DisableControls;
+  try
+    while not ds.Eof do
+    begin
+      str:= str + '{';
+      for i:= 0 to DS.Fields.Count - 1 do        //   DS.Fields.Count
+      begin
+        if DS.Fields[i].IsNull then Continue;
+
+        if DS.Fields[i].DataType = ftDateTime then
+          str := str  +'"' + DS.Fields[i].FieldName + '":"' + FormatDateTime('yyyy-MM-dd hh:mm:ss',DS.Fields[i].AsDateTime) +'",'
+        else
+          str := str  +'"' + DS.Fields[i].FieldName + '":"' + Trim(DS.Fields[i].AsString) +'",' ;
+      end;
+      str:= Copy(str,0,Length(str)-1);
+      str:= str + '},';
+      ds.Next;
+    end;
+    str:= Copy(str,0,Length(str)-1) ;
+    Result:= str +']';
+  finally
+    DS.EnableControls;
+  end;
+end;
+
+function TForm1.PostData(url, jsonstr: string): Boolean;
+var
+   str: TStringStream;
+   hp:TIdHTTP;
+   res:string;
+begin
+  Result:= False;
+  str:= TStringStream.Create(UTF8Encode(jsonstr));
+  hp:= TIdHTTP.Create(nil);
+  try
+    hp.Request.ContentType := 'application/json';
+    try
+      res:=Utf8ToAnsi(hp.Post(url,str));
+
+      if CheckDataSuc(res) then Result:= True;
+    except
+
+    end;
+  finally
+    hp.Free;
+    str.Free;
+  end;
+end;
+
+function TForm1.CheckDataSuc(res: string): Boolean;
+var
+  Jsonstr: ISuperObject;
+begin
+  Result:= False;
+  try
+    Jsonstr:= SO(res);
+    if (StrToBoolDef(Jsonstr['data']['Success'].AsString,False) = true) then Result:= true;
+  except
+
+  end;
+end;
+
+function TForm1.PostDataByGetMethod(url: string): Boolean;
+var
+   str: TStringStream;
+   hp:TIdHTTP;
+   res:string;
+begin
+  Result:= False;
+  hp:= TIdHTTP.Create(nil);
+  str := TStringStream.Create('');
+  try
+    try
+      hp.Get(url,str);
+      res := str.DataString;
+      res := UTF8Decode(res);
+
+      if CheckDataSuc(res) then Result:= True;
+    except
+
+    end;
+  finally
+    hp.Free;
+    str.Free;
+  end;
+end;
+
+end.

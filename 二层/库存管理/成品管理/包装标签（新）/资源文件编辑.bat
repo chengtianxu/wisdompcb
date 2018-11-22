@@ -1,0 +1,1 @@
+Brcc32 -m F:\SVN_Work\WuZhou\vss\原程序代码\库存管理\成品管理\包装标签（新2）\CallerResource.rc

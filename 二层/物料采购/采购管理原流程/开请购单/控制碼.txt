@@ -1,0 +1,78 @@
+ if dm.Aq04.FieldValues['seed_flag'] = 2  then
+  for i:=length(maskedit1.Text) downto 1 do
+  if (maskedit1.Text[i]<'0') or (maskedit1.Text[i]>'9') then //﹍玡后
+  begin                                      //ぃ琌计才碞玡后
+   maskedit1.EditMask := copy(maskedit1.Text,1,i)+copy('999999999999999',1,15-i)+';1; ';
+   v_mask := maskedit1.EditMask;
+   for j:=1 to i do
+    insert('\',v_mask,2*j-1);        //眖计础
+   maskedit1.EditMask  := v_mask;    //被絏结
+   maskedit1.Text := trim(DM.ADO68PO_REQ_NUMBER.Value);
+   break;
+  end;
+  if bitbtn1.Visible = true then
+  if dm.AQ04.FieldValues['seed_flag'] = 1 then
+   maskedit1.SetFocus
+  else
+   if dm.AQ04.FieldValues['seed_flag'] = 4 then
+   begin
+    maskedit1.Enabled := false;
+    edit2.SetFocus;
+   end;
+ 
+ if dm.AQ04.FieldValues['seed_flag'] <> 1 then //璸衡审笆絪腹
+   begin
+    maskedit1.text := trim(dm.AQ04.Fieldvalues['seed_value']);
+    if dm.AQ04.FieldValues['seed_flag']=2  then
+     for i:=length(maskedit1.Text) downto 1 do //砞竚被絏
+     if (maskedit1.Text[i]<'0') or (maskedit1.Text[i]>'9') then //﹍玡后
+      begin                                    //ぃ琌计才碞玡后
+       maskedit1.EditMask := copy(maskedit1.Text,1,i)+copy('999999999999999',1,15-i)+';1; ';
+       v_mask := maskedit1.EditMask;
+       for j:=1 to i do
+       insert('\',v_mask,2*j-1);      //眖计础
+       maskedit1.EditMask := v_mask;
+       maskedit1.text := trim(dm.AQ04.Fieldvalues['seed_value']);
+       break;
+      end;
+     if dm.AQ04.FieldValues['seed_flag']=4 then
+      maskedit1.Enabled :=false;
+     if label18.Caption ='0' then  //ぃ琌蝋
+      edit1.SetFocus
+     else
+      edit2.SetFocus;
+   end
+  else            //Чも块絪腹
+   begin
+    maskedit1.Text := '';
+    maskedit1.SetFocus;
+   end;
+  dm.AQ04.Close;     //030522эㄏノ闽超768︽秨ゴ
+
+dm.AQ04.Open;    //030522э祘癬笆竒盢ㄏノ筁04闽超204︽闽超
+if dm.aq04seed_flag.Value<>1 then //絏パ北絏北
+ begin
+  v_seed := trim(maskedit1.Text);
+  v_length := length(v_seed);
+  control_no := dm.AQ04CONTROL_NO_LENGTH.Value;  //北程
+ if v_seed>=trim(dm.AQ04.FieldValues['seed_value']) then   //狦絏琌眖04い
+  for i := v_length downto 1 do         //穝data0004
+  if (copy(v_seed,i,1)<'0') or (copy(v_seed,i,1)>'9') then  //狦ぃ琌计
+  begin                                 //后1
+   v_last := floattostr(100000000000000+strtofloat(copy(v_seed,i+1,v_length-i))+1);
+   new_seed := copy(v_seed,1,i)+copy(v_last,control_no-(v_length-i)+1,v_length-i);
+   dm.AQ04.Edit;            //ㄏ玡后ぃ跑后1
+   dm.AQ04.FieldValues['seed_value'] := new_seed;
+   dm.AQ04.Post;
+   break;
+  end
+ else
+  if i=1 then //狦材ご礛琌计
+  begin
+   v_last := floattostr(1000000000000000+strtofloat(v_seed)+1);
+   new_seed := copy(v_last,control_no+1-v_length+1,v_length);
+   dm.AQ04.Edit;
+   dm.AQ04.FieldValues['seed_value'] := new_seed;
+   dm.AQ04.Post;
+  end;
+end;

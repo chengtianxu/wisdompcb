@@ -1,0 +1,115 @@
+unit FindStemParamFrm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, Grids, DBGridEh, Buttons, damo, DBGrids, DB;
+
+type
+  TfrmFindStepParam = class(TForm)
+    Panel1: TPanel;
+    Panel3: TPanel;
+    edt1: TEdit;
+    Label1: TLabel;
+    Panel2: TPanel;
+    btn2: TButton;
+    dbgrd1: TDBGrid;
+    procedure btn2Click(Sender: TObject);
+    procedure edt1Change(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure dbgrd1TitleClick(Column: TColumn);
+  private
+    { Private declarations }
+    PreColumn: TColumn;
+    FHotField: string;
+  public
+    { Public declarations }
+    FOld494Afterscroll: Pointer;
+    FOldNeedChangeParam: Boolean;
+    procedure ads494AfterScroll(DataSet: TDataSet);
+  end;
+
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmFindStepParam.ads494AfterScroll(DataSet: TDataSet);
+begin
+  with dm.ADOQuery1 do
+   begin
+    close;
+    sql.Clear;
+    sql.Add('select tvalue from data0338 where parameter_ptr='+inttostr(dm.ads494PARAMETER_PTR.AsInteger));
+    open;
+   end;
+  if not dm.adoquery1.IsEmpty then
+   begin
+    //DBComboBox1.Items.Clear;
+    dbgrd1.Columns[5].PickList.Clear;
+    while not dm.adoquery1.eof do
+     begin
+     // DBComboBox1.Items.Add(trim(dm.adoquery1.FieldValues['tvalue']));
+     dbgrd1.Columns[5].PickList.Add(trim(dm.adoquery1.FieldValues['tvalue']));
+      dm.adoquery1.Next;
+     end;
+   end
+  else
+   //DBComboBox1.Items.Clear;
+   dbgrd1.Columns[5].PickList.Clear;
+end;
+
+procedure TfrmFindStepParam.btn2Click(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmFindStepParam.edt1Change(Sender: TObject);
+begin
+  with DM.ads494 do
+  begin
+    if edt1.Text <> '' then
+    begin
+      Filter := PreColumn.FieldName + ' like ' + QuotedStr('%' + edt1.Text + '%');
+    end else
+      Filter := '';
+    Filtered := True;
+  end;
+end;
+
+procedure TfrmFindStepParam.FormCreate(Sender: TObject);
+begin
+  FOldNeedChangeParam := DM.FChangeAllParam;
+  dm.FChangeAllParam := False;
+  FOld494Afterscroll := @DM.ads494.AfterScroll;
+  DM.ads494.AfterScroll := ads494AfterScroll;
+end;
+
+procedure TfrmFindStepParam.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  @DM.ads494.AfterScroll := FOld494Afterscroll;
+  DM.FChangeAllParam := FOldNeedChangeParam;
+end;
+
+procedure TfrmFindStepParam.dbgrd1TitleClick(Column: TColumn);
+begin
+  if Column.Field.FieldKind <> fkData then Exit;
+if (column.FieldName <> dm.ADs494.IndexFieldNames) then
+ dm.ADs494.IndexFieldNames:=column.FieldName;
+
+if (column.ReadOnly) and (PreColumn<>column) then
+ begin
+  label1.Caption:=column.Title.Caption;
+  edt1.SetFocus;
+  //PreColumn.Title.Color := clBtnFace;
+  Column.Title.Color := clred;
+  PreColumn := column;
+ end
+else
+ edt1.SetFocus;
+end;
+
+end.

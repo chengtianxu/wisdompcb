@@ -1,0 +1,602 @@
+object Frm_detail: TFrm_detail
+  Left = 417
+  Top = 226
+  Width = 705
+  Height = 496
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'yy'
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 697
+    Height = 33
+    Align = alTop
+    TabOrder = 2
+    object BitBtn9: TBitBtn
+      Left = 62
+      Top = 3
+      Width = 59
+      Height = 28
+      Cursor = crHandPoint
+      Hint = #20851#38381
+      Caption = #20851#38381
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnClick = BitBtn9Click
+      Glyph.Data = {
+        EE000000424DEE000000000000007600000028000000100000000F0000000100
+        0400000000007800000000000000000000001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFF0FFFFFF
+        FFFFFFFF00FFFFFFFFFFFFF030FFFFFFFFFFFF0330FFFFFFFFFF003330000000
+        0FFFF03330FF0FFFFFFFF03300FF0FFFF4FFF03330FF0FFF44FFF03330FF0FF4
+        4444F03330FF0F444444F03330FF0FF44444F0330FFF0FFF44FFF030FFFF0FFF
+        F4FFF00FFFFF0FFFFFFFF00000000FFFFFFF}
+    end
+    object BtnSave: TBitBtn
+      Left = 3
+      Top = 3
+      Width = 59
+      Height = 28
+      Cursor = crHandPoint
+      Hint = #20445#23384
+      Caption = #20445#23384
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = BtnSaveClick
+      Glyph.Data = {
+        C6050000424DC605000000000000360400002800000014000000140000000100
+        08000000000090010000C40E0000C40E0000000100000000000000000000E8E0
+        18008868080048484800D8D8E000C8C8C8001078F00070500000B0900800F8F8
+        F800A8880800D0D8D800B8A81000A0800800C8D0D000E8E8E80068686800B0A0
+        100098700800A8900800D0D0D000D8D8D80090700800B0981000C0A81000E0E0
+        E0009878080090680800A0880800D8E0D800B8A01000B0901000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000100000000
+        000000130000301A1600000000000000E400F712000035A6FC00770000001300
+        0700A7FC7700080613000083A600FC7700000000000035A5FC0077FFFF000000
+        6800010000000000000000000000000000000000000000000000000000000000
+        31000000000000E2EC0000640000660000004716000078011300000047001600
+        780001130000F8461600000000000000C000F7120000C8F3EB007770F5001200
+        0000ECFD7F0002000000000000001300AF000000000001000A0000884000F877
+        30001A1600000100000000998400E6775400F71200000101010001D8F8001200
+        450090FB7700801FF80077FFFF00FFFF6000F8120000AD84E6007760F8001200
+        D80084E677000000000000FFFF000000C800E2EC0000C8E2EC00001800000000
+        00000000000044F8120000400000000000000000000028F81200000000000000
+        00000000000000000000000C000000000200000000000101120000872B00F877
+        0000ECFD7F00000000000002000000006C00001A0200381A1600007FFF00FFFF
+        000000000000381A1600000500000000870031E6770084F8120000218600E677
+        9800F81200006713000010FFFF000000680001000000C8E2EC00000000000000
+        7000F8120000ACF8120000D8F8001200100030001000F8400000105F5400E677
+        680001000000D0F8120000D8F80012000800000000000E0000000F0505BF05BF
+        05BF05BF05BF05BF05BF05BF05C7BF0000000000000000000000000000000000
+        00050500E1138CE0E0E0E0E0E0E0E0E0E006BD1B00BFBF00031305050505BF05
+        050505050505181B00050500C60705050F050FC70F050FC70FBF011B00BFBF00
+        011B05A7C7090383BF0503030305011300050500010705091003050503031003
+        0305011B00BFBF00011BBF031005BF03101010101005181300050500010705C7
+        0FC709C70FC70FC70F05011300BFBF00011B03171017101710171017101B1B18
+        00050500011318131813181B181318131813181300BFBF0001181BC601C618C6
+        01C601C60101181800050500E11713000003C210050505050510C61800BFBF00
+        01181B000010C705C705BF0FC71718C600050500E113180000100F0505000005
+        A717C61800BFBF0001C61B000010C70505000005C71718C600050500E1171300
+        00100F05050000050F10C60100BFBF00BD0101000010090F0510100FC7170101
+        00E90500000000000300000000000000000000000005C705BF05BF0509E9BF05
+        BF05BF05BF05BF05BF09}
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 33
+    Width = 697
+    Height = 240
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 15
+      Top = 12
+      Width = 52
+      Height = 13
+      Caption = #35746#21333#32534#21495
+    end
+    object Label3: TLabel
+      Left = 15
+      Top = 37
+      Width = 52
+      Height = 13
+      Caption = #35746#21333#26085#26399
+    end
+    object Label5: TLabel
+      Left = 363
+      Top = 113
+      Width = 52
+      Height = 13
+      Caption = #29983#20135#37096#38376
+    end
+    object Label7: TLabel
+      Left = 41
+      Top = 212
+      Width = 26
+      Height = 13
+      Caption = #22791#27880
+    end
+    object Label10: TLabel
+      Left = 162
+      Top = 65
+      Width = 7
+      Height = 13
+    end
+    object SpeedButton1: TSpeedButton
+      Tag = 3
+      Left = 514
+      Top = 108
+      Width = 25
+      Height = 24
+      Glyph.Data = {
+        EE000000424DEE000000000000007600000028000000100000000F0000000100
+        04000000000078000000130B0000130B00001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+        888800000888880000080F000888880F00080F000888880F0008000000080000
+        000800F000000F00000800F000800F00000800F000800F000008800000000000
+        0088880F00080F000888880000080000088888800088800088888880F08880F0
+        888888800088800088888888888888888888}
+      OnClick = SpeedButton1Click
+    end
+    object Label2: TLabel
+      Left = 379
+      Top = 139
+      Width = 39
+      Height = 13
+      Caption = #19994#21153#21592
+    end
+    object SpeedButton2: TSpeedButton
+      Tag = 4
+      Left = 514
+      Top = 135
+      Width = 25
+      Height = 24
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+        333333777777777F33333330B00000003333337F7777777F3333333000000000
+        333333777777777F333333330EEEEEE033333337FFFFFF7F3333333300000000
+        333333377777777F3333333330BFBFB03333333373333373F33333330BFBFBFB
+        03333337F33333F7F33333330FBFBF0F03333337F33337F7F33333330BFBFB0B
+        03333337F3F3F7F7333333330F0F0F0033333337F7F7F773333333330B0B0B03
+        3333333737F7F7F333333333300F0F03333333337737F7F33333333333300B03
+        333333333377F7F33333333333330F03333333333337F7F33333333333330B03
+        3333333333373733333333333333303333333333333373333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton1Click
+    end
+    object Label4: TLabel
+      Left = 655
+      Top = 45
+      Width = 7
+      Height = 13
+    end
+    object Label8: TLabel
+      Left = 363
+      Top = 13
+      Width = 52
+      Height = 13
+      Caption = #31080#25454#31867#22411
+    end
+    object Label9: TLabel
+      Left = 41
+      Top = 60
+      Width = 26
+      Height = 13
+      Caption = #23458#25143
+    end
+    object Label11: TLabel
+      Left = 387
+      Top = 38
+      Width = 26
+      Height = 13
+      Caption = #36135#24065
+    end
+    object Label12: TLabel
+      Left = 15
+      Top = 187
+      Width = 52
+      Height = 13
+      Caption = #36865#36135#22320#22336
+    end
+    object Label13: TLabel
+      Left = 28
+      Top = 135
+      Width = 39
+      Height = 13
+      Caption = #32852#31995#20154
+    end
+    object Label14: TLabel
+      Left = 386
+      Top = 63
+      Width = 26
+      Height = 13
+      Caption = #27719#29575
+    end
+    object SpeedButton3: TSpeedButton
+      Tag = 1
+      Left = 578
+      Top = 183
+      Width = 25
+      Height = 24
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+        333333777777777F33333330B00000003333337F7777777F3333333000000000
+        333333777777777F333333330EEEEEE033333337FFFFFF7F3333333300000000
+        333333377777777F3333333330BFBFB03333333373333373F33333330BFBFBFB
+        03333337F33333F7F33333330FBFBF0F03333337F33337F7F33333330BFBFB0B
+        03333337F3F3F7F7333333330F0F0F0033333337F7F7F773333333330B0B0B03
+        3333333737F7F7F333333333300F0F03333333337737F7F33333333333300B03
+        333333333377F7F33333333333330F03333333333337F7F33333333333330B03
+        3333333333373733333333333333303333333333333373333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton3Click
+    end
+    object SpeedButton4: TSpeedButton
+      Left = 169
+      Top = 55
+      Width = 25
+      Height = 24
+      Glyph.Data = {
+        EE000000424DEE000000000000007600000028000000100000000F0000000100
+        04000000000078000000130B0000130B00001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+        888800000888880000080F000888880F00080F000888880F0008000000080000
+        000800F000000F00000800F000800F00000800F000800F000008800000000000
+        0088880F00080F000888880000080000088888800088800088888880F08880F0
+        888888800088800088888888888888888888}
+      OnClick = SpeedButton1Click
+    end
+    object SpeedButton5: TSpeedButton
+      Tag = 2
+      Left = 514
+      Top = 33
+      Width = 25
+      Height = 24
+      Glyph.Data = {
+        EE000000424DEE000000000000007600000028000000100000000F0000000100
+        04000000000078000000130B0000130B00001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+        888800000888880000080F000888880F00080F000888880F0008000000080000
+        000800F000000F00000800F000800F00000800F000800F000008800000000000
+        0088880F00080F000888880000080000088888800088800088888880F08880F0
+        888888800088800088888888888888888888}
+      OnClick = SpeedButton1Click
+    end
+    object Label15: TLabel
+      Left = 15
+      Top = 161
+      Width = 52
+      Height = 13
+      Caption = #32852#31995#30005#35805
+    end
+    object Label16: TLabel
+      Left = 362
+      Top = 87
+      Width = 52
+      Height = 13
+      Caption = #20184#27454#26041#27861
+    end
+    object Label17: TLabel
+      Left = 363
+      Top = 164
+      Width = 52
+      Height = 13
+      Caption = #21512#35745#37329#39069
+    end
+    object Label18: TLabel
+      Left = 15
+      Top = 109
+      Width = 52
+      Height = 13
+      Caption = #35013#36816#26041#27861
+    end
+    object LBCust: TLabel
+      Left = 199
+      Top = 60
+      Width = 6
+      Height = 12
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object LBCurr: TLabel
+      Left = 544
+      Top = 39
+      Width = 7
+      Height = 13
+    end
+    object LBSale: TLabel
+      Left = 633
+      Top = 139
+      Width = 7
+      Height = 13
+    end
+    object LBDept: TLabel
+      Left = 544
+      Top = 112
+      Width = 7
+      Height = 13
+    end
+    object SpeedButton6: TSpeedButton
+      Tag = 5
+      Left = 169
+      Top = 106
+      Width = 25
+      Height = 24
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+        333333777777777F33333330B00000003333337F7777777F3333333000000000
+        333333777777777F333333330EEEEEE033333337FFFFFF7F3333333300000000
+        333333377777777F3333333330BFBFB03333333373333373F33333330BFBFBFB
+        03333337F33333F7F33333330FBFBF0F03333337F33337F7F33333330BFBFB0B
+        03333337F3F3F7F7333333330F0F0F0033333337F7F7F773333333330B0B0B03
+        3333333737F7F7F333333333300F0F03333333337737F7F33333333333300B03
+        333333333377F7F33333333333330F03333333333337F7F33333333333330B03
+        3333333333373733333333333333303333333333333373333333}
+      NumGlyphs = 2
+      OnClick = SpeedButton1Click
+    end
+    object Label6: TLabel
+      Left = 28
+      Top = 85
+      Width = 39
+      Height = 13
+      Caption = #21512#21516#21495
+    end
+    object EdtSale: TEdit
+      Left = 419
+      Top = 135
+      Width = 95
+      Height = 21
+      TabOrder = 12
+      OnEnter = EdtSaleEnter
+      OnExit = EdtSaleExit
+    end
+    object EdtDept: TEdit
+      Left = 419
+      Top = 109
+      Width = 95
+      Height = 21
+      TabOrder = 11
+      OnEnter = EdtDeptEnter
+      OnExit = EdtDeptExit
+    end
+    object MaskEdit1: TMaskEdit
+      Left = 71
+      Top = 8
+      Width = 120
+      Height = 21
+      TabOrder = 0
+    end
+    object EdtCust: TEdit
+      Left = 71
+      Top = 56
+      Width = 98
+      Height = 21
+      ReadOnly = True
+      TabOrder = 2
+      OnEnter = EdtCustEnter
+      OnExit = EdtCustExit
+    end
+    object EdtCurr: TEdit
+      Left = 419
+      Top = 34
+      Width = 95
+      Height = 21
+      TabOrder = 8
+      OnEnter = EdtCurrEnter
+      OnExit = EdtCurrExit
+    end
+    object DBEdit1: TDBEdit
+      Left = 71
+      Top = 184
+      Width = 506
+      Height = 21
+      DataField = 'location'
+      DataSource = DM.DS3
+      ReadOnly = True
+      TabOrder = 3
+    end
+    object DBEdit2: TDBEdit
+      Left = 71
+      Top = 132
+      Width = 120
+      Height = 21
+      DataField = 'CONTACT_name'
+      DataSource = DM.DS3
+      TabOrder = 5
+    end
+    object DBEdit3: TDBEdit
+      Left = 419
+      Top = 60
+      Width = 120
+      Height = 21
+      DataField = 'EXCH_rate'
+      DataSource = DM.DS3
+      TabOrder = 9
+    end
+    object DBEdit4: TDBEdit
+      Left = 71
+      Top = 158
+      Width = 120
+      Height = 21
+      DataField = 'CONT_phone'
+      DataSource = DM.DS3
+      TabOrder = 6
+    end
+    object DBEdit5: TDBEdit
+      Left = 419
+      Top = 84
+      Width = 120
+      Height = 21
+      DataField = 'PAY_METHOD'
+      DataSource = DM.DS3
+      TabOrder = 10
+    end
+    object DBEdit6: TDBEdit
+      Left = 419
+      Top = 161
+      Width = 120
+      Height = 21
+      Color = clInactiveCaptionText
+      DataField = 'TOTAL_AMOUNT'
+      DataSource = DM.DS3
+      Enabled = False
+      TabOrder = 13
+    end
+    object DBEdit7: TDBEdit
+      Left = 71
+      Top = 106
+      Width = 98
+      Height = 21
+      DataField = 'ship_method'
+      DataSource = DM.DS3
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object DBEdit8: TDBEdit
+      Left = 71
+      Top = 209
+      Width = 532
+      Height = 21
+      DataField = 'Remark'
+      DataSource = DM.DS3
+      TabOrder = 14
+    end
+    object DBComboBox1: TDBComboBox
+      Left = 419
+      Top = 8
+      Width = 120
+      Height = 21
+      Style = csDropDownList
+      DataField = 'TAX_cate'
+      DataSource = DM.DS3
+      ItemHeight = 13
+      Items.Strings = (
+        #26222#36890#25910#25454
+        #26222#36890#21457#31080
+        #22686#20540#31246#31080)
+      TabOrder = 7
+    end
+    object DBDateTimeEditEh1: TDBDateTimeEditEh
+      Left = 71
+      Top = 32
+      Width = 120
+      Height = 21
+      DataField = 'sales_date'
+      DataSource = DM.DS3
+      EditButtons = <>
+      Kind = dtkDateEh
+      TabOrder = 1
+      Visible = True
+    end
+    object dbedtPO_NO: TDBEdit
+      Left = 71
+      Top = 82
+      Width = 120
+      Height = 21
+      DataField = 'PO_NO'
+      DataSource = DM.DS3
+      TabOrder = 15
+    end
+  end
+  object SGrid: TStringGrid
+    Left = 0
+    Top = 273
+    Width = 697
+    Height = 189
+    Align = alClient
+    ColCount = 8
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goTabs, goAlwaysShowEditor]
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+    OnDrawCell = SGridDrawCell
+    OnKeyPress = SGridKeyPress
+    OnMouseDown = SGridMouseDown
+    OnSelectCell = SGridSelectCell
+    ColWidths = (
+      42
+      84
+      64
+      64
+      64
+      122
+      64
+      64)
+    RowHeights = (
+      24
+      24)
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 325
+    Top = 299
+    Width = 95
+    Height = 26
+    BevelEdges = []
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    Date = 40302.000000000000000000
+    Time = 40302.000000000000000000
+    TabOrder = 3
+    Visible = False
+    OnChange = DateTimePicker1Change
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 584
+    object N5: TMenuItem
+      Tag = 3
+      Caption = #26032#22686
+      OnClick = N5Click
+    end
+    object N2: TMenuItem
+      Caption = #21024#38500
+      OnClick = N2Click
+    end
+  end
+end

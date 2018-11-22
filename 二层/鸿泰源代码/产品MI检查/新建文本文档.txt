@@ -1,0 +1,68 @@
+form_report:=tform_report.Create(application);
+  with form_report do
+  begin
+    ppReport1.Reset;
+    ppReport1.Template.FileName :=
+      stringReplace(UpperCase(extractfilepath(paramstr(0))),'EXEC\','NIERP\REPORT\',[rfReplaceAll])+
+        'Manu_instruction.rtm';   //R:\NIERP\Report\Manu_instruction.rtm
+    ppReport1.Template.LoadFromFile;
+    ppreport1.SaveAsTemplate:=false;
+
+   ads192.Open;
+   ads279.Close;
+   ads279.Parameters.ParamValues['rkey']:=dm.ADS25rkey.Value;
+   if ads192ENG_CONTROL16.Value=1 then       //不显示为空的全局参数
+    ads279.Parameters.ParamValues['value']:=''
+   else
+    ads279.Parameters.ParamValues['value']:='#@#@#';
+   ads279.Open;
+
+   ads25.Close;
+   ads25.Parameters[0].Value:=dm.ADS25rkey.Value;
+   ads25.Open;
+    ads494.Close;
+    ads494.Parameters.ParamValues['source_ptr']:=dm.ADS25rkey.Value;
+    if ads192ENG_CONTROL2.Value=1 then       //不显示为空的制程参数
+     ads494.Parameters.ParamValues['value']:=''
+    else
+     ads494.Parameters.ParamValues['value']:='#@#@#';
+    ads494.Open;
+
+   ads38.Close;
+   ads38.Parameters.ParamValues['rkey']:=dm.ADS25rkey.Value;
+   if form_reportselect.CheckBox3.Checked then
+    ads38.Parameters.ParamValues['visible']:=1
+   else
+    ads38.Parameters.ParamValues['visible']:=2;
+   ads38.Open;
+   ads502.Open;
+   ads29.Open;
+   form_report.ppImage3.Picture.Assign(Load_JPG_Pic_From_DB(ads502DSDesigner));
+   if ads502A3.Value>0 then
+    form_report.ppimage1.Picture.Assign(Load_JPG_Pic_From_DB(ads502A));
+   if ads502B3.Value>0 then
+    form_report.ppimage2.Picture.Assign(Load_JPG_Pic_From_DB(ads502B));
+
+    if (not ADS25DSDesigner35.IsNull) and
+       (form_reportselect.CheckBox6.Checked) then
+     begin
+      form_report.ppImage4.Visible:=True;
+      form_report.ppImage4.Picture.Assign(Load_JPG_Pic_From_DB(ADS25DSDesigner35));
+     end
+    else
+     form_report.ppImage4.Visible:=False;
+
+   if not form_reportselect.CheckBox1.Checked then
+    form_report.ppSubReport1.Visible:=false;
+   if not form_reportselect.CheckBox2.Checked then
+    form_report.ppSubReport2.Visible:=false;
+   if not form_reportselect.CheckBox4.Checked then
+    form_report.ppSubReport3.Visible:=false;
+   if not form_reportselect.CheckBox5.Checked then
+    form_report.ppSubReport4.Visible:=false;
+  end;
+
+  form_report.ppReport1.Print;
+  form_report.Free;
+ end;
+form_reportselect.Free;

@@ -1,0 +1,119 @@
+unit CutViewFrm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask, DBCtrls, ComCtrls, ExtCtrls, DB, ADODB, DmUnit1;
+
+type
+  TfrmCutView = class(TForm)
+    pnl1: TPanel;
+    pnl2: TPanel;
+    pnl3: TPanel;
+    pgc1: TPageControl;
+    ts1: TTabSheet;
+    ts2: TTabSheet;
+    ts3: TTabSheet;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    lbl5: TLabel;
+    lbl6: TLabel;
+    lbl7: TLabel;
+    lbl8: TLabel;
+    lbl9: TLabel;
+    lbl10: TLabel;
+    lbl11: TLabel;
+    lbl12: TLabel;
+    lbl13: TLabel;
+    lbl14: TLabel;
+    lbl15: TLabel;
+    lbl16: TLabel;
+    edtpcs_lngth: TDBEdit;
+    edtpcs_width: TDBEdit;
+    edtset_lngth: TDBEdit;
+    edtset_width: TDBEdit;
+    edtspell_lngth: TDBEdit;
+    edtspell_width: TDBEdit;
+    edtset_qty: TDBEdit;
+    edtspell_qty: TDBEdit;
+    edtunit_sq: TDBEdit;
+    edtspell_sq: TDBEdit;
+    edtpcs_sq: TDBEdit;
+    img3: TImage;
+    img2: TImage;
+    img1: TImage;
+    ads1: TADODataSet;
+    ds1: TDataSource;
+    ads502: TADODataSet;
+    ds2: TDataSource;
+    ads1pcs_lngth: TBCDField;
+    ads1pcs_width: TBCDField;
+    ads1pcs_sq: TFloatField;
+    ads1set_lngth: TBCDField;
+    ads1set_width: TBCDField;
+    ads1set_qty: TIntegerField;
+    ads1spell_lngth: TBCDField;
+    ads1spell_width: TBCDField;
+    ads1spell_qty: TIntegerField;
+    ads1spell_sq: TFloatField;
+    ads502sheet_BMP: TBlobField;
+    ads502pnl_bmp: TBlobField;
+    ads502pnl2_bmp: TBlobField;
+    ads1rkey25: TAutoIncField;
+    ads1unit_sq: TFloatField;
+    procedure ads502AfterOpen(DataSet: TDataSet);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCutView: TfrmCutView;
+
+implementation
+
+uses
+  common;
+
+{$R *.dfm}
+
+procedure TfrmCutView.ads502AfterOpen(DataSet: TDataSet);
+begin
+ img1.Picture.Assign(nil);
+ img2.Picture.Assign(nil);
+ img3.Picture.Assign(nil);
+ img1.Canvas.Brush.Color:=clwhite;
+ img2.Canvas.Brush.Color:=clwhite;
+ img3.Canvas.Brush.Color:=clwhite;
+ if not ads502.IsEmpty then
+ begin
+  img1.Picture.Assign(Load_JPG_Pic_From_DB(ads502sheet_BMP));
+  if not ads502pnl_bmp.IsNull then
+   img2.Picture.Assign(Load_JPG_Pic_From_DB(ads502pnl_bmp));
+  if not ads502pnl2_bmp.IsNull then
+   img3.Picture.Assign(Load_JPG_Pic_From_DB(ads502pnl2_bmp));
+ end;
+end;
+
+procedure TfrmCutView.FormShow(Sender: TObject);
+begin
+  ads1.Close;
+  ads1.Parameters[0].Value := DM.ADOQALL2.fieldbyname('d025_rkey').AsInteger ;
+  ads1.Open;
+
+  ads502.Open;
+end;
+
+procedure TfrmCutView.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+  frmCutView := nil;
+end;
+
+end.

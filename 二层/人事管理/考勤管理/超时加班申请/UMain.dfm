@@ -1,0 +1,467 @@
+object FrmMain: TFrmMain
+  Left = 237
+  Top = 247
+  Width = 958
+  Height = 517
+  Caption = #36229#26102#21152#29677#30003#35831
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 950
+    Height = 486
+    Align = alClient
+    TabOrder = 0
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 948
+      Height = 48
+      Align = alTop
+      TabOrder = 0
+      object lbl_field: TLabel
+        Left = 312
+        Top = 13
+        Width = 59
+        Height = 13
+        Caption = ' '#21592#24037#24037#21495
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 503
+        Top = 15
+        Width = 84
+        Height = 12
+        Caption = #26174#31034#35760#24405#31508#25968#65306
+        Color = cl3DLight
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlue
+        Font.Height = -12
+        Font.Name = #23435#20307
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object lbl_count: TLabel
+        Left = 584
+        Top = 14
+        Width = 12
+        Height = 13
+        Caption = '00'
+      end
+      object edt_value: TEdit
+        Left = 373
+        Top = 8
+        Width = 121
+        Height = 21
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = #23435#20307
+        Font.Style = []
+        ImeMode = imDisable
+        ParentFont = False
+        TabOrder = 0
+        OnChange = edt_valueChange
+      end
+      object btn_quit: TBitBtn
+        Left = 4
+        Top = 7
+        Width = 60
+        Height = 21
+        Caption = #36864#20986
+        TabOrder = 1
+        OnClick = btn_quitClick
+        Glyph.Data = {
+          36060000424D3606000000000000360400002800000020000000100000000100
+          08000000000000020000710B0000710B00000001000000000000000000003300
+          00006600000099000000CC000000FF0000000033000033330000663300009933
+          0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+          000000990000339900006699000099990000CC990000FF99000000CC000033CC
+          000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+          0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+          330000333300333333006633330099333300CC333300FF333300006633003366
+          33006666330099663300CC663300FF6633000099330033993300669933009999
+          3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+          330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+          66006600660099006600CC006600FF0066000033660033336600663366009933
+          6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+          660000996600339966006699660099996600CC996600FF99660000CC660033CC
+          660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+          6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+          990000339900333399006633990099339900CC339900FF339900006699003366
+          99006666990099669900CC669900FF6699000099990033999900669999009999
+          9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+          990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+          CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+          CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+          CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+          CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+          CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+          FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+          FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+          FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+          FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+          000000808000800000008000800080800000C0C0C00080808000191919004C4C
+          4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+          82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+          F100C56A31000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+          F1EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEF1EEEEEEEEEEEEEEEEEEEEEEEEF1E3AC
+          E3F1EEEEEEEEEEEEEEEEEEEEEEF1EEACE3F1EEEEEEEEEEEEEEEEEEF1E3E28257
+          57E2ACE3F1EEEEEEEEEEEEF1EEE2818181E2ACEEF1EEEEEEEEEEE382578282D7
+          578181E2E3EEEEEEEEEEEE81818181D7818181E2EEEEEEEEEEEE57828989ADD7
+          57797979F1EEEEEEEEEE8181DEDEACD781818181F1EEEEEEEEEE57898989ADD7
+          57AAAAA2D7ADEEEEEEEE81DEDEDEACD781DEDE81D7ACEEEEEEEE57898989ADD7
+          57AACEA3AD10EEEEEEEE81DEDEDEACD781DEAC81AC81EEEEEEEE5789825EADD7
+          57ABCFE21110EEEEEEEE81DE8181ACD781ACACE28181EEEEEEEE578957D7ADD7
+          57ABDE101010101010EE81DE56D7ACD781ACDE818181818181EE57898257ADD7
+          57EE10101010101010EE81DE8156ACD781E381818181818181EE57898989ADD7
+          57EE82101010101010EE81DEDEDEACD781E381818181818181EE57898989ADD7
+          57ACF1821110EEEEEEEE81DEDEDEACD781ACF1818181EEEEEEEE57898989ADD7
+          57ABEEAB8910EEEEEEEE81DEDEDEACD781ACE3ACDE81EEEEEEEE57828989ADD7
+          57ACEEA3EE89EEEEEEEE8181DEDEACD781ACE381EEDEEEEEEEEEEEDE5E8288D7
+          57A2A2A2EEEEEEEEEEEEEEDE8181DED781818181EEEEEEEEEEEEEEEEEEAC8257
+          57EEEEEEEEEEEEEEEEEEEEEEEEAC818181EEEEEEEEEEEEEEEEEE}
+        NumGlyphs = 2
+      end
+      object btn_refresh: TBitBtn
+        Left = 64
+        Top = 7
+        Width = 60
+        Height = 21
+        Caption = #21047#26032
+        TabOrder = 2
+        OnClick = btn_refreshClick
+        Glyph.Data = {
+          F6000000424DF600000000000000760000002800000010000000100000000100
+          04000000000080000000CE0E0000C40E00001000000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+          7777777777777777777777777744447777777777444444447777777444777744
+          4777777447777774477777447777777744777744777777774477774477777777
+          4477774477777777447777744777747447777774477774444777777777777444
+          7777777777777444477777777777777777777777777777777777}
+      end
+      object btn_qry: TBitBtn
+        Left = 126
+        Top = 7
+        Width = 49
+        Height = 21
+        Caption = #26597#35810
+        TabOrder = 3
+        OnClick = btn_qryClick
+      end
+      object btn_import: TBitBtn
+        Left = 177
+        Top = 7
+        Width = 60
+        Height = 21
+        Caption = #23548#20837
+        TabOrder = 4
+        OnClick = btn_importClick
+        Glyph.Data = {
+          36060000424D3606000000000000360400002800000020000000100000000100
+          08000000000000020000B40E0000B40E00000001000000000000000000003300
+          00006600000099000000CC000000FF0000000033000033330000663300009933
+          0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+          000000990000339900006699000099990000CC990000FF99000000CC000033CC
+          000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+          0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+          330000333300333333006633330099333300CC333300FF333300006633003366
+          33006666330099663300CC663300FF6633000099330033993300669933009999
+          3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+          330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+          66006600660099006600CC006600FF0066000033660033336600663366009933
+          6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+          660000996600339966006699660099996600CC996600FF99660000CC660033CC
+          660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+          6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+          990000339900333399006633990099339900CC339900FF339900006699003366
+          99006666990099669900CC669900FF6699000099990033999900669999009999
+          9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+          990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+          CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+          CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+          CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+          CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+          CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+          FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+          FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+          FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+          FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+          000000808000800000008000800080800000C0C0C00080808000191919004C4C
+          4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+          82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+          F100C56A31000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+          EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE09
+          EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE81EEEEEEEEEEEEEEEEEEEEEEEEEEEE0909
+          EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEEEEEEEEEEEE090909
+          09090909090909EEEEEEEEEEEE81818181818181818181EEEEEEEEEEEEEE0909
+          EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE09
+          EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE81EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+          EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEA37878787878
+          78EEEE5E5E5E5E5E5E5E81818181818181EEEE81818181818181A3D5D5D5D5D5
+          78EEEE5ED7D7D7D7D75E81ACACACACAC81EEEE81D7D7D7D7D781A3D5D5D5D5D5
+          78EEEE5ED7D7D7D7D75E81ACACACACAC81EEEE81D7D7D7D7D781A3D5D5D5D5D5
+          78EEEE5ED7D7D7D7D75E81ACACACACAC81EEEE81D7D7D7D7D781A3D5D5D5D5D5
+          78EEEE5ED7D7D7D7D75E81ACACACACAC81EEEE81D7D7D7D7D781A3D5D5A3A3A3
+          A3EEEE5ED7D75E5E5E5E81ACAC81818181EEEE81D7D781818181A3D5D5A3D678
+          EEEEEE5ED7D75EE35EEE81ACAC81AC81EEEEEE81D7D781E381EEA3D5D5A378EE
+          EEEEEE5ED7D75E5EEEEE81ACAC8181EEEEEEEE81D7D78181EEEEA3A3A3A3EEEE
+          EEEEEE5E5E5E5EEEEEEE81818181EEEEEEEEEE81818181EEEEEE}
+        NumGlyphs = 2
+      end
+      object btn_Outport: TBitBtn
+        Left = 238
+        Top = 7
+        Width = 60
+        Height = 21
+        Caption = #23548#20986
+        TabOrder = 5
+        OnClick = btn_OutportClick
+        Glyph.Data = {
+          F6000000424DF600000000000000760000002800000010000000100000000100
+          04000000000080000000120B0000120B00001000000010000000000000000000
+          8000008000000080800080000000800080008080000080808000C0C0C0000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DADADADADADA
+          DADAADADADADADADADADDADADADADAD00000000000000006666007777777706E
+          EF0AA0E6666606EEF0ADDA0E66606EEF060AADA0E606EEF0000DDADA006EEF0A
+          DADAADAD06EEF00DADADDAD06EEF0670DADAAD06EEF0E6670DADD06EEF0A0E66
+          70DA0FFFF0ADA0EEEE0D00000ADADA00000AADADADADADADADAD}
+      end
+      object rg_status: TRadioGroup
+        Left = 656
+        Top = 0
+        Width = 169
+        Height = 33
+        Columns = 2
+        ItemIndex = 0
+        Items.Strings = (
+          #26410#23457#26680
+          #24050#23457#26680)
+        TabOrder = 6
+        OnClick = rg_statusClick
+      end
+    end
+    object Panel3: TPanel
+      Left = 1
+      Top = 467
+      Width = 948
+      Height = 18
+      Align = alBottom
+      TabOrder = 1
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 49
+      Width = 948
+      Height = 418
+      Align = alClient
+      TabOrder = 2
+      object dgh_main: TDBGridEh
+        Left = 1
+        Top = 1
+        Width = 946
+        Height = 416
+        Align = alClient
+        DataSource = ds
+        FooterColor = clWindow
+        FooterFont.Charset = DEFAULT_CHARSET
+        FooterFont.Color = clWindowText
+        FooterFont.Height = -11
+        FooterFont.Name = 'MS Sans Serif'
+        FooterFont.Style = []
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+        PopupMenu = pm_Main
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        OnTitleClick = dgh_mainTitleClick
+        Columns = <
+          item
+            EditButtons = <>
+            FieldName = 'employeecode'
+            Footers = <>
+            Title.Caption = #24037#21495
+            Width = 83
+          end
+          item
+            EditButtons = <>
+            FieldName = 'chinesename'
+            Footers = <>
+            Title.Caption = #22995#21517
+          end
+          item
+            EditButtons = <>
+            FieldName = 'YearMonth'
+            Footers = <>
+            Title.Caption = #24180#26376'(yyyy-mm)'
+            Width = 81
+          end
+          item
+            EditButtons = <>
+            FieldName = 'atype2'
+            Footers = <>
+            Title.Caption = #31867#22411'('#21608#26411'/'#33410#20551')'
+            Width = 93
+          end
+          item
+            EditButtons = <>
+            FieldName = 'days'
+            Footers = <>
+            Title.Caption = #22825#25968
+          end
+          item
+            EditButtons = <>
+            FieldName = 'status2'
+            Footers = <>
+            Title.Caption = #29366#24577
+          end
+          item
+            EditButtons = <>
+            FieldName = 'remark'
+            Footers = <>
+            Title.Caption = #22791#27880
+            Width = 300
+          end>
+      end
+    end
+  end
+  object ds: TDataSource
+    DataSet = qry_main
+    Left = 113
+    Top = 106
+  end
+  object qry_main: TADOQuery
+    Connection = DM.con1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select a.* , b.employeecode, b.chinesename,c.departmentName,b.on' +
+        'dutytime,c.rkey as  departmentid,'
+      'case when a.atype=0  then '#39#21608#26411#39'  else '#39#33410#20551#39' end as  atype2,'
+      'case when a.status=0  then '#39#26410#23457#26680#39'  else '#39#24050#23457#26680#39' end as status2'
+      'from  OverWorkApply  a '
+      'inner join  employeemsg b on a.employeeid=b.rkey '
+      'left join  datadepartment c on b.departmentid=c.rkey'
+      'where 1=1 ')
+    Left = 73
+    Top = 114
+    object qry_mainrkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object qry_mainemployeeid: TStringField
+      FieldName = 'employeeid'
+      Size = 10
+    end
+    object qry_mainYearMonth: TStringField
+      FieldName = 'YearMonth'
+      Size = 7
+    end
+    object qry_mainAtype: TIntegerField
+      FieldName = 'Atype'
+    end
+    object qry_maindays: TFloatField
+      FieldName = 'days'
+    end
+    object qry_mainstatus: TIntegerField
+      FieldName = 'status'
+    end
+    object qry_mainOdate: TDateTimeField
+      FieldName = 'Odate'
+    end
+    object qry_mainremark: TStringField
+      FieldName = 'remark'
+      Size = 500
+    end
+    object qry_mainemployeecode: TWideStringField
+      FieldName = 'employeecode'
+    end
+    object qry_mainchinesename: TWideStringField
+      FieldName = 'chinesename'
+    end
+    object qry_mainatype2: TStringField
+      FieldName = 'atype2'
+      ReadOnly = True
+      Size = 4
+    end
+    object qry_mainstatus2: TStringField
+      FieldName = 'status2'
+      ReadOnly = True
+      Size = 6
+    end
+    object qry_maindepartmentName: TWideStringField
+      FieldName = 'departmentName'
+    end
+    object qry_mainondutytime: TDateTimeField
+      FieldName = 'ondutytime'
+    end
+    object qry_maindepartmentid: TAutoIncField
+      FieldName = 'departmentid'
+      ReadOnly = True
+    end
+  end
+  object pm_Main: TPopupMenu
+    OnPopup = pm_MainPopup
+    Left = 425
+    Top = 121
+    object N_Add: TMenuItem
+      Tag = 1
+      Caption = #26032#22686
+      OnClick = N_AddClick
+    end
+    object N_edit: TMenuItem
+      Tag = 2
+      Caption = #32534#36753
+      OnClick = N_AddClick
+    end
+    object n_view: TMenuItem
+      Tag = 3
+      Caption = #26597#30475
+      OnClick = N_AddClick
+    end
+    object n_del: TMenuItem
+      Tag = 4
+      Caption = #21024#38500
+      OnClick = n_delClick
+    end
+    object N1: TMenuItem
+      Caption = #20840#36873
+      OnClick = N1Click
+    end
+    object N_audit: TMenuItem
+      Tag = 5
+      Caption = #23457#26680
+      OnClick = N_auditClick
+    end
+    object n_NoAudit: TMenuItem
+      Tag = 6
+      Caption = #21462#28040#23457#26680
+      OnClick = n_NoAuditClick
+    end
+  end
+end

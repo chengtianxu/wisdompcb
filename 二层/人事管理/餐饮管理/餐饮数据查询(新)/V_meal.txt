@@ -1,0 +1,101 @@
+USE [sj_v20_live]
+GO
+/****** 对象:  View [dbo].[V_meal]    脚本日期: 06/02/2012 11:55:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER
+ VIEW  [dbo].[V_meal] 
+AS 
+SELECT   
+b.employeecode,
+b.departmentname,
+b.chinesename,
+a.empid,
+d.mealtype as meal_type,
+ case when a.time_e between '05:40:00' and '09:30:00'  then 1 else 0 end as breakfast,
+ case when a.time_e between '10:30:00' and '13:30:00'  then 1 else 0 end as lunch,
+ case when a.time_e between '15:30:00' and '19:30:00'  then 1 else 0 end as supper,
+ case when a.time_e 
+between '22:30:00' and '23:59:59' or  a.time_e between '00:00:00' and '01:30:00' 
+	then 1 else 0 end as [night snack],
+ case when  a.time_e  not between '05:40:00' and '09:30:00'
+ and a.time_e not between '10:30:00' and '13:30:00'
+ and a.time_e not between '15:30:00' and '19:30:00'
+ and a.time_e not between '22:30:00' and '23:59:59'
+ and a.time_e not between '00:00:00'and '01:30:00'
+ then 1 else 0 end as [invalid_card],
+ case when a.time_e  between '00:00:00'and '01:30:00'
+ then dateadd(day,-1,a.date_e) else a.date_e end as [meal_date],
+ a.card_time
+ FROM dbo.meal_orginaldata a 
+ join (select rkey, 
+employeecode,
+ departmentname,
+ chinesename,
+'01' as  factorytype
+from v_employeemsg 
+union 
+select rkey,employeecode,factoryarea,
+chinesename,'extra' as factorytype 
+from  employeemsg_extra where flag=1)  
+as b 
+ on a.empid=b.rkey and a.factorytype=b.factorytype
+ join dev_detail d 
+ on cast (a.dev_id as int)=cast (d.devid as int)
+
+
+----select * from dbo.meal_orginaldata
+----select * from employeemsg_extra where rkey =20 
+----- select * from V_meal where departmentname='锌智泉'
+
+
+
+
+/*2015-11-20 修改设备信息表dbo.dev_detail 增加各餐次价格
+
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.dev_detail ADD
+	pbreakfast money NOT NULL CONSTRAINT DF_dev_detail_pbreakfast DEFAULT 0,
+	plunch money NOT NULL CONSTRAINT DF_dev_detail_plunch DEFAULT 0,
+	psupper money NOT NULL CONSTRAINT DF_dev_detail_psupper DEFAULT 0,
+	pnysnack money NOT NULL CONSTRAINT DF_dev_detail_pnysnack DEFAULT 0,
+        pallowance money NOT NULL CONSTRAINT DF_dev_detail_pallowance DEFAULT 0
+GO
+COMMIT
+
+
+
+//============修改存储过程  这里是一样的 
+declare @b_price nvarchar(20)  
+declare @l_price nvarchar(20) 
+declare @s_price nvarchar(20)
+declare @n_price nvarchar(20)
+declare @ip_addr_str nvarchar(50)
+declare @ip_addr_likestr nvarchar(50)
+
+if @ip_addr='' 
+begin
+ set @ip_addr_str=''
+ set @ip_addr_likestr='%'
+end
+
+if @ip_addr<>'' 
+begin
+ set @ip_addr_str=' and ip_addr='+''''+@ip_addr+''''
+ set @ip_addr_likestr='%'+@ip_addr+'%'
+end
+/*============修改存储过程  这里是一样的 
+//夜宵的滑 要将下面的 @n_price改成 @n1_price
+//修改早中晚夜宵价格从数据库直接取得 */
+SELECT  @b_price=pbreakfast,@l_price=plunch,@s_price=psupper,@n_price=pnysnack
+FROM         dbo.dev_detail
+WHERE     (mealtype = @meal_type) AND (purpose = 'm') 
+AND (devaddr = N'local') AND (NOT (price IS NULL)) 
+AND (dev_ip LIKE @ip_addr_likestr)
+/*叶锋  */
+/**/
+
+

@@ -1,0 +1,1427 @@
+object Form2: TForm2
+  Left = 215
+  Top = 159
+  Width = 818
+  Height = 537
+  Caption = #38144#21806#20195#34920#25509#21333#27719#24635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 802
+    Height = 31
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+    DesignSize = (
+      802
+      31)
+    object SpeedButton1: TSpeedButton
+      Left = 91
+      Top = 3
+      Width = 75
+      Height = 26
+      Hint = #23558#25968#25454#36755#20986#21040'EXCEL'#25991#20214#20013
+      Caption = #23548#20986#25968#25454
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        04000000000080000000120B0000120B00001000000010000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DADADADADADA
+        DADAADADADADADADADADDADADADADAD00000000000000006666007777777706E
+        EF0AA0E6666606EEF0ADDA0E66606EEF060AADA0E606EEF0000DDADA006EEF0A
+        DADAADAD06EEF00DADADDAD06EEF0670DADAAD06EEF0E6670DADD06EEF0A0E66
+        70DA0FFFF0ADA0EEEE0D00000ADADA00000AADADADADADADADAD}
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = SpeedButton1Click
+    end
+    object Label4: TLabel
+      Left = 572
+      Top = 11
+      Width = 59
+      Height = 13
+      Anchors = [akTop, akRight]
+      Caption = #32479#35745#21333#20301' '
+    end
+    object BitBtn1: TBitBtn
+      Left = 9
+      Top = 3
+      Width = 75
+      Height = 26
+      Hint = #36864#20986
+      Caption = #36864#20986
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnClick = BitBtn1Click
+      Glyph.Data = {
+        EE000000424DEE000000000000007600000028000000100000000F0000000100
+        0400000000007800000000000000000000001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFF0FFFFFF
+        FFFFFFFF00FFFFFFFFFFFFF030FFFFFFFFFFFF0330FFFFFFFFFF003330000000
+        0FFFF03330FF0FFFFFFFF03300FF0FFFF4FFF03330FF0FFF44FFF03330FF0FF4
+        4444F03330FF0F444444F03330FF0FF44444F0330FFF0FFF44FFF030FFFF0FFF
+        F4FFF00FFFFF0FFFFFFFF00000000FFFFFFF}
+    end
+    object ComboBox2: TComboBox
+      Left = 632
+      Top = 7
+      Width = 89
+      Height = 21
+      Style = csDropDownList
+      Anchors = [akTop, akRight]
+      Enabled = False
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 1
+      Text = #37329#39069
+      OnChange = ComboBox2Change
+      Items.Strings = (
+        #37329#39069
+        #38754#31215
+        'PCS'#25968#37327)
+    end
+    object CheckBox1: TCheckBox
+      Left = 725
+      Top = 9
+      Width = 51
+      Height = 17
+      Anchors = [akTop, akRight]
+      Caption = #19977#32500
+      Checked = True
+      Enabled = False
+      State = cbChecked
+      TabOrder = 2
+      OnClick = CheckBox1Click
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Top = 31
+    Width = 802
+    Height = 468
+    ActivePage = TabSheet1
+    Align = alClient
+    TabOrder = 1
+    OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = #26085#26399#19994#21153#21592#27719#24635
+      object DecisionGrid1: TDecisionGrid
+        Left = 0
+        Top = 0
+        Width = 794
+        Height = 404
+        DefaultColWidth = 83
+        DefaultRowHeight = 20
+        CaptionColor = clActiveCaption
+        CaptionFont.Charset = DEFAULT_CHARSET
+        CaptionFont.Color = clCaptionText
+        CaptionFont.Height = -11
+        CaptionFont.Name = 'MS Sans Serif'
+        CaptionFont.Style = []
+        DataColor = clInfoBk
+        DataSumColor = clMoneyGreen
+        DataFont.Charset = DEFAULT_CHARSET
+        DataFont.Color = clWindowText
+        DataFont.Height = -11
+        DataFont.Name = 'MS Sans Serif'
+        DataFont.Style = []
+        LabelFont.Charset = DEFAULT_CHARSET
+        LabelFont.Color = clWindowText
+        LabelFont.Height = -13
+        LabelFont.Name = #23435#20307
+        LabelFont.Style = []
+        LabelColor = clBtnFace
+        LabelSumColor = clInactiveCaption
+        DecisionSource = DecisionSource2
+        Dimensions = <
+          item
+            FieldName = #26085#26399
+            Color = clNone
+            Alignment = taCenter
+            Subtotals = True
+          end
+          item
+            FieldName = #19994#21153#21592
+            Color = clNone
+            Alignment = taCenter
+            Subtotals = True
+          end
+          item
+            FieldName = #37329#39069
+            Color = clNone
+            Alignment = taCenter
+            Subtotals = True
+          end
+          item
+            FieldName = #38754#31215
+            Color = clNone
+            Alignment = taCenter
+            Subtotals = True
+          end
+          item
+            FieldName = #25968#37327'pcs'
+            Color = clNone
+            Alignment = taCenter
+            Subtotals = True
+          end>
+        Totals = True
+        ShowCubeEditor = False
+        Align = alClient
+        Color = clBtnFace
+        GridLineWidth = 1
+        GridLineColor = clWindowText
+        TabOrder = 0
+      end
+      object DecisionPivot1: TDecisionPivot
+        Left = 0
+        Top = 404
+        Width = 794
+        Height = 36
+        ButtonAutoSize = True
+        DecisionSource = DecisionSource2
+        GroupLayout = xtHorizontal
+        Groups = [xtRows, xtColumns, xtSummaries]
+        ButtonSpacing = 0
+        ButtonWidth = 64
+        ButtonHeight = 24
+        GroupSpacing = 10
+        BorderWidth = 0
+        BorderStyle = bsSingle
+        Align = alBottom
+        TabOrder = 1
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = #35746#21333#26126#32454
+      ImageIndex = 1
+      object DBGrid1: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 802
+        Height = 448
+        Align = alClient
+        DataSource = DataSource1
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = #23435#20307
+        TitleFont.Style = []
+        OnKeyDown = DBGrid1KeyDown
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'SALES_ORDER'
+            Width = 90
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ENT_DATE'
+            Width = 86
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CUST_CODE'
+            Width = 58
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PO_NUMBER'
+            Width = 94
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MANU_PART_NUMBER'
+            Width = 79
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MANU_PART_DESC'
+            Width = 92
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'part_c'
+            Width = 32
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ANALYSIS_CODE_1'
+            Width = 82
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PARTS_ORDERED'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PART_PRICE'
+            Width = 66
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'jin_e'
+            Width = 76
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ORIG_SCHED_SHIP_DATE'
+            Width = 80
+            Visible = True
+          end>
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = #19994#21153#21592#19994#32489#23545#27604#22270
+      ImageIndex = 2
+      object Chart1: TChart
+        Left = 0
+        Top = 0
+        Width = 802
+        Height = 448
+        AllowPanning = pmNone
+        AnimatedZoom = True
+        BackWall.Brush.Color = clWhite
+        BackWall.Brush.Style = bsClear
+        BackWall.Color = clSilver
+        BottomWall.Brush.Color = clWhite
+        BottomWall.Brush.Style = bsClear
+        LeftWall.Brush.Color = clWhite
+        LeftWall.Brush.Style = bsClear
+        Title.Alignment = taLeftJustify
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clBlue
+        Title.Font.Height = -16
+        Title.Font.Name = #23435#20307
+        Title.Font.Style = []
+        Title.Text.Strings = (
+          #19994#21153#21592#19994#32489#23545#27604#22270)
+        BackColor = clSilver
+        BottomAxis.LabelsAngle = 270
+        LeftAxis.AxisValuesFormat = '0'
+        LeftAxis.LabelsFont.Charset = DEFAULT_CHARSET
+        LeftAxis.LabelsFont.Color = clBlack
+        LeftAxis.LabelsFont.Height = -12
+        LeftAxis.LabelsFont.Name = 'Arial'
+        LeftAxis.LabelsFont.Style = []
+        LeftAxis.LabelsSeparation = 20
+        LeftAxis.Title.Caption = #37329#39069
+        LeftAxis.Title.Font.Charset = ANSI_CHARSET
+        LeftAxis.Title.Font.Color = clBlue
+        LeftAxis.Title.Font.Height = -16
+        LeftAxis.Title.Font.Name = #23435#20307
+        LeftAxis.Title.Font.Style = []
+        Legend.ShadowSize = 2
+        Legend.VertMargin = 4
+        MaxPointsPerPage = 10
+        RightAxis.AxisValuesFormat = '0'
+        TopAxis.Axis.Width = 1
+        TopAxis.AxisValuesFormat = '0'
+        Align = alClient
+        BevelOuter = bvLowered
+        BorderWidth = 1
+        Color = 13160660
+        TabOrder = 0
+        DesignSize = (
+          794
+          440)
+        object SpeedButton2: TSpeedButton
+          Left = 536
+          Top = 6
+          Width = 26
+          Height = 25
+          Hint = #19978#19968#39029
+          Anchors = [akTop, akRight]
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF0080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF0080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF008000
+            000080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00800000008000
+            000080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF008000000080000000800000008000
+            000080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF008000000080000000800000008000
+            000080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF008000000080000000800000008000
+            000080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0080000000800000008000
+            000080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF008000
+            000080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF0080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF0080000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton2Click
+        end
+        object SpeedButton3: TSpeedButton
+          Left = 564
+          Top = 6
+          Width = 26
+          Height = 25
+          Hint = #19979#19968#39029
+          Anchors = [akTop, akRight]
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF0080000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF0080000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF008000000080000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00800000008000000080000000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00800000008000000080000000800000008000
+            0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00800000008000000080000000800000008000
+            0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00800000008000000080000000800000008000
+            0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF0080000000800000008000000080000000FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF008000000080000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF0080000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF0080000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton3Click
+        end
+        object SpeedButton4: TSpeedButton
+          Left = 454
+          Top = 6
+          Width = 25
+          Height = 25
+          Hint = #20445#23384#22270#29255
+          Anchors = [akTop, akRight]
+          Glyph.Data = {
+            C6050000424DC605000000000000360400002800000014000000140000000100
+            08000000000090010000C40E0000C40E0000000100000000000000000000E8E0
+            18008868080048484800D8D8E000C8C8C8001078F00070500000B0900800F8F8
+            F800A8880800D0D8D800B8A81000A0800800C8D0D000E8E8E80068686800B0A0
+            100098700800A8900800D0D0D000D8D8D80090700800B0981000C0A81000E0E0
+            E0009878080090680800A0880800D8E0D800B8A01000B0901000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000100000000
+            000000130000301A1600000000000000E400F712000035A6FC00770000001300
+            0700A7FC7700080613000083A600FC7700000000000035A5FC0077FFFF000000
+            6800010000000000000000000000000000000000000000000000000000000000
+            31000000000000E2EC0000640000660000004716000078011300000047001600
+            780001130000F8461600000000000000C000F7120000C8F3EB007770F5001200
+            0000ECFD7F0002000000000000001300AF000000000001000A0000884000F877
+            30001A1600000100000000998400E6775400F71200000101010001D8F8001200
+            450090FB7700801FF80077FFFF00FFFF6000F8120000AD84E6007760F8001200
+            D80084E677000000000000FFFF000000C800E2EC0000C8E2EC00001800000000
+            00000000000044F8120000400000000000000000000028F81200000000000000
+            00000000000000000000000C000000000200000000000101120000872B00F877
+            0000ECFD7F00000000000002000000006C00001A0200381A1600007FFF00FFFF
+            000000000000381A1600000500000000870031E6770084F8120000218600E677
+            9800F81200006713000010FFFF000000680001000000C8E2EC00000000000000
+            7000F8120000ACF8120000D8F8001200100030001000F8400000105F5400E677
+            680001000000D0F8120000D8F80012000800000000000E0000000F0505BF05BF
+            05BF05BF05BF05BF05BF05BF05C7BF0000000000000000000000000000000000
+            00050500E1138CE0E0E0E0E0E0E0E0E0E006BD1B00BFBF00031305050505BF05
+            050505050505181B00050500C60705050F050FC70F050FC70FBF011B00BFBF00
+            011B05A7C7090383BF0503030305011300050500010705091003050503031003
+            0305011B00BFBF00011BBF031005BF03101010101005181300050500010705C7
+            0FC709C70FC70FC70F05011300BFBF00011B03171017101710171017101B1B18
+            00050500011318131813181B181318131813181300BFBF0001181BC601C618C6
+            01C601C60101181800050500E11713000003C210050505050510C61800BFBF00
+            01181B000010C705C705BF0FC71718C600050500E113180000100F0505000005
+            A717C61800BFBF0001C61B000010C70505000005C71718C600050500E1171300
+            00100F05050000050F10C60100BFBF00BD0101000010090F0510100FC7170101
+            00E90500000000000300000000000000000000000005C705BF05BF0509E9BF05
+            BF05BF05BF05BF05BF09}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton4Click
+        end
+        object SpeedButton5: TSpeedButton
+          Left = 426
+          Top = 6
+          Width = 26
+          Height = 25
+          Hint = #25171#21360#22270#29255
+          Anchors = [akTop, akRight]
+          Glyph.Data = {
+            26050000424D26050000000000003604000028000000100000000F0000000100
+            080000000000F000000000000000000000000001000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000C0DCC000F0C8
+            A400000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00070707070707
+            0707070707070707070707070000000000000000000000070707070007070707
+            0707070707000700070700000000000000000000000000070007000707070707
+            07FBFBFB07070000000700070707070707101010070700070007000000000000
+            0000000000000007070000070707070707070707070007000700070000000000
+            00000000000700070000070700FFFFFFFFFFFFFFFF000700070007070700FF00
+            00000000FF000000000707070700FFFFFFFFFFFFFFFF000707070707070700FF
+            0000000000FF000707070707070700FFFFFFFFFFFFFFFF000707070707070700
+            00000000000000000707}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton5Click
+        end
+        object SpeedButton6: TSpeedButton
+          Left = 481
+          Top = 7
+          Width = 25
+          Height = 24
+          Hint = #25918#22823
+          Anchors = [akTop, akRight]
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FF00FF000000
+            000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+            00000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00000000000000000000000000FF00FF0080808000000000000000
+            0000000000000000000080808000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000000000000000000000000000C0C0C000C0C0
+            C000C0C0C000C0C0C0000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF000000000080808000FFFF0000FFFF0000C0C0
+            C000C0C0C000C0C0C000C0C0C0008080800000000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF008080800000000000C0C0C000FFFF0000C0C0C0000000
+            000000000000C0C0C000C0C0C000C0C0C0000000000080808000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000FFFF0000C0C0C000C0C0C0000000
+            000000000000C0C0C000C0C0C000C0C0C000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000C0C0C00000000000000000000000
+            0000000000000000000000000000C0C0C000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000C0C0C00000000000000000000000
+            0000000000000000000000000000FFFF0000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000C0C0C000C0C0C000C0C0C0000000
+            000000000000C0C0C000C0C0C000FFFF0000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF008080800000000000C0C0C000C0C0C000C0C0C0000000
+            000000000000C0C0C000FFFF0000FFFF00000000000080808000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF000000000080808000C0C0C000C0C0C000C0C0
+            C000FFFF0000FFFF0000FFFF00008080800000000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF000000000000000000C0C0C000C0C0
+            C000C0C0C000C0C0C0000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0080808000000000000000
+            0000000000000000000080808000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton6Click
+        end
+        object SpeedButton7: TSpeedButton
+          Left = 509
+          Top = 7
+          Width = 25
+          Height = 24
+          Hint = #32553#23567
+          Anchors = [akTop, akRight]
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000000000000000000000000000000000000FF00FF000000
+            000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+            00000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00000000000000000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00000000000000000000000000FF00FF0080808000000000000000
+            0000000000000000000080808000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000000000000000000000000000C0C0C000C0C0
+            C000C0C0C000C0C0C0000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF000000000080808000FFFF0000FFFF0000C0C0
+            C000C0C0C000C0C0C000C0C0C0008080800000000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF008080800000000000C0C0C000FFFF0000C0C0C000C0C0
+            C000C0C0C000C0C0C000C0C0C000C0C0C0000000000080808000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000FFFF0000C0C0C000C0C0C000C0C0
+            C000C0C0C000C0C0C000C0C0C000C0C0C000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000C0C0C00000000000000000000000
+            0000000000000000000000000000C0C0C000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000C0C0C00000000000000000000000
+            0000000000000000000000000000FFFF0000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF0000000000C0C0C000C0C0C000C0C0C000C0C0C000C0C0
+            C000C0C0C000C0C0C000C0C0C000FFFF0000C0C0C00000000000FF00FF00FF00
+            FF00FF00FF00FF00FF008080800000000000C0C0C000C0C0C000C0C0C000C0C0
+            C000C0C0C000C0C0C000FFFF0000FFFF00000000000080808000FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF000000000080808000C0C0C000C0C0C000C0C0
+            C000FFFF0000FFFF0000FFFF00008080800000000000FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF000000000000000000C0C0C000C0C0
+            C000C0C0C000C0C0C0000000000000000000FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0080808000000000000000
+            0000000000000000000080808000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+            FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton7Click
+        end
+        object UpDown1: TUpDown
+          Left = 620
+          Top = 8
+          Width = 15
+          Height = 21
+          Anchors = [akTop, akRight]
+          Associate = Edit2
+          Max = 30
+          Position = 10
+          TabOrder = 0
+        end
+        object Edit2: TEdit
+          Left = 599
+          Top = 8
+          Width = 21
+          Height = 21
+          Anchors = [akTop, akRight]
+          TabOrder = 1
+          Text = '10'
+          OnChange = Edit2Change
+        end
+        object Series1: TBarSeries
+          ColorEachPoint = True
+          Marks.ArrowLength = 10
+          Marks.BackColor = clGray
+          Marks.Frame.Visible = False
+          Marks.Style = smsValue
+          Marks.Transparent = True
+          Marks.Visible = True
+          SeriesColor = clRed
+          ShowInLegend = False
+          ValueFormat = '0.00'
+          AutoMarkPosition = False
+          BarBrush.Color = clWhite
+          BarStyle = bsRectGradient
+          Dark3D = False
+          SideMargins = False
+          XValues.DateTime = False
+          XValues.Name = 'X'
+          XValues.Multiplier = 1.000000000000000000
+          XValues.Order = loAscending
+          YValues.DateTime = False
+          YValues.Name = 'Bar'
+          YValues.Multiplier = 1.000000000000000000
+          YValues.Order = loNone
+        end
+      end
+    end
+  end
+  object ADO102: TADOQuery
+    AutoCalcFields = False
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltReadOnly
+    Parameters = <
+      item
+        Name = 'dtpk1'
+        DataType = ftDateTime
+        NumericScale = 3
+        Precision = 23
+        Size = 16
+        Value = 39630.0006944444d
+      end
+      item
+        Name = 'dtpk2'
+        DataType = ftDateTime
+        NumericScale = 3
+        Precision = 23
+        Size = 16
+        Value = 39656.9583333333d
+      end>
+    SQL.Strings = (
+      'SELECT TOP 100 PERCENT CONVERT(datetime, CONVERT(varchar,'
+      
+        '      Data0060.ENT_DATE, 101), 101) AS ent_date, Data0009.ABBR_N' +
+        'AME,'
+      '      ROUND(SUM(((Data0060.PARTS_ORDERED * Data0060.PARTS_ALLOC+'
+      '      data0060.TOTAL_ADD_L_PRICE) *'
+      
+        '      (1 + Data0060.RUSH_CHARGE * 0.01)) / Data0060.EXCH_RATE), ' +
+        '3)'
+      
+        '      AS jin_e, ROUND(SUM(Data0060.PARTS_ORDERED * Data0025.unit' +
+        '_sq), 4)'
+      '      AS mianji, SUM(Data0060.PARTS_ORDERED) AS pcs'
+      'FROM Data0060 INNER JOIN'
+      '      Data0102 ON'
+      '      Data0060.RKEY = Data0102.SALES_ORDER_PTR INNER JOIN'
+      
+        '      Data0009 ON Data0102.SALES_REP_PTR = Data0009.RKEY INNER J' +
+        'OIN'
+      '      Data0025 ON Data0060.CUST_PART_PTR = Data0025.RKEY'
+      
+        'where (data0060.ent_date>=:dtpk1) and (data0060.ent_date<=:dtpk2' +
+        ')'
+      '      and ((data0060.status=1) or (data0060.status=4))'
+      
+        'GROUP BY CONVERT(datetime, CONVERT(varchar, Data0060.ENT_DATE, 1' +
+        '01), 101),'
+      '      Data0009.ABBR_NAME'
+      
+        'ORDER BY CONVERT(datetime, CONVERT(varchar, Data0060.ENT_DATE, 1' +
+        '01), 101),'
+      '   Data0009.ABBR_NAME')
+    Left = 243
+    Top = 143
+    object ADO102ENT_DATE: TDateTimeField
+      DisplayWidth = 22
+      FieldName = 'ENT_DATE'
+    end
+    object ADO102ABBR_NAME: TStringField
+      FieldName = 'ABBR_NAME'
+      Size = 10
+    end
+    object ADO102jin_e: TFloatField
+      DisplayWidth = 14
+      FieldName = 'jin_e'
+    end
+    object ADO102mianji: TFloatField
+      DisplayWidth = 15
+      FieldName = 'mianji'
+      ReadOnly = True
+    end
+    object ADO102pcs: TFloatField
+      DisplayWidth = 21
+      FieldName = 'pcs'
+    end
+  end
+  object ADO60: TADOQuery
+    AutoCalcFields = False
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltReadOnly
+    Parameters = <
+      item
+        Name = 'dtpk1'
+        DataType = ftDateTime
+        NumericScale = 3
+        Precision = 23
+        Size = 16
+        Value = 38224d
+      end
+      item
+        Name = 'dtpk2'
+        DataType = ftDateTime
+        NumericScale = 3
+        Precision = 23
+        Size = 16
+        Value = 38224d
+      end>
+    SQL.Strings = (
+      
+        'SELECT Data0060.SALES_ORDER,Data0010.CUST_CODE, Data0097.PO_NUMB' +
+        'ER,'
+      '      data0025.ANALYSIS_CODE_1,'
+      
+        '      Data0060.PARTS_ORDERED,Data0060.PART_PRICE,Data0060.ENT_DA' +
+        'TE,'
+      'round(((Data0060.PARTS_ORDERED * Data0060.PARTS_alloc+'
+      '       data0060.TOTAL_ADD_L_PRICE) *'
+      
+        '      (1 + Data0060.RUSH_CHARGE * 0.01))/data0060.exch_rate,3) A' +
+        'S jin_e,'
+      '      Data0025.MANU_PART_DESC,Data0060.ORIG_SCHED_SHIP_DATE,'
+      '      Data0025.layers AS part_c,DATA0025.MANU_PART_NUMBER'
+      'FROM dbo.Data0060 INNER JOIN'
+      
+        'dbo.Data0025 ON dbo.Data0060.CUST_PART_PTR = Data0025.RKEY INNER' +
+        ' JOIN'
+      
+        'dbo.Data0097 ON dbo.Data0060.PURCHASE_ORDER_PTR = dbo.Data0097.R' +
+        'KEY INNER JOIN'
+      'dbo.Data0010 ON dbo.Data0060.CUSTOMER_PTR = dbo.Data0010.RKEY'
+      
+        'where (data0060.ent_date>=:dtpk1) and (data0060.ent_date<=:dtpk2' +
+        ')'
+      'ORDER BY Data0060.ENT_DATE,data0060.sales_order')
+    Left = 95
+    Top = 96
+    object ADO60ENT_DATE: TDateTimeField
+      DisplayLabel = #19979#21333#26085#26399
+      DisplayWidth = 14
+      FieldName = 'ENT_DATE'
+    end
+    object ADO60SALES_ORDER: TStringField
+      DisplayLabel = #35746#21333#32534#21495
+      DisplayWidth = 17
+      FieldName = 'SALES_ORDER'
+      FixedChar = True
+      Size = 12
+    end
+    object ADO60CUST_CODE: TStringField
+      DisplayLabel = #23458#25143#20195#30721
+      DisplayWidth = 12
+      FieldName = 'CUST_CODE'
+      Size = 5
+    end
+    object ADO60PO_NUMBER: TStringField
+      DisplayLabel = #23458#25143#35746#21333#21495
+      DisplayWidth = 18
+      FieldName = 'PO_NUMBER'
+      Size = 25
+    end
+    object ADO60ANALYSIS_CODE_1: TStringField
+      DisplayLabel = #35268#26684'(SET'#23610#23544')'
+      DisplayWidth = 15
+      FieldName = 'ANALYSIS_CODE_1'
+      FixedChar = True
+    end
+    object ADO60PARTS_ORDERED: TFloatField
+      DisplayLabel = #25968#37327
+      DisplayWidth = 12
+      FieldName = 'PARTS_ORDERED'
+    end
+    object ADO60PART_PRICE: TFloatField
+      DisplayLabel = #20215#26684
+      DisplayWidth = 10
+      FieldName = 'PART_PRICE'
+    end
+    object ADO60jin_e: TFloatField
+      DisplayLabel = #37329#39069
+      DisplayWidth = 11
+      FieldName = 'jin_e'
+      ReadOnly = True
+    end
+    object ADO60ORIG_SCHED_SHIP_DATE: TDateTimeField
+      DisplayLabel = #20132#36135#26399
+      FieldName = 'ORIG_SCHED_SHIP_DATE'
+    end
+    object ADO60part_c: TWordField
+      DisplayLabel = #23618#25968
+      FieldName = 'part_c'
+    end
+    object ADO60MANU_PART_DESC: TStringField
+      DisplayLabel = #23458#25143#22411#21495
+      FieldName = 'MANU_PART_DESC'
+      Size = 40
+    end
+    object ADO60MANU_PART_NUMBER: TStringField
+      DisplayLabel = #26412#21378#32534#21495
+      FieldName = 'MANU_PART_NUMBER'
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ADO60
+    Left = 55
+    Top = 96
+  end
+  object ADOQuery1: TADOQuery
+    AutoCalcFields = False
+    Connection = DM.ADOConnection1
+    LockType = ltReadOnly
+    Parameters = <
+      item
+        Name = 'dtpk1'
+        DataType = ftDateTime
+        NumericScale = 3
+        Precision = 23
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'dtpk2'
+        DataType = ftDateTime
+        NumericScale = 3
+        Precision = 23
+        Size = 16
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT TOP 100 PERCENT  Data0009.ABBR_NAME,'
+      
+        '      ROUND(SUM(((Data0060.PARTS_ORDERED * Data0060.PARTS_ALLOC ' +
+        '+'
+      '       data0060.TOTAL_ADD_L_PRICE) *'
+      
+        '       (1 + Data0060.RUSH_CHARGE * 0.01)) / Data0060.EXCH_RATE),' +
+        ' 3)'
+      
+        '      AS jin_e, ROUND(SUM(Data0060.PARTS_ORDERED * Data0025.unit' +
+        '_sq), 4)'
+      '      AS mianji, SUM(Data0060.PARTS_ORDERED) AS pcs'
+      'FROM Data0060 INNER JOIN'
+      '      Data0102 ON'
+      '      Data0060.RKEY = Data0102.SALES_ORDER_PTR INNER JOIN'
+      
+        '      Data0009 ON Data0102.SALES_REP_PTR = Data0009.RKEY INNER J' +
+        'OIN'
+      '      Data0025 ON Data0060.CUST_PART_PTR = Data0025.RKEY'
+      
+        'where (data0060.ent_date>=:dtpk1) and (data0060.ent_date<=:dtpk2' +
+        ')'
+      '      and ((data0060.status=1) or (data0060.status=4))'
+      'GROUP BY  Data0009.ABBR_NAME'
+      
+        'ORDER BY       ROUND(SUM(((Data0060.PARTS_ORDERED * Data0060.PAR' +
+        'TS_ALLOC +'
+      
+        'data0060.TOTAL_ADD_L_PRICE) * (1 + Data0060.RUSH_CHARGE * 0.01))' +
+        ' / Data0060.EXCH_RATE), 3) desc')
+    Left = 100
+    Top = 191
+    object ADOQuery1ABBR_NAME: TStringField
+      FieldName = 'ABBR_NAME'
+      Size = 10
+    end
+    object ADOQuery1jin_e: TFloatField
+      FieldName = 'jin_e'
+      ReadOnly = True
+    end
+    object ADOQuery1mianji: TFloatField
+      FieldName = 'mianji'
+      ReadOnly = True
+    end
+    object ADOQuery1pcs: TFloatField
+      FieldName = 'pcs'
+    end
+  end
+  object PrintDialog1: TPrintDialog
+    Left = 136
+    Top = 192
+  end
+  object SavePictureDialog1: TSavePictureDialog
+    Filter = 'Bitmaps (*.bmp)|*.bmp'
+    Left = 168
+    Top = 192
+  end
+  object ADO64_60: TADOQuery
+    AutoCalcFields = False
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltReadOnly
+    Parameters = <
+      item
+        Name = 'dtpk1'
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = 38224d
+      end
+      item
+        Name = 'dtpk2'
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = 38224d
+      end>
+    SQL.Strings = (
+      
+        'SELECT TOP 100 PERCENT dbo.Data0060.SALES_ORDER, dbo.Data0010.CU' +
+        'ST_CODE, '
+      '      dbo.Data0097.PO_NUMBER, dbo.Data0025.ANALYSIS_CODE_1, '
+      
+        '      dbo.Data0064.QUAN_SHIPPED AS PARTS_ORDERED, dbo.Data0060.P' +
+        'ART_PRICE, '
+      '      dbo.Data0064.DATE_ASSIGN AS ENT_DATE, '
+      
+        '      ROUND((dbo.Data0064.QUAN_SHIPPED * dbo.Data0060.PARTS_ALLO' +
+        'C) '
+      
+        '      * (1 + dbo.Data0060.RUSH_CHARGE * 0.01) / dbo.Data0060.EXC' +
+        'H_RATE, 3) AS jin_e, '
+      
+        '      dbo.Data0025.MANU_PART_DESC, dbo.Data0060.ORIG_SCHED_SHIP_' +
+        'DATE, '
+      
+        '      dbo.Data0025.LAYERS AS part_c, dbo.Data0025.MANU_PART_NUMB' +
+        'ER'
+      'FROM dbo.Data0060 INNER JOIN'
+      
+        '      dbo.Data0025 ON dbo.Data0060.CUST_PART_PTR = dbo.Data0025.' +
+        'RKEY INNER JOIN'
+      '      dbo.Data0097 ON '
+      
+        '      dbo.Data0060.PURCHASE_ORDER_PTR = dbo.Data0097.RKEY INNER ' +
+        'JOIN'
+      
+        '      dbo.Data0010 ON dbo.Data0060.CUSTOMER_PTR = dbo.Data0010.R' +
+        'KEY INNER JOIN'
+      '      dbo.Data0064 ON dbo.Data0060.RKEY = dbo.Data0064.SO_PTR'
+      'WHERE (dbo.Data0064.DATE_ASSIGN >=:dtpk1) AND '
+      '      (dbo.Data0064.DATE_ASSIGN <= :dtpk2) and'
+      '     (data0064.assign_type=0)'
+      'ORDER BY dbo.Data0060.ENT_DATE, dbo.Data0060.SALES_ORDER')
+    Left = 135
+    Top = 96
+    object ADO64_60SALES_ORDER: TStringField
+      DisplayLabel = #35746#21333#32534#21495
+      FieldName = 'SALES_ORDER'
+      FixedChar = True
+      Size = 12
+    end
+    object ADO64_60CUST_CODE: TStringField
+      DisplayLabel = #23458#25143#20195#30721
+      FieldName = 'CUST_CODE'
+      Size = 10
+    end
+    object ADO64_60PO_NUMBER: TStringField
+      DisplayLabel = #23458#25143#35746#21333#21495
+      FieldName = 'PO_NUMBER'
+      Size = 25
+    end
+    object ADO64_60ANALYSIS_CODE_1: TStringField
+      DisplayLabel = #35268#26684'(SET'#23610#23544')'
+      FieldName = 'ANALYSIS_CODE_1'
+      Size = 30
+    end
+    object ADO64_60PARTS_ORDERED: TIntegerField
+      DisplayLabel = #25968#37327
+      FieldName = 'PARTS_ORDERED'
+    end
+    object ADO64_60PART_PRICE: TFloatField
+      DisplayLabel = #20215#26684
+      FieldName = 'PART_PRICE'
+    end
+    object ADO64_60ENT_DATE: TDateTimeField
+      DisplayLabel = #25351#27966#26085#26399
+      FieldName = 'ENT_DATE'
+    end
+    object ADO64_60jin_e: TFloatField
+      DisplayLabel = #37329#39069
+      FieldName = 'jin_e'
+      ReadOnly = True
+    end
+    object ADO64_60MANU_PART_DESC: TStringField
+      DisplayLabel = #23458#25143#22411#21495
+      FieldName = 'MANU_PART_DESC'
+      Size = 40
+    end
+    object ADO64_60ORIG_SCHED_SHIP_DATE: TDateTimeField
+      DisplayLabel = #20132#36135#26399
+      FieldName = 'ORIG_SCHED_SHIP_DATE'
+    end
+    object ADO64_60part_c: TWordField
+      DisplayLabel = #23618#25968
+      FieldName = 'part_c'
+    end
+    object ADO64_60MANU_PART_NUMBER: TStringField
+      DisplayLabel = #26412#21378#32534#21495
+      FieldName = 'MANU_PART_NUMBER'
+    end
+  end
+  object ADO64_102: TADOQuery
+    AutoCalcFields = False
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltReadOnly
+    Parameters = <
+      item
+        Name = 'dtpk1'
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = 39630.0006944444d
+      end
+      item
+        Name = 'dtpk2'
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = 39661.9583333333d
+      end>
+    SQL.Strings = (
+      'SELECT TOP 100 PERCENT CONVERT(datetime, CONVERT(varchar, '
+      
+        '      dbo.Data0064.DATE_ASSIGN, 101), 101) AS ent_date, dbo.Data' +
+        '0009.ABBR_NAME, '
+      
+        '      ROUND(SUM((dbo.Data0064.QUAN_SHIPPED * dbo.Data0060.PARTS_' +
+        'ALLOC) '
+      
+        '      * (1 + dbo.Data0060.RUSH_CHARGE * 0.01) / dbo.Data0060.EXC' +
+        'H_RATE), 3) AS jin_e, '
+      
+        '      ROUND(SUM(dbo.Data0064.QUAN_SHIPPED * dbo.Data0025.unit_sq' +
+        '), 4) AS mianji, '
+      '      SUM(dbo.Data0064.QUAN_SHIPPED) AS pcs'
+      'FROM dbo.Data0060 INNER JOIN'
+      
+        '      dbo.Data0025 ON dbo.Data0060.CUST_PART_PTR = dbo.Data0025.' +
+        'RKEY INNER JOIN'
+      
+        '      dbo.Data0010 ON dbo.Data0060.CUSTOMER_PTR = dbo.Data0010.R' +
+        'KEY INNER JOIN'
+      
+        '      dbo.Data0009 ON dbo.Data0010.SALES_REP_PTR = dbo.Data0009.' +
+        'RKEY INNER JOIN'
+      '      dbo.Data0064 ON dbo.Data0060.RKEY = dbo.Data0064.SO_PTR'
+      'WHERE (dbo.Data0064.DATE_ASSIGN >= :dtpk1) AND '
+      '      (dbo.Data0064.DATE_ASSIGN <= :dtpk2) and'
+      '     (data0064.assign_type=0)'
+      
+        'GROUP BY CONVERT(datetime, CONVERT(varchar, dbo.Data0064.DATE_AS' +
+        'SIGN, 101), '
+      '      101), dbo.Data0009.ABBR_NAME'
+      
+        'ORDER BY CONVERT(datetime, CONVERT(varchar, dbo.Data0064.DATE_AS' +
+        'SIGN, 101), '
+      '      101), dbo.Data0009.ABBR_NAME')
+    Left = 99
+    Top = 143
+    object ADO64_102ent_date: TDateTimeField
+      DisplayLabel = 'ENT_DATE'
+      FieldName = 'ent_date'
+    end
+    object ADO64_102ABBR_NAME: TStringField
+      FieldName = 'ABBR_NAME'
+      Size = 10
+    end
+    object ADO64_102jin_e: TFloatField
+      FieldName = 'jin_e'
+      ReadOnly = True
+    end
+    object ADO64_102mianji: TFloatField
+      FieldName = 'mianji'
+      ReadOnly = True
+    end
+    object ADO64_102pcs: TIntegerField
+      FieldName = 'pcs'
+    end
+  end
+  object DecisionCube2: TDecisionCube
+    DataSet = ADO102
+    DimensionMap = <
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftDateTime
+        Fieldname = 'ENT_DATE'
+        Name = #26085#26399
+        DerivedFrom = -1
+        DimensionType = dimDimension
+        BinType = binNone
+        ValueCount = 28
+        Active = True
+      end
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftString
+        Fieldname = 'ABBR_NAME'
+        Name = #19994#21153#21592
+        DerivedFrom = -1
+        DimensionType = dimDimension
+        BinType = binNone
+        ValueCount = 31
+        Active = True
+      end
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftFloat
+        Fieldname = 'jin_e'
+        Name = #37329#39069
+        DerivedFrom = -1
+        DimensionType = dimSum
+        BinType = binNone
+        ValueCount = -1
+        Active = True
+      end
+      item
+        ActiveFlag = diActive
+        FieldType = ftFloat
+        Fieldname = 'mianji'
+        Name = #38754#31215
+        DerivedFrom = -1
+        DimensionType = dimSum
+        BinType = binNone
+        ValueCount = -1
+        Active = True
+      end
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftFloat
+        Fieldname = 'pcs'
+        Name = #25968#37327'pcs'
+        DerivedFrom = -1
+        DimensionType = dimSum
+        BinType = binNone
+        ValueCount = -1
+        Active = True
+      end>
+    ShowProgressDialog = True
+    MaxDimensions = 2
+    MaxSummaries = 3
+    MaxCells = 0
+    Left = 276
+    Top = 143
+  end
+  object DecisionSource2: TDecisionSource
+    DecisionCube = DecisionCube2
+    ControlType = xtCheck
+    SparseRows = False
+    SparseCols = False
+    Left = 308
+    Top = 143
+    DimensionCount = 2
+    SummaryCount = 3
+    CurrentSummary = 0
+    SparseRows = False
+    SparseCols = False
+    DimensionInfo = (
+      1
+      0
+      1
+      0
+      -1
+      2
+      0
+      1
+      0
+      -1)
+  end
+  object DecisionCube1: TDecisionCube
+    DataSet = ADO64_102
+    DimensionMap = <
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftDateTime
+        Fieldname = 'ent_date'
+        Name = #26085#26399
+        DerivedFrom = -1
+        DimensionType = dimDimension
+        BinType = binNone
+        ValueCount = 31
+        Active = True
+        StartValue = 39448.000000000000000000
+      end
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftString
+        Fieldname = 'ABBR_NAME'
+        Name = #19994#21153#21592
+        DerivedFrom = -1
+        DimensionType = dimDimension
+        BinType = binNone
+        ValueCount = 26
+        Active = True
+      end
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftFloat
+        Fieldname = 'jin_e'
+        Name = #37329#39069
+        DerivedFrom = -1
+        DimensionType = dimSum
+        BinType = binNone
+        ValueCount = -1
+        Active = True
+      end
+      item
+        ActiveFlag = diActive
+        FieldType = ftFloat
+        Fieldname = 'mianji'
+        Name = #38754#31215
+        DerivedFrom = -1
+        DimensionType = dimSum
+        BinType = binNone
+        ValueCount = -1
+        Active = True
+      end
+      item
+        ActiveFlag = diAsNeeded
+        FieldType = ftInteger
+        Fieldname = 'pcs'
+        Name = #25968#37327'pcs'
+        DerivedFrom = -1
+        DimensionType = dimSum
+        BinType = binNone
+        ValueCount = -1
+        Active = True
+      end>
+    ShowProgressDialog = True
+    MaxDimensions = 2
+    MaxSummaries = 3
+    MaxCells = 0
+    Left = 132
+    Top = 143
+  end
+  object DecisionSource1: TDecisionSource
+    DecisionCube = DecisionCube1
+    ControlType = xtCheck
+    SparseRows = False
+    SparseCols = False
+    Left = 164
+    Top = 143
+    DimensionCount = 2
+    SummaryCount = 3
+    CurrentSummary = 0
+    SparseRows = False
+    SparseCols = False
+    DimensionInfo = (
+      1
+      0
+      1
+      0
+      -1
+      2
+      0
+      1
+      0
+      -1)
+  end
+  object ADOQuery2: TADOQuery
+    AutoCalcFields = False
+    Connection = DM.ADOConnection1
+    LockType = ltReadOnly
+    Parameters = <
+      item
+        Name = 'dtpk1'
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = 'dtpk2'
+        DataType = ftDateTime
+        Precision = 16
+        Size = 16
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT TOP 100 PERCENT dbo.Data0009.ABBR_NAME,'
+      
+        '      ROUND(SUM((dbo.Data0064.QUAN_SHIPPED * dbo.Data0060.PARTS_' +
+        'ALLOC) '
+      
+        '      * (1 + dbo.Data0060.RUSH_CHARGE * 0.01) / dbo.Data0060.EXC' +
+        'H_RATE), 3) AS jin_e, '
+      
+        '      ROUND(SUM(dbo.Data0064.QUAN_SHIPPED * dbo.Data0025.unit_sq' +
+        '), 4) AS mianji, '
+      '      SUM(dbo.Data0064.QUAN_SHIPPED) AS pcs'
+      'FROM dbo.Data0060 INNER JOIN'
+      
+        '      dbo.Data0025 ON dbo.Data0060.CUST_PART_PTR = dbo.Data0025.' +
+        'RKEY INNER JOIN'
+      
+        '      dbo.Data0010 ON dbo.Data0060.CUSTOMER_PTR = dbo.Data0010.R' +
+        'KEY INNER JOIN'
+      
+        '      dbo.Data0009 ON dbo.Data0010.SALES_REP_PTR = dbo.Data0009.' +
+        'RKEY INNER JOIN'
+      '      dbo.Data0064 ON dbo.Data0060.RKEY = dbo.Data0064.SO_PTR'
+      'WHERE (dbo.Data0064.DATE_ASSIGN >= :dtpk1) AND'
+      '      (dbo.Data0064.DATE_ASSIGN <= :dtpk2) and'
+      '     (data0064.assign_type=0)'
+      'GROUP BY dbo.Data0009.ABBR_NAME'
+      
+        'ORDER BY ROUND(SUM((dbo.Data0064.QUAN_SHIPPED * dbo.Data0060.PAR' +
+        'TS_ALLOC) '
+      
+        '      * (1 + dbo.Data0060.RUSH_CHARGE * 0.01) / dbo.Data0060.EXC' +
+        'H_RATE), 3) DESC')
+    Left = 100
+    Top = 231
+    object ADOQuery2ABBR_NAME: TStringField
+      FieldName = 'ABBR_NAME'
+      Size = 10
+    end
+    object ADOQuery2jin_e: TFloatField
+      FieldName = 'jin_e'
+      ReadOnly = True
+    end
+    object ADOQuery2mianji: TFloatField
+      FieldName = 'mianji'
+      ReadOnly = True
+    end
+    object ADOQuery2pcs: TIntegerField
+      FieldName = 'pcs'
+    end
+  end
+end

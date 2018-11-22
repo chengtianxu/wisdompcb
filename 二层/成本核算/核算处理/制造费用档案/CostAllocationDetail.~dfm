@@ -1,0 +1,176 @@
+object frm_CostAllocationDetail: Tfrm_CostAllocationDetail
+  Left = 233
+  Top = 189
+  Width = 824
+  Height = 501
+  Caption = #25104#26412#20998#37197#26126#32454#26597#35810
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 816
+    Height = 37
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 208
+      Top = 11
+      Width = 46
+      Height = 13
+      Caption = #20316#19994#21333':'
+    end
+    object BitBtn4: TBitBtn
+      Left = 5
+      Top = 4
+      Width = 60
+      Height = 29
+      Hint = #23548#20986'Excel'
+      Caption = #23548#20986
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnClick = BitBtn4Click
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        04000000000080000000120B0000120B00001000000010000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DADADADADADA
+        DADAADADADADADADADADDADADADADAD00000000000000006666007777777706E
+        EF0AA0E6666606EEF0ADDA0E66606EEF060AADA0E606EEF0000DDADA006EEF0A
+        DADAADAD06EEF00DADADDAD06EEF0670DADAAD06EEF0E6670DADD06EEF0A0E66
+        70DA0FFFF0ADA0EEEE0D00000ADADA00000AADADADADADADADAD}
+    end
+    object Edit1: TEdit
+      Left = 272
+      Top = 8
+      Width = 121
+      Height = 21
+      TabOrder = 1
+      OnChange = Edit1Change
+    end
+  end
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 37
+    Width = 816
+    Height = 411
+    Align = alClient
+    DataSource = DataSource1
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = #23435#20307
+    FooterFont.Style = []
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    OnKeyDown = DBGridEh1KeyDown
+    OnTitleClick = DBGridEh1TitleClick
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'WORK_ORDER_NUMBER'
+        Footers = <>
+        Title.Color = clRed
+        Title.SortIndex = 1
+        Title.SortMarker = smUpEh
+        Width = 138
+      end
+      item
+        EditButtons = <>
+        FieldName = 'MANU_PART_NUMBER'
+        Footers = <>
+        Width = 107
+      end
+      item
+        EditButtons = <>
+        FieldName = 'MANU_PART_DESC'
+        Footers = <>
+        Width = 191
+      end
+      item
+        EditButtons = <>
+        FieldName = 'PRODUCT_NAME'
+        Footers = <>
+        Width = 122
+      end
+      item
+        EditButtons = <>
+        FieldName = 'STEP'
+        Footers = <>
+        Width = 43
+      end
+      item
+        EditButtons = <>
+        FieldName = 'QTY'
+        Footers = <>
+        Width = 57
+      end
+      item
+        EditButtons = <>
+        FieldName = 'WTYPE'
+        Footers = <>
+        Width = 57
+      end
+      item
+        EditButtons = <>
+        FieldName = 'sq_total'
+        Footers = <>
+        Width = 140
+      end
+      item
+        EditButtons = <>
+        FieldName = 'matl_total'
+        Footers = <>
+        Width = 157
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ovhd_total'
+        Footers = <>
+        Width = 163
+      end
+      item
+        EditButtons = <>
+        FieldName = 'ovhd1_total'
+        Footers = <>
+        Width = 154
+      end
+      item
+        EditButtons = <>
+        FieldName = 'outsource_total'
+        Footers = <>
+        Width = 147
+      end>
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 448
+    Width = 816
+    Height = 19
+    Panels = <
+      item
+        Width = 50
+      end>
+  end
+  object DataSource1: TDataSource
+    DataSet = dm.ADOD410
+    Left = 280
+    Top = 128
+  end
+end

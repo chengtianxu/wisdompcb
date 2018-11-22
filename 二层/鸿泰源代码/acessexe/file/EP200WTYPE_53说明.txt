@@ -1,0 +1,31 @@
+一，EP004在货品控制二，里增加了开关，控制EP200一张入仓单录几个产品,0为默认，可录多个产品一张单；1只可录一个产品 LLL  
+二,1.EP004在货品控制二，里增加了开关，控制EP200一张入仓单录几个产品,0为默认，可录多个产品一张单；1只可录一个产品 2:增加了字段，data0053.WTYPE_53 ，--53表入仓类型,0 或NULL 其它，1-过数入仓,2-退货返工 ,3-库存返工
+
+
+三，EP069产成品入仓明细里面，增加了过数入仓类型筛选条件，这个条件只有过数入仓，被勾选时，才能显示出来。data0053.WTYPE_53 ，--53表入仓类型,0 或NULL 其它，1-过数入仓,2-退货返工 ,3-库存返工
+
+四，EP004在货品控制二，里增加了开关：EP069成品出仓明细及汇总汇率取（指派日期）当月汇率 0取订单汇率，1取当月汇率LLL20120704
+
+
+
+--53表入仓类型,0 或NULL 其它，1-过数入仓,2-退货返工,3-库存返工  LLL　20120828
+if not exists(select 1
+              from sysobjects t1 inner join
+                   syscolumns t2 on t1.id=t2.id
+              where t1.name='data0053'
+                and t2.name='WTYPE_53')
+begin
+alter table data0053 add WTYPE_53  tinyint default(0) not null
+end
+go
+
+data0053.WTYPE_53，根据56表的字段继承而来
+DATA0056.WTYPE=0 then data0053.WTYPE_53=1 //过数 
+DATA0056.WTYPE=1 or  DATA0056.WTYPE=4 then data0053.WTYPE_53=2  //退货返工 
+DATA0056.WTYPE=3 or  DATA0056.WTYPE=5 then data0053.WTYPE_53=3  //库存返工 
+else data0053.WTYPE_53=0  //其它  
+
+
+
+
+LLL　20120822 

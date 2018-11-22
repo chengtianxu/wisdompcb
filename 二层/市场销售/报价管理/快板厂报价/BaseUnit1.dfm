@@ -1,0 +1,19 @@
+object BaseForm1: TBaseForm1
+  Left = 229
+  Top = 107
+  Width = 544
+  Height = 375
+  Caption = 'BaseForm1'
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+end

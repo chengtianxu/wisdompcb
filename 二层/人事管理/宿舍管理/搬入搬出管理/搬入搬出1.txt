@@ -1,0 +1,220 @@
+
+
+
+select top 1 * from bedmsg
+
+select top 1 * from bedroomusemsg
+
+
+bedroomusemsg
+
+
+      InputVar.Sqlstr :='select Dormitorymsg.d_name, '+
+        ' bedmsg.b_code,employeemsg_extra.chinesename,employeemsg_extra.employeecode,'+
+        ' bedroommsg.r_code,  ' +
+        ' bedroommsg.r_name,d_floor,'   +
+        ' bedmsg.employeeid,'+
+        ' bedmsg.rkey as rkey,   '    +
+        ' bedroomusemsg.rkey as beduseid '+
+        ' from bedmsg join bedroommsg on bedmsg.bedroomid=bedroommsg.rkey  '  +
+        ' join Dormitorymsg on bedroommsg.dormitoryid=Dormitorymsg.rkey     '   +      
+        ' left join employeemsg_extra on bedmsg.employeeid=employeemsg_extra.rkey'+
+        ' left join bedroomusemsg on bedroomusemsg.employeeid=employeemsg_extra.rkey and bedmsg.rkey=bedroomusemsg.bedid and enddate is null	';
+
+
+
+
+
+select Dormitorymsg.d_name, 
+         bedmsg.b_code,employeemsg_extra.chinesename,employeemsg_extra.employeecode,
+         bedroommsg.r_code,   
+         bedroommsg.r_name,d_floor,   
+         bedmsg.employeeid,
+         bedmsg.rkey as rkey,
+         bedroomusemsg.rkey as beduseid     
+         from bedmsg join bedroommsg on bedmsg.bedroomid=bedroommsg.rkey    
+         join Dormitorymsg on bedroommsg.dormitoryid=Dormitorymsg.rkey              
+         left join employeemsg_extra on bedmsg.employeeid=employeemsg_extra.rkey
+         left join bedroomusemsg on bedroomusemsg.employeeid=employeemsg_extra.rkey
+      and bedmsg.rkey=bedroomusemsg.bedid and enddate is null	 
+
+
+
+select * from bedroomusemsg
+
+
+
+2	1619	488	2011-12-30 00:00:00.000	3	2011-04-01 00:00:00.000	NULL	NULL	NULL	NULL
+3	1620	998	2012-04-14 00:00:00.000	3	2011-04-01 00:00:00.000	NULL	NULL	NULL	NULL
+
+
+
+declare @operator int
+declare @cur_empid int
+declare @des_empid int
+declare @cur_bedid int
+declare @des_bedid int
+declare @des_empid int.
+declare @des_empid int
+
+
+update bedroomusemsg
+set operator_out=1
+enddate=cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),
+oper_time_out=getdate()
+from bedroomusemsg
+where rkey in (2,3)
+
+insert bedroomusemsg(bedid,employeeid,startdate,operator_in,oper_time_in,remark)
+select 1619,998,cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),3,getdate(),'huanfang'
+insert bedroomusemsg(bedid,employeeid,startdate,operator_in,oper_time_in,remark)
+select 1620,488,cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),3,getdate(),'huanfang'
+
+
+
+update employeemsg_extra
+set roomcode=(select B_code from bedmsg where rkey=)
+from employeemsg_extra
+where rkey=
+
+update employeemsg_extra
+set roomcode=(select B_code from bedmsg where rkey=)
+from employeemsg_extra
+where rkey=
+
+update employeemsg
+set roomcode=(select B_code from bedmsg where rkey=)
+from employeemsg where employeecode = 
+(select employeecode from employeemsg_extra where rkey=)
+ 
+
+
+
+select top 1 * from bedmsg
+
+select top 1 * from bedroomusemsg
+
+
+bedroomusemsg
+
+
+      InputVar.Sqlstr :='select Dormitorymsg.d_name, '+
+        ' bedmsg.b_code,employeemsg_extra.chinesename,employeemsg_extra.employeecode,'+
+        ' bedroommsg.r_code,  ' +
+        ' bedroommsg.r_name,d_floor,'   +
+        ' bedmsg.employeeid,'+
+        ' bedmsg.rkey as rkey,   '    +
+        ' bedroomusemsg.rkey as beduseid '+
+        ' from bedmsg join bedroommsg on bedmsg.bedroomid=bedroommsg.rkey  '  +
+        ' join Dormitorymsg on bedroommsg.dormitoryid=Dormitorymsg.rkey     '   +      
+        ' left join employeemsg_extra on bedmsg.employeeid=employeemsg_extra.rkey'+
+        ' left join bedroomusemsg on bedroomusemsg.employeeid=employeemsg_extra.rkey and bedmsg.rkey=bedroomusemsg.bedid and enddate is null	';
+
+
+
+
+
+select Dormitorymsg.d_name, 
+         bedmsg.b_code,employeemsg_extra.chinesename,employeemsg_extra.employeecode,
+         bedroommsg.r_code,   
+         bedroommsg.r_name,d_floor,   
+         bedmsg.employeeid,
+         bedmsg.rkey as rkey,
+         bedroomusemsg.rkey as beduseid     
+         from bedmsg join bedroommsg on bedmsg.bedroomid=bedroommsg.rkey    
+         join Dormitorymsg on bedroommsg.dormitoryid=Dormitorymsg.rkey              
+         left join employeemsg_extra on bedmsg.employeeid=employeemsg_extra.rkey
+         left join bedroomusemsg on bedroomusemsg.employeeid=employeemsg_extra.rkey
+      and bedmsg.rkey=bedroomusemsg.bedid and enddate is null	 
+
+
+
+select * from bedroomusemsg
+where employeeid in (488,998)
+
+
+
+2	1619	488	2011-12-30 00:00:00.000	3	2011-04-01 00:00:00.000	NULL	NULL	NULL	NULL
+3	1620	998	2012-04-14 00:00:00.000	3	2011-04-01 00:00:00.000	NULL	NULL	NULL	NULL
+
+
+
+declare @operator int
+declare @cur_empid int
+declare @des_empid int
+declare @cur_bedid int
+declare @des_bedid int
+declare @cur_beduseid int
+declare @des_beduseid int
+declare @remark nvarchar(20)
+
+set @operator=3
+set @cur_empid=488
+set @des_empid=998
+set @cur_bedid=1620
+set @des_bedid=1619
+set @cur_beduseid=1831
+set @des_beduseid=1832
+set @remark='»»·¿'
+
+
+update bedroomusemsg
+set operator_out=@operator,
+enddate=cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),
+oper_time_out=getdate(),remark=@remark
+from bedroomusemsg
+where rkey in (@cur_beduseid,@des_beduseid)
+
+insert bedroomusemsg(bedid,employeeid,startdate,operator_in,oper_time_in)
+select @des_bedid,@cur_empid,cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),@operator,getdate()
+
+update employeemsg_extra
+set roomcode=(select B_code from bedmsg where rkey=@des_bedid)
+from employeemsg_extra
+where rkey=@cur_empid
+
+update bedmsg
+set employeeid=null
+where rkey=@cur_bedid
+
+update bedmsg
+set employeeid=@cur_empid
+where rkey=@des_bedid
+
+
+
+if @des_empid<>0 
+begin
+
+insert bedroomusemsg(bedid,employeeid,startdate,operator_in,oper_time_in)
+select @cur_bedid,@des_empid,cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),@operator,getdate()
+
+update employeemsg_extra
+set roomcode=(select B_code from bedmsg where rkey=@cur_bedid)
+from employeemsg_extra
+where rkey=@des_empid
+
+update bedmsg
+set employeeid=@des_empid
+where rkey=@cur_bedid
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

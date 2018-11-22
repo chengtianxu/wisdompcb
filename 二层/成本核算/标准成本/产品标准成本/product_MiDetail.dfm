@@ -1,0 +1,4448 @@
+object Form2: TForm2
+  Left = 261
+  Top = 151
+  Width = 825
+  Height = 595
+  Caption = #20135#21697'MI'#25968#25454#26126#32454
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object spl1: TSplitter
+    Left = 170
+    Top = 68
+    Height = 488
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 809
+    Height = 43
+    Align = alTop
+    BevelOuter = bvSpace
+    TabOrder = 0
+    object Label17: TLabel
+      Left = 251
+      Top = 6
+      Width = 59
+      Height = 13
+      Caption = #23458#25143#20195#30721':'
+    end
+    object Label18: TLabel
+      Left = 251
+      Top = 26
+      Width = 59
+      Height = 13
+      Caption = #23458#25143#31616#31216':'
+    end
+    object DBText1: TDBText
+      Left = 315
+      Top = 6
+      Width = 49
+      Height = 13
+      AutoSize = True
+      DataField = 'CUST_CODE'
+      DataSource = dmcon.dsProdLists
+    end
+    object DBText2: TDBText
+      Left = 315
+      Top = 26
+      Width = 49
+      Height = 13
+      AutoSize = True
+      DataField = 'ABBR_NAME'
+      DataSource = dmcon.dsProdLists
+    end
+    object Label57: TLabel
+      Left = 615
+      Top = 6
+      Width = 59
+      Height = 13
+      Alignment = taRightJustify
+      Caption = #26412#21378#32534#21495':'
+    end
+    object Label58: TLabel
+      Left = 616
+      Top = 26
+      Width = 59
+      Height = 13
+      Alignment = taRightJustify
+      Caption = #23458#25143#22411#21495':'
+    end
+    object DBText3: TDBText
+      Left = 675
+      Top = 6
+      Width = 49
+      Height = 13
+      AutoSize = True
+      DataField = 'MANU_PART_NUMBER'
+      DataSource = dmcon.DataSource2
+    end
+    object DBText4: TDBText
+      Left = 675
+      Top = 24
+      Width = 49
+      Height = 13
+      AutoSize = True
+      DataField = 'MANU_PART_DESC'
+      DataSource = dmcon.DataSource2
+    end
+    object rkey25: TLabel
+      Left = 752
+      Top = 16
+      Width = 7
+      Height = 13
+      Caption = '0'
+      Visible = False
+    end
+    object status: TLabel
+      Left = 771
+      Top = 16
+      Width = 7
+      Height = 13
+      Caption = '0'
+      Visible = False
+    end
+    object btnBOM: TSpeedButton
+      Left = 11
+      Top = 6
+      Width = 32
+      Height = 32
+      Hint = #20135#21697#25104#26412#26356#26032
+      Glyph.Data = {
+        36060000424D3606000000000000360400002800000020000000100000000100
+        08000000000000020000120E0000120E00000001000000000000000000003300
+        00006600000099000000CC000000FF0000000033000033330000663300009933
+        0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+        000000990000339900006699000099990000CC990000FF99000000CC000033CC
+        000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+        0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+        330000333300333333006633330099333300CC333300FF333300006633003366
+        33006666330099663300CC663300FF6633000099330033993300669933009999
+        3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+        330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+        66006600660099006600CC006600FF0066000033660033336600663366009933
+        6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+        660000996600339966006699660099996600CC996600FF99660000CC660033CC
+        660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+        6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+        990000339900333399006633990099339900CC339900FF339900006699003366
+        99006666990099669900CC669900FF6699000099990033999900669999009999
+        9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+        990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+        CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+        CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+        CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+        CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+        CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+        FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+        FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+        FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+        FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+        000000808000800000008000800080800000C0C0C00080808000191919004C4C
+        4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+        82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+        F100C56A31000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+        EEEEEE0909EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEEEEEEEE
+        EEEEEE091009EEEEEEEEEEEEEEEEEEEEEEEEEE81AC81EEEEEEEE5E5E5E5E5E5E
+        5E5E5E09101009EEEEEE81818181818181818181ACAC81EEEEEE5ED7D7D7D7D7
+        D7D7D70910101009EEEE81D7D7D7D7D7D7D7D781ACACAC81EEEE5ED7E3E3E3E3
+        E3E3E3091010101009EE81D7E3E3E3E3E3E3E381ACACACAC81EE5ED7D7D7D7D7
+        D7D7D70910101010100981D7D7D7D7D7D7D7D781ACACACACAC815ED7E3E3E3E3
+        E3E3E3091010101009EE81D7E3E3E3E3E3E3E381ACACACAC81EE5ED7D7D7D7D7
+        D7D7D70910101009EEEE81D7D7D7D7D7D7D7D781ACACAC81EEEE5ED7E3E3E3E3
+        E3E3E309101009EEEEEE81D7E3E3E3E3E3E3E381ACAC81EEEEEE5ED7D7D7D7D7
+        D7D7D7091009EEEEEEEE81D7D7D7D7D7D7D7D781AC81EEEEEEEE5ED7E3E3E3E3
+        E3E3E309095EEEEEEEEE81D7E3E3E3E3E3E3E3818181EEEEEEEE5ED7D7D7D7D7
+        D7D7D7D7D75EEEEEEEEE81D7D7D7D7D7D7D7D7D7D781EEEEEEEE5ED7E3E3E3E3
+        E3E3E3E3D75EEEEEEEEE81D7E3E3E3E3E3E3E3E3D781EEEEEEEE5ED7D7D7D7D7
+        D7D7D7D7D75EEEEEEEEE81D7D7D7D7D7D7D7D7D7D781EEEEEEEE5ED7D7D7D7D7
+        D7D7D7D7D75EEEEEEEEE81D7D7D7D7D7D7D7D7D7D781EEEEEEEE5E5E5E5E5E5E
+        5E5E5E5E5E5EEEEEEEEE818181818181818181818181EEEEEEEE}
+      NumGlyphs = 2
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnBOMClick
+    end
+    object btnApprove: TSpeedButton
+      Left = 42
+      Top = 6
+      Width = 32
+      Height = 32
+      Hint = #23457#26680
+      Glyph.Data = {
+        36060000424D3606000000000000360400002800000020000000100000000100
+        08000000000000020000320B0000320B00000001000000000000000000003300
+        00006600000099000000CC000000FF0000000033000033330000663300009933
+        0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+        000000990000339900006699000099990000CC990000FF99000000CC000033CC
+        000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+        0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+        330000333300333333006633330099333300CC333300FF333300006633003366
+        33006666330099663300CC663300FF6633000099330033993300669933009999
+        3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+        330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+        66006600660099006600CC006600FF0066000033660033336600663366009933
+        6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+        660000996600339966006699660099996600CC996600FF99660000CC660033CC
+        660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+        6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+        990000339900333399006633990099339900CC339900FF339900006699003366
+        99006666990099669900CC669900FF6699000099990033999900669999009999
+        9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+        990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+        CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+        CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+        CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+        CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+        CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+        FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+        FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+        FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+        FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+        000000808000800000008000800080800000C0C0C00080808000191919004C4C
+        4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+        82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+        F100C56A31000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE0909
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEEEEEEEEEEEE091010
+        09EEEEEEEEEEEEEEEEEEEEEEEE81ACAC81EEEEEEEEEEEEEEEEEEEEEE09101010
+        1009EEEEEEEEEEEEEEEEEEEE81ACACACAC81EEEEEEEEEEEEEEEEEE0910101010
+        101009EEEEEEEEEEEEEEEE81ACACACACACAC81EEEEEEEEEEEEEEEE0910100909
+        10101009EEEEEEEEEEEEEE81ACAC8181ACACAC81EEEEEEEEEEEEEE091009EEEE
+        0910101009EEEEEEEEEEEE81AC81EEEE81ACACAC81EEEEEEEEEEEE0909EEEEEE
+        EE0910101009EEEEEEEEEE8181EEEEEEEE81ACACAC81EEEEEEEEEEEEEEEEEEEE
+        EEEE0910101009EEEEEEEEEEEEEEEEEEEEEE81ACACAC81EEEEEEEEEEEEEEEEEE
+        EEEEEE0910101009EEEEEEEEEEEEEEEEEEEEEE81ACACAC81EEEEEEEEEEEEEEEE
+        EEEEEEEE09101009EEEEEEEEEEEEEEEEEEEEEEEE81ACAC81EEEEEEEEEEEEEEEE
+        EEEEEEEEEE091009EEEEEEEEEEEEEEEEEEEEEEEEEE81AC81EEEEEEEEEEEEEEEE
+        EEEEEEEEEEEE0909EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE}
+      NumGlyphs = 2
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnApproveClick
+    end
+    object btnRollback: TSpeedButton
+      Left = 73
+      Top = 6
+      Width = 32
+      Height = 32
+      Hint = #21462#28040#23457#26680
+      Glyph.Data = {
+        36060000424D3606000000000000360400002800000020000000100000000100
+        08000000000000020000850E0000850E00000001000000000000000000003300
+        00006600000099000000CC000000FF0000000033000033330000663300009933
+        0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+        000000990000339900006699000099990000CC990000FF99000000CC000033CC
+        000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+        0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+        330000333300333333006633330099333300CC333300FF333300006633003366
+        33006666330099663300CC663300FF6633000099330033993300669933009999
+        3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+        330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+        66006600660099006600CC006600FF0066000033660033336600663366009933
+        6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+        660000996600339966006699660099996600CC996600FF99660000CC660033CC
+        660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+        6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+        990000339900333399006633990099339900CC339900FF339900006699003366
+        99006666990099669900CC669900FF6699000099990033999900669999009999
+        9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+        990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+        CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+        CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+        CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+        CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+        CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+        FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+        FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+        FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+        FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+        000000808000800000008000800080800000C0C0C00080808000191919004C4C
+        4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+        82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+        F100C56A31000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEE5E09EEEEEEEEEEEEEEEEEEEEEEEEEEEEAC81EEEEEEEEEE09090909
+        09EEEEEEEEEE095EEEEEEEEE8181818181EEEEEEEEEE81ACEEEEEEEE09090909
+        EEEEEEEEEEEEEE09EEEEEEEE81818181EEEEEEEEEEEEEE81EEEEEEEE090909EE
+        EEEEEEEEEEEEEE09EEEEEEEE818181EEEEEEEEEEEEEEEE81EEEEEEEE0909EE09
+        EEEEEEEEEEEEEE09EEEEEEEE8181EE81EEEEEEEEEEEEEE81EEEEEEEE09EEEEEE
+        0909EEEEEEEE095EEEEEEEEE81EEEEEE8181EEEEEEEE81ACEEEEEEEEEEEEEEEE
+        EEEE090909095EEEEEEEEEEEEEEEEEEEEEEE81818181ACEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE}
+      NumGlyphs = 2
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnRollbackClick
+    end
+    object Label84: TLabel
+      Left = 446
+      Top = 25
+      Width = 59
+      Height = 13
+      Alignment = taRightJustify
+      Caption = #24037#21378#31616#31216':'
+    end
+    object Label86: TLabel
+      Left = 445
+      Top = 9
+      Width = 59
+      Height = 13
+      Alignment = taRightJustify
+      Caption = #24037#21378#32534#21495':'
+    end
+    object DBText7: TDBText
+      Left = 505
+      Top = 9
+      Width = 49
+      Height = 13
+      AutoSize = True
+      DataField = 'warehouse_code'
+      DataSource = dmcon.dsProdLists
+    end
+    object DBText8: TDBText
+      Left = 505
+      Top = 25
+      Width = 49
+      Height = 13
+      AutoSize = True
+      DataField = 'abbr_name_1'
+      DataSource = dmcon.dsProdLists
+    end
+    object BitBtn2: TBitBtn
+      Left = 104
+      Top = 6
+      Width = 32
+      Height = 32
+      Hint = #36864#20986
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        36060000424D3606000000000000360400002800000020000000100000000100
+        08000000000000020000710B0000710B00000001000000000000000000003300
+        00006600000099000000CC000000FF0000000033000033330000663300009933
+        0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+        000000990000339900006699000099990000CC990000FF99000000CC000033CC
+        000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+        0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+        330000333300333333006633330099333300CC333300FF333300006633003366
+        33006666330099663300CC663300FF6633000099330033993300669933009999
+        3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+        330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+        66006600660099006600CC006600FF0066000033660033336600663366009933
+        6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+        660000996600339966006699660099996600CC996600FF99660000CC660033CC
+        660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+        6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+        990000339900333399006633990099339900CC339900FF339900006699003366
+        99006666990099669900CC669900FF6699000099990033999900669999009999
+        9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+        990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+        CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+        CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+        CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+        CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+        CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+        FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+        FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+        FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+        FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+        000000808000800000008000800080800000C0C0C00080808000191919004C4C
+        4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+        82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+        F100C56A31000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+        F1EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEF1EEEEEEEEEEEEEEEEEEEEEEEEF1E3AC
+        E3F1EEEEEEEEEEEEEEEEEEEEEEF1EEACE3F1EEEEEEEEEEEEEEEEEEF1E3E28257
+        57E2ACE3F1EEEEEEEEEEEEF1EEE2818181E2ACEEF1EEEEEEEEEEE382578282D7
+        578181E2E3EEEEEEEEEEEE81818181D7818181E2EEEEEEEEEEEE57828989ADD7
+        57797979F1EEEEEEEEEE8181DEDEACD781818181F1EEEEEEEEEE57898989ADD7
+        57AAAAA2D7ADEEEEEEEE81DEDEDEACD781DEDE81D7ACEEEEEEEE57898989ADD7
+        57AACEA3AD10EEEEEEEE81DEDEDEACD781DEAC81AC81EEEEEEEE5789825EADD7
+        57ABCFE21110EEEEEEEE81DE8181ACD781ACACE28181EEEEEEEE578957D7ADD7
+        57ABDE101010101010EE81DE56D7ACD781ACDE818181818181EE57898257ADD7
+        57EE10101010101010EE81DE8156ACD781E381818181818181EE57898989ADD7
+        57EE82101010101010EE81DEDEDEACD781E381818181818181EE57898989ADD7
+        57ACF1821110EEEEEEEE81DEDEDEACD781ACF1818181EEEEEEEE57898989ADD7
+        57ABEEAB8910EEEEEEEE81DEDEDEACD781ACE3ACDE81EEEEEEEE57828989ADD7
+        57ACEEA3EE89EEEEEEEE8181DEDEACD781ACE381EEDEEEEEEEEEEEDE5E8288D7
+        57A2A2A2EEEEEEEEEEEEEEDE8181DED781818181EEEEEEEEEEEEEEEEEEAC8257
+        57EEEEEEEEEEEEEEEEEEEEEEEEAC818181EEEEEEEEEEEEEEEEEE}
+      NumGlyphs = 2
+    end
+  end
+  object HeaderControl1: THeaderControl
+    Left = 0
+    Top = 43
+    Width = 809
+    Height = 25
+    Sections = <
+      item
+        Alignment = taCenter
+        ImageIndex = -1
+        Text = #20135#21697#32467#26500
+        Width = 170
+      end
+      item
+        Alignment = taCenter
+        ImageIndex = -1
+        Text = #36873#25321#39033#30446
+        Width = 79
+      end
+      item
+        Alignment = taCenter
+        AutoSize = True
+        BiDiMode = bdLeftToRight
+        ImageIndex = -1
+        ParentBiDiMode = False
+        Text = #25968#25454#20869#23481
+        Width = 560
+      end>
+  end
+  object TreeView1: TTreeView
+    Left = 0
+    Top = 68
+    Width = 170
+    Height = 488
+    Align = alLeft
+    BevelWidth = 2
+    HideSelection = False
+    Images = ImageList1
+    Indent = 19
+    ReadOnly = True
+    RowSelect = True
+    TabOrder = 2
+    OnChange = TreeView1Change
+  end
+  object ListBox1: TListBox
+    Left = 173
+    Top = 68
+    Width = 79
+    Height = 488
+    Align = alLeft
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+    ItemHeight = 13
+    Items.Strings = (
+      #20135#21697#20449#24687
+      #25340#29256#35774#35745
+      #20840#23616#21442#25968
+      #24037#33402#27969#31243
+      #23618#21387#32467#26500
+      #38075#21632#34920
+      #22791#27880#20449#24687
+      #24037#31243#26356#25913
+      #35780#23457#20449#24687
+      #23458#25143#20449#24687)
+    ParentFont = False
+    TabOrder = 3
+    OnClick = ListBox1Click
+  end
+  object Notebook1: TNotebook
+    Left = 252
+    Top = 68
+    Width = 557
+    Height = 488
+    Align = alClient
+    PageIndex = 12
+    TabOrder = 4
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = 'Default'
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #20135#21697#20449#24687
+      object Label1: TLabel
+        Left = 73
+        Top = 17
+        Width = 59
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #26412#21378#32534#21495':'
+      end
+      object Label2: TLabel
+        Left = 73
+        Top = 41
+        Width = 59
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #23458#25143#22411#21495':'
+      end
+      object Label3: TLabel
+        Left = 73
+        Top = 163
+        Width = 59
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #20135#21697#31867#22411':'
+      end
+      object Label4: TLabel
+        Left = 99
+        Top = 65
+        Width = 33
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #23618#25968':'
+      end
+      object Label5: TLabel
+        Left = 73
+        Top = 90
+        Width = 59
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #26679#26495#32534#21495':'
+      end
+      object Label6: TLabel
+        Left = 46
+        Top = 213
+        Width = 86
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #29983#20135#21608#26399'('#22825'):'
+      end
+      object Label7: TLabel
+        Left = 33
+        Top = 237
+        Width = 99
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #21046#36896#25552#20132#26399'('#22825'):'
+      end
+      object Label8: TLabel
+        Left = 12
+        Top = 286
+        Width = 120
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #26368#20339#27969#36716#25209#37327'(PNL):'
+      end
+      object Label9: TLabel
+        Left = 79
+        Top = 188
+        Width = 53
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #25253#24223#29575'%:'
+      end
+      object Label10: TLabel
+        Left = 46
+        Top = 262
+        Width = 86
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #26377#25928#23384#26399'('#22825'):'
+      end
+      object Label11: TLabel
+        Left = 60
+        Top = 115
+        Width = 72
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #23458#25143#29289#26009#21495':'
+      end
+      object Label12: TLabel
+        Left = 73
+        Top = 139
+        Width = 59
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #22823#26009#35268#26684':'
+      end
+      object Label13: TLabel
+        Left = 272
+        Top = 286
+        Width = 85
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #26368#21518#19979#21333#26085#26399':'
+      end
+      object Label14: TLabel
+        Left = 298
+        Top = 310
+        Width = 59
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #24403#21069#24211#23384':'
+      end
+      object Label15: TLabel
+        Left = 296
+        Top = 163
+        Width = 63
+        Height = 13
+        Caption = '         '
+      end
+      object Label16: TLabel
+        Left = 18
+        Top = 310
+        Width = 114
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #21333#20301#37325#37327'('#20811'/PCS):'
+      end
+      object Label35: TLabel
+        Left = 272
+        Top = 333
+        Width = 85
+        Height = 13
+        Caption = #26368#21518#20462#25913#20154#21592':'
+      end
+      object Label36: TLabel
+        Left = 272
+        Top = 358
+        Width = 85
+        Height = 13
+        Caption = #26368#21518#20462#25913#26085#26399':'
+      end
+      object Label37: TLabel
+        Left = 298
+        Top = 382
+        Width = 59
+        Height = 13
+        Caption = #26816#26597#20154#21592':'
+      end
+      object Label38: TLabel
+        Left = 298
+        Top = 407
+        Width = 59
+        Height = 13
+        Caption = #26816#26597#26085#26399':'
+      end
+      object Label39: TLabel
+        Left = 298
+        Top = 431
+        Width = 59
+        Height = 13
+        Caption = #23457#26680#20154#21592':'
+      end
+      object Label40: TLabel
+        Left = 298
+        Top = 456
+        Width = 59
+        Height = 13
+        Caption = #23457#26680#26085#26399':'
+      end
+      object Label59: TLabel
+        Left = 277
+        Top = 213
+        Width = 80
+        Height = 13
+        Caption = 'PCS'#21333#21482#23610#23544':'
+      end
+      object Label60: TLabel
+        Left = 277
+        Top = 237
+        Width = 80
+        Height = 13
+        Caption = 'SET'#20132#36135#23610#23544':'
+      end
+      object Label61: TLabel
+        Left = 263
+        Top = 262
+        Width = 94
+        Height = 13
+        Caption = 'SPELL'#25340#29256#23610#23544':'
+      end
+      object Label62: TLabel
+        Left = 74
+        Top = 334
+        Width = 59
+        Height = 13
+        Caption = #21387#21512#27493#39588':'
+      end
+      object Label63: TLabel
+        Left = 76
+        Top = 383
+        Width = 59
+        Height = 13
+        Caption = #21387#21512#27604#20363':'
+      end
+      object Label64: TLabel
+        Left = 141
+        Top = 358
+        Width = 42
+        Height = 13
+        Caption = '      '
+      end
+      object DBEdit1: TDBEdit
+        Left = 139
+        Top = 13
+        Width = 121
+        Height = 21
+        DataField = 'MANU_PART_NUMBER'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 0
+      end
+      object DBEdit2: TDBEdit
+        Left = 139
+        Top = 37
+        Width = 235
+        Height = 21
+        DataField = 'MANU_PART_DESC'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 1
+      end
+      object DBCheckBox1: TDBCheckBox
+        Left = 338
+        Top = 15
+        Width = 121
+        Height = 17
+        Caption = #32511#33394#29615#20445#26631#35782
+        DataField = 'green_flag'
+        DataSource = dmcon.DataSource2
+        TabOrder = 2
+        ValueChecked = 'Y'
+        ValueUnchecked = 'N'
+      end
+      object Edit1: TEdit
+        Left = 139
+        Top = 159
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 13
+      end
+      object DBRadioGroup1: TDBRadioGroup
+        Left = 338
+        Top = 67
+        Width = 163
+        Height = 39
+        Caption = #20135#21697#23646#24615
+        Columns = 2
+        DataField = 'ttype'
+        DataSource = dmcon.DataSource2
+        Items.Strings = (
+          #37327#20135
+          #26679#26495)
+        TabOrder = 14
+        Values.Strings = (
+          '0'
+          '1')
+      end
+      object DBEdit3: TDBEdit
+        Left = 139
+        Top = 61
+        Width = 65
+        Height = 21
+        DataField = 'LAYERS'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 3
+      end
+      object DBEdit4: TDBEdit
+        Left = 139
+        Top = 86
+        Width = 121
+        Height = 21
+        DataField = 'SAMPLE_NR'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 4
+      end
+      object DBEdit5: TDBEdit
+        Left = 139
+        Top = 110
+        Width = 235
+        Height = 21
+        DataField = 'ANALYSIS_CODE_2'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 5
+      end
+      object DBEdit6: TDBEdit
+        Left = 139
+        Top = 135
+        Width = 235
+        Height = 21
+        DataField = 'ANALYSIS_CODE_3'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 6
+      end
+      object DBEdit7: TDBEdit
+        Left = 139
+        Top = 184
+        Width = 65
+        Height = 21
+        DataField = 'EST_SCRAP'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 7
+        OnKeyPress = DBEdit15KeyPress
+      end
+      object DBEdit8: TDBEdit
+        Left = 139
+        Top = 209
+        Width = 65
+        Height = 21
+        DataField = 'SHELF_LIFE'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 8
+      end
+      object DBEdit9: TDBEdit
+        Left = 139
+        Top = 233
+        Width = 65
+        Height = 21
+        DataField = 'MFG_LEAD_TIME'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 9
+      end
+      object DBEdit10: TDBEdit
+        Left = 139
+        Top = 258
+        Width = 65
+        Height = 21
+        DataField = 'REVIEW_DAYS'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 10
+      end
+      object DBEdit11: TDBEdit
+        Left = 139
+        Top = 282
+        Width = 65
+        Height = 21
+        DataField = 'OPT_LOT_SIZE'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 11
+      end
+      object DBEdit12: TDBEdit
+        Left = 361
+        Top = 282
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'LAST_SO_DATE'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 15
+      end
+      object DBEdit13: TDBEdit
+        Left = 361
+        Top = 306
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'QTY_ON_HAND'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 16
+      end
+      object DBEdit14: TDBEdit
+        Left = 139
+        Top = 306
+        Width = 65
+        Height = 21
+        DataField = 'REPORT_UNIT_VALUE1'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 12
+        OnKeyPress = DBEdit15KeyPress
+      end
+      object DBRadioGroup2: TDBRadioGroup
+        Left = 140
+        Top = 465
+        Width = 122
+        Height = 33
+        Caption = #38144#21806#29366#24577
+        Columns = 2
+        DataField = 'ONHOLD_SALES_FLAG'
+        DataSource = dmcon.DataSource2
+        Items.Strings = (
+          #26377#25928
+          #36807#26399)
+        ReadOnly = True
+        TabOrder = 17
+        Values.Strings = (
+          '0'
+          '1')
+      end
+      object DBCheckBox2: TDBCheckBox
+        Left = 140
+        Top = 425
+        Width = 76
+        Height = 17
+        Caption = #25237#20135#26242#32531
+        DataField = 'ONHOLD_PLANNING_FLAG'
+        DataSource = dmcon.DataSource2
+        ReadOnly = True
+        TabOrder = 18
+        ValueChecked = '1'
+        ValueUnchecked = '0'
+      end
+      object DBCheckBox3: TDBCheckBox
+        Left = 140
+        Top = 445
+        Width = 97
+        Height = 17
+        Caption = #24037#21333#21457#20986#26242#32531
+        DataField = 'ONHOLD_RELEASE_FLAG'
+        DataSource = dmcon.DataSource2
+        ReadOnly = True
+        TabOrder = 19
+        ValueChecked = '1'
+        ValueUnchecked = '0'
+      end
+      object Edit3: TEdit
+        Left = 361
+        Top = 329
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 20
+      end
+      object DBEdit23: TDBEdit
+        Left = 361
+        Top = 354
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'LAST_MODIFIED_DATE'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 21
+      end
+      object Edit4: TEdit
+        Left = 361
+        Top = 378
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 22
+      end
+      object DBEdit24: TDBEdit
+        Left = 361
+        Top = 403
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'CHECK_DATE'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 23
+      end
+      object Edit5: TEdit
+        Left = 361
+        Top = 427
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 24
+      end
+      object DBEdit25: TDBEdit
+        Left = 361
+        Top = 452
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'AUDITED_DATE'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 25
+      end
+      object DBCheckBox4: TDBCheckBox
+        Left = 140
+        Top = 406
+        Width = 76
+        Height = 17
+        Caption = #20801#35768#32534#36753
+        DataField = 'ALLOW_EDIT_FLAG'
+        DataSource = dmcon.DataSource2
+        ReadOnly = True
+        TabOrder = 26
+        ValueChecked = 'Y'
+        ValueUnchecked = 'N'
+      end
+      object DBEdit29: TDBEdit
+        Left = 361
+        Top = 209
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'ANALYSIS_CODE_5'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 27
+      end
+      object DBEdit30: TDBEdit
+        Left = 361
+        Top = 233
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'ANALYSIS_CODE_1'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 28
+      end
+      object DBEdit31: TDBEdit
+        Left = 361
+        Top = 258
+        Width = 121
+        Height = 21
+        Color = cl3DLight
+        DataField = 'ANALYSIS_CODE_4'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        TabOrder = 29
+      end
+      object DBEdit32: TDBEdit
+        Left = 139
+        Top = 330
+        Width = 66
+        Height = 21
+        DataField = 'BOM_STEP'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 30
+      end
+      object DBEdit33: TDBEdit
+        Left = 139
+        Top = 379
+        Width = 66
+        Height = 21
+        DataField = 'QTY_BOM'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        TabOrder = 31
+      end
+      object BitBtn12: TBitBtn
+        Left = 208
+        Top = 329
+        Width = 25
+        Height = 25
+        TabOrder = 32
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000120B0000120B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+          333333777777777F33333330B00000003333337F7777777F3333333000000000
+          333333777777777F333333330EEEEEE033333337FFFFFF7F3333333300000000
+          333333377777777F3333333330BFBFB03333333373333373F33333330BFBFBFB
+          03333337F33333F7F33333330FBFBF0F03333337F33337F7F33333330BFBFB0B
+          03333337F3F3F7F7333333330F0F0F0033333337F7F7F773333333330B0B0B03
+          3333333737F7F7F333333333300F0F03333333337737F7F33333333333300B03
+          333333333377F7F33333333333330F03333333333337F7F33333333333330B03
+          3333333333373733333333333333303333333333333373333333}
+        NumGlyphs = 2
+      end
+      object BitBtn13: TBitBtn
+        Left = 265
+        Top = 158
+        Width = 25
+        Height = 25
+        TabOrder = 33
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000120B0000120B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+          333333777777777F33333330B00000003333337F7777777F3333333000000000
+          333333777777777F333333330EEEEEE033333337FFFFFF7F3333333300000000
+          333333377777777F3333333330BFBFB03333333373333373F33333330BFBFBFB
+          03333337F33333F7F33333330FBFBF0F03333337F33337F7F33333330BFBFB0B
+          03333337F3F3F7F7333333330F0F0F0033333337F7F7F773333333330B0B0B03
+          3333333737F7F7F333333333300F0F03333333337737F7F33333333333300B03
+          333333333377F7F33333333333330F03333333333337F7F33333333333330B03
+          3333333333373733333333333333303333333333333373333333}
+        NumGlyphs = 2
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #25340#29256#35774#35745
+      object PageControl1: TPageControl
+        Left = 0
+        Top = 100
+        Width = 557
+        Height = 388
+        ActivePage = TabSheet1
+        Align = alClient
+        TabOrder = 0
+        object TabSheet1: TTabSheet
+          Caption = #22823#26009#25340#29256
+          object Image1: TImage
+            Left = 0
+            Top = 0
+            Width = 560
+            Height = 372
+            Align = alClient
+            Stretch = True
+          end
+        end
+        object TabSheet2: TTabSheet
+          Caption = 'PNLA'#25340#29256
+          ImageIndex = 1
+          object Image2: TImage
+            Left = 0
+            Top = 0
+            Width = 528
+            Height = 387
+            Align = alClient
+            Stretch = True
+          end
+        end
+        object TabSheet3: TTabSheet
+          Caption = 'PNLB'#25340#29256
+          ImageIndex = 2
+          object Image3: TImage
+            Left = 0
+            Top = 0
+            Width = 528
+            Height = 387
+            Align = alClient
+            Stretch = True
+          end
+        end
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 100
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        object Label19: TLabel
+          Left = 23
+          Top = 8
+          Width = 107
+          Height = 13
+          Caption = #21333#20803#23610#23544'(PCS)'#38271':'
+        end
+        object Label20: TLabel
+          Left = 23
+          Top = 30
+          Width = 107
+          Height = 13
+          Caption = #20132#36135#23610#23544'(SET)'#38271':'
+        end
+        object Label21: TLabel
+          Left = 9
+          Top = 52
+          Width = 121
+          Height = 13
+          Caption = #25340#29256#23610#23544'(SPELL)'#38271':'
+        end
+        object Label22: TLabel
+          Left = 194
+          Top = 8
+          Width = 14
+          Height = 13
+          Caption = 'mm'
+        end
+        object Label23: TLabel
+          Left = 194
+          Top = 30
+          Width = 14
+          Height = 13
+          Caption = 'mm'
+        end
+        object Label24: TLabel
+          Left = 195
+          Top = 52
+          Width = 14
+          Height = 13
+          Caption = 'mm'
+        end
+        object Label25: TLabel
+          Left = 293
+          Top = 52
+          Width = 14
+          Height = 13
+          Caption = 'mm'
+        end
+        object Label26: TLabel
+          Left = 293
+          Top = 30
+          Width = 14
+          Height = 13
+          Caption = 'mm'
+        end
+        object Label27: TLabel
+          Left = 293
+          Top = 8
+          Width = 14
+          Height = 13
+          Caption = 'mm'
+        end
+        object Label28: TLabel
+          Left = 214
+          Top = 8
+          Width = 20
+          Height = 13
+          Caption = #23485':'
+        end
+        object Label29: TLabel
+          Left = 214
+          Top = 30
+          Width = 20
+          Height = 13
+          Caption = #23485':'
+        end
+        object Label30: TLabel
+          Left = 215
+          Top = 52
+          Width = 20
+          Height = 13
+          Caption = #23485':'
+        end
+        object Label31: TLabel
+          Left = 318
+          Top = 30
+          Width = 72
+          Height = 13
+          Caption = #20132#36135#21333#20803#25968':'
+        end
+        object Label32: TLabel
+          Left = 318
+          Top = 52
+          Width = 72
+          Height = 13
+          Caption = #25340#29256#21333#20803#25968':'
+        end
+        object Label41: TLabel
+          Left = 473
+          Top = 8
+          Width = 26
+          Height = 13
+          Alignment = taRightJustify
+          Caption = #38754#31215
+        end
+        object Label42: TLabel
+          Left = 336
+          Top = 8
+          Width = 54
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'PCS'#38754#31215':'
+        end
+        object Label43: TLabel
+          Left = 71
+          Top = 77
+          Width = 59
+          Height = 13
+          Caption = #20132#36135#24418#24335':'
+        end
+        object DBEdit15: TDBEdit
+          Left = 135
+          Top = 4
+          Width = 57
+          Height = 21
+          DataField = 'pcs_lngth'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 0
+          OnExit = DBEdit15Exit
+          OnKeyPress = DBEdit15KeyPress
+        end
+        object DBEdit16: TDBEdit
+          Left = 231
+          Top = 4
+          Width = 57
+          Height = 21
+          DataField = 'pcs_width'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 1
+          OnExit = DBEdit15Exit
+          OnKeyPress = DBEdit15KeyPress
+        end
+        object DBEdit17: TDBEdit
+          Left = 135
+          Top = 26
+          Width = 57
+          Height = 21
+          DataField = 'set_lngth'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 2
+          OnExit = DBEdit17Exit
+          OnKeyDown = DBEdit17KeyDown
+          OnKeyPress = DBEdit15KeyPress
+        end
+        object DBEdit18: TDBEdit
+          Left = 231
+          Top = 26
+          Width = 57
+          Height = 21
+          DataField = 'set_width'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 3
+          OnExit = DBEdit17Exit
+          OnKeyDown = DBEdit18KeyDown
+          OnKeyPress = DBEdit15KeyPress
+        end
+        object DBEdit19: TDBEdit
+          Left = 135
+          Top = 48
+          Width = 57
+          Height = 21
+          DataField = 'spell_lngth'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 4
+          OnExit = DBEdit19Exit
+          OnKeyDown = DBEdit19KeyDown
+          OnKeyPress = DBEdit15KeyPress
+        end
+        object DBEdit20: TDBEdit
+          Left = 231
+          Top = 48
+          Width = 57
+          Height = 21
+          DataField = 'spell_width'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 5
+          OnExit = DBEdit19Exit
+          OnKeyDown = DBEdit20KeyDown
+          OnKeyPress = DBEdit15KeyPress
+        end
+        object DBEdit21: TDBEdit
+          Left = 391
+          Top = 26
+          Width = 57
+          Height = 21
+          DataField = 'set_qty'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 6
+          OnExit = DBEdit17Exit
+          OnKeyPress = DBEdit21KeyPress
+          OnKeyUp = DBEdit21KeyUp
+        end
+        object DBEdit22: TDBEdit
+          Left = 391
+          Top = 48
+          Width = 57
+          Height = 21
+          DataField = 'spell_qty'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 7
+          OnExit = DBEdit19Exit
+          OnKeyDown = DBEdit22KeyDown
+          OnKeyPress = DBEdit21KeyPress
+          OnKeyUp = DBEdit21KeyUp
+        end
+        object BitBtn3: TBitBtn
+          Left = 460
+          Top = 74
+          Width = 71
+          Height = 25
+          Caption = #25340#29256#35774#35745
+          TabOrder = 8
+        end
+        object DBEdit26: TDBEdit
+          Left = 458
+          Top = 26
+          Width = 73
+          Height = 21
+          Color = cl3DLight
+          DataField = 'unit_sq'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 9
+        end
+        object DBEdit27: TDBEdit
+          Left = 458
+          Top = 48
+          Width = 73
+          Height = 21
+          Color = cl3DLight
+          DataField = 'spell_sq'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 10
+        end
+        object DBEdit28: TDBEdit
+          Left = 390
+          Top = 4
+          Width = 57
+          Height = 21
+          Color = cl3DLight
+          DataField = 'pcs_sq'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 11
+        end
+        object DBComboBox2: TDBComboBox
+          Left = 135
+          Top = 73
+          Width = 89
+          Height = 21
+          Style = csDropDownList
+          DataField = 'SO_UNIT'
+          DataSource = dmcon.DataSource2
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ItemHeight = 13
+          Items.Strings = (
+            'PCS'
+            'SET'
+            #26080#35201#27714)
+          TabOrder = 12
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #20840#23616#21442#25968
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 36
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 0
+        DesignSize = (
+          557
+          36)
+        object SpeedButton1: TSpeedButton
+          Left = 432
+          Top = 4
+          Width = 56
+          Height = 28
+          Hint = #20174#35780#23457#20449#24687#20013#26356#26032
+          Anchors = [akTop, akRight]
+          Caption = #26356#26032
+          Flat = True
+          Glyph.Data = {
+            BE060000424DBE06000000000000360400002800000024000000120000000100
+            0800000000008802000000000000000000000001000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+            A600000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00030303030303
+            0404040404040303030303030303030303FFF8F8F8F8F8F803FF030303030302
+            0403030402020202020204040303030303F8F8FF03F8030303030303F8F8FF03
+            030303020204040202020202020202020403030303F8FFF8F80303FFFFFFFFFF
+            0303F8FF030303020202020202FAFAFAFAFA02020204030303F8FF030303FFF8
+            F8F8F8F8FF0303F8FF03030202020202FA0303030303FA020202040303F8FF03
+            03FFF80303030303F8FF0303F8FF03020202020203030303030303FA02020403
+            03F8FF0303F803030303030303F8FF03F8FF03020202020202030303030303FA
+            0404040303F8FFFFFFFFF8FF0303030303F8F8F8F80303FAFAFAFAFAFAFA0303
+            030303030303030303F8F8F8F8F8F8F803030303030303030303030303030303
+            030303030303030303030303030303030303030303030303FFFFFFFFFFFF0303
+            030303030303030303030404040404040303FFFFFFFF030303030303F8F8F8F8
+            F8F803FA040404030303030303FA02020202020403F8F8F8F8FF0303030303F8
+            FF03030303F803FA02020403030303030303FA020202020403F8FF03F8FF0303
+            03030303F803030303F80303FA0202040303030303040402020202040303F803
+            03F8FFFFFFFFFFF8F803030303F80303FA020202040404040402020202020204
+            0303F8FF0303F8F8F8F8F8030303FFFF03F8030303FA02020202020202020202
+            FAFA0204030303F8FFFF030303030303FFFFF8F8FFF803030303FAFA02020202
+            0202FAFA0303FA0303030303F8F8FFFFFFFFFFFFF8F80303F803030303030303
+            FAFAFAFAFAFA030303030303030303030303F8F8F8F8F8F80303030303030303
+            0303030303030303030303030303030303030303030303030303030303030303
+            0303}
+          NumGlyphs = 2
+          ParentShowHint = False
+          ShowHint = True
+          OnClick = SpeedButton1Click
+        end
+        object SpeedButton2: TSpeedButton
+          Left = 494
+          Top = 4
+          Width = 56
+          Height = 28
+          Hint = #20174#20854#23427#32447#36335#23618#36733#20837
+          Anchors = [akTop, akRight]
+          Caption = #36733#20837
+          Flat = True
+          Glyph.Data = {
+            26050000424D26050000000000003604000028000000100000000F0000000100
+            080000000000F000000000000000000000000001000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000C0DCC000F0C8
+            A400000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00070707070707
+            0707070707070707070707070707070704040404040404040407070707070707
+            04FFFFFFFFFFFFFF040707070707070704FF0000000000FF0407000000000000
+            04FFFFFFFFFFFFFF040700FFFFFFFFFF04FF0000000000FF040700FF00000000
+            04FFFFFFFFFFFFFF040700FFFFFFFFFF04FF0000FF040404040700FF00000000
+            04FFFFFFFF04FF04070700FFFFFFFFFF04FFFFFFFF040407070700FF0000FF00
+            0404040404040707070700FFFFFFFF00FF00070707070707070700FFFFFFFF00
+            0007070707070707070700000000000007070707070707070707070707070707
+            07070707070707070707}
+          ParentShowHint = False
+          ShowHint = True
+        end
+        object Label33: TLabel
+          Left = 233
+          Top = 12
+          Width = 52
+          Height = 13
+          Anchors = [akTop]
+          Caption = #20840#23616#21442#25968
+        end
+      end
+      object Panel6: TPanel
+        Left = 0
+        Top = 36
+        Width = 557
+        Height = 452
+        Align = alClient
+        BevelOuter = bvNone
+        Caption = 'Panel6'
+        TabOrder = 1
+        object DBGrid1: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 557
+          Height = 452
+          Align = alClient
+          DataSource = dmcon.DataSource3
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = #23435#20307
+          TitleFont.Style = []
+          OnCellClick = DBGrid1CellClick
+          OnColExit = DBGrid1ColExit
+          OnDrawColumnCell = DBGrid1DrawColumnCell
+          OnKeyDown = DBGrid1KeyDown
+          OnKeyPress = DBGrid1KeyPress
+          Columns = <
+            item
+              Color = cl3DLight
+              Expanded = False
+              FieldName = 'PARAMETER_NAME'
+              ReadOnly = True
+              Visible = True
+            end
+            item
+              Color = cl3DLight
+              Expanded = False
+              FieldName = 'PARAMETER_DESC'
+              ReadOnly = True
+              Visible = True
+            end
+            item
+              Color = cl3DLight
+              Expanded = False
+              FieldName = 'UNIT_NAME'
+              ReadOnly = True
+              Width = 69
+              Visible = True
+            end
+            item
+              Color = cl3DLight
+              Expanded = False
+              FieldName = 'datatype'
+              ReadOnly = True
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PARAMETER_VALUE'
+              Width = 175
+              Visible = True
+            end>
+        end
+        object DBComboBox1: TDBComboBox
+          Left = 337
+          Top = 19
+          Width = 177
+          Height = 21
+          DataField = 'PARAMETER_VALUE'
+          DataSource = dmcon.DataSource3
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ItemHeight = 13
+          TabOrder = 1
+          Visible = False
+          OnKeyDown = DBComboBox1KeyDown
+          OnKeyPress = DBComboBox1KeyPress
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #24037#33402#27969#31243
+      object Panel4: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 41
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 0
+        DesignSize = (
+          557
+          41)
+        object Label34: TLabel
+          Left = 80
+          Top = 14
+          Width = 59
+          Height = 13
+          Caption = #27969#31243#27169#22411':'
+        end
+        object Label56: TLabel
+          Left = 321
+          Top = 14
+          Width = 63
+          Height = 13
+          Caption = '         '
+        end
+        object Edit2: TEdit
+          Left = 139
+          Top = 10
+          Width = 102
+          Height = 21
+          Color = cl3DLight
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object BitBtn4: TBitBtn
+          Left = 268
+          Top = 7
+          Width = 67
+          Height = 28
+          Hint = #32534#36753#27969#31243' '
+          Anchors = [akTop, akRight]
+          Caption = #20462#35746
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          Glyph.Data = {
+            36060000424D3606000000000000360400002800000020000000100000000100
+            08000000000000020000520B0000520B00000001000000000000000000003300
+            00006600000099000000CC000000FF0000000033000033330000663300009933
+            0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+            000000990000339900006699000099990000CC990000FF99000000CC000033CC
+            000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+            0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+            330000333300333333006633330099333300CC333300FF333300006633003366
+            33006666330099663300CC663300FF6633000099330033993300669933009999
+            3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+            330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+            66006600660099006600CC006600FF0066000033660033336600663366009933
+            6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+            660000996600339966006699660099996600CC996600FF99660000CC660033CC
+            660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+            6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+            990000339900333399006633990099339900CC339900FF339900006699003366
+            99006666990099669900CC669900FF6699000099990033999900669999009999
+            9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+            990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+            CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+            CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+            CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+            CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+            CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+            FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+            FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+            FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+            FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+            000000808000800000008000800080800000C0C0C00080808000191919004C4C
+            4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+            82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+            F100C56A31000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE002BEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEE5681EEEEEEEEEEEEEEEEEEEEEEEEEEEE2B565656EEEE
+            EEEEEEEEEEEEEEEEEEEE81565656EEEEEEEEEEEEEEEEEEEEEEEEEE81AC815656
+            EEEEEEEEEEEEEEEEEEEEEE81AC815656EEEEEEEEEEEEEEEEEEEEEE81ACAC8181
+            5656EEEEEEEEEEEEEEEEEE81ACAC81815656EEEEEEEEEEEEEEEEEEEE81ACAC81
+            81815656EEEEEEEEEEEEEEEE81ACAC8181815656EEEEEEEEEEEEEEEE81E3ACAC
+            818181090808EEEEEEEEEEEE81E3ACAC818181815656EEEEEEEEEEEEEE81E3AC
+            AC810909090908EEEEEEEEEEEE81E3ACAC818181818156EEEEEEEEEEEE81D7E3
+            AC09090909090908EEEEEEEEEE81D7E3AC81818181818156EEEEEEEEEEEE81D7
+            093409090909090908EEEEEEEEEE81D781AC81818181818156EEEEEEEEEE8109
+            34093409090909090908EEEEEEEE8181AC81AC81818181818156EEEEEEEEEE09
+            09340934090909090909EEEEEEEEEE8181AC81AC818181818181EEEEEEEEEE09
+            09093409340909090981EEEEEEEEEE818181AC81AC8181818181EEEEEEEEEEEE
+            09090934093409098181EEEEEEEEEEEE818181AC81AC81818181EEEEEEEEEEEE
+            EE090909340909ACAC81EEEEEEEEEEEEEE818181AC8181ACAC81EEEEEEEEEEEE
+            EEEE09090909E3E3ACACEEEEEEEEEEEEEEEE81818181E3E3ACAC}
+          NumGlyphs = 2
+        end
+      end
+      object DBGrid2: TDBGrid
+        Left = 0
+        Top = 41
+        Width = 557
+        Height = 447
+        Align = alClient
+        DataSource = dmcon.DataSource4
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        PopupMenu = PopupMenu1
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = #23435#20307
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'STEP_NUMBER'
+            Width = 51
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEPT_CODE'
+            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEPT_NAME'
+            Width = 172
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'tooling_rev'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'OUTP_SPFC'
+            Width = 67
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'BARCODE_ENTRY_FLAG'
+            Width = 61
+            Visible = True
+          end>
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #23618#21387#32467#26500
+      object Panel5: TPanel
+        Left = 0
+        Top = 0
+        Width = 568
+        Height = 41
+        Align = alTop
+        Alignment = taLeftJustify
+        Caption = #23618#21387#32467#26500
+        TabOrder = 0
+        object SpeedButton3: TSpeedButton
+          Left = 347
+          Top = 6
+          Width = 82
+          Height = 28
+          Caption = #36873#25321#27169#26495
+          Glyph.Data = {
+            36060000424D3606000000000000360400002800000020000000100000000100
+            08000000000000020000520B0000520B00000001000000000000000000003300
+            00006600000099000000CC000000FF0000000033000033330000663300009933
+            0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+            000000990000339900006699000099990000CC990000FF99000000CC000033CC
+            000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+            0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+            330000333300333333006633330099333300CC333300FF333300006633003366
+            33006666330099663300CC663300FF6633000099330033993300669933009999
+            3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+            330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+            66006600660099006600CC006600FF0066000033660033336600663366009933
+            6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+            660000996600339966006699660099996600CC996600FF99660000CC660033CC
+            660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+            6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+            990000339900333399006633990099339900CC339900FF339900006699003366
+            99006666990099669900CC669900FF6699000099990033999900669999009999
+            9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+            990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+            CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+            CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+            CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+            CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+            CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+            FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+            FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+            FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+            FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+            000000808000800000008000800080800000C0C0C00080808000191919004C4C
+            4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+            82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+            F100C56A31000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE00000000
+            0000000000000000EEEEEEEE818181818181818181818181EEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE0000
+            000000000000EEEEEEEEEEEEEEEE8181818181818181EEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE000000
+            00000000000000EEEEEEEEEEEE81818181818181818181EEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE0000
+            000000000000EEEEEEEEEEEEEEEE8181818181818181EEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE00000000
+            0000000000000000EEEEEEEE818181818181818181818181EEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE}
+          NumGlyphs = 2
+        end
+        object CheckBox1: TCheckBox
+          Left = 435
+          Top = 11
+          Width = 93
+          Height = 17
+          Caption = #35206#30422#24403#21069#22270
+          TabOrder = 0
+        end
+      end
+      object DBMemo1: TDBMemo
+        Left = 0
+        Top = 41
+        Width = 568
+        Height = 459
+        Align = alClient
+        DataField = 'layers_info'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        PopupMenu = PopupMenu2
+        ScrollBars = ssVertical
+        TabOrder = 1
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #38075#21632#34920
+      object StringGrid1: TStringGrid
+        Left = 0
+        Top = 59
+        Width = 557
+        Height = 430
+        Align = alClient
+        ColCount = 12
+        DefaultRowHeight = 20
+        FixedCols = 0
+        RowCount = 2
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor]
+        PopupMenu = PopupMenu3
+        TabOrder = 0
+        OnExit = StringGrid1Exit
+        OnKeyDown = StringGrid1KeyDown
+        OnKeyUp = StringGrid1KeyUp
+        OnMouseDown = StringGrid1MouseDown
+        OnSelectCell = StringGrid1SelectCell
+        ColWidths = (
+          35
+          37
+          31
+          66
+          35
+          66
+          48
+          49
+          49
+          54
+          54
+          52)
+      end
+      object Panel7: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 59
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        object Label44: TLabel
+          Left = 8
+          Top = 9
+          Width = 59
+          Height = 13
+          Caption = #26368#23567#38075#21632':'
+        end
+        object Label45: TLabel
+          Left = 125
+          Top = 9
+          Width = 67
+          Height = 13
+          Caption = 'PTH'#23380#20559#24046':'
+        end
+        object Label46: TLabel
+          Left = 253
+          Top = 9
+          Width = 74
+          Height = 13
+          Caption = 'NPTH'#23380#20559#24046':'
+        end
+        object BitBtn5: TBitBtn
+          Left = 8
+          Top = 30
+          Width = 66
+          Height = 25
+          Caption = #38075#21632#36873#25321
+          TabOrder = 0
+          OnClick = BitBtn5Click
+        end
+        object BitBtn6: TBitBtn
+          Left = 77
+          Top = 30
+          Width = 66
+          Height = 25
+          Caption = #38075#21632#26816#26597
+          TabOrder = 1
+          OnClick = BitBtn6Click
+        end
+        object BitBtn7: TBitBtn
+          Left = 145
+          Top = 30
+          Width = 66
+          Height = 25
+          Caption = #23380#25968#35745#31639
+          TabOrder = 2
+          OnClick = BitBtn7Click
+        end
+        object BitBtn8: TBitBtn
+          Left = 213
+          Top = 30
+          Width = 66
+          Height = 25
+          Caption = #23380#25968#27719#24635
+          TabOrder = 3
+          OnClick = BitBtn8Click
+        end
+        object Edit6: TEdit
+          Left = 68
+          Top = 5
+          Width = 53
+          Height = 21
+          Color = cl3DLight
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 4
+          Text = '0'
+        end
+        object Edit7: TEdit
+          Left = 194
+          Top = 5
+          Width = 53
+          Height = 21
+          Color = cl3DLight
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 5
+        end
+        object Edit8: TEdit
+          Left = 328
+          Top = 5
+          Width = 53
+          Height = 21
+          Color = cl3DLight
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 6
+        end
+        object isopen: TCheckBox
+          Left = 390
+          Top = 8
+          Width = 25
+          Height = 17
+          TabOrder = 7
+          Visible = False
+        end
+        object BitBtnDriToExcel: TBitBtn
+          Left = 280
+          Top = 30
+          Width = 66
+          Height = 25
+          Caption = #23548#20986'EXCEL'
+          TabOrder = 8
+          OnClick = BitBtnDriToExcelClick
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #22791#27880#20449#24687
+      object DBMemo2: TDBMemo
+        Left = 0
+        Top = 342
+        Width = 568
+        Height = 158
+        Align = alBottom
+        DataField = 'memo_text'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ScrollBars = ssVertical
+        TabOrder = 0
+      end
+      object Panel8: TPanel
+        Left = 0
+        Top = 0
+        Width = 568
+        Height = 32
+        Align = alTop
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = #21152#24037#25351#38024':'
+        TabOrder = 1
+        object Label47: TLabel
+          Left = 192
+          Top = 8
+          Width = 65
+          Height = 13
+          Caption = #36873#25321#22791#27880#24211
+        end
+        object BitBtn9: TBitBtn
+          Left = 263
+          Top = 4
+          Width = 25
+          Height = 25
+          TabOrder = 0
+          Glyph.Data = {
+            36060000424D3606000000000000360400002800000020000000100000000100
+            08000000000000020000A40E0000A40E00000001000000000000000000003300
+            00006600000099000000CC000000FF0000000033000033330000663300009933
+            0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+            000000990000339900006699000099990000CC990000FF99000000CC000033CC
+            000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+            0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+            330000333300333333006633330099333300CC333300FF333300006633003366
+            33006666330099663300CC663300FF6633000099330033993300669933009999
+            3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+            330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+            66006600660099006600CC006600FF0066000033660033336600663366009933
+            6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+            660000996600339966006699660099996600CC996600FF99660000CC660033CC
+            660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+            6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+            990000339900333399006633990099339900CC339900FF339900006699003366
+            99006666990099669900CC669900FF6699000099990033999900669999009999
+            9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+            990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+            CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+            CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+            CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+            CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+            CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+            FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+            FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+            FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+            FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+            000000808000800000008000800080800000C0C0C00080808000191919004C4C
+            4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+            82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+            F100C56A31000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+            EE5E5E5E5E5E5E5E5E5EEEEEEEEEEEEEEE818181818181818181EEEEEEEEEEEE
+            EE5ED7D7D7D7D7D7D75EEEEEEEEEEEEEEE81D7D7D7D7D7D7D781EEEE78787878
+            785ED7D7D7D7D7D7D75EEEEE818181818181D7D7D7D7D7D7D781EEA3D5D5D5D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D6D5D5D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D5D6D5D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D6D5D6D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D5D6D5D6
+            D55ED7D7D7D75E5E5E5EEE81ACACACACAC81D7D7D7D781818181EEA3D6D5D6D5
+            D65ED7D7D7D75EE35EEEEE81ACACACACAC81D7D7D7D781EE81EEEEA3D5D6D5D6
+            D55ED7D7D7D75E5EEEEEEE81ACACACACAC81D7D7D7D78181EEEEEEA3D6D5D6D5
+            D65E5E5E5E5E5EEEEEEEEE81ACACACACAC818181818181EEEEEEEEA3D6D6D5D6
+            D5D6D5D6D5D578EEEEEEEE81ACACACACACACACACACAC81EEEEEEEEA3D6D61009
+            09090909D6D578EEEEEEEE81ACAC818181818181ACAC81EEEEEEEEA3D6D610D7
+            17171709D5D678EEEEEEEE81ACAC81D7ACACAC81ACAC81EEEEEEEEEEA3A3A310
+            D71709A3A3A3EEEEEEEEEEEE81818181D7AC81818181EEEEEEEEEEEEEEEEEEEE
+            1010EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEE}
+          NumGlyphs = 2
+        end
+      end
+      object DBMemo3: TDBMemo
+        Left = 0
+        Top = 32
+        Width = 568
+        Height = 160
+        Align = alClient
+        DataField = 'REMARK'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ScrollBars = ssVertical
+        TabOrder = 2
+      end
+      object Panel9: TPanel
+        Left = 0
+        Top = 315
+        Width = 568
+        Height = 27
+        Align = alBottom
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = #24066#22330#22791#27880':'
+        TabOrder = 3
+      end
+      object DBMemo4: TDBMemo
+        Left = 0
+        Top = 226
+        Width = 568
+        Height = 89
+        Align = alBottom
+        DataField = 'ENG_NOTE'
+        DataSource = dmcon.DataSource2
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        MaxLength = 200
+        ScrollBars = ssVertical
+        TabOrder = 4
+      end
+      object Panel10: TPanel
+        Left = 0
+        Top = 192
+        Width = 568
+        Height = 34
+        Align = alBottom
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = #24037#31243#22791#27880':'
+        TabOrder = 5
+        object Label48: TLabel
+          Left = 192
+          Top = 11
+          Width = 65
+          Height = 13
+          Caption = #36873#25321#22791#27880#24211
+        end
+        object BitBtn10: TBitBtn
+          Left = 263
+          Top = 4
+          Width = 25
+          Height = 25
+          TabOrder = 0
+          Glyph.Data = {
+            36060000424D3606000000000000360400002800000020000000100000000100
+            08000000000000020000A40E0000A40E00000001000000000000000000003300
+            00006600000099000000CC000000FF0000000033000033330000663300009933
+            0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+            000000990000339900006699000099990000CC990000FF99000000CC000033CC
+            000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+            0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+            330000333300333333006633330099333300CC333300FF333300006633003366
+            33006666330099663300CC663300FF6633000099330033993300669933009999
+            3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+            330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+            66006600660099006600CC006600FF0066000033660033336600663366009933
+            6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+            660000996600339966006699660099996600CC996600FF99660000CC660033CC
+            660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+            6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+            990000339900333399006633990099339900CC339900FF339900006699003366
+            99006666990099669900CC669900FF6699000099990033999900669999009999
+            9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+            990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+            CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+            CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+            CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+            CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+            CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+            FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+            FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+            FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+            FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+            000000808000800000008000800080800000C0C0C00080808000191919004C4C
+            4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+            82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+            F100C56A31000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+            EE5E5E5E5E5E5E5E5E5EEEEEEEEEEEEEEE818181818181818181EEEEEEEEEEEE
+            EE5ED7D7D7D7D7D7D75EEEEEEEEEEEEEEE81D7D7D7D7D7D7D781EEEE78787878
+            785ED7D7D7D7D7D7D75EEEEE818181818181D7D7D7D7D7D7D781EEA3D5D5D5D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D6D5D5D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D5D6D5D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D6D5D6D5
+            D55ED7D7D7D7D7D7D75EEE81ACACACACAC81D7D7D7D7D7D7D781EEA3D5D6D5D6
+            D55ED7D7D7D75E5E5E5EEE81ACACACACAC81D7D7D7D781818181EEA3D6D5D6D5
+            D65ED7D7D7D75EE35EEEEE81ACACACACAC81D7D7D7D781EE81EEEEA3D5D6D5D6
+            D55ED7D7D7D75E5EEEEEEE81ACACACACAC81D7D7D7D78181EEEEEEA3D6D5D6D5
+            D65E5E5E5E5E5EEEEEEEEE81ACACACACAC818181818181EEEEEEEEA3D6D6D5D6
+            D5D6D5D6D5D578EEEEEEEE81ACACACACACACACACACAC81EEEEEEEEA3D6D61009
+            09090909D6D578EEEEEEEE81ACAC818181818181ACAC81EEEEEEEEA3D6D610D7
+            17171709D5D678EEEEEEEE81ACAC81D7ACACAC81ACAC81EEEEEEEEEEA3A3A310
+            D71709A3A3A3EEEEEEEEEEEE81818181D7AC81818181EEEEEEEEEEEEEEEEEEEE
+            1010EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEE}
+          NumGlyphs = 2
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #24037#31243#26356#25913
+      object Panel11: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 97
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 0
+        object SpeedButton4: TSpeedButton
+          Left = 409
+          Top = 65
+          Width = 60
+          Height = 25
+          Caption = #21069#32763
+          Flat = True
+          Glyph.Data = {
+            36060000424D3606000000000000360400002800000020000000100000000100
+            08000000000000020000610D0000610D00000001000000000000000000003300
+            00006600000099000000CC000000FF0000000033000033330000663300009933
+            0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+            000000990000339900006699000099990000CC990000FF99000000CC000033CC
+            000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+            0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+            330000333300333333006633330099333300CC333300FF333300006633003366
+            33006666330099663300CC663300FF6633000099330033993300669933009999
+            3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+            330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+            66006600660099006600CC006600FF0066000033660033336600663366009933
+            6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+            660000996600339966006699660099996600CC996600FF99660000CC660033CC
+            660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+            6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+            990000339900333399006633990099339900CC339900FF339900006699003366
+            99006666990099669900CC669900FF6699000099990033999900669999009999
+            9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+            990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+            CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+            CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+            CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+            CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+            CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+            FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+            FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+            FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+            FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+            000000808000800000008000800080800000C0C0C00080808000191919004C4C
+            4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+            82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+            F100C56A31000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEE0909EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEEEEEEEE
+            EEEE091009EEEEEEEEEEEEEEEEEEEEEEEEEE81AC81EEEEEEEEEEEEEEEEEEEEEE
+            EE09101009EEEEEEEEEEEEEEEEEEEEEEEE81ACAC81EEEEEEEEEEEEEEEEEEEEEE
+            09101010090909EEEEEEEEEEEEEEEEEE81ACACAC818181EEEEEEEEEEEEEEEE09
+            10101010101009EEEEEEEEEEEEEEEE81ACACACACACAC81EEEEEEEEEEEEEE0910
+            10101010101009EEEEEEEEEEEEEE81ACACACACACACAC81EEEEEEEEEEEE091010
+            10101010101009EEEEEEEEEEEE81ACACACACACACACAC81EEEEEEEEEEEEEE0910
+            10101010101009EEEEEEEEEEEEEE81ACACACACACACAC81EEEEEEEEEEEEEEEE09
+            10101010101009EEEEEEEEEEEEEEEE81ACACACACACAC81EEEEEEEEEEEEEEEEEE
+            09101010090909EEEEEEEEEEEEEEEEEE81ACACAC818181EEEEEEEEEEEEEEEEEE
+            EE09101009EEEEEEEEEEEEEEEEEEEEEEEE81ACAC81EEEEEEEEEEEEEEEEEEEEEE
+            EEEE091009EEEEEEEEEEEEEEEEEEEEEEEEEE81AC81EEEEEEEEEEEEEEEEEEEEEE
+            EEEEEE0909EEEEEEEEEEEEEEEEEEEEEEEEEEEE8181EEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE}
+          NumGlyphs = 2
+          OnClick = SpeedButton4Click
+        end
+        object SpeedButton5: TSpeedButton
+          Left = 473
+          Top = 65
+          Width = 60
+          Height = 25
+          Caption = #36824#21407
+          Flat = True
+          Glyph.Data = {
+            36060000424D3606000000000000360400002800000020000000100000000100
+            08000000000000020000610B0000610B00000001000000000000000000003300
+            00006600000099000000CC000000FF0000000033000033330000663300009933
+            0000CC330000FF33000000660000336600006666000099660000CC660000FF66
+            000000990000339900006699000099990000CC990000FF99000000CC000033CC
+            000066CC000099CC0000CCCC0000FFCC000000FF000033FF000066FF000099FF
+            0000CCFF0000FFFF000000003300330033006600330099003300CC003300FF00
+            330000333300333333006633330099333300CC333300FF333300006633003366
+            33006666330099663300CC663300FF6633000099330033993300669933009999
+            3300CC993300FF99330000CC330033CC330066CC330099CC3300CCCC3300FFCC
+            330000FF330033FF330066FF330099FF3300CCFF3300FFFF3300000066003300
+            66006600660099006600CC006600FF0066000033660033336600663366009933
+            6600CC336600FF33660000666600336666006666660099666600CC666600FF66
+            660000996600339966006699660099996600CC996600FF99660000CC660033CC
+            660066CC660099CC6600CCCC6600FFCC660000FF660033FF660066FF660099FF
+            6600CCFF6600FFFF660000009900330099006600990099009900CC009900FF00
+            990000339900333399006633990099339900CC339900FF339900006699003366
+            99006666990099669900CC669900FF6699000099990033999900669999009999
+            9900CC999900FF99990000CC990033CC990066CC990099CC9900CCCC9900FFCC
+            990000FF990033FF990066FF990099FF9900CCFF9900FFFF99000000CC003300
+            CC006600CC009900CC00CC00CC00FF00CC000033CC003333CC006633CC009933
+            CC00CC33CC00FF33CC000066CC003366CC006666CC009966CC00CC66CC00FF66
+            CC000099CC003399CC006699CC009999CC00CC99CC00FF99CC0000CCCC0033CC
+            CC0066CCCC0099CCCC00CCCCCC00FFCCCC0000FFCC0033FFCC0066FFCC0099FF
+            CC00CCFFCC00FFFFCC000000FF003300FF006600FF009900FF00CC00FF00FF00
+            FF000033FF003333FF006633FF009933FF00CC33FF00FF33FF000066FF003366
+            FF006666FF009966FF00CC66FF00FF66FF000099FF003399FF006699FF009999
+            FF00CC99FF00FF99FF0000CCFF0033CCFF0066CCFF0099CCFF00CCCCFF00FFCC
+            FF0000FFFF0033FFFF0066FFFF0099FFFF00CCFFFF00FFFFFF00000080000080
+            000000808000800000008000800080800000C0C0C00080808000191919004C4C
+            4C00B2B2B200E5E5E5005A1E1E00783C3C0096646400C8969600FFC8C800465F
+            82005591B9006EB9D7008CD2E600B4E6F000D8E9EC0099A8AC00646F7100E2EF
+            F100C56A31000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000EEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE5E09
+            095EEEEEEEEEEEEEEEEEEEEEEEEEE28181E2EEEEEEEEEEEEEEEEEEEEEE090910
+            1009EEEEEEEEEEEEEEEEEEEEEE8181ACAC81EEEEEEEEEEEEEEEEEEEE09101009
+            095EEEEEEEEEEEEEEEEEEEEE81ACAC8181E2EEEEEEEEEEEEEEEEEE5E0910095E
+            EEEE09090909090909EEEEE281AC81E2EEEE81818181818181EEEE0910095EEE
+            EEEE09101010101009EEEE81AC81E2EEEEEE81ACACACACAC81EEEE091009EEEE
+            EEEEEE091010101009EEEE81AC81EEEEEEEEEE81ACACACAC81EEEE0910095EEE
+            EEEEEE5E0910101009EEEE81AC81E2EEEEEEEEE281ACACAC81EEEE5E0910095E
+            EE5E09091009101009EEEEE281AC81E2EEE28181AC81ACAC81EEEEEE09101009
+            09091010095E091009EEEEEE81ACAC818181ACAC81E281AC81EEEEEEEE090910
+            10100909EEEEEE0909EEEEEEEE8181ACACAC8181EEEEEE8181EEEEEEEEEE5E09
+            09095EEEEEEEEEEEEEEEEEEEEEEEE2818181E2EEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE}
+          Layout = blGlyphRight
+          NumGlyphs = 2
+          OnClick = SpeedButton5Click
+        end
+        object Label49: TLabel
+          Left = 12
+          Top = 13
+          Width = 54
+          Height = 13
+          Caption = 'ECN'#32534#21495':'
+        end
+        object Label50: TLabel
+          Left = 20
+          Top = 39
+          Width = 46
+          Height = 13
+          Caption = #20174#20135#21697':'
+        end
+        object Label51: TLabel
+          Left = 20
+          Top = 66
+          Width = 46
+          Height = 13
+          Caption = #21040#20135#21697':'
+        end
+        object Label52: TLabel
+          Left = 201
+          Top = 13
+          Width = 59
+          Height = 13
+          Caption = #21019#24314#20154#21592':'
+        end
+        object Label53: TLabel
+          Left = 350
+          Top = 13
+          Width = 59
+          Height = 13
+          Caption = #21019#24314#26085#26399':'
+        end
+        object Label54: TLabel
+          Left = 202
+          Top = 39
+          Width = 59
+          Height = 13
+          Caption = #20462#25913#20154#21592':'
+        end
+        object Label55: TLabel
+          Left = 351
+          Top = 39
+          Width = 59
+          Height = 13
+          Caption = #20462#25913#26085#26399':'
+        end
+        object Edit9: TEdit
+          Left = 69
+          Top = 9
+          Width = 112
+          Height = 21
+          Color = cl3DLight
+          Enabled = False
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object Edit10: TEdit
+          Left = 69
+          Top = 35
+          Width = 112
+          Height = 21
+          Color = cl3DLight
+          Enabled = False
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object Edit11: TEdit
+          Left = 69
+          Top = 61
+          Width = 112
+          Height = 21
+          Color = cl3DLight
+          Enabled = False
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object RadioGroup1: TRadioGroup
+          Left = 264
+          Top = 60
+          Width = 105
+          Height = 34
+          Caption = #21464#26356#26469#28304
+          Columns = 2
+          Enabled = False
+          Items.Strings = (
+            #20869#37096
+            #22806#37096)
+          TabOrder = 3
+        end
+        object Edit12: TEdit
+          Left = 264
+          Top = 9
+          Width = 81
+          Height = 21
+          Color = cl3DLight
+          Enabled = False
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 4
+        end
+        object Edit13: TEdit
+          Left = 411
+          Top = 9
+          Width = 121
+          Height = 21
+          Color = cl3DLight
+          Enabled = False
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 5
+        end
+        object Edit14: TEdit
+          Left = 264
+          Top = 35
+          Width = 81
+          Height = 21
+          Color = cl3DLight
+          Enabled = False
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 6
+        end
+        object Edit15: TEdit
+          Left = 412
+          Top = 35
+          Width = 121
+          Height = 21
+          Color = cl3DLight
+          Enabled = False
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ReadOnly = True
+          TabOrder = 7
+        end
+      end
+      object Memo1: TMemo
+        Left = 0
+        Top = 320
+        Width = 557
+        Height = 168
+        Align = alBottom
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ReadOnly = True
+        ScrollBars = ssBoth
+        TabOrder = 1
+      end
+      object Panel12: TPanel
+        Left = 0
+        Top = 285
+        Width = 557
+        Height = 35
+        Align = alBottom
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = #22791#27880#20449#24687':'
+        TabOrder = 2
+      end
+      object Memo2: TMemo
+        Left = 0
+        Top = 130
+        Width = 557
+        Height = 155
+        Align = alClient
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        ScrollBars = ssBoth
+        TabOrder = 3
+      end
+      object Panel13: TPanel
+        Left = 0
+        Top = 97
+        Width = 557
+        Height = 33
+        Align = alTop
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = #21464#26356#20869#23481#65306
+        TabOrder = 4
+        object to_part_ptr: TLabel
+          Left = 232
+          Top = 16
+          Width = 7
+          Height = 13
+          Caption = '0'
+          Visible = False
+        end
+        object from_part_ptr: TLabel
+          Left = 182
+          Top = 16
+          Width = 7
+          Height = 13
+          Caption = '0'
+          Visible = False
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #35780#23457#20449#24687
+      object Panel15: TPanel
+        Left = 0
+        Top = 0
+        Width = 568
+        Height = 34
+        Align = alTop
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = #24066#22330#35780#23457#20449#24687':'
+        TabOrder = 0
+      end
+      object DBGrid3: TDBGrid
+        Left = 0
+        Top = 34
+        Width = 568
+        Height = 466
+        Align = alClient
+        DataSource = dmcon.DataSource6
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = #23435#20307
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'PARAMETER_NAME'
+            Width = 88
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PARAMETER_DESC'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'UNIT_NAME'
+            Width = 67
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'datatype'
+            Width = 47
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'tvalue'
+            Width = 160
+            Visible = True
+          end>
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #23458#25143#20449#24687
+      object Memo3: TMemo
+        Left = 0
+        Top = 41
+        Width = 557
+        Height = 447
+        Align = alClient
+        ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+        Lines.Strings = (
+          '')
+        ScrollBars = ssBoth
+        TabOrder = 0
+      end
+      object Panel14: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 41
+        Align = alTop
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = #23458#25143#29305#21035#35201#27714':'
+        TabOrder = 1
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = 'BOM'
+      object Panel16: TPanel
+        Left = 0
+        Top = 0
+        Width = 568
+        Height = 500
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGrid4: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 568
+          Height = 500
+          Align = alClient
+          DataSource = dmcon.dsBOMView
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopupMenu6
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = #23435#20307
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Route_Step_NO'
+              Title.Alignment = taCenter
+              Title.Caption = #27493#39588
+              Width = 43
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Dept_Code'
+              Title.Alignment = taCenter
+              Title.Caption = #37096#38376
+              Width = 69
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Inv_Part_Number'
+              Title.Alignment = taCenter
+              Title.Caption = #26448#26009#32534#21495
+              Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'INV_Name'
+              Title.Alignment = taCenter
+              Title.Caption = #26448#26009#21517#31216
+              Width = 140
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Unit_Code'
+              Title.Alignment = taCenter
+              Title.Caption = #21333#20301
+              Width = 44
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Qty_BOM'
+              Title.Alignment = taCenter
+              Title.Caption = #21333#20301#29992#37327
+              Width = 95
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DOC_FLAG'
+              PickList.Strings = (
+                'Y'
+                'N')
+              Title.Alignment = taCenter
+              Title.Caption = #25171#21360
+              Width = 41
+              Visible = True
+            end>
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #19968#31867#26448#26009
+      object Panel17: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 488
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridEh1: TDBGridEh
+          Left = 0
+          Top = 0
+          Width = 557
+          Height = 488
+          Align = alClient
+          DataSource = dmcon.adsPrimaryMatl
+          FooterColor = clMoneyGreen
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = #23435#20307
+          FooterFont.Style = []
+          FooterRowCount = 1
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghRowHighlight]
+          PopupMenu = PopupMenu7
+          ReadOnly = True
+          SumList.Active = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = #23435#20307
+          TitleFont.Style = []
+          UseMultiTitle = True
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'route_step_no'
+              Footers = <>
+              Title.Caption = #27493#39588
+              Width = 39
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Dept_Code'
+              Footers = <>
+              Title.Caption = #24037#24207
+              Width = 66
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Inv_Part_Description'
+              Footers = <>
+              Title.Caption = #26448#26009#21517#31216
+              Width = 101
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Unit_Code'
+              Footers = <>
+              Title.Caption = #21333#20301
+              Width = 42
+            end
+            item
+              EditButtons = <>
+              FieldName = 'qty_bom'
+              Footers = <>
+              Title.Caption = #26631#20934#28040#32791'|PCS'
+              Width = 63
+            end
+            item
+              EditButtons = <>
+              FieldName = 'std_cost'
+              Footers = <>
+              Title.Caption = #21407#26448#26009'|'#26631#20934#21333#20215
+              Width = 68
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Cost_Pcs'
+              Footer.DisplayFormat = '###,###,###,##0.#####'
+              Footer.FieldName = 'Cost_Pcs'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #26631#20934#25104#26412'|PCS'
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Cost_Per_SQM'
+              Footer.DisplayFormat = '###,###,###,##0.#####'
+              Footer.FieldName = 'Cost_Per_SQM'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #26631#20934#25104#26412'|'#24179#26041#31859
+              Width = 73
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Inv_Part_Number'
+              Footers = <>
+              Title.Caption = #29289#26009#32534#30721
+              Width = 150
+            end>
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #20108#31867#26448#26009
+      object Panel18: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 489
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridEh2: TDBGridEh
+          Left = 0
+          Top = 0
+          Width = 557
+          Height = 489
+          Align = alClient
+          DataSource = dmcon.adsSecondaryMatl
+          FooterColor = clMoneyGreen
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = #23435#20307
+          FooterFont.Style = []
+          FooterRowCount = 1
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghRowHighlight]
+          PopupMenu = PopupMenu8
+          ReadOnly = True
+          SumList.Active = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = #23435#20307
+          TitleFont.Style = []
+          UseMultiTitle = True
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'step_number'
+              Footers = <>
+              Title.Caption = #27493#39588
+              Width = 41
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Dept_Code'
+              Footers = <>
+              Title.Caption = #24037#24207
+              Width = 65
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Inv_Part_Description'
+              Footers = <>
+              Title.Caption = #26448#26009#21517#31216
+              Width = 108
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Unit_Code'
+              Footers = <>
+              Title.Caption = #21333#20301
+              Width = 42
+            end
+            item
+              EditButtons = <>
+              FieldName = 'qty_bom_per_sqft'
+              Footers = <>
+              Title.Caption = #26631#20934#28040#32791'|'#38754#31215#21333#20301
+              Width = 63
+            end
+            item
+              EditButtons = <>
+              FieldName = 'std_cost'
+              Footers = <>
+              Title.Caption = #21407#26448#26009'|'#26631#20934#21333#20215
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Cost_per_Pcs'
+              Footer.DisplayFormat = '###,###,###,##0.#####'
+              Footer.FieldName = 'Cost_per_Pcs'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #26631#20934#25104#26412'|PCS'
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Cost_Per_Sqft'
+              Footer.DisplayFormat = '###,###,###,##0.#####'
+              Footer.FieldName = 'Cost_Per_Sqft'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #26631#20934#25104#26412'|'#38754#31215#21333#20301
+              Width = 71
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Inv_Part_Number'
+              Footers = <>
+              Title.Caption = #29289#26009#32534#30721
+              Width = 150
+            end>
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #25104#26412#27719#24635
+      object Panel19: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 488
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridEh3: TDBGridEh
+          Left = 0
+          Top = 37
+          Width = 557
+          Height = 451
+          Align = alClient
+          DataSource = dmcon.dsCostSum
+          FooterColor = clMoneyGreen
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = #23435#20307
+          FooterFont.Style = []
+          FooterRowCount = 1
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghRowHighlight]
+          PopupMenu = PopupMenu9
+          ReadOnly = True
+          SumList.Active = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = #23435#20307
+          TitleFont.Style = []
+          UseMultiTitle = True
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'STEP'
+              Footers = <>
+              Title.Caption = #27493#39588
+              Width = 37
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Dept_Code'
+              Footers = <>
+              Title.Caption = #24037#24207
+              Width = 62
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Matl1'
+              Footer.FieldName = 'Matl1'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #19968#31867#26448#26009
+              Width = 62
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Matl2'
+              Footer.FieldName = 'Matl2'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #20108#31867#26448#26009
+              Width = 65
+            end
+            item
+              EditButtons = <>
+              FieldName = 'PCost1'
+              Footer.FieldName = 'PCost1'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #30452#25509#20154#24037
+              Width = 65
+            end
+            item
+              EditButtons = <>
+              FieldName = 'PCost2'
+              Footer.FieldName = 'PCost2'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #35774#22791#25240#26087
+              Width = 67
+            end
+            item
+              EditButtons = <>
+              FieldName = 'PCost3'
+              Footer.FieldName = 'PCost3'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #27700#30005#20854#23427
+              Width = 65
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Cost_4'
+              Footers = <>
+              Title.Caption = #21046#36896#36153#29992'4'
+              Width = 70
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Cost_5'
+              Footers = <>
+              Title.Caption = #21046#36896#36153#29992'5'
+              Width = 70
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Sub_Cost'
+              Footer.FieldName = 'Sub_Cost'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #26448#26009#24102#20837#25104#26412
+              Width = 66
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Sub_P_Cost'
+              Footer.FieldName = 'Sub_P_Cost'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #21046#36896#24102#20837#25104#26412
+              Width = 65
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Total'
+              Footer.FieldName = 'Total'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Caption = #25104#26412#23567#35745
+              Width = 82
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Total_All'
+              Footer.FieldName = 'Total_All'
+              Footers = <>
+              Title.Caption = #25104#26412#32047#35745
+              Width = 92
+            end>
+        end
+        object Panel21: TPanel
+          Left = 0
+          Top = 0
+          Width = 557
+          Height = 37
+          Align = alTop
+          TabOrder = 1
+          object Label74: TLabel
+            Left = 8
+            Top = 16
+            Width = 59
+            Height = 13
+            Caption = #25104#26412#21333#20301':'
+          end
+          object ComboBox2: TComboBox
+            Left = 72
+            Top = 9
+            Width = 129
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ItemHeight = 13
+            ItemIndex = 2
+            TabOrder = 0
+            Text = #20986#36135#24179#26041#31859
+            OnChange = ComboBox2Change
+            Items.Strings = (
+              'PCS'
+              'SET'
+              #20986#36135#24179#26041#31859)
+          end
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #25104#26412#20998#26512
+      object Panel20: TPanel
+        Left = 0
+        Top = -12
+        Width = 557
+        Height = 500
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 0
+        object Label73: TLabel
+          Left = 344
+          Top = 24
+          Width = 46
+          Height = 13
+          Caption = #25253#24223#29575':'
+        end
+        object Label72: TLabel
+          Left = 40
+          Top = 24
+          Width = 59
+          Height = 13
+          Caption = #25104#26412#21333#20301':'
+        end
+        object Label81: TLabel
+          Left = 40
+          Top = 419
+          Width = 91
+          Height = 13
+          Caption = #26368#26032#35746#21333#26085#26399#65306
+        end
+        object Label82: TLabel
+          Left = 288
+          Top = 419
+          Width = 93
+          Height = 13
+          Caption = #26368#26032#20215#26684'/PCS'#65306
+        end
+        object Label85: TLabel
+          Left = 329
+          Top = 441
+          Width = 52
+          Height = 13
+          Caption = #25104#26412#29575#65306
+        end
+        object labelCostRate: TLabel
+          Left = 377
+          Top = 441
+          Width = 7
+          Height = 13
+          Caption = ' '
+        end
+        object DBText5: TDBText
+          Left = 128
+          Top = 419
+          Width = 49
+          Height = 13
+          AutoSize = True
+          DataField = 'LAST_SO_DATE'
+          DataSource = dmcon.DataSource2
+        end
+        object DBText6: TDBText
+          Left = 377
+          Top = 419
+          Width = 49
+          Height = 13
+          AutoSize = True
+          DataField = 'LATEST_PRICE'
+          DataSource = dmcon.DataSource2
+        end
+        object Label83: TLabel
+          Left = 40
+          Top = 445
+          Width = 98
+          Height = 13
+          Caption = #26368#26032#20215#26684'/'#24179#31859#65306
+        end
+        object labelPrice_SQM: TLabel
+          Left = 136
+          Top = 445
+          Width = 7
+          Height = 13
+          Caption = ' '
+        end
+        object GroupBox1: TGroupBox
+          Left = 40
+          Top = 48
+          Width = 489
+          Height = 153
+          Caption = #26448#26009#25104#26412
+          TabOrder = 0
+          object Label65: TLabel
+            Left = 40
+            Top = 48
+            Width = 52
+            Height = 13
+            Caption = #19968#31867#26448#26009
+          end
+          object Label66: TLabel
+            Left = 40
+            Top = 72
+            Width = 52
+            Height = 13
+            Caption = #20108#31867#26448#26009
+          end
+          object Label67: TLabel
+            Left = 40
+            Top = 96
+            Width = 52
+            Height = 13
+            Caption = #24102#20837#25104#26412
+          end
+          object Label68: TLabel
+            Left = 40
+            Top = 120
+            Width = 52
+            Height = 13
+            Caption = #26448#26009#21512#35745
+          end
+          object Label69: TLabel
+            Left = 129
+            Top = 22
+            Width = 73
+            Height = 13
+            Caption = #22522#26412#25104#26412'(1)'
+          end
+          object Label70: TLabel
+            Left = 237
+            Top = 22
+            Width = 73
+            Height = 13
+            Caption = #25253#24223#25104#26412'(2)'
+          end
+          object Label71: TLabel
+            Left = 332
+            Top = 22
+            Width = 101
+            Height = 13
+            Caption = #25104#26412#23567#35745'(3=1+2)'
+          end
+          object edtMatl_1_Basic: TEdit
+            Left = 120
+            Top = 40
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object edtMatl_1_scrap: TEdit
+            Left = 228
+            Top = 40
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object edtMatl_1_Total: TEdit
+            Left = 336
+            Top = 40
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object edtMatl_2_Basic: TEdit
+            Left = 120
+            Top = 64
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object edtMatl_2_scrap: TEdit
+            Left = 228
+            Top = 64
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 4
+          end
+          object edtMatl_2_Total: TEdit
+            Left = 336
+            Top = 64
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 5
+          end
+          object edtOut_Basic: TEdit
+            Left = 120
+            Top = 88
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 6
+          end
+          object edtOut_Scrap: TEdit
+            Left = 228
+            Top = 88
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 7
+          end
+          object edtOut_Total: TEdit
+            Left = 336
+            Top = 88
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 8
+          end
+          object edtBasic_sum: TEdit
+            Left = 120
+            Top = 112
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 9
+          end
+          object edtScrap_sum: TEdit
+            Left = 228
+            Top = 112
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 10
+          end
+          object edtTotal_Sum: TEdit
+            Left = 336
+            Top = 112
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 11
+          end
+        end
+        object ComboBox1: TComboBox
+          Left = 112
+          Top = 16
+          Width = 129
+          Height = 21
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          ItemHeight = 13
+          ItemIndex = 2
+          TabOrder = 1
+          Text = #24179#26041#31859
+          OnChange = ComboBox1Change
+          Items.Strings = (
+            'PCS'
+            'SET'
+            #24179#26041#31859)
+        end
+        object GroupBox2: TGroupBox
+          Left = 40
+          Top = 208
+          Width = 489
+          Height = 98
+          Caption = #21046#36896#25104#26412
+          TabOrder = 2
+          object Label76: TLabel
+            Left = 40
+            Top = 27
+            Width = 52
+            Height = 13
+            Caption = #21046#36896#36153#29992
+          end
+          object Label77: TLabel
+            Left = 40
+            Top = 51
+            Width = 52
+            Height = 13
+            Caption = #24102#20837#25104#26412
+          end
+          object Label78: TLabel
+            Left = 40
+            Top = 75
+            Width = 52
+            Height = 13
+            Caption = #21046#36896#21512#35745
+          end
+          object edtP_Basic: TEdit
+            Left = 120
+            Top = 19
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object edtP_Scrap: TEdit
+            Left = 228
+            Top = 19
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object edtP_Total: TEdit
+            Left = 336
+            Top = 19
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object edtP_Out_Total: TEdit
+            Left = 336
+            Top = 43
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object edtP_Out_Scrap: TEdit
+            Left = 228
+            Top = 43
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 4
+          end
+          object edtP_Out_Basic: TEdit
+            Left = 120
+            Top = 43
+            Width = 90
+            Height = 21
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ReadOnly = True
+            TabOrder = 5
+          end
+          object edtP_Basic_Sum: TEdit
+            Left = 120
+            Top = 67
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 6
+          end
+          object edtP_Scrap_Sum: TEdit
+            Left = 228
+            Top = 67
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 7
+          end
+          object edtP_Total_Sum: TEdit
+            Left = 336
+            Top = 67
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 8
+          end
+        end
+        object GroupBox3: TGroupBox
+          Left = 40
+          Top = 311
+          Width = 489
+          Height = 100
+          Caption = #24635#25104#26412
+          TabOrder = 3
+          object Label80: TLabel
+            Left = 40
+            Top = 76
+            Width = 56
+            Height = 13
+            Caption = #25104#26412#21512#35745
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label75: TLabel
+            Left = 40
+            Top = 28
+            Width = 56
+            Height = 13
+            Caption = #20135#21697#25104#26412
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label79: TLabel
+            Left = 40
+            Top = 52
+            Width = 56
+            Height = 13
+            Caption = #24102#20837#25104#26412
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object edtBasic_Total: TEdit
+            Left = 120
+            Top = 68
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object edtScrap_Total: TEdit
+            Left = 228
+            Top = 68
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object edt_Total_All: TEdit
+            Left = 336
+            Top = 68
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object edt_self_basic: TEdit
+            Left = 120
+            Top = 20
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object edt_Self_Scrap: TEdit
+            Left = 228
+            Top = 20
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 4
+          end
+          object edt_Self_Total: TEdit
+            Left = 336
+            Top = 20
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 5
+          end
+          object edt_Out_Basic: TEdit
+            Left = 120
+            Top = 44
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 6
+          end
+          object edt_Out_Scrap: TEdit
+            Left = 228
+            Top = 44
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 7
+          end
+          object edt_Out_Total: TEdit
+            Left = 336
+            Top = 44
+            Width = 90
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -13
+            Font.Name = #23435#20307
+            Font.Style = []
+            ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 8
+          end
+        end
+      end
+    end
+    object TPage
+      Left = 0
+      Top = 0
+      Caption = #21046#36896#36153#29992
+      object Panel22: TPanel
+        Left = 0
+        Top = 0
+        Width = 557
+        Height = 488
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridEh4: TDBGridEh
+          Left = 0
+          Top = 0
+          Width = 557
+          Height = 488
+          Align = alClient
+          DataSource = dmcon.dsProducingCost
+          FooterColor = clMoneyGreen
+          FooterFont.Charset = DEFAULT_CHARSET
+          FooterFont.Color = clWindowText
+          FooterFont.Height = -13
+          FooterFont.Name = #23435#20307
+          FooterFont.Style = []
+          FooterRowCount = 1
+          ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghRowHighlight]
+          PopupMenu = PopupMenu10
+          ReadOnly = True
+          SumList.Active = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -13
+          TitleFont.Name = #23435#20307
+          TitleFont.Style = []
+          Columns = <
+            item
+              EditButtons = <>
+              FieldName = 'Step'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #27493#39588
+              Width = 36
+            end
+            item
+              EditButtons = <>
+              FieldName = 'DEPT_CODE'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #24037#24207
+              Width = 68
+            end
+            item
+              EditButtons = <>
+              FieldName = 'OverHead_Per_SQFT'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #20154#24037'/'#24179#31859
+              Width = 71
+            end
+            item
+              EditButtons = <>
+              FieldName = 'OverHead2_Per_SQFT'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #25240#26087'/'#24179#31859
+              Width = 68
+            end
+            item
+              EditButtons = <>
+              FieldName = 'OverHead3_Per_SQFT'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #27700#30005'/'#24179#31859
+              Width = 69
+            end
+            item
+              EditButtons = <>
+              FieldName = 'cost_4'
+              Footers = <>
+              Title.Caption = #21046#36896#36153#29992'4'
+              Width = 70
+            end
+            item
+              EditButtons = <>
+              FieldName = 'cost_5'
+              Footers = <>
+              Title.Caption = #21046#36896#36153#29992'5'
+              Width = 70
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Total_SQM'
+              Footer.FieldName = 'Total_SQM'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #21512#35745'/'#24179#31859
+              Width = 66
+            end
+            item
+              EditButtons = <>
+              FieldName = 'P1_PCS'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #20154#24037'/PCS'
+              Visible = False
+              Width = 69
+            end
+            item
+              EditButtons = <>
+              FieldName = 'P2_PCS'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #25240#26087'/PCS'
+              Visible = False
+              Width = 69
+            end
+            item
+              EditButtons = <>
+              FieldName = 'P3_PCS'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #27700#30005'/PCS'
+              Visible = False
+              Width = 70
+            end
+            item
+              EditButtons = <>
+              FieldName = 'Total_pcs'
+              Footer.FieldName = 'Total_pcs'
+              Footer.ValueType = fvtSum
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #21512#35745'/PCS'
+              Visible = False
+              Width = 65
+            end>
+        end
+      end
+    end
+  end
+  object ImageList1: TImageList
+    ShareImages = True
+    Left = 72
+    Top = 512
+    Bitmap = {
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000003000000001002000000000000030
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200D6E7FF00B5C6
+      FF00001852000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      73008CADFF006B8CFF0000185200000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      7300003194000039BD000052FF000039BD000018520000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      7300003194000039BD004A73FF008CADFF000031940000217300001852000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      7300003194000039BD004A73FF008CADFF00B5C6FF00B5C6FF00002173000018
+      5200001852000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      7300003194000039BD004A73FF008CADFF00B5C6FF00B5C6FF00D6E7FF000018
+      5200001852000018520000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      7300003194000039BD004A73FF008CADFF00B5C6FF0000319400002173000018
+      5200000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      7300003194000039BD004A73FF000039BD000031940000185200000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200001852000021
+      7300003194006B8CFF000052FF00001852000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200D6E7FF00B5C6
+      FF008CADFF000018520000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200D6E7FF000018
+      5200000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000185200000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000009C9C9C008C8C8C0000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FF000000FF000000FF000000FF00
+      0000FF000000FF000000FF000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000094847B00E7B5B500B5948C00FFC6C600FFCECE00949494009C9C9C000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FF000000FF000000FF000000FF00
+      0000FF000000FF000000FF000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000FF000000FF000000FF000000FF
+      000000FF000000FF000000FF000000FF0000000000000000000000000000BDA5
+      9C00EFBDB500FFC6C600E7B5AD00FFC6C600FFC6C6009C847B00FFC6C6008C73
+      7300000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FF000000FF000000FF000000FF00
+      0000FF000000FF000000FF000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000FF000000FF000000FF000000FF
+      000000FF000000FF000000FF000000FF00000000000000000000B59C8C00B58C
+      8C00D6AD9C00FFBDBD00FFBDBD00FFBDBD00FFBDBD00FFBDBD00FFBDBD00E7AD
+      AD00000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FF000000FF000000FF000000FF00
+      0000FF000000FF000000FF000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000FF000000FF000000FF000000FF
+      000000FF000000FF000000FF000000FF000000000000C6ADA500FFB5B500FFB5
+      B500FFB5B500FFB5B500FFB5B500F7B5AD00FFB5B500FFB5B500FFB5B500AD84
+      84008C7B7B006363630000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000FF000000FF000000FF000000FF
+      000000FF000000FF000000FF000000FF00000000000000000000CEA59400FFAD
+      AD00FFADAD00EFA5A500000000000000000000000000CEA59400FFADAD00FFAD
+      AD00FFADAD00CE94940000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000FF000000FF000000FF000000FF
+      000000FF000000FF000000FF000000FF0000000000009C949400BD948C00FFA5
+      A500FFADAD00A5A5A50000000000000000000000000000000000D6A59400FFAD
+      AD00FFADAD00D69C9C0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000D6A59400FFA5A500FFA5
+      A500FFA5A5000000000000000000000000000000000000000000CEAD9C00FFA5
+      A500FFA5A5006363630000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000D6A59400FF9C9C00FF9C
+      9C00FF9C9C000000000000000000000000000000000000000000C6ADA500F79C
+      9400FF9C9C00FF9C9C005A5A5A00000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000BDA59C00F794
+      9400FF9494006363630000000000000000000000000000000000C6A59C00F794
+      9400FF949400FF94940084848400000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000EF948C00F78C
+      8C00F78C8C00AD6B6B0094949400000000000000000000000000C6AD9C00F78C
+      8C00F78C8C0094948C0000000000000000000000000000000000000000000000
+      00000000FF000000FF000000FF000000FF000000FF000000FF000000FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000C6ADA500E78C8400EF84
+      8400EF848400EF848400845A5A008484840000000000AD9C9400E78C8400EF84
+      8400EF8484009C6B6B0000000000000000000000000000000000000000000000
+      00000000FF000000FF000000FF000000FF000000FF000000FF000000FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000CEAD9C00CEAD
+      9C00CE9C8C00E77B7B00E77B7B00E7848400DE7B7B00E77B7B00E77B7B00E77B
+      7B00E77B7B00DE7B7B0000000000000000000000000000000000000000000000
+      00000000FF000000FF000000FF000000FF000000FF000000FF000000FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000CEAD
+      9C00D6847B00DE7B7B00DE737300DE7B7B00DE7B7B00DE737300DE7B7B00BD73
+      7300D69C9C000000000000000000000000000000000000000000000000000000
+      00000000FF000000FF000000FF000000FF000000FF000000FF000000FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000CEAD
+      9C00CE8C8400DE6B7300CEAD9C00D6737300D66B6B00CEA58C00DE6B7300DE73
+      7300000000000000000000000000000000000000000000000000000000000000
+      00000000FF000000FF000000FF000000FF000000FF000000FF000000FF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000C6AD9C00CE6B6B00D6636300BDADAD00CE847B000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000040000000300000000100010000000000800100000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000FFFF000000000000FFFF000000000000
+      9FFF00000000000087FF00000000000081FF000000000000807F000000000000
+      801F00000000000080070000000000008003000000000000800F000000000000
+      803F00000000000080FF00000000000083FF0000000000008FFF000000000000
+      BFFF000000000000FFFF000000000000FFFFFFFFFFFFFE7FFFFF8301FFFFF01F
+      0780BB01FF00E00F77BEBB01FF00C00F77BE8301F00080030780EFEFF700C383
+      DFF7EFEFF70083C3DFF7E00FF7FF87C3C007FEFFF7FF87C1FEFFFEFFF7FFC3C1
+      FEFFFEFFF7FFC1C3F01FF01F80FF8083F01FF7DFBEFFC003F01FF7DFBEFFE007
+      F01FF7DFBEFFE00FF01FF01F80FFFC1F00000000000000000000000000000000
+      000000000000}
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 209
+    Top = 453
+    object N1: TMenuItem
+      Caption = #26032#22686
+    end
+    object N2: TMenuItem
+      Caption = #25554#20837
+    end
+    object N3: TMenuItem
+      Caption = #32534#36753
+      OnClick = N3Click
+    end
+    object N4: TMenuItem
+      Caption = #21024#38500
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 209
+    Top = 485
+    object N5: TMenuItem
+      Caption = #25554#20837#22522#26412#21472#29255
+    end
+  end
+  object PopupMenu3: TPopupMenu
+    OnPopup = PopupMenu3Popup
+    Left = 209
+    Top = 521
+    object N6: TMenuItem
+      Caption = #25554#20837
+      OnClick = N6Click
+    end
+    object N7: TMenuItem
+      Caption = #21024#38500
+      OnClick = N7Click
+    end
+  end
+  object PopupMenu5: TPopupMenu
+    Left = 248
+    Top = 464
+    object N10: TMenuItem
+      Caption = #26816#26597#24037#24207#21046#31243#21442#25968
+      OnClick = N10Click
+    end
+  end
+  object PopupMenu6: TPopupMenu
+    Left = 297
+    Top = 116
+    object EXCEL1: TMenuItem
+      Caption = #23548#20986'EXCEL'
+      OnClick = EXCEL1Click
+    end
+  end
+  object PopupMenu7: TPopupMenu
+    OnPopup = PopupMenu7Popup
+    Left = 297
+    Top = 180
+    object EXCEL2: TMenuItem
+      Caption = #23548#20986'EXCEL'
+      OnClick = EXCEL2Click
+    end
+    object n8: TMenuItem
+      Caption = #20462#25913#26631#20934#28040#32791
+      OnClick = n8Click
+    end
+  end
+  object PopupMenu8: TPopupMenu
+    Left = 297
+    Top = 236
+    object EXCEL3: TMenuItem
+      Caption = #23548#20986'EXCEL'
+      OnClick = EXCEL3Click
+    end
+  end
+  object PopupMenu9: TPopupMenu
+    Left = 297
+    Top = 292
+    object EXCEL4: TMenuItem
+      Caption = #23548#20986'EXCEL'
+      OnClick = EXCEL4Click
+    end
+  end
+  object PopupMenu10: TPopupMenu
+    Left = 297
+    Top = 332
+    object EXCEL5: TMenuItem
+      Caption = #23548#20986'EXCEL'
+      OnClick = EXCEL5Click
+    end
+  end
+end

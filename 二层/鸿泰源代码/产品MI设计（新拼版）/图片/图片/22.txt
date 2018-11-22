@@ -1,0 +1,25 @@
+alter table data0025 add vcut_B varchar(50)
+alter table data0025 add vcut_T varchar(50)
+alter table data0025 add vcut_X varchar(50)
+alter table data0025 add gf_A varchar(50)
+alter table data0025 add gf_T varchar(50)
+alter table data0025 add gf_L varchar(50)
+
+
+
+Çå½Ç¿×
+¶Ì²ÛÒý¿×
+²Û¿×
+Ï´»Ò²Û
+ÐÍºÅ¿×
+º¬¶Ì²ÛÒý¿×
+º¬Çå½Ç¿×
+Ï´»Ò¿×
+½ü¿×
+Á¬¿×
+CCD¶¨Î»¿×
+V¸î¹Ò¿×
+·À±¬¿×
+Ð¶Á¦¿×
+×è¿¹Ìõ¶¨Î»¿×
+¹¤ÒÕ±ß¶¨Î»¿×

@@ -1,0 +1,179 @@
+unit OutParameter;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, DBGridEh, Menus;
+
+type
+  TFrm_OutParameter = class(TForm)
+    Panel1: TPanel;
+    BitSave: TBitBtn;
+    BitCancel: TBitBtn;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Edit2: TEdit;
+    DBGridEh1: TDBGridEh;
+    PopupMenu1: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    procedure DBGridEh1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure N1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure BitSaveClick(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure BitCancelClick(Sender: TObject);
+  private
+    function returen_rkey278list():string;
+
+    { Private declarations }
+  public
+    Rkey34 : Integer;
+    { Public declarations }
+  end;
+
+var
+  Frm_OutParameter: TFrm_OutParameter;
+
+implementation
+
+uses demo, Parmeter;
+
+{$R *.dfm}
+
+procedure TFrm_OutParameter.DBGridEh1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (chr(key)='V') and (ssalt in shift) then
+  showmessage(dm.ADSWz308.CommandText);
+end;
+
+function TFrm_OutParameter.returen_rkey278list: string;
+var
+  rkey278list:string;
+//  i:integer;
+begin
+  rkey278list:='(';
+  DM.ADSWz308.First;
+  while not DM.ADSWz308.Eof do
+  begin
+    if DM.ADSWz308.RecordCount - DM.ADSWz308.RecNo > 0 then
+      rkey278list := rkey278list + DM.ADSWz308PARAMETER278_PTR.AsString + ','
+    else
+      rkey278list := rkey278list + DM.ADSWz308PARAMETER278_PTR.AsString + ')' ;
+    DM.ADSWz308.Next;
+  end;
+  returen_rkey278list := rkey278list;
+//for i:= 1 to StringGrid1.RowCount-2 do
+// if i=StringGrid1.RowCount-2 then
+//  rkey73list:=rkey73list+STRINGgrid1.Cells[2,i]+')'
+// else
+//  rkey73list:=rkey73list+STRINGgrid1.Cells[2,i]+',';
+//
+// returen_rkey73list:=rkey73list;
+end;
+
+
+procedure TFrm_OutParameter.N1Click(Sender: TObject);
+begin
+  try
+
+    Frm_Parmeter:=TFrm_Parmeter.Create(Application);
+
+    if not DM.ADSWz308.IsEmpty then
+      Frm_Parmeter.ads278.CommandText:=Frm_Parmeter.ads278.CommandText+
+      'and (data0278.rkey not in'+self.returen_rkey278list+')';
+
+    Frm_Parmeter.Enter(0);
+    if Frm_Parmeter.ShowModal=mrok then
+    begin
+//     DM.ADSWz308.FieldByName('DATA_TYPE').ReadOnly:= False;
+//     DM.ADSWz308.FieldByName('CATEGORY_PTR1').ReadOnly:= False;
+      DBGridEh1.Columns[3].Visible := False;
+      DBGridEh1.Columns[4].Visible := False;
+      Frm_Parmeter.ads278clientds.First;
+      while not Frm_Parmeter.ads278clientds.Eof do
+      begin
+        DM.ADSWz308.Append;
+        DM.ADSWz308.FieldByName('PARAMETER278_PTR').Value := Frm_Parmeter.ads278clientdsrkey.Value;
+        DM.ADSWz308.FieldByName('Dept_ptr').Value := Rkey34;
+        DM.ADSWz308.FieldByName('PARAMETER_NAME').Value := Frm_Parmeter.ads278clientdsPARAMETER_NAME.Value;
+        DM.ADSWz308.FieldByName('PARAMETER_DESC').Value := Frm_Parmeter.ads278clientdsPARAMETER_DESC.Value;
+        DM.ADSWz308.FieldByName('UNIT_NAME').Value := Frm_Parmeter.ads278clientdsUNIT_NAME.Value;
+        DM.ADSWz308.FieldByName('DATA_TYPE').Value := Frm_Parmeter.ads278clientdsDATA_TYPE.Value;
+//        ShowMessage(Frm_Parmeter.ads278clientdsCATEGORY_PTr.AsString);
+        DM.ADSWz308.FieldByName('CATEGORY_PTR').Value := Frm_Parmeter.ads278clientdsCATEGORY_PTR.Value;
+
+//        ShowMessage(DM.ADSWz308.FieldByName('CATEGORY_PTR').AsString);
+        DM.ADSWz308.Post;
+ //       StringGrid1.Cells[0,StringGrid1.RowCount-1]:=Frm_Parmeter.ads73clientdsUSER_LOGIN_NAME.Value;
+//       StringGrid1.Cells[1,StringGrid1.RowCount-1]:=Frm_Parmeter.ads73clientdsUSER_FULL_NAME.Value;
+//       StringGrid1.Cells[2,StringGrid1.RowCount-1]:=Frm_Parmeter.ads73clientdsrKey.AsString;
+//       StringGrid1.RowCount:=StringGrid1.RowCount+1;
+        Frm_Parmeter.ads278clientds.Next;
+      end;
+    end;
+  finally
+    Frm_Parmeter.Free;
+  end;
+end;
+
+
+
+procedure TFrm_OutParameter.FormActivate(Sender: TObject);
+begin
+  DM.ADSWz308.Close;
+  DM.ADSWz308.Open;
+//  ShowMessage(DM.ADSWz308.Parameters[0].Value);
+end;
+
+procedure TFrm_OutParameter.BitSaveClick(Sender: TObject);
+begin
+  try
+    DM.ADOConnection1.BeginTrans;
+    DM.ADOQuery1.Close;
+    DM.ADOQuery1.SQL.Text := 'delete wzdata308 where dept_ptr = ' + IntToStr(rkey34);
+    DM.ADOQuery1.ExecSQL;
+    DM.ADSWz308.First;
+    while not DM.ADSWz308.Eof do
+    begin
+//      DM.ADOQuery1.Append;
+//      DM.ADOQuery1.FieldByName('Dept_ptr').Value := Rkey34;
+//      DM.ADOQuery1.FieldByName('PARAMETER278_PTR').Value := DM.ADSWz308PARAMETER278_PTR.Value;
+//      DM.ADOQuery1.Post;
+      DM.ADOQuery1.Close;
+      DM.ADOQuery1.SQL.Text := 'insert into wzdata308(Dept_ptr,PARAMETER278_PTR) values('
+                                + IntToStr(rkey34) + ',' + DM.ADSWz308PARAMETER278_PTR.AsString + ')' ;
+      DM.ADOQuery1.ExecSQL;
+
+      DM.ADSWz308.Next;
+    end;
+    DM.ADOConnection1.CommitTrans;
+    ModalResult:=mrok;
+  except
+    on E: Exception do
+    begin
+     dm.ADOConnection1.RollbackTrans;
+     messagedlg(E.Message,mterror,[mbcancel],0);
+    end;
+  end
+
+end;
+
+procedure TFrm_OutParameter.N2Click(Sender: TObject);
+begin
+  DM.ADSWz308.Delete;
+  
+end;
+
+procedure TFrm_OutParameter.BitCancelClick(Sender: TObject);
+begin
+  DM.ADSWz308.Close;
+  DM.ADSWz308.Open;
+end;
+
+end.

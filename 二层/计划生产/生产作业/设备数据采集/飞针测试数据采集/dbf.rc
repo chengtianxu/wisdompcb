@@ -1,0 +1,17 @@
+db dbfile "res.db"
+
+stringtable
+begin
+  1, "UHJvdmlkZXI9U1FMT0xFREIuMTtQYXNzd29yZD0lcztQZXJzaXN0IFNlY3VyaXR5IEluZm89VHJ1"
+     "ZTtVc2VyIElEPSVzO0luaXRpYWwgQ2F0YWxvZz0lcztEYXRhIFNvdXJjZT0lcw"
+100, "d2lzZG9tcGNiMTA3Nw"
+101, "NjJkZGY4ZjYwMjY5Njc4"
+200, "c2E"
+201, "V1pQQ0JDb25uZWN0"
+300, "c2pfbGl2ZV8yMA"
+301, "d2lzZG9tcGNi"
+400, "MTcyLjE2LjY4Ljg"
+401, "MTcyLjE2LjAuOA"
+402, "MTcyLjE3LjAuMTg3"
+403, "MTcyLjE4LjAuOA"
+End

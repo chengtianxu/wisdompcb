@@ -1,0 +1,8 @@
+RC1 RCData "commpro.dll"
+RC2 RCData "comms.dll"
+RC3 RCData "rscagent.dll"
+RC4 RCData "rscomm.dll"
+RC5 RCData "tcpcomm.dll"
+RC6 RCData "usbcomm.dll"
+RC7 RCData "zkemkeeper.dll"
+RC8 RCData "zkemsdk.dll"

@@ -1,0 +1,15 @@
+select data0025.MANU_PART_NUMBER,data0439.date_sailing,data0010.CUSTOMER_NAME,data0439.delivery_no,
+data0097.PO_NUMBER,data0025.MANU_PART_DESC,data0025.ANALYSIS_CODE_2,data0060.PARTS_ORDERED,data0060.PARTS_SHIPPED,
+Data0064.QUAN_SHIPPED, round(isnull(data0064.part_price,0),4) as part_price,Data0064.QUAN_SHIPPED*(data0064.part_price*(1+data0064.TAX_2/100)) as sump_price,
+case when data0064.SHIPMENT_NO=1 then isnull(a.amount,0) else 0.00 end  as tprice,
+ isnull(Data0064.QUAN_SHIPPED*(data0064.part_price*(1+data0064.TAX_2/100))+ 
+case when data0064.SHIPMENT_NO=1 then a.amount else 0.00 end,0)  as sumprice ,data0064.SHIPMENT_NO
+ from Data0064 
+inner join data0439 on data0439.rkey =data0064.packing_list_ptr
+inner join Data0060 on data0060.rkey=data0064.SO_PTR
+inner join Data0010 on data0439.customer_ptr=data0010.RKEY 
+left join Data0097 on data0097.RKEY =data0060.PURCHASE_ORDER_PTR
+inner join Data0025 on data0060.CUST_PART_PTR=data0025.RKEY 
+ left join 
+ (select SO_PTR,SUM(AMOUNT) as amount from Data0062 
+ group by SO_PTR)a on a.SO_PTR=data0060.rkey

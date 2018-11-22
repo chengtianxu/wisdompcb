@@ -1,0 +1,24 @@
+var
+  R: TRect;
+  org: TPoint;
+begin
+ with Sender as TStringGrid do
+    if (ACol = 7) and (ARow >= FixedRows) then //在第二列显示一个ComboBox
+    begin
+      perform(WM_CANCELMODE, 0, 0);
+      R := CellRect(ACol, ARow);
+      org := Self.ScreenToClient(ClientToScreen(R.topleft));
+      with ComboBox1 do
+      begin
+        setbounds(org.X, org.Y, R.right - R.left, height);
+        itemindex := Items.IndexOf(Cells[ACol, ARow]);
+        Show;
+        BringTofront;
+        SetFocus;
+        DroppedDown := true;
+      end;
+    end;
+
+
+
+ stringgrid1.Cells[ stringgrid1.Col, stringgrid1.Row]:=Trim(ComboBox1.Text);//传值给StringGrid

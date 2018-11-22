@@ -1,0 +1,8 @@
+select RKEY as  FILE_POINTER,6010 as SOURCE_TYPE,general_req as memo_text into #22 
+from [192.168.1.253].sj_v20_live.dbo.data0010
+
+
+insert into data0011( FILE_POINTER,SOURCE_TYPE,memo_text )
+select  FILE_POINTER,SOURCE_TYPE,memo_text from #22
+where general_req<>''
+WHERE NOT EXISTS(SELECT RKEY FROM Data0279 WHERE Data0279.RKEY=#KD0279.RKEY)

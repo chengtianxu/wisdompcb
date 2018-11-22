@@ -1,0 +1,3 @@
+create index 索引名 on 表名(索引字段名)
+
+一般在DATA0314,创建D14_PTR和EMP_PTR创建索引

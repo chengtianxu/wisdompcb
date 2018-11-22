@@ -1,0 +1,51 @@
+USE [sj_v20_live]
+GO
+/****** 对象:  View [dbo].[V_meal]    脚本日期: 06/02/2012 11:55:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER
+ VIEW  [dbo].[V_meal] 
+AS 
+SELECT   
+b.employeecode,
+b.departmentname,
+b.chinesename,
+a.empid,
+d.mealtype as meal_type,
+ case when a.time_e between '05:40:00' and '09:30:00'  then 1 else 0 end as breakfast,
+ case when a.time_e between '10:30:00' and '13:30:00'  then 1 else 0 end as lunch,
+ case when a.time_e between '15:30:00' and '19:30:00'  then 1 else 0 end as supper,
+ case when a.time_e 
+between '22:30:00' and '23:59:59' or  a.time_e between '00:00:00' and '01:30:00' 
+	then 1 else 0 end as [night snack],
+ case when  a.time_e  not between '05:40:00' and '09:30:00'
+ and a.time_e not between '10:30:00' and '13:30:00'
+ and a.time_e not between '15:30:00' and '19:30:00'
+ and a.time_e not between '22:30:00' and '23:59:59'
+ and a.time_e not between '00:00:00'and '01:30:00'
+ then 1 else 0 end as [invalid_card],
+ case when a.time_e  between '00:00:00'and '01:30:00'
+ then dateadd(day,-1,a.date_e) else a.date_e end as [meal_date],
+ a.card_time
+ FROM dbo.meal_orginaldata a 
+ join (select rkey, 
+employeecode,
+ departmentname,
+ chinesename,
+'01' as  factorytype
+from v_employeemsg 
+union 
+select rkey,employeecode,factoryarea,
+chinesename,'extra' as factorytype 
+from  employeemsg_extra where flag=1)  
+as b 
+ on a.empid=b.rkey and a.factorytype=b.factorytype
+ join dev_detail d 
+ on cast (a.dev_id as int)=cast (d.devid as int)
+
+
+----select * from dbo.meal_orginaldata
+----select * from employeemsg_extra where rkey =20 
+----- select * from V_meal where departmentname='锌智泉'

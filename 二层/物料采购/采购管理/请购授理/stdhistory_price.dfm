@@ -1,0 +1,94 @@
+object Form_stdprice: TForm_stdprice
+  Left = 294
+  Top = 227
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = #29983#20135#29289#26009#21382#21490#20215#26684
+  ClientHeight = 358
+  ClientWidth = 610
+  Color = clBtnFace
+  Font.Charset = GB2312_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 0
+    Width = 610
+    Height = 297
+    Align = alTop
+    DataSource = DM.DataSource8
+    TabOrder = 0
+    TitleFont.Charset = GB2312_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    OnKeyDown = FormKeyDown
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ABBR_NAME'
+        Width = 79
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CURR_NAME'
+        Width = 50
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QUANTITY'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'UNIT_NAME'
+        Width = 58
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tax_price'
+        Width = 70
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tax'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'REQ_DATE'
+        Width = 101
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'in_out'
+        Width = 54
+        Visible = True
+      end>
+  end
+  object Button1: TButton
+    Left = 269
+    Top = 319
+    Width = 74
+    Height = 24
+    Caption = #20851#38381
+    ModalResult = 1
+    TabOrder = 1
+    OnKeyDown = FormKeyDown
+  end
+end

@@ -1,0 +1,3 @@
+EP177显示 CKsqmt_avg无效
+这个字段不是实际存在的，而是临时表时的数据
+可以删除这几个临时表DROP TABLE TEMP_001\TEMP_002\TEMP_003\TEMP_004\TEMP_0012\TEMP_0014

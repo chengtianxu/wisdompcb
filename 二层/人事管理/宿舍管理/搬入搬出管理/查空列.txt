@@ -1,0 +1,19 @@
+Declare @Name Varchar(100)
+Declare @Sql nVArchar(4000)
+Declare @Table Varchar(100)='test'
+Declare @F  Varchar(2000)=''
+DECLARE Cur CURSOR FOR 
+select name from sys.columns where object_id=object_id(@Table)
+
+OPEN Cur
+FETCH NEXT FROM Cur INTO @Name
+WHILE @@FETCH_STATUS = 0
+BEGIN
+set @Sql='if not exists(Select * From '+@Table +' Where '+@Name+' is not null )
+Set @F=@F+'','+@Name+''''
+exec sp_executesql @sql,N'@F Varchar(2000)='''' output',@F  output
+FETCH NEXT FROM Cur INTO @Name
+END 
+CLOSE Cur
+DEALLOCATE Cur
+Select @F 

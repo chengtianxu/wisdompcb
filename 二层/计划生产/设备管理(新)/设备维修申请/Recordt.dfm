@@ -1,0 +1,49 @@
+object frm_Recordt: Tfrm_Recordt
+  Left = 193
+  Top = 185
+  Width = 648
+  Height = 467
+  Caption = #35760#24405
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 640
+    Height = 433
+    Align = alClient
+    DataSource = DataSource1
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = #23435#20307
+    FooterFont.Style = []
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery1
+    Left = 112
+    Top = 144
+  end
+  object ADOQuery1: TADOQuery
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    Left = 232
+    Top = 152
+  end
+end

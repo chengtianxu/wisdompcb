@@ -1,0 +1,41 @@
+var
+  n: Byte;
+  rkey360: TDatetime;
+  list: TStringList;
+begin
+  form5:=tform5.Create(application);
+  list:=TStringList.Create;
+  try
+    rkey360:= dm.ADO360.FieldByName('sch_date').AsDatetime;
+    dm.ADO360.First;
+    while not DM.ADO360.Eof do
+    begin
+      if dm.ADO360.FieldByName('sch_date').AsDatetime <> rkey360 then
+        list.Add(DateToStr(dm.ADO360sch_date.Value));
+      DM.ADO360.Next;
+    end;
+
+    dm.ADO360.Locate('sch_date',rkey360,[]);
+    dm.ADO360.Edit;
+    if form5.ShowModal=mrok then
+    begin
+      if list.Count > 0 then
+      begin
+        for n:= 0 to list.Count-1 do
+        begin
+          if DateToStr(DM.ADO360sch_date.Value)=list.Strings[n] then
+          begin
+            ShowMessage('不能有相同的完工日期');
+            dm.ADO360.Cancel;
+            Exit;
+          end;
+        end;
+      end;
+      dm.ADO360.Post;
+    end
+    else
+      dm.ADO360.Cancel;
+  finally
+    form5.Free;
+    list.Free;
+  end;

@@ -1,0 +1,46 @@
+unit Udemo;
+
+interface
+
+uses
+  SysUtils, Classes, DB, ADODB;
+
+type
+  TDM = class(TDataModule)
+    con1: TADOConnection;
+    ads593: TADODataSet;
+    ads594: TADODataSet;
+    dsu2: TDataSource;
+    ads593rkey: TAutoIncField;
+    ads593invt_ttyename: TWideStringField;
+    ads593rkey593: TIntegerField;
+    ads593guizhe: TWordField;
+    ads593length: TWordField;
+    ads593PARAMETER_PTR: TIntegerField;
+    ads594rkey593: TIntegerField;
+    ads594rec_no: TIntegerField;
+    ads594type_name: TStringField;
+    ads594type_code: TStringField;
+    ads594filter_name: TStringField;
+    cdsMain: TADODataSet;
+    AutoIncField1: TAutoIncField;
+    WideStringField1: TWideStringField;
+    IntegerField1: TIntegerField;
+    WordField1: TWordField;
+    WordField2: TWordField;
+    IntegerField2: TIntegerField;
+    DataSource1: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{$R *.dfm}
+
+end.

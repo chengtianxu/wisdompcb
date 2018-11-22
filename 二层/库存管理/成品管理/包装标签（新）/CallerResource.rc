@@ -1,0 +1,65 @@
+//华为技术
+SZ1806I RCData ".\Report\WZPR0698\SZ\SZ1806I.rtm"
+SZ1806O RCData ".\Report\WZPR0698\SZ\SZ1806O.rtm"
+DG1806I RCData ".\Report\WZPR0698\DG\DG1806I.rtm"
+DG1806O RCData ".\Report\WZPR0698\DG\DG1806O.rtm"
+MZ1806I RCData ".\Report\WZPR0698\MZ\MZ1806I.rtm"
+MZ1806O RCData ".\Report\WZPR0698\MZ\MZ1806O.rtm"
+//华为终端
+SZ1915I RCData ".\Report\WZPR0698\SZ\SZ1915I.rtm"
+SZ1915O RCData ".\Report\WZPR0698\SZ\SZ1915O.rtm"
+DG1915I RCData ".\Report\WZPR0698\DG\DG1915I.rtm"
+DG1915O RCData ".\Report\WZPR0698\DG\DG1915O.rtm"
+MZ1915I RCData ".\Report\WZPR0698\MZ\MZ1915I.rtm"
+MZ1915O RCData ".\Report\WZPR0698\MZ\MZ1915O.rtm"
+//中兴康讯
+SZ2303I RCData ".\Report\WZPR0698\SZ\SZ2303I.rtm"
+SZ2303O RCData ".\Report\WZPR0698\SZ\SZ2303O.rtm"
+DG2303I RCData ".\Report\WZPR0698\DG\DG2303I.rtm"
+DG2303O RCData ".\Report\WZPR0698\DG\DG2303O.rtm"
+MZ2303I RCData ".\Report\WZPR0698\MZ\MZ2303I.rtm"
+MZ2303O RCData ".\Report\WZPR0698\MZ\MZ2303O.rtm"
+//海思半导体
+SZ2258I RCData ".\Report\WZPR0698\SZ\SZ2258I.rtm"
+SZ2258O RCData ".\Report\WZPR0698\SZ\SZ2258O.rtm"
+//明锐铭泰
+SZ2104I RCData ".\Report\WZPR0698\SZ\SZ2104I.rtm"
+SZ2104O RCData ".\Report\WZPR0698\SZ\SZ2104O.rtm"
+MZ2104I RCData ".\Report\WZPR0698\MZ\MZ2104I.rtm"
+MZ2104O RCData ".\Report\WZPR0698\MZ\MZ2104O.rtm"
+//创力仕
+SZ1901I RCData ".\Report\WZPR0698\SZ\SZ1901I.rtm"
+SZ1901O RCData ".\Report\WZPR0698\SZ\SZ1901O.rtm"
+//大华
+SZ2390I RCData ".\Report\WZPR0698\SZ\SZ2390I.rtm"
+SZ2390O RCData ".\Report\WZPR0698\SZ\SZ2390O.rtm"
+//大运河
+DGdyh_I RCData ".\Report\WZPR0698\DG\DGDYH_I.rtm"
+DGdyh_O RCData ".\Report\WZPR0698\DG\DGDYH_O.rtm"
+//水世界
+DGSSJ_I RCData ".\Report\WZPR0698\DG\DGSSJ_I.rtm"
+DGSSJ_O RCData ".\Report\WZPR0698\DG\DGSSJ_O.rtm"
+//华勤
+DGhq_I RCData ".\Report\WZPR0698\DG\DGhq_I.rtm"
+DGhq_O RCData ".\Report\WZPR0698\DG\DGhq_O.rtm"
+//闻泰
+DGwt_I RCData ".\Report\WZPR0698\DG\DGwt_I.rtm"
+DGwt_O RCData ".\Report\WZPR0698\DG\DGwt_O.rtm"
+//TCL
+DGtcl_I RCData ".\Report\WZPR0698\DG\DGtcl_I.rtm"
+DGtcl_O RCData ".\Report\WZPR0698\DG\DGtcl_O.rtm"
+//JCKJ 精诚科技
+DGJCKJ_I RCData ".\Report\WZPR0698\DG\DGJCKJ_I.rtm"
+DGJCKJ_O RCData ".\Report\WZPR0698\DG\DGJCKJ_O.rtm"
+//拔超科技
+SZS2763_I RCData ".\Report\WZPR0698\SZ\SZS2763I.rtm"
+SZS2763_O RCData ".\Report\WZPR0698\SZ\SZS2763O.rtm"
+//英源达
+DGYYD_I RCData ".\Report\WZPR0698\DG\DGYYD_I.rtm"
+DGYYD_O RCData ".\Report\WZPR0698\DG\DGYYD_O.rtm"
+//东莞和硕
+DGHS7325_I RCData ".\Report\WZPR0698\DG\DGHS7325_I.rtm"
+DGHS7325_O RCData ".\Report\WZPR0698\DG\DGHS7325_O.rtm"
+//东莞戴尔
+DGDell_I RCData ".\Report\WZPR0698\DG\DGDell_I.rtm"
+DGDell_O RCData ".\Report\WZPR0698\DG\DGDell_O.rtm"

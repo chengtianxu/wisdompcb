@@ -1,0 +1,31 @@
+object Frm_tree: TFrm_tree
+  Left = 204
+  Top = 130
+  Width = 509
+  Height = 444
+  BorderIcons = [biSystemMenu]
+  Caption = 'tree'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object TreeView1: TTreeView
+    Left = 0
+    Top = 0
+    Width = 501
+    Height = 414
+    Align = alClient
+    Indent = 19
+    ReadOnly = True
+    TabOrder = 0
+    OnDblClick = TreeView1DblClick
+    OnKeyDown = FormKeyDown
+  end
+end

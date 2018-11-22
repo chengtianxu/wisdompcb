@@ -1,0 +1,58 @@
+insert into data0814(phonenumber,messagecontent,sendername,rkey73,sendtime)
+select distinct data0834.Phone,ABBR_NAME+' 部门：'+DEPT_NAME+' 设备代码：'+FASSET_CODE+'设备名称：'+FASSET_NAME+'，预计'
+ +CONVERT(varchar(100),data0831.PlanMainDate, 23)+'进行'+data0831.MainCycl+'保养。'as msg,
+'系统生成',data0834.User_ptr,GETDATE()
+from data0417 
+join data0034 on data0417.Dept_Ptr=data0034.rkey 
+join data0834 on data0834.DeptCode=data0034.Dept_Code and  data0834.warehouse_ptr=data0417.warehouse_ptr
+join data0831 on data0831.DeviNumb=data0417.Fasset_Code and data0831.RKEY832=1 /*1=待执行*/
+join data0514 on data0514.rkey=data0417.FASSET_TYPE_PTR
+join data0015 on data0417.warehouse_ptr=data0015.rkey
+join data0812 on data0417.devitype=data0812.devitype
+where (DATEADD(Day,ISNULL(-data0812.AdvanceDays,-1),PlanMainDate)<=(SELECT CONVERT(VARCHAR(10),GETDATE(),120))and(data0514.Fasset_type<>'公共设备'))
+or(DATEADD(Day,ISNULL(-data0812.AdvanceDays,-4),PlanMainDate)<=(SELECT CONVERT(VARCHAR(10),GETDATE(),120))and(data0514.Fasset_type='公共设备'))
+--保养信息如果保养提前周期公共设备大于4天，其它设备大于1天，
+ 
+BEGIN tran
+DECLARE @v1PlanMainDate datetime,
+@v2MainCycl char(10),
+@v3DeviNumb char(30),
+@LastDate datetime 
+DECLARE ph_mycursor Cursor for  
+select  PlanMainDate,data0831.MainCycl,DeviNumb from data0417  
+join data0831 on data0831.DeviNumb=data0417.Fasset_Code and data0831.RKEY832=1 /*1=待执行*/
+join data0514 on data0514.rkey=data0417.FASSET_TYPE_PTR
+join data0812 on data0417.devitype=data0812.devitype --2018-1-24修改成按保养提前天数插入新数据
+where (DATEADD(Day,ISNULL(-data0812.AdvanceDays,-1),PlanMainDate)<=(SELECT CONVERT(VARCHAR(10),GETDATE(),120))and(data0514.Fasset_type<>'公共设备')
+)
+or(DATEADD(Day,ISNULL(-data0812.AdvanceDays,-4),PlanMainDate)<=(SELECT CONVERT(VARCHAR(10),GETDATE(),120))and(data0514.Fasset_type='公共设备'))
+for update of RKEY832 open ph_mycursor 
+FETCH NEXT FROM ph_mycursor INTO @v1PlanMainDate,@v2MainCycl,@v3DeviNumb
+WHILE(@@FETCH_STATUS = 0)
+BEGIN
+--修改状态
+  UPDATE data0831 
+  SET   RKEY832=5
+  where CURRENT OF ph_mycursor
+--添加下次保养计划  
+
+  select @LastDate=DateAdd(day,Cycl_Duration,@v1PlanMainDate)from DATA0816 WHERE MainCycl=@v2MainCycl           
+if not exists(select * from data0831 where [PlanMainDate]=@LastDate 
+   and [DeviNumb]=@v3DeviNumb and [MainCycl]=@v2MainCycl)
+begin                              
+insert into data0831 (PlanMainDate,DeviNumb,DeviType,MainCycl,RKEY832,StdTimeCons) 
+select @LastDate,Fasset_Code,data0417.DeviType,data0812.MainCycl,1,
+StdTimeCons =(select top 1 StdTimeCons from [data0847] where [D417_ptr]=data0417.rkey and data0812.MainCycl= [data0847].MainCycl )
+from data0417 join data0812 on data0417.DeviType=data0812.DeviType    
+and Fasset_Code=@v3DeviNumb and data0812.MainCycl=@v2MainCycl
+
+insert into data0821(Rkey831,Rkey17,Quantity,IfmustReplace,unit_ptr,ReplaceQuantity)
+select @@identity,data0820.Rkey17,data0820.Quantity,data0820.IfMustReplace,data0820.Unit_ptr,0 
+from data0820 inner join data0417 on data0820.rkey417=data0417.rkey where data0417.Fasset_Code =@v3DeviNumb
+and data0820.MainCycl = @v2MainCycl
+end	                     
+  FETCH NEXT FROM ph_mycursor INTO @v1PlanMainDate,@v2MainCycl,@v3DeviNumb
+END
+COMMIT tran
+CLOSE ph_mycursor  
+DEALLOCATE ph_mycursor

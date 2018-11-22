@@ -1,0 +1,91 @@
+object frmMain: TfrmMain
+  Left = 224
+  Top = 167
+  Width = 708
+  Height = 377
+  Caption = #29289#26009#26631#35782#30721#27604#23545
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lbl1: TLabel
+    Left = 80
+    Top = 80
+    Width = 71
+    Height = 19
+    Caption = #26465#30721'1'#65306
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lbl2: TLabel
+    Left = 80
+    Top = 144
+    Width = 71
+    Height = 19
+    Caption = #26465#30721'2'#65306
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblRet: TLabel
+    Left = 128
+    Top = 216
+    Width = 280
+    Height = 56
+    Caption = '          '
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -56
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object edt1: TEdit
+    Left = 168
+    Top = 77
+    Width = 257
+    Height = 27
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnKeyPress = edt1KeyPress
+  end
+  object edt2: TEdit
+    Left = 168
+    Top = 139
+    Width = 257
+    Height = 27
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnKeyPress = edt2KeyPress
+  end
+  object mmo1: TMemo
+    Left = 440
+    Top = 24
+    Width = 241
+    Height = 297
+    TabOrder = 2
+  end
+end

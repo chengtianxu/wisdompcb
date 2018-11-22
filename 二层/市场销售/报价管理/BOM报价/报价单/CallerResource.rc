@@ -1,0 +1,4 @@
+RC1 RCData "WZPCBCut.dll"
+SZ_BomPriceRpt_In RCData ".\Reports\SZ\BomPriceRpt_In.fr3"
+DG_BomPriceRpt_In RCData ".\Reports\DG\BomPriceRpt_In.fr3"
+MZ_BomPriceRpt_In RCData ".\Reports\MZ\BomPriceRpt_In.fr3"

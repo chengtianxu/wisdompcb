@@ -1,0 +1,547 @@
+object Form1: TForm1
+  Left = 368
+  Top = 256
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  ClientHeight = 428
+  ClientWidth = 643
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label7: TLabel
+    Left = 40
+    Top = 46
+    Width = 59
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #20837#20179#21333#21495':'
+  end
+  object Label8: TLabel
+    Left = 396
+    Top = 42
+    Width = 59
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #20837#20179#26085#26399':'
+  end
+  object Label9: TLabel
+    Left = 66
+    Top = 154
+    Width = 33
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #22791#27880':'
+  end
+  object Label10: TLabel
+    Left = 404
+    Top = 155
+    Width = 59
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #20837#20179#24635#25968':'
+  end
+  object Label1: TLabel
+    Left = 40
+    Top = 70
+    Width = 59
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #36864#36135#21333#21495':'
+    Visible = False
+  end
+  object Label2: TLabel
+    Left = 66
+    Top = 96
+    Width = 33
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #24037#21378':'
+  end
+  object Label3: TLabel
+    Left = 299
+    Top = 95
+    Width = 7
+    Height = 13
+  end
+  object Label4: TLabel
+    Left = 41
+    Top = 126
+    Width = 59
+    Height = 13
+    Alignment = taRightJustify
+    Caption = #21046#36896#37096#38376':'
+  end
+  object Label5: TLabel
+    Left = 301
+    Top = 126
+    Width = 35
+    Height = 13
+    Caption = '     '
+  end
+  object BitBtn1: TBitBtn
+    Left = 8
+    Top = 8
+    Width = 68
+    Height = 25
+    Hint = #20445#23384#31243#24207
+    Caption = #20445#23384
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    TabStop = False
+    OnClick = BitBtn1Click
+    OnEnter = BitBtn1Enter
+    Glyph.Data = {
+      56070000424D5607000000000000360400002800000028000000140000000100
+      0800000000002003000000000000000000000001000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+      A600000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00030303030303
+      0303030303030303030303030303030303030303030303030303030303030303
+      0303030303030303030303030303030303030303030303030303030303030303
+      0303030303030303030303030303030303030303030303030303030303030303
+      030303FFFFFFFFFFFFFFFFFFFFFFFF030303030303F800000000000000000000
+      0000F803030303030303F8F8F8F8F8F8F8F8F8F8F8F803FF030303030300FCFC
+      00F8FCFCFF070700FCFC00030303030303F8FF03F8FF0303030303F8FF03F8FF
+      030303030300FCFC00F8FCFCFF070700FCFC00030303030303F8FF03F8FF0303
+      030303F8FF03F8FF030303030300FCFC0007F8F807070700FCFC000303030303
+      03F8FF03F8FFFFFFFFFFFFF80303F8FF030303030300FCFC0600000000000006
+      FCFC00030303030303F8FF0303F8F8F8F8F8F8030303F8FF030303030300FCFC
+      FCFCFCFCFCFCFCFCFCFC00030303030303F8FF0303FFFFFFFFFFFFFFFF03F8FF
+      030303030300FC06000000000000000006FC00030303030303F8FF03F8F8F8F8
+      F8F8F8F803FFF8FF030303030300FC00FFFFFFFFFFFFFFFF00FC000303030303
+      03F8FFF8FF03030303030303F8FFF8FF030303030300FC00FFFFFFFFFFFFFFFF
+      00FC00030303030303F8FFF8FF03030303030303F8FFF8FF030303030300FC00
+      FFFFFFFFFFFFFFFF00FC00030303030303F8FFF8FF03030303030303F8FFF8FF
+      030303030300FC00FFFFFFFFFFFFFFFF00FC00030303030303F8FFF8FF030303
+      03030303F8FFF8FF0303030303000000FFFFFFFFFFFFFFFF0000000303030303
+      03F8FFF8FF03030303030303F8FFF8FF030303030300FC00FFFFFFFFFFFFFFFF
+      00FC00030303030303F8FFF8FFFFFFFFFFFFFFFFF8FFF8030303030303F80000
+      00000000000000000000F803030303030303F8F8F8F8F8F8F8F8F8F8F8F80303
+      0303030303030303030303030303030303030303030303030303030303030303
+      0303030303030303030303030303030303030303030303030303030303030303
+      0303030303030303030303030303030303030303030303030303030303030303
+      0303030303030303030303030303030303030303030303030303}
+    NumGlyphs = 2
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 178
+    Width = 643
+    Height = 250
+    Align = alBottom
+    DataSource = DataSource1
+    Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    OnKeyDown = DBGrid1KeyDown
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'CUSTOMER_PART_NUMBER'
+        Width = 84
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CUSTOMER_PART_DESC'
+        Width = 120
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PRODUCT_DESC'
+        Width = 98
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LOCATION'
+        Title.Caption = #20179#24211
+        Width = 58
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'REFERENCE_NUMBER'
+        Title.Caption = #20855#20307#20301#32622
+        Width = 78
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'unit_name'
+        Width = 46
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QUANTITY'
+        Title.Caption = #20837#20179#25968#37327
+        Width = 63
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'price'
+        Title.Caption = #21333#20215
+        Width = -1
+        Visible = False
+      end>
+  end
+  object Edit4: TEdit
+    Left = 104
+    Top = 42
+    Width = 121
+    Height = 21
+    MaxLength = 15
+    TabOrder = 0
+  end
+  object BitBtn4: TBitBtn
+    Left = 77
+    Top = 8
+    Width = 68
+    Height = 25
+    Caption = #21462#28040
+    ModalResult = 2
+    TabOrder = 4
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      3333333333333FFFFF333333000033333388888833333333333F888888FFF333
+      000033338811111188333333338833FFF388FF33000033381119999111833333
+      38F338888F338FF30000339119933331111833338F388333383338F300003391
+      13333381111833338F8F3333833F38F3000039118333381119118338F38F3338
+      33F8F38F000039183333811193918338F8F333833F838F8F0000391833381119
+      33918338F8F33833F8338F8F000039183381119333918338F8F3833F83338F8F
+      000039183811193333918338F8F833F83333838F000039118111933339118338
+      F3833F83333833830000339111193333391833338F33F8333FF838F300003391
+      11833338111833338F338FFFF883F83300003339111888811183333338FF3888
+      83FF83330000333399111111993333333388FFFFFF8833330000333333999999
+      3333333333338888883333330000333333333333333333333333333333333333
+      0000}
+    NumGlyphs = 2
+  end
+  object Edit5: TEdit
+    Left = 462
+    Top = 39
+    Width = 155
+    Height = 21
+    TabStop = False
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 5
+  end
+  object Edit6: TEdit
+    Left = 103
+    Top = 151
+    Width = 186
+    Height = 21
+    MaxLength = 50
+    TabOrder = 1
+  end
+  object Edit7: TEdit
+    Left = 467
+    Top = 151
+    Width = 94
+    Height = 21
+    TabStop = False
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 6
+    Text = '0'
+  end
+  object BitBtn2: TBitBtn
+    Left = 230
+    Top = 63
+    Width = 61
+    Height = 25
+    Caption = #26597#25214
+    TabOrder = 7
+    Visible = False
+    OnClick = BitBtn2Click
+    Glyph.Data = {
+      EE000000424DEE000000000000007600000028000000100000000F0000000100
+      04000000000078000000130B0000130B00001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+      888800000888880000080F000888880F00080F000888880F0008000000080000
+      000800F000000F00000800F000800F00000800F000800F000008800000000000
+      0088880F00080F000888880000080000088888800088800088888880F08880F0
+      888888800088800088888888888888888888}
+  end
+  object Edit2: TEdit
+    Left = 103
+    Top = 92
+    Width = 121
+    Height = 21
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 8
+  end
+  object BitBtn3: TBitBtn
+    Left = 230
+    Top = 89
+    Width = 61
+    Height = 25
+    Caption = #26597#25214
+    TabOrder = 9
+    OnClick = BitBtn3Click
+    Glyph.Data = {
+      EE000000424DEE000000000000007600000028000000100000000F0000000100
+      04000000000078000000130B0000130B00001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+      888800000888880000080F000888880F00080F000888880F0008000000080000
+      000800F000000F00000800F000800F00000800F000800F000008800000000000
+      0088880F00080F000888880000080000088888800088800088888880F08880F0
+      888888800088800088888888888888888888}
+  end
+  object Edit1: TEdit
+    Left = 103
+    Top = 66
+    Width = 121
+    Height = 21
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 10
+    Visible = False
+  end
+  object Edit3: TEdit
+    Left = 104
+    Top = 122
+    Width = 121
+    Height = 21
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 11
+  end
+  object BitBtn5: TBitBtn
+    Left = 231
+    Top = 119
+    Width = 61
+    Height = 25
+    Caption = #26597#25214
+    TabOrder = 12
+    OnClick = BitBtn5Click
+    Glyph.Data = {
+      EE000000424DEE000000000000007600000028000000100000000F0000000100
+      04000000000078000000130B0000130B00001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+      888800000888880000080F000888880F00080F000888880F0008000000080000
+      000800F000000F00000800F000800F00000800F000800F000008800000000000
+      0088880F00080F000888880000080000088888800088800088888880F08880F0
+      888888800088800088888888888888888888}
+  end
+  object ADO53: TADOQuery
+    Connection = DM.ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey416'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'SELECT RKEY, NPAD_PTR, LOC_PTR, CUST_PART_PTR, mo_ptr, QUANTITY,' +
+        ' REFERENCE_NUMBER, price'
+      ''
+      'FROM Data0053'
+      ''
+      'where data0053.npad_ptr=:rkey416')
+    Left = 104
+    Top = 296
+    object ADO53RKEY: TIntegerField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object ADO53NPAD_PTR: TIntegerField
+      FieldName = 'NPAD_PTR'
+    end
+    object ADO53LOC_PTR: TIntegerField
+      FieldName = 'LOC_PTR'
+    end
+    object ADO53CUST_PART_PTR: TIntegerField
+      FieldName = 'CUST_PART_PTR'
+    end
+    object ADO53QUANTITY: TBCDField
+      FieldName = 'QUANTITY'
+      Precision = 10
+      Size = 2
+    end
+    object ADO53REFERENCE_NUMBER: TStringField
+      FieldName = 'REFERENCE_NUMBER'
+      FixedChar = True
+    end
+    object ADO53LOCATION: TStringField
+      DisplayLabel = #20179#24211#21517#31216
+      FieldKind = fkLookup
+      FieldName = 'LOCATION'
+      LookupDataSet = DM.ADOT16
+      LookupKeyFields = 'RKEY'
+      LookupResultField = 'LOCATION'
+      KeyFields = 'LOC_PTR'
+      Size = 10
+      Lookup = True
+    end
+    object ADO53CODE: TStringField
+      DisplayLabel = #20179#24211#20195#30721
+      FieldKind = fkLookup
+      FieldName = 'CODE'
+      LookupDataSet = DM.ADOT16
+      LookupKeyFields = 'RKEY'
+      LookupResultField = 'CODE'
+      KeyFields = 'LOC_PTR'
+      Size = 5
+      Lookup = True
+    end
+    object ADO53CUSTOMER_PART_NUMBER: TStringField
+      DisplayLabel = #20135#21697#20195#30721
+      FieldKind = fkLookup
+      FieldName = 'CUSTOMER_PART_NUMBER'
+      LookupDataSet = DM.aq50
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PROD_CODE'
+      KeyFields = 'CUST_PART_PTR'
+      Lookup = True
+    end
+    object ADO53CUSTOMER_PART_DESC: TStringField
+      DisplayLabel = #20135#21697#21517#31216
+      FieldKind = fkLookup
+      FieldName = 'CUSTOMER_PART_DESC'
+      LookupDataSet = DM.aq50
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PRODUCT_NAME'
+      KeyFields = 'CUST_PART_PTR'
+      Size = 40
+      Lookup = True
+    end
+    object ADO53PRODUCT_DESC: TStringField
+      DisplayLabel = #20135#21697#35268#26684
+      FieldKind = fkLookup
+      FieldName = 'PRODUCT_DESC'
+      LookupDataSet = DM.aq50
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'PRODUCT_DESC'
+      KeyFields = 'CUST_PART_PTR'
+      Size = 200
+      Lookup = True
+    end
+    object ADO53unit_name: TStringField
+      DisplayLabel = #21333#20301
+      DisplayWidth = 10
+      FieldKind = fkLookup
+      FieldName = 'unit_name'
+      LookupDataSet = DM.aq50
+      LookupKeyFields = 'rkey'
+      LookupResultField = 'unit_name'
+      KeyFields = 'CUST_PART_PTR'
+      Lookup = True
+    end
+    object ADO53price: TBCDField
+      FieldName = 'price'
+      Precision = 10
+      Size = 2
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ADO53
+    Left = 72
+    Top = 296
+  end
+  object ADOQuery2: TADOQuery
+    Connection = DM.ADOConnection1
+    ParamCheck = False
+    Parameters = <>
+    Left = 8
+    Top = 296
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 152
+    Top = 296
+    object N1: TMenuItem
+      Caption = #26032#22686
+      OnClick = N1Click
+    end
+    object N2: TMenuItem
+      Caption = #32534#36753
+      OnClick = N2Click
+    end
+    object N4: TMenuItem
+      Caption = #21024#38500
+      OnClick = N4Click
+    end
+  end
+  object ADO04: TADOQuery
+    Connection = DM.ADOConnection1
+    Parameters = <>
+    SQL.Strings = (
+      'select * from data0004'
+      'where rkey=5')
+    Left = 8
+    Top = 255
+    object ADO04SEED_VALUE: TStringField
+      FieldName = 'SEED_VALUE'
+    end
+    object ADO04SEED_FLAG: TWordField
+      FieldName = 'SEED_FLAG'
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 568
+    Top = 8
+  end
+end

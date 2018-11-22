@@ -1,0 +1,5 @@
+公式取三位小数
+IF[ FP_07 > 0 ; rtrim(ltrim(str( FP_07 , 10 ,3 ))) + ' x ' + rtrim(ltrim(str( FP_08 , 10 , 3 ))) ; '' ]
+0位小数
+rtrim(ltrim(str(124/5 , 10 ,0 )))
+可以用ROUND(原来的数,小数位)

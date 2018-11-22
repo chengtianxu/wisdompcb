@@ -1,0 +1,159 @@
+object Frm_remark: TFrm_remark
+  Left = 470
+  Top = 275
+  BorderStyle = bsDialog
+  Caption = #20462#25913#22791#27880
+  ClientHeight = 225
+  ClientWidth = 440
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 7
+    Top = 1
+    Width = 76
+    Height = 38
+    Caption = #21407#20379#24212#21830#13#10#29983#20135#25209#21495
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 5
+    Top = 48
+    Width = 76
+    Height = 19
+    Caption = #29615#20445#26631#35782
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 43
+    Top = 117
+    Width = 38
+    Height = 19
+    Caption = #22791#27880
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 248
+    Top = 24
+    Width = 52
+    Height = 13
+    Caption = #25253#20851#21333#21495
+  end
+  object Label5: TLabel
+    Left = 234
+    Top = 50
+    Width = 66
+    Height = 13
+    Caption = #21333#20301#37325#37327'KG'
+  end
+  object Label6: TLabel
+    Left = 5
+    Top = 76
+    Width = 76
+    Height = 19
+    Caption = #35814#32454#20301#32622
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -19
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object BitBtn1: TBitBtn
+    Left = 136
+    Top = 194
+    Width = 75
+    Height = 25
+    Caption = #20445#23384
+    TabOrder = 0
+    Kind = bkOK
+  end
+  object BitBtn2: TBitBtn
+    Left = 248
+    Top = 194
+    Width = 75
+    Height = 25
+    Caption = #21462#28040
+    TabOrder = 1
+    Kind = bkCancel
+  end
+  object DBEdit1: TDBEdit
+    Left = 88
+    Top = 19
+    Width = 128
+    Height = 21
+    DataField = 'SUPPLIER2'
+    DataSource = dm.DataSource2
+    TabOrder = 2
+  end
+  object DBEdit2: TDBEdit
+    Left = 88
+    Top = 48
+    Width = 129
+    Height = 21
+    DataField = 'rohs'
+    DataSource = dm.DataSource2
+    TabOrder = 3
+  end
+  object DBMemo1: TDBMemo
+    Left = 88
+    Top = 114
+    Width = 339
+    Height = 60
+    DataField = 'BARCODE_ID'
+    DataSource = dm.DataSource2
+    TabOrder = 7
+    OnKeyPress = DBMemo1KeyPress
+  end
+  object DBEdit3: TDBEdit
+    Left = 304
+    Top = 19
+    Width = 124
+    Height = 21
+    DataField = 'cust_decl'
+    DataSource = dm.DataSource2
+    TabOrder = 4
+  end
+  object DBEdit4: TDBEdit
+    Left = 304
+    Top = 45
+    Width = 124
+    Height = 21
+    DataField = 'STOCK_BASE'
+    DataSource = dm.DataSource2
+    TabOrder = 5
+    OnExit = DBEdit4Exit
+  end
+  object DBEdit5: TDBEdit
+    Left = 88
+    Top = 75
+    Width = 129
+    Height = 21
+    DataField = 'spec_place'
+    DataSource = dm.DataSource2
+    TabOrder = 6
+  end
+end

@@ -1,0 +1,179 @@
+
+
+--向数据库中增加一个字段　early_ptr　，
+if not (exists(SELECT syscolumns.name AS Expr1
+               FROM syscolumns INNER JOIN
+                     sysobjects ON syscolumns.id = sysobjects.id
+               WHERE (sysobjects.name = N'data0444') AND (syscolumns.name = N'early_ptr')))
+  begin
+    ALTER TABLE data0444
+      add [early_ptr] [int] NOT NULL DEFAULT 0
+    --期初截数指针444.rkey
+   exec sp_addextendedproperty N'MS_Description', N'期初截数指针444.rkey', N'user', N'dbo', N'table', N'data0444', N'column', N'early_ptr'
+
+  end
+go
+
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[wzpr444]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+  drop PROCEDURE wzpr444
+GO
+
+CREATE PROCEDURE wzpr444;1
+AS
+SELECT dbo.Data0006.BOM_PTR, dbo.Data0006.WORK_ORDER_NUMBER, 
+      dbo.Data0056.FLOW_NO, dbo.Data0056.DEPT_PTR, dbo.Data0056.STEP, 
+      dbo.Data0056.QTY_BACKLOG, dbo.Data0056.INTIME, dbo.data0492.CUT_NO, 
+      dbo.data0492.SO_NO, dbo.Data0056.WO_PTR, dbo.Data0056.TO_BE_STOCKED, 
+      dbo.Data0025.CUSTOMER_PTR, dbo.Data0025.LATEST_PRICE, 
+      dbo.Data0025.unit_sq
+FROM dbo.Data0056 INNER JOIN
+      dbo.Data0006 ON dbo.Data0056.WO_PTR = dbo.Data0006.RKEY INNER JOIN
+      dbo.Data0025 ON dbo.Data0006.BOM_PTR = dbo.Data0025.RKEY LEFT OUTER JOIN
+      dbo.data0492 ON dbo.Data0006.CUT_NO = dbo.data0492.CUT_NO
+GO
+
+CREATE PROCEDURE wzpr444;2
+AS
+  select data0022.rkey,data0456.ship_date as  tdate,data0022.inventory_ptr,
+  	data0022.quan_on_hand+data0022.quan_in_insp as quantity,
+  	data0022.tax_2,
+       
+        convert(float,data0022.tax_price*data0456.exch_rate/(1.0+data0022.tax_2*0.01)) as unit_price,
+  	data0022.EXPIRE_DATE
+  from data0022  inner join data0456
+          on data0022.grn_ptr=data0456.rkey
+  where data0022.quan_on_hand+data0022.quan_in_insp>0
+GO
+
+CREATE PROCEDURE wzpr444;3
+AS
+SELECT TOP 100 PERCENT dbo.Data0006.WORK_ORDER_NUMBER, 
+      dbo.Data0053.WORK_ORDER_PTR, dbo.Data0053.CUST_PART_PTR, 
+      dbo.Data0053.RKEY, dbo.Data0053.QTY_ON_HAND, dbo.Data0053.MFG_DATE, 
+      dbo.Data0053.REFERENCE_NUMBER, dbo.Data0053.WHSE_PTR, 
+      dbo.Data0053.LOC_PTR, dbo.Data0025.unit_sq, dbo.Data0025.CUSTOMER_PTR, 
+      dbo.Data0025.LATEST_PRICE
+FROM dbo.Data0053 INNER JOIN
+      dbo.Data0025 ON 
+      dbo.Data0053.CUST_PART_PTR = dbo.Data0025.RKEY LEFT OUTER JOIN
+      dbo.Data0006 ON dbo.Data0053.WORK_ORDER_PTR = dbo.Data0006.RKEY
+WHERE (dbo.Data0053.QTY_ON_HAND > 0)
+ORDER BY dbo.Data0025.MANU_PART_NUMBER
+GO
+
+CREATE PROCEDURE wzpr444;4
+AS
+SELECT dbo.Data0006.WORK_ORDER_NUMBER, 
+      dbo.Data0490.WORK_ORDER_PTR , dbo.Data0490.QTY_ON_HAND, 
+      dbo.Data0490.WHSE_PTR, dbo.Data0490.LOC_PTR, dbo.Data0490.MFG_DATE, 
+      dbo.Data0025.ANCESTOR_PTR, dbo.Data0490.MANU_PART_PTR, 
+      dbo.Data0047.PARAMETER_VALUE
+FROM dbo.Data0025 INNER JOIN
+      dbo.Data0490 INNER JOIN
+      dbo.Data0006 ON dbo.Data0490.WORK_ORDER_PTR = dbo.Data0006.RKEY ON 
+      dbo.Data0025.RKEY = dbo.Data0490.MANU_PART_PTR INNER JOIN
+      dbo.Data0047 ON 
+      dbo.Data0025.RKEY = dbo.Data0047.SOURCE_POINTER INNER JOIN
+      dbo.Data0278 ON dbo.Data0047.PARAMETER_PTR = dbo.Data0278.RKEY
+WHERE (dbo.Data0490.QTY_ON_HAND > 0) AND (dbo.Data0278.SPEC_RKEY = 'D')
+GO
+
+CREATE PROCEDURE wzpr444;5
+@rkey444 int
+AS
+update data0448
+set Data0448.STD_MATL_COST_PER_PCS = Data0460.TOT_ACCU_MATL_PER_SQFT * Data0448.unit_sq, 
+     Data0448.STD_OVHD_COST_PER_PCS = Data0460.TOT_ACCU_OVHD_PER_SQFT * Data0448.unit_sq 
+FROM dbo.Data0460 RIGHT OUTER JOIN
+      Data0448 ON dbo.Data0460.BOM_PTR = Data0448.MANU_PART_PTR AND 
+      Data0460.FLOW_NO = Data0448.FLOW_NO AND 
+      Data0460.STEP = Data0448.STEP
+WHERE (Data0448.D0444_PTR = @rkey444)  --更新期末在制品标准成本
+
+update data0449
+set
+  Data0449.STD_MATL_COST_PER_PCS= Data0025.tot_accu_matl_per_sqft * Data0449.unit_sq, 
+  Data0449.STD_OVHD_COST_PER_PCS=Data0025.tot_accu_OVHD_per_sqft * Data0449.unit_sq 
+FROM dbo.Data0449 INNER JOIN
+      dbo.Data0025 ON 
+      dbo.Data0449.CUSTOMER_PART_PTR = dbo.Data0025.rkey
+WHERE (dbo.Data0449.D0444_PTR = @rkey444)   --更新期末库存成品标准成本
+
+/*update data0459
+set  Data0459.STD_MATL_COST_PER_PCS= dbo.Data0025.tot_accu_matl_per_sqft * Data0459.unit_sq, 
+      Data0459.STD_OVHD_COST_PER_PCS= dbo.Data0025.tot_accu_OVHD_per_sqft * Data0459.unit_sq
+FROM dbo.Data0459 INNER JOIN
+      dbo.Data0025 ON dbo.Data0459.BOM_PTR = dbo.Data0025.RKEY
+WHERE (dbo.Data0459.D0444_PTR = @rkey444)  --更新期末半成品标准成本
+*/
+
+update data0444
+set Data0444.MATL_CST_IN_STOCK_CLOSED=d1.MATL_COST
+FROM Data0444 INNER JOIN
+          (SELECT Data0445.D0444_PTR, 
+               SUM(Data0445.QUANTITY * Data0445.unit_price) AS MATL_COST
+         FROM data0445
+        where (data0445.d0444_ptr=@rkey444) 
+         GROUP BY Data0445.D0444_PTR) d1 ON 
+      Data0444.RKEY = d1.D0444_PTR          --更新期末仓库材料成本
+where data0444.rkey=@rkey444
+GO
+
+CREATE PROCEDURE wzpr444;6
+  @rkey444 int,
+  @rkey017 int
+AS
+  begin
+    declare @Expr1 float,
+            @Expr2 float,
+            @Expr3 float,
+            @Expr4 float
+    --select matl_date from data0444 where rkey=@rkey444
+
+    SELECT @Expr1=SUM((Data0022.tax_price * Data0207.QUANTITY * Data0456.exch_rate) / (1 + Data0022.TAX_2 * 0.01)) , 
+        @Expr2=SUM(Data0207.QUANTITY)
+    FROM Data0456 INNER JOIN
+        Data0022 ON Data0456.RKEY = Data0022.GRN_PTR INNER JOIN
+        Data0207 ON Data0022.RKEY = Data0207.D0022_PTR
+    WHERE (Data0207.INVENTORY_PTR = @rkey017) AND 
+        (Data0207.TDATE > (select matl_date from data0444 where rkey=(select early_ptr from data0444 where rkey=@rkey444)) AND 
+        Data0207.TDATE < (select matl_date from data0444 where rkey=@rkey444))
+    --GROUP BY Data0207.D0022_PTR
+
+    SELECT @Expr3=SUM(STD_PRICE * QUAN)  , @Expr4=SUM(QUAN)
+    FROM Data0462
+    WHERE (INVENT_PTR = @rkey017) AND (D0443_PTR=(select early_ptr from data0444 where rkey=@rkey444))
+    --(RKEY = @rkey444)
+
+
+
+   IF @Expr1 IS NULL 
+      SET  @Expr1=0
+   IF @Expr2 IS NULL  
+      SET @Expr2=0
+   IF @Expr3 IS NULL 
+      SET @Expr3=0
+   IF @Expr4 IS NULL 
+      SET @Expr4=0
+ 
+
+    select case when @Expr2+@Expr4 <>0 then (@Expr1+@Expr3)/(@Expr2+@Expr4)
+                else (select std_cost from data0017 where rkey=@rkey017)  end as STD_PRICE
+
+  end
+GO
+
+CREATE PROCEDURE wzpr444;7
+as
+ begin
+    SELECT Data0444.RKEY, Data0444.CUT_DATE, 
+          Data0005.EMPLOYEE_NAME, Data0444.CLOSED
+    FROM Data0444 INNER JOIN
+         Data0005 ON Data0444.CUT_BY = Data0005.RKEY  
+    ORDER BY Data0444.CUT_DATE DESC  --截数时间
+ end
+GO
+
+
+

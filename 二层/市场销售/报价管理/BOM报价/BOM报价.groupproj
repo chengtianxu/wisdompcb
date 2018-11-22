@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{FBB68BB4-F7D1-4DE9-A28B-A6FC40BB8DCE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="报价单\BOMBaoJia.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="报价模板设置\BOMBaoJiaType.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="计价工序设置\BOMBaoJiaDept.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="报价审核\BOMBaoJiaAuth.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="BOMBaoJia">
+        <MSBuild Projects="报价单\BOMBaoJia.dproj"/>
+    </Target>
+    <Target Name="BOMBaoJia:Clean">
+        <MSBuild Projects="报价单\BOMBaoJia.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BOMBaoJia:Make">
+        <MSBuild Projects="报价单\BOMBaoJia.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BOMBaoJiaType">
+        <MSBuild Projects="报价模板设置\BOMBaoJiaType.dproj"/>
+    </Target>
+    <Target Name="BOMBaoJiaType:Clean">
+        <MSBuild Projects="报价模板设置\BOMBaoJiaType.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BOMBaoJiaType:Make">
+        <MSBuild Projects="报价模板设置\BOMBaoJiaType.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BOMBaoJiaDept">
+        <MSBuild Projects="计价工序设置\BOMBaoJiaDept.dproj"/>
+    </Target>
+    <Target Name="BOMBaoJiaDept:Clean">
+        <MSBuild Projects="计价工序设置\BOMBaoJiaDept.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BOMBaoJiaDept:Make">
+        <MSBuild Projects="计价工序设置\BOMBaoJiaDept.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="BOMBaoJiaAuth">
+        <MSBuild Projects="报价审核\BOMBaoJiaAuth.dproj"/>
+    </Target>
+    <Target Name="BOMBaoJiaAuth:Clean">
+        <MSBuild Projects="报价审核\BOMBaoJiaAuth.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="BOMBaoJiaAuth:Make">
+        <MSBuild Projects="报价审核\BOMBaoJiaAuth.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="BOMBaoJia;BOMBaoJiaType;BOMBaoJiaDept;BOMBaoJiaAuth"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="BOMBaoJia:Clean;BOMBaoJiaType:Clean;BOMBaoJiaDept:Clean;BOMBaoJiaAuth:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="BOMBaoJia:Make;BOMBaoJiaType:Make;BOMBaoJiaDept:Make;BOMBaoJiaAuth:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

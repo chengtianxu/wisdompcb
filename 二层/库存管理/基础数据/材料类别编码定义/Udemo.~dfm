@@ -1,0 +1,136 @@
+object DM: TDM
+  OldCreateOrder = False
+  Left = 348
+  Top = 194
+  Height = 325
+  Width = 345
+  object con1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=62ddf8f60269678;Persist Security In' +
+      'fo=True;User ID=WZPCBConnect;Initial Catalog=sj_v20_live;Data So' +
+      'urce=172.16.8.112'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 56
+    Top = 12
+  end
+  object ads593: TADODataSet
+    AutoCalcFields = False
+    Connection = con1
+    CursorType = ctStatic
+    Filtered = True
+    CommandText = 'SELECT     dbo.DATA0593.*'#13#10'FROM         dbo.DATA0593'
+    Parameters = <>
+    Left = 68
+    Top = 76
+    object ads593rkey: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object ads593invt_ttyename: TWideStringField
+      DisplayLabel = #32534#30721#35268#21010#21517#31216
+      FieldName = 'invt_ttyename'
+      Size = 30
+    end
+    object ads593rkey593: TIntegerField
+      DisplayLabel = #32534#30721#33258#20851#32852
+      FieldName = 'rkey593'
+    end
+    object ads593guizhe: TWordField
+      DisplayLabel = #32534#30721#35268#21010
+      FieldName = 'guizhe'
+    end
+    object ads593length: TWordField
+      DisplayLabel = #38271#24230
+      FieldName = 'length'
+    end
+    object ads593PARAMETER_PTR: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+  end
+  object ads594: TADODataSet
+    Connection = con1
+    CursorType = ctStatic
+    CommandText = 
+      'SELECT     dbo.DATA0594.*'#13#10'FROM         dbo.DATA0594'#13#10'where rkey' +
+      '593=:rkey'
+    MasterFields = 'rkey'
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Value = 1
+      end>
+    Left = 68
+    Top = 124
+    object ads594rkey593: TIntegerField
+      FieldName = 'rkey593'
+    end
+    object ads594rec_no: TIntegerField
+      DisplayLabel = #24207#21495
+      FieldName = 'rec_no'
+    end
+    object ads594type_name: TStringField
+      DisplayLabel = #36873#39033#21517#31216
+      FieldName = 'type_name'
+      Size = 50
+    end
+    object ads594type_code: TStringField
+      DisplayLabel = #36873#39033#32534#30721
+      FieldName = 'type_code'
+      Size = 10
+    end
+    object ads594filter_name: TStringField
+      DisplayLabel = #36873#39033#36807#28388#21517#31216
+      FieldName = 'filter_name'
+      Size = 50
+    end
+  end
+  object dsu2: TDataSource
+    DataSet = ads594
+    Left = 148
+    Top = 124
+  end
+  object cdsMain: TADODataSet
+    AutoCalcFields = False
+    Connection = con1
+    CursorType = ctStatic
+    Filtered = True
+    CommandText = 'SELECT     dbo.DATA0593.*'#13#10'FROM         dbo.DATA0593'
+    Parameters = <>
+    Left = 144
+    Top = 24
+    object AutoIncField1: TAutoIncField
+      FieldName = 'rkey'
+      ReadOnly = True
+    end
+    object WideStringField1: TWideStringField
+      DisplayLabel = #32534#30721#35268#21010#21517#31216
+      FieldName = 'invt_ttyename'
+      Size = 30
+    end
+    object IntegerField1: TIntegerField
+      DisplayLabel = #32534#30721#33258#20851#32852
+      FieldName = 'rkey593'
+    end
+    object WordField1: TWordField
+      DisplayLabel = #32534#30721#35268#21010
+      FieldName = 'guizhe'
+    end
+    object WordField2: TWordField
+      DisplayLabel = #38271#24230
+      FieldName = 'length'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'PARAMETER_PTR'
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ads594
+    Left = 208
+    Top = 28
+  end
+end

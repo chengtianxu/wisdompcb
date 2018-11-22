@@ -1,0 +1,296 @@
+object FrmDetail: TFrmDetail
+  Left = 221
+  Top = 211
+  Width = 696
+  Height = 480
+  Caption = #23458#25143#23545#24080#21333#26597#35810#65288#26631#20934#21457#31080#65289
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 0
+    Top = 0
+    Width = 688
+    Height = 48
+    Cursor = crArrow
+    Align = alTop
+    Color = clBtnFace
+    ParentColor = False
+  end
+  object SpeedButton2: TSpeedButton
+    Left = 68
+    Top = 8
+    Width = 29
+    Height = 30
+    Hint = #25171#21360#22270#34920
+    Glyph.Data = {
+      26050000424D26050000000000003604000028000000100000000F0000000100
+      080000000000F0000000CE0E0000C40E00000001000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000C0DCC000F0C8
+      A400000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000FFFFFFFF0007070707
+      0707070707000700FFFF000000000000000000000000000700FF000707070707
+      07FBFBFB0707000000FF000707070707071010100707000700FF000000000000
+      0000000000000007070000070707070707070707070007000700FF0000000000
+      00000000000700070000FFFF00FFFFFFFFFFFFFFFF0007000700FFFFFF00FF00
+      00000000FF00000000FFFFFFFF00FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF00FF
+      0000000000FF00FFFFFFFFFFFFFF00FFFFFFFFFFFFFFFF00FFFFFFFFFFFFFF00
+      0000000000000000FFFF}
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = SpeedButton2Click
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 38
+    Top = 8
+    Width = 29
+    Height = 30
+    Hint = #23558#25968#25454#36755#20986#21040'EXCEL'#25991#20214#20013
+    Glyph.Data = {
+      F6000000424DF600000000000000760000002800000010000000100000000100
+      04000000000080000000120B0000120B00001000000010000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF00C0C0C00000FFFF00FF000000C0C0C000FFFF0000FFFFFF00DA0000000000
+      000AAD0FFFFFFFFFFF0DDA0FFFFF2FFFFF0AAD0FFFF22FFFFF0DDA0FFF22222F
+      FF0AAD0FFFF22FF2FF0DDA0FFFFF2FF2FF0AAD0FF2FFFFF2FF0DDA0FF2FF2FFF
+      FF0AAD0FF2FF22FFFF0DDA0FFF22222FFF0AAD0FFFFF22FFFF0DDA0FFFFF2FF0
+      000AAD0FFFFFFFF0F0ADDA0FFFFFFFF00ADAAD0000000000ADAD}
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = SpeedButton1Click
+  end
+  object BitBtn2: TBitBtn
+    Left = 8
+    Top = 8
+    Width = 29
+    Height = 30
+    TabOrder = 0
+    OnClick = BitBtn2Click
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00388888888877
+      F7F787F8888888888333333F00004444400888FFF444448888888888F333FF8F
+      000033334D5007FFF4333388888888883338888F0000333345D50FFFF4333333
+      338F888F3338F33F000033334D5D0FFFF43333333388788F3338F33F00003333
+      45D50FEFE4333333338F878F3338F33F000033334D5D0FFFF43333333388788F
+      3338F33F0000333345D50FEFE4333333338F878F3338F33F000033334D5D0FFF
+      F43333333388788F3338F33F0000333345D50FEFE4333333338F878F3338F33F
+      000033334D5D0EFEF43333333388788F3338F33F0000333345D50FEFE4333333
+      338F878F3338F33F000033334D5D0EFEF43333333388788F3338F33F00003333
+      4444444444333333338F8F8FFFF8F33F00003333333333333333333333888888
+      8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
+      333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
+      0000}
+    NumGlyphs = 2
+  end
+  object DBGrid1: TDBGridEh
+    Left = 0
+    Top = 48
+    Width = 688
+    Height = 394
+    Align = alClient
+    DataSource = FrmMain.DataSource1
+    FixedColor = clAqua
+    FooterColor = clYellow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'MS Sans Serif'
+    FooterFont.Style = []
+    FooterRowCount = 1
+    FrozenCols = 1
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    SumList.Active = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'customer_name'
+        Footers = <
+          item
+            Value = #21512#35745
+            ValueType = fvtStaticText
+          end>
+        Title.Caption = #23458#25143#21517#31216
+        Width = 131
+      end
+      item
+        EditButtons = <>
+        FieldName = 'curr_code'
+        Footers = <>
+        Title.Caption = #36135#24065
+      end
+      item
+        EditButtons = <>
+        FieldName = 'invoice_number'
+        Footers = <>
+        Title.Caption = #21457#31080#21495
+        Width = 75
+      end
+      item
+        EditButtons = <>
+        FieldName = 'invoice_date'
+        Footers = <>
+        Title.Caption = #21457#31080#26085#26399
+        Width = 63
+      end
+      item
+        EditButtons = <>
+        FieldName = 'invoice_total'
+        Footers = <
+          item
+            DisplayFormat = '#0.00'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #21457#31080#37329#39069
+        Width = 61
+      end
+      item
+        EditButtons = <>
+        FieldName = 'amount_paid'
+        Footers = <
+          item
+            DisplayFormat = '#0.00'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #24050#32467#37329#39069
+        Width = 60
+      end
+      item
+        EditButtons = <>
+        FieldName = 'amt_payable'
+        Footers = <
+          item
+            DisplayFormat = '#0.00'
+            ValueType = fvtSum
+          end>
+        Title.Caption = #26410#32467#37329#39069
+        Width = 63
+      end
+      item
+        EditButtons = <>
+        FieldName = 'po_number'
+        Footers = <>
+        Title.Caption = #23458#25143#35746#21333
+        Width = 67
+      end
+      item
+        EditButtons = <>
+        FieldName = 'customer_part_number'
+        Footers = <>
+        Title.Caption = #26412#21378#32534#21495
+        Width = 80
+      end
+      item
+        EditButtons = <>
+        FieldName = 'cp_rev'
+        Footers = <>
+        Title.Caption = #29256#26412
+        Width = 29
+      end
+      item
+        EditButtons = <>
+        FieldName = 'customer_part_desc'
+        Footers = <>
+        Title.Caption = #23458#25143#22411#21495
+        Width = 179
+      end
+      item
+        EditButtons = <>
+        FieldName = 'parts_ordered'
+        Footers = <>
+        Title.Caption = #35746#36135#25968#37327
+      end
+      item
+        EditButtons = <>
+        FieldName = 'delivery_no'
+        Footers = <>
+        Title.Caption = #36865#36135#21333
+        Width = 62
+      end
+      item
+        EditButtons = <>
+        FieldName = 'quan_shipped'
+        Footer.EndEllipsis = True
+        Footer.ValueType = fvtSum
+        Footers = <
+          item
+            EndEllipsis = True
+            ValueType = fvtSum
+          end>
+        Title.Caption = #20986#36135#25968#37327
+        Width = 62
+      end
+      item
+        EditButtons = <>
+        FieldName = 'part_price'
+        Footers = <>
+        Title.Caption = #21333#20215
+        Width = 63
+      end
+      item
+        EditButtons = <>
+        FieldName = 'amt_shipped'
+        Footers = <>
+        Title.Caption = #37329#39069
+        Width = 60
+      end
+      item
+        EditButtons = <>
+        FieldName = 'unit_sq'
+        Footers = <>
+        Title.Caption = #21333#20803#38754#31215
+      end
+      item
+        EditButtons = <>
+        FieldName = 'date_shipped'
+        Footers = <>
+        Title.Caption = #20986#36135#26085#26399
+        Width = 66
+      end>
+  end
+end

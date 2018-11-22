@@ -1,0 +1,50 @@
+var
+   vdbamt,vcramt:double;
+   SmallMonth,BigMonth:string;
+   wei1,qianwei1,vstr:string;
+   qianwei,dianweizhi,qian,qian1:integer;
+
+
+
+ qianwei:=1;
+ vstr:='';
+ vcramt:= dbcalc1.value;
+ 
+ Smallmonth:=formatfloat('0.00',vcramt);
+ dianweizhi :=pos('.',Smallmonth);
+ Bigmonth:='';
+ for qian:=1 to length(Smallmonth) do
+ begin
+  qian1:=length(Smallmonth)-qian+1;
+  if qian1<>dianweizhi then
+  begin
+   if copy(Smallmonth,qian1,1)='-' then wei1:='?o';
+    case strtoint(copy(Smallmonth,qian1,1)) of
+	 1:wei1:='Ò¼'; 2:wei1:='·¡';
+	 3:wei1:='Èþ'; 4:wei1:='ËÁ';
+	 5:wei1:='Îé'; 6:wei1:='Â½';
+	 7:wei1:='Æâ'; 8:wei1:='°Æ';
+	 9:wei1:='¾Á'; 0:wei1:='Áã';
+    end;
+    case qianwei of 
+	 1:qianwei1:='·Ö';
+	 2:qianwei1:='½Ç';
+	 3 :qianwei1:='Ôª';
+	 4 :qianwei1:='Ê°';
+	 5 :qianwei1:='°Û';
+	 6 :qianwei1:='Ç§';
+	 7 :qianwei1:='Íò';
+	 8 :qianwei1:='Ê°';
+	 9 :qianwei1:='°Û';
+	 10 :qianwei1:='Ç§';
+	 11 :qianwei1:='ÒÚ';
+	 12 :qianwei1:='Ê®';
+	 13:qianwei1:='°Û';
+	 14:qianwei1:='Ç§';
+    end;
+    qianwei:=qianwei+1;
+    BigMonth :=wei1+qianwei1+BigMonth;
+
+  end;
+ end;
+ Value:=vstr+bigMonth;

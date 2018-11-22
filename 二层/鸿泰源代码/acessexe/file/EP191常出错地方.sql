@@ -1,0 +1,4 @@
+EP191常出错地方
+1、cprev_init_num EP191ep100小版本起始编号
+2、除数为0，由于SET_X_QTY和SET_Y_QTY，导致SQ_UNIT为0
+3、销售订单里一个订单有两条记录，原因同一个型号同一客户两条记录，即59表里有两条记录，增加一个CUSTOMER_PTR和CUST_PART_PTR索引

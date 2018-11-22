@@ -1,0 +1,336 @@
+object frm_edit_req_date: Tfrm_edit_req_date
+  Left = 192
+  Top = 160
+  Width = 795
+  Height = 563
+  Caption = #20462#25913#20132#36135#26085#26399
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGrid2: TDBGrid
+    Left = 0
+    Top = 41
+    Width = 787
+    Height = 488
+    Align = alClient
+    DataSource = DM.DataSource4
+    Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    Visible = False
+    Columns = <
+      item
+        Color = cl3DLight
+        Expanded = False
+        FieldName = 'DESCRIPTION'
+        Width = 130
+        Visible = True
+      end
+      item
+        Color = cl3DLight
+        Expanded = False
+        FieldName = 'GUI_GE'
+        Title.Caption = #29289#21697#35268#26684
+        Width = 188
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DEL_DATE'
+        Title.Caption = #20132#36135#26085#26399
+        Width = 131
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QUAN_ORD'
+        Title.Alignment = taRightJustify
+        Title.Caption = #25968#37327
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tax_price'
+        Title.Alignment = taRightJustify
+        Visible = True
+      end
+      item
+        Color = clAqua
+        Expanded = False
+        FieldName = 'taxprice_total'
+        Title.Alignment = taRightJustify
+        Width = 83
+        Visible = True
+      end
+      item
+        Color = clAqua
+        Expanded = False
+        FieldName = 'STATE_TAX'
+        Title.Alignment = taRightJustify
+        Title.Caption = #31246#29575'%'
+        Width = 54
+        Visible = True
+      end
+      item
+        Color = clAqua
+        Expanded = False
+        FieldName = 'tax_total'
+        Title.Alignment = taRightJustify
+        Width = 73
+        Visible = True
+      end>
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 41
+    Width = 787
+    Height = 488
+    Align = alClient
+    DataSource = DM.DataSource3
+    Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgCancelOnExit]
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    Columns = <
+      item
+        Color = cl3DLight
+        Expanded = False
+        FieldName = 'inv_number'
+        Width = 102
+        Visible = True
+      end
+      item
+        Color = cl3DLight
+        Expanded = False
+        FieldName = 'inv_part_number'
+        Width = 131
+        Visible = True
+      end
+      item
+        Color = cl3DLight
+        Expanded = False
+        FieldName = 'invpart_desc'
+        Title.Caption = #29289#26009#35268#26684
+        Width = 157
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'REQ_DATE'
+        Title.Caption = #20132#36135#26085#26399
+        Width = 129
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QUAN_ORD'
+        Title.Alignment = taRightJustify
+        Title.Caption = #25968#37327
+        Width = 75
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'tax_price'
+        Title.Alignment = taRightJustify
+        Visible = True
+      end
+      item
+        Color = clAqua
+        Expanded = False
+        FieldName = 'taxprice_total'
+        Title.Alignment = taRightJustify
+        Width = 70
+        Visible = True
+      end
+      item
+        Color = clAqua
+        Expanded = False
+        FieldName = 'TAX_2'
+        Title.Alignment = taRightJustify
+        Title.Caption = #31246#29575'%'
+        Width = 55
+        Visible = True
+      end
+      item
+        Color = clAqua
+        Expanded = False
+        FieldName = 'tax_total'
+        Title.Alignment = taRightJustify
+        Visible = True
+      end>
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 787
+    Height = 41
+    Align = alTop
+    TabOrder = 2
+    object BitBtn2: TBitBtn
+      Left = 6
+      Top = 8
+      Width = 25
+      Height = 25
+      Cursor = crHandPoint
+      Hint = #23384#30424
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      TabStop = False
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        56070000424D5607000000000000360400002800000028000000140000000100
+        0800000000002003000000000000000000000001000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
+        A600000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00030303030303
+        0303030303030303030303030303030303030303030303030303030303030303
+        0303030303030303030303030303030303030303030303030303030303030303
+        0303030303030303030303030303030303030303030303030303030303030303
+        030303FFFFFFFFFFFFFFFFFFFFFFFF030303030303F800000000000000000000
+        0000F803030303030303F8F8F8F8F8F8F8F8F8F8F8F803FF030303030300FCFC
+        00F8FCFCFF070700FCFC00030303030303F8FF03F8FF0303030303F8FF03F8FF
+        030303030300FCFC00F8FCFCFF070700FCFC00030303030303F8FF03F8FF0303
+        030303F8FF03F8FF030303030300FCFC0007F8F807070700FCFC000303030303
+        03F8FF03F8FFFFFFFFFFFFF80303F8FF030303030300FCFC0600000000000006
+        FCFC00030303030303F8FF0303F8F8F8F8F8F8030303F8FF030303030300FCFC
+        FCFCFCFCFCFCFCFCFCFC00030303030303F8FF0303FFFFFFFFFFFFFFFF03F8FF
+        030303030300FC06000000000000000006FC00030303030303F8FF03F8F8F8F8
+        F8F8F8F803FFF8FF030303030300FC00FFFFFFFFFFFFFFFF00FC000303030303
+        03F8FFF8FF03030303030303F8FFF8FF030303030300FC00FFFFFFFFFFFFFFFF
+        00FC00030303030303F8FFF8FF03030303030303F8FFF8FF030303030300FC00
+        FFFFFFFFFFFFFFFF00FC00030303030303F8FFF8FF03030303030303F8FFF8FF
+        030303030300FC00FFFFFFFFFFFFFFFF00FC00030303030303F8FFF8FF030303
+        03030303F8FFF8FF0303030303000000FFFFFFFFFFFFFFFF0000000303030303
+        03F8FFF8FF03030303030303F8FFF8FF030303030300FC00FFFFFFFFFFFFFFFF
+        00FC00030303030303F8FFF8FFFFFFFFFFFFFFFFF8FFF8030303030303F80000
+        00000000000000000000F803030303030303F8F8F8F8F8F8F8F8F8F8F8F80303
+        0303030303030303030303030303030303030303030303030303030303030303
+        0303030303030303030303030303030303030303030303030303030303030303
+        0303030303030303030303030303030303030303030303030303030303030303
+        0303030303030303030303030303030303030303030303030303}
+      NumGlyphs = 2
+    end
+    object BitBtn5: TBitBtn
+      Left = 39
+      Top = 8
+      Width = 25
+      Height = 25
+      Cursor = crHandPoint
+      Hint = #21462#28040
+      ModalResult = 2
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      TabStop = False
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333FFFFF333333000033333388888833333333333F888888FFF333
+        000033338811111188333333338833FFF388FF33000033381119999111833333
+        38F338888F338FF30000339119933331111833338F388333383338F300003391
+        13333381111833338F8F3333833F38F3000039118333381119118338F38F3338
+        33F8F38F000039183333811193918338F8F333833F838F8F0000391833381119
+        33918338F8F33833F8338F8F000039183381119333918338F8F3833F83338F8F
+        000039183811193333918338F8F833F83333838F000039118111933339118338
+        F3833F83333833830000339111193333391833338F33F8333FF838F300003391
+        11833338111833338F338FFFF883F83300003339111888811183333338FF3888
+        83FF83330000333399111111993333333388FFFFFF8833330000333333999999
+        3333333333338888883333330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+    end
+  end
+  object Pn2: TPanel
+    Left = 344
+    Top = 104
+    Width = 257
+    Height = 81
+    TabOrder = 3
+    Visible = False
+    object Label1: TLabel
+      Left = 9
+      Top = 20
+      Width = 65
+      Height = 13
+      Caption = #20132#36135#26085#26399#65306
+    end
+    object MaskEdit1: TMaskEdit
+      Left = 72
+      Top = 16
+      Width = 169
+      Height = 21
+      TabOrder = 0
+      Text = 'MaskEdit1'
+    end
+    object BitBtn1: TBitBtn
+      Left = 64
+      Top = 48
+      Width = 75
+      Height = 25
+      Caption = #30830#23450
+      TabOrder = 1
+      OnClick = BitBtn1Click
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 320
+    Top = 160
+    object N1: TMenuItem
+      Caption = #20462#25913#20132#36135#26085#26399
+      OnClick = N1Click
+    end
+  end
+end

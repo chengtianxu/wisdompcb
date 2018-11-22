@@ -1,0 +1,133 @@
+object DM: TDM
+  OldCreateOrder = False
+  Left = 412
+  Top = 328
+  Height = 241
+  Width = 264
+  object con1: TADOConnection
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=62ddf8f60269678;Persist Security In' +
+      'fo=True;User ID=WZPCBConnect;Initial Catalog=demo2;Data Source=1' +
+      '72.18.8.89'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 12
+    Top = 20
+  end
+  object qry596: TADOQuery
+    Connection = con1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey595'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      
+        'select DATA0596.*,DATA0593.invt_ttyename,DATA0593. length,DATA05' +
+        '93. guizhe,DATA0593.rkey593 as zgn'
+      'from DATA0596 inner join '
+      'DATA0593 on DATA0596.rkey593=DATA0593.rkey'
+      'where rkey595=:rkey595'
+      'order by data0596.rec_no')
+    Left = 124
+    Top = 20
+    object qry596rec_no: TIntegerField
+      DisplayLabel = #24207#21495
+      FieldName = 'rec_no'
+    end
+    object qry596rkey595: TIntegerField
+      DisplayLabel = #32534#30721#31867#22411
+      FieldName = 'rkey595'
+    end
+    object qry596rkey593: TIntegerField
+      DisplayLabel = #32534#30721#20998#31867
+      FieldName = 'rkey593'
+    end
+    object qry596invt_ttyename: TWideStringField
+      FieldName = 'invt_ttyename'
+      Size = 30
+    end
+    object qry596length: TWordField
+      FieldName = 'length'
+    end
+  end
+  object ds596: TDataSource
+    DataSet = qry596
+    Left = 164
+    Top = 16
+  end
+  object save595: TADOQuery
+    Connection = con1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      'select  * from data0595'
+      'where rkey = :rkey')
+    Left = 120
+    Top = 80
+    object save595RKEY: TAutoIncField
+      FieldName = 'RKEY'
+      ReadOnly = True
+    end
+    object save595TYPE_CODE: TStringField
+      FieldName = 'TYPE_CODE'
+      Size = 15
+    end
+    object save595TYPE_NAME: TWideStringField
+      FieldName = 'TYPE_NAME'
+      Size = 30
+    end
+    object save595LENGTH: TIntegerField
+      FieldName = 'LENGTH'
+    end
+  end
+  object save596: TADOQuery
+    Connection = con1
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <
+      item
+        Name = 'rkey595'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = 0
+      end>
+    SQL.Strings = (
+      'select * from data0596'
+      'where rkey595=:rkey595')
+    Left = 120
+    Top = 136
+    object save596rkey595: TIntegerField
+      FieldName = 'rkey595'
+    end
+    object save596rkey593: TIntegerField
+      FieldName = 'rkey593'
+    end
+    object save596rec_no: TIntegerField
+      FieldName = 'rec_no'
+    end
+  end
+  object ADOQuery1: TADOQuery
+    Connection = con1
+    Parameters = <>
+    Left = 188
+    Top = 120
+  end
+end

@@ -1,0 +1,27 @@
+ sql用存储过程获取当前计算机ip
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[GetClientIP]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)   
+drop procedure [dbo].[GetClientIP]   
+GO   
+/********************************************************  
+功能：获取当前客户端IP地址  
+********************************************************/  
+/*调用过程：  
+exec GetClientIP  
+*/  
+Create Procedure GetClientIP   
+as  
+declare @ip varchar(20)   
+declare @hst varchar(20)   
+declare @sql varchar(100)   
+declare @str varchar(100)   
+set @str='PING '+Host_Name() + ' -n 1'  
+create table #tmp(aa varchar(200))   
+insert #tmp exec master..xp_cmdshell @str   
+select top 1 @ip = replace(left(aa,charindex(':',aa)-1),'Reply from ','')    
+from #tmp where aa like 'reply from %:%'  
+  
+select @ip   
+return (0)   
+Go    
+EXEC GetClientIP

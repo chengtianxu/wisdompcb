@@ -1,0 +1,2 @@
+--EP091Ã·Ωª…Û∫À
+exec sp_executesql N'UPDATE "SJ_V20_live"."dbo"."data0492" SET "SECOND_WHSE_PTR"=@P1,"DATE_EDITED"=@P2,"STATUS"=@P3 WHERE "rkey"=@P4 AND "SECOND_WHSE_PTR" IS NULL AND "DATE_EDITED" IS NULL AND "STATUS"=@P5',N'@P1 int,@P2 datetime,@P3 tinyint,@P4 int,@P5 tinyint',886,'2013-08-01 16:34:30',1,4765,0

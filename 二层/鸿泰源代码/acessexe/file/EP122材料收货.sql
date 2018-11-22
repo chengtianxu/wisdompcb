@@ -1,0 +1,16 @@
+select rkey,
+QUANTITY 已接收的数量,
+QUAN_IN_INSP 在IQC检查数量,
+QUAN_SCRAPPED 报废数量,
+QUAN_TO_BE_STOCKED 待入仓数量,
+QUAN_TO_BE_SHIPPED 已退货数量待装运,
+QUAN_RETURNED 退货退回的数量,
+QUAN_STOCKED 入库数量,
+
+QUAN_ON_HAND 现持有数量,
+OCCUPYQTY,占用
+
+* from data0022
+where QUAN_TO_BE_SHIPPED>0
+
+data0096和DATA0207发出

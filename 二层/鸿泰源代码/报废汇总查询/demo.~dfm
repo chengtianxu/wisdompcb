@@ -1,0 +1,19 @@
+object DM: TDM
+  OldCreateOrder = False
+  Left = 192
+  Top = 160
+  Height = 192
+  Width = 184
+  object ADOConnection1: TADOConnection
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=62ddf8f60269678;Persist Security In' +
+      'fo=True;User ID=WZPCBConnect;Initial Catalog=wisdompcb;Data Sour' +
+      'ce=172.18.0.8;Use Procedure for Prepare=1;Auto Translate=True;Pa' +
+      'cket Size=4096;Workstation ID=PC-20150130VGBU;Use Encryption for' +
+      ' Data=False;Tag with column collation when possible=False'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 68
+    Top = 24
+  end
+end

@@ -1,0 +1,10 @@
+--exec EP100;133 24344
+DECLARE @vptr INT
+SET @vptr = 24344
+BEGIN
+	SELECT *
+	FROM   DATA0332
+	WHERE  srce_ptr = @vptr
+	ORDER BY
+	       SEQ_NO
+END

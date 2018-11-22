@@ -1,0 +1,74 @@
+object Frm_Approvalinfo: TFrm_Approvalinfo
+  Left = 300
+  Top = 197
+  Width = 787
+  Height = 480
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = #23457#25209#20449#24687
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGridEh1: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 779
+    Height = 446
+    Align = alClient
+    DataSource = DM.DS602
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -13
+    FooterFont.Name = #23435#20307
+    FooterFont.Style = []
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = #23435#20307
+    TitleFont.Style = []
+    Columns = <
+      item
+        EditButtons = <>
+        FieldName = 'DEPT_NAME'
+        Footers = <>
+        Width = 95
+      end
+      item
+        EditButtons = <>
+        FieldName = 'EMPLOYEE_NAME'
+        Footers = <>
+        Width = 74
+      end
+      item
+        EditButtons = <>
+        FieldName = 'auth_date'
+        Footers = <>
+      end
+      item
+        EditButtons = <>
+        FieldName = 'PUTH_INFO'
+        Footers = <>
+        Width = 269
+      end
+      item
+        EditButtons = <>
+        FieldName = 'rec_no'
+        Footers = <>
+        Width = 65
+      end
+      item
+        EditButtons = <>
+        FieldName = 'v_auth_flag'
+        Footers = <>
+        Width = 65
+      end>
+  end
+end

@@ -1,0 +1,6 @@
+select bom_ptr from data0006
+where WORK_ORDER_NUMBER='130416012-0A-3-1' --LOT号
+
+select * from data0025 ,data0050
+where data0025.ancestor_ptr=data0050.rkey and data0050.CUSTOMER_PART_NUMBER='DMP-120630' and data0050.CP_REV='A1'－－正确的编号和版本
+Update data0006 sEt BOM_PTR=50816 where WORK_ORDER_NUMBER='130416012-0A-3-1'

@@ -1,0 +1,428 @@
+unit Unew;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Grids, DBGridEh, Mask, DBCtrls, ExtCtrls, Buttons,
+  Menus, DB, ADODB;
+
+type
+  TForm_edit = class(TForm)
+    Panel2: TPanel;
+    Panel4: TPanel;
+    GroupBox2: TGroupBox;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBGridEh1: TDBGridEh;
+    pm594: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    qry_Save594: TADOQuery;
+    qry_Save593: TADOQuery;
+    edt_SChName: TEdit;
+    etd_Lenth: TEdit;
+    Label4: TLabel;
+    edt_rkey693: TEdit;
+    Label5: TLabel;
+    edt_278: TEdit;
+    cbb_GH: TComboBox;
+    qry_Save593rkey: TAutoIncField;
+    qry_Save593invt_ttyename: TWideStringField;
+    qry_Save593rkey593: TIntegerField;
+    qry_Save593guizhe: TWordField;
+    qry_Save593length: TWordField;
+    qry_Save593PARAMETER_PTR: TIntegerField;
+    qry_Save594rkey593: TIntegerField;
+    qry_Save594rec_no: TIntegerField;
+    qry_Save594type_name: TStringField;
+    qry_Save594type_code: TStringField;
+    qry_Save594filter_name: TStringField;
+    BitBtn1: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    BitBtn6: TBitBtn;
+    procedure N1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure N5Click(Sender: TObject);
+    procedure etd_LenthKeyPress(Sender: TObject; var Key: Char);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
+    procedure BitBtn6Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure pm594Popup(Sender: TObject);
+    procedure cbb_GHChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+     status : Integer;
+     Frkey:integer;
+
+    { Public declarations }
+
+  end;
+
+var
+  Form_edit: TForm_edit;
+
+
+implementation
+uses UDM,UEditDetail,ConstVar,common, Pick_Item_Single, Unit3;
+
+{$R *.dfm}
+
+procedure TForm_edit.N1Click(Sender: TObject);
+//var
+//  frmAddDetail:TfrmAddDetail;
+begin
+
+  try
+   frmAddDetail:=TfrmAddDetail.create(Application);
+   frmAddDetail.Label4.Visible:=False;
+   frmAddDetail.Edit1.Visible:=False;
+   frmAddDetail.FFlag:=0;
+   frmAddDetail.fflag1:=1;
+   frmAddDetail.fflag2:= qry_Save593rkey.Value;
+
+   if frmAddDetail.ShowModal= mrok then
+   begin
+    // dm.qry594.Open;
+   end;
+  finally
+
+  end;
+end;
+
+
+
+procedure TForm_edit.BitBtn2Click(Sender: TObject);
+var i:Integer;
+begin
+  if edt_SChName.Text='' then
+  begin
+    ShowMessage('请输入编码规划名称');
+    edt_SChName.SetFocus;
+    Exit;
+  end
+  else
+  if etd_Lenth.Text='' then
+  begin
+    ShowMessage('请输入编码长度');
+    etd_Lenth.SetFocus;
+    Exit;
+  end
+  else
+    if cbb_GH.Text='' then
+  begin
+    ShowMessage('请选择编码规划');
+    cbb_GH.SetFocus;
+    Exit;
+  end ;
+
+
+
+
+  if status=0 then
+  begin
+    with DM.ADOQuery1 do
+  begin
+    Close;
+    SQL.Text :='select * from data0593 where invt_ttyename='''+Trim(edt_SChName.Text)+'''';
+
+    Open;
+    if not IsEmpty then
+    begin
+      ShowMessage('大类名称已存在!');
+      Exit;
+    end;
+  end;
+
+  i:=1;
+  try
+   dm.con1.BeginTrans;
+
+   qry_Save593.Append;
+
+   qry_Save593.FieldByName('invt_ttyename').Value:= Trim(edt_SChName.Text);
+   qry_Save593.FieldByName('length').Value:= Trim(etd_Lenth.Text);
+
+   if edt_rkey693.Tag>0   then
+   begin
+      qry_Save593.FieldByName('rkey593').Value:= edt_rkey693.Tag;
+   end ;
+   if edt_278.Tag>0 then
+   begin
+      qry_Save593.FieldByName('PARAMETER_PTR').Value:= edt_278.Tag ;
+   end;  
+   qry_Save593.FieldByName('guizhe').Value:= cbb_GH.ItemIndex;
+
+
+
+   qry_Save593.Post;
+   qry_Save593.UpdateBatch(arall);
+   Frkey:=qry_Save593rkey.Value;
+   dm.qry594.First;
+   while not dm.qry594.Eof do
+   begin
+     DM.qry594.Edit;
+     DM.qry594rec_no.Value:=i;
+     DM.qry594.FieldByName('rkey593').Value:=qry_Save593rkey.Value;
+     DM.qry594.Post;
+     i:=i+1;
+     dm.qry594.Next;
+   end;
+   DM.qry594.UpdateBatch(arall);
+
+   dm.con1.CommitTrans;
+   ModalResult:=mrok
+  except
+   dm.con1.RollbackTrans;
+
+  end;
+end;
+
+ if status=1 then
+ begin
+   edt_SChName.Enabled:=False;
+  i:=1;
+  try
+
+   dm.con1.BeginTrans;
+
+   qry_Save593.Edit;
+
+   qry_Save593.FieldByName('invt_ttyename').Value:= Trim(edt_SChName.Text);
+   qry_Save593.FieldByName('length').Value:= Trim(etd_Lenth.Text);
+   if edt_rkey693.Tag>0   then
+   begin
+      qry_Save593.FieldByName('rkey593').Value:= edt_rkey693.Tag;
+   end
+   else
+   qry_Save593.FieldByName('rkey593').AsVariant:=null;
+
+   if edt_278.Tag>0 then
+   begin
+      qry_Save593.FieldByName('PARAMETER_PTR').Value:= edt_278.Tag ;
+   end
+   else
+   qry_Save593.FieldByName('PARAMETER_PTR').AsVariant:=null;
+
+   qry_Save593.FieldByName('guizhe').Value:= cbb_GH.ItemIndex;
+
+   qry_Save593.Post;
+   qry_Save593.UpdateBatch(arall);
+   Frkey:=qry_Save593rkey.Value;
+//------------------------------------------------------------------------
+//   dm.qry594.First;
+//   while not dm.qry594 .Eof do
+//   begin
+//     qry_Save594.Edit;
+//     qry_Save594rec_no.Value:=i;
+//     qry_Save594.FieldByName('rkey593').Value:=qry_Save593rkey.Value;
+//     qry_Save594.FieldByName('filter_name').Value:=DM.qry594filter_name.Value;
+//     qry_Save594.FieldByName('type_name').Value:= dm.qry594type_name.Value;
+//     qry_Save594.FieldByName('type_code').Value:=DM.qry594type_code.Value;
+//     qry_Save594.Post;
+//     i:=i+1;
+//     dm.qry594.Next;
+//   end;
+//------------------------------------------------------------------------
+
+   DM.qry594.UpdateBatch(arall);
+
+   dm.con1.CommitTrans;
+   ModalResult:=mrok
+  except
+   dm.con1.RollbackTrans;
+
+  end;
+
+ end;
+
+ end;
+
+
+
+  procedure TForm_edit.N5Click(Sender: TObject);
+begin
+   if status=0 then
+    begin
+      if messagedlg('你确定要删除这条记录吗?',mtConfirmation,[mbyes,mbno],0)=mryes then
+      DM.qry594.Delete;
+    end;
+
+  if status=1 then
+  begin
+  if (strtoint(vprev)=1) or (strtoint(vprev)=3) then
+  begin
+   messagedlg('对不起!您没有该程序的可写权限',mtinformation,[mbok],0);
+  end
+  else
+   if messagedlg('你确定要删除这条记录吗?',mtConfirmation,[mbyes,mbno],0)=mryes then
+   begin
+     DM.qry594.Delete;
+   end;
+end;
+//  begin
+//     dm.qry594.Delete;
+end;
+
+procedure TForm_edit.etd_LenthKeyPress(Sender: TObject; var Key: Char);
+  begin
+     if not (key in ['0'..'9',#13,#8]) then
+     key := #0;
+  end;
+
+procedure TForm_edit.BitBtn1Click(Sender: TObject);
+var
+  InputVar: PDlgInput ;
+begin
+   if cbb_GH.ItemIndex<0 then
+   begin
+   
+   ShowMessage('请选选择编码规划');
+   exit;
+   end;
+  frmPick_Item_Single:=TfrmPick_Item_Single.Create(nil);
+  try
+   InputVar.Fields := 'invt_ttyename/编码规划名称/300';
+   InputVar.Sqlstr :='select rkey,invt_ttyename,length  from data0593' ;
+   inputvar.KeyField:='';
+   InputVar.AdoConn := dm.con1 ;
+   frmPick_Item_Single.InitForm_New(InputVar);
+   if frmPick_Item_Single.ShowModal=mrok then
+   begin
+     edt_rkey693.Text:=frmPick_Item_Single.adsPick.FieldValues['invt_ttyename'];
+//    label6.Caption:=trim(frmPick_Item_Single.adsPick.FieldValues['Dept_name']);
+     edt_rkey693.tag:=frmPick_Item_Single.adsPick.Fieldbyname('rkey').AsInteger;
+   end ;
+  finally
+  frmPick_Item_Single.Free ;
+  end;
+
+end;
+
+procedure TForm_edit.BitBtn4Click(Sender: TObject);
+
+  var
+  InputVar: PDlgInput ;
+begin
+  frmPick_Item_Single:=TfrmPick_Item_Single.Create(nil);
+  try
+   InputVar.Fields := 'PARAMETER_NAME/参数名称/150,PARAMETER_DESC/参数代码/150';
+   InputVar.Sqlstr :='select rkey, PARAMETER_NAME,PARAMETER_DESC  from data0278' ;
+   inputvar.KeyField:='rkey';
+   InputVar.AdoConn := dm.con1 ;
+   frmPick_Item_Single.InitForm_New(InputVar);
+   if frmPick_Item_Single.ShowModal=mrok then
+   begin
+     edt_278.Text:=frmPick_Item_Single.adsPick.FieldValues['PARAMETER_NAME'];
+//   label6.Caption:=trim(frmPick_Item_Single.adsPick.FieldValues['Dept_name']);
+     edt_278.tag:=frmPick_Item_Single.adsPick.Fieldbyname('rkey').AsInteger;
+   end ;
+  finally
+  frmPick_Item_Single.Free ;
+  end;
+
+end;
+
+
+procedure TForm_edit.FormShow(Sender: TObject);
+begin
+ qry_Save593.Close;
+ qry_Save593.Open;
+ qry_Save594.Close;
+ qry_Save594.Open;
+
+end;
+
+procedure TForm_edit.BitBtn5Click(Sender: TObject);
+begin
+  edt_rkey693.Clear;
+  edt_rkey693.Tag:=0;
+end;
+
+procedure TForm_edit.BitBtn6Click(Sender: TObject);
+begin
+ edt_278.Clear;
+ edt_278.Tag:=0;
+end;
+procedure TForm_edit.N2Click(Sender: TObject);
+
+begin
+
+  try
+   frmAddDetail:=TfrmAddDetail.create(Application);
+   frmAddDetail.edt_typename.Text:= DM.qry594type_name.Value;
+   frmAddDetail.edt_typecode.Text:= DM.qry594type_code.Value ;
+   frmAddDetail.Edt_filter.Text:= DM.qry594filter_name.Value;
+   frmAddDetail.Edit1.Text:=DM.qry594rec_no.Text;
+   frmAddDetail.FFlag:=1;
+
+
+   if frmAddDetail.ShowModal= mrok then
+   begin
+    DM.qry594.Filtered:=False;
+    dm.qry594.Filter:='';
+    dm.qry594.Filtered:=True;
+    dm.qry594.Locate('type_name',Trim(frmAddDetail.edt_typename.Text),[]);
+
+   end;
+  finally
+
+  end;
+end;
+
+procedure TForm_edit.pm594Popup(Sender: TObject);
+begin
+
+  if cbb_GH.ItemIndex= 0 then
+  begin
+    N1.Enabled:=True;
+    N2.Enabled:=True;
+    N5.Enabled:=True;
+  end
+  else
+  begin
+    N1.Enabled:=False;
+    N2.Enabled:=False;
+    N5.Enabled:=False;
+  end;
+  if DM.qry594.IsEmpty  then
+  begin
+    N2.Enabled:=False;
+    N5.Enabled:=False;
+  end;
+
+  if DM.qry594.RecNo<>DM.qry594.RecordCount then
+  N5.Enabled:=False;
+end;
+
+procedure TForm_edit.cbb_GHChange(Sender: TObject);
+begin
+ if Trim(cbb_GH.Text) <> '自选' then
+ begin
+ BitBtn1.Enabled:=False;
+ edt_rkey693.Clear;
+ end
+ else
+ BitBtn1.Enabled:=True;
+
+ if not DM.qry594.IsEmpty then
+ begin
+ cbb_GH.ItemIndex:= 0;
+ ShowMessage('您已经添加明细,不能选择流水');
+ end;
+end;
+
+end.
+

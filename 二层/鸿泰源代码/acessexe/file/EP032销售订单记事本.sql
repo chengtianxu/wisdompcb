@@ -1,0 +1,1 @@
+select * from data0011 where source_type=60 and file_pointer=data60.rkey

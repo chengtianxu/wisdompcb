@@ -1,0 +1,45 @@
+unit Path;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, ShellCtrls, StdCtrls, Buttons, ExtCtrls;
+
+type
+  TFrmPath = class(TForm)
+    Panel1: TPanel;
+    ShellTreeView1: TShellTreeView;
+    Edit1: TEdit;
+    Label1: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure ShellTreeView1Change(Sender: TObject; Node: TTreeNode);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmPath: TFrmPath;
+
+implementation
+
+uses DataTransSet;
+
+{$R *.dfm}
+
+procedure TFrmPath.BitBtn1Click(Sender: TObject);
+begin
+FrmDataTransSet.Edit2.Text:=Edit1.Text ;
+end;
+
+procedure TFrmPath.ShellTreeView1Change(Sender: TObject; Node: TTreeNode);
+begin
+if ShellTreeView1.SelectedFolder.PathName='¼ÆËã»ú' then exit;
+  Edit1.Text:=ShellTreeView1.SelectedFolder.PathName;
+end;
+
+end.

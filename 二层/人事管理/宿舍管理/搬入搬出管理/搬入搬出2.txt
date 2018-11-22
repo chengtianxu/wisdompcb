@@ -1,0 +1,261 @@
+
+
+ 
+select *  from bedmsg
+where employeeid is not null
+and employeeid not in 
+( select employeeid from bedroomusemsg where  enddate is null)
+
+
+select * from employeemsg_extra
+where employeecode in 
+('28963','25780')
+
+
+黎克强
+唐自亮
+
+select * from bedmsg
+where effective=0 and employeeid is not null 
+
+update bedmsg
+set effective=1 from bedmsg
+where effective=0 and employeeid is not null
+
+
+where employeeid in (273
+,3767)
+
+
+
+select * from bedroomusemsg
+where employeeid in (273
+,3767)
+
+
+select min(oper_time_in) from bedroomusemsg where operator
+select min(startdate) from bedroomusemsg
+ 
+
+
+
+
+
+
+
+
+
+select * from data0005 where rkey=2683
+select * from data0005 where rkey=3280
+
+
+1630
+1629
+
+select
+Bedroomusemsg.rkey as bedroomuserkey,
+Bedmsg.rkey as BedRkey,
+Bedroommsg.R_name,
+Dormitorymsg.D_name,
+Dormitorymsg.D_code,Bedroommsg.R_code,Bedmsg.B_code,employeemsg_extra.idcard, 
+case when employeemsg_extra.sex=0 then '女' else '男' end as sex,
+Bedroomusemsg.rkey as BedUseMsgrkey,
+Bedroomusemsg.startdate,Bedroomusemsg.oper_time_in,Bedroomusemsg.enddate,Bedroomusemsg.oper_time_out,Bedroomusemsg.remark, 
+employeemsg_extra.rkey as Emprkey,
+employeemsg_extra.position,
+employeemsg_extra.departmentname,
+employeemsg_extra.employeecode,employeemsg_extra.chinesename , 
+(select data0005.employee_name from data0005 where data0005.rkey=Bedroomusemsg.operator_out) out_name, 
+(select data0005.employee_name from data0005 where data0005.rkey=Bedroomusemsg.operator_in) in_name 
+from Bedroomusemsg inner join employeemsg_extra on Bedroomusemsg.employeeid=employeemsg_extra.rkey
+inner join Bedmsg on Bedroomusemsg.bedid=Bedmsg.rkey
+inner join Bedroommsg on Bedmsg.bedroomid=Bedroommsg.rkey
+inner join Dormitorymsg on Bedroommsg.Dormitoryid=Dormitorymsg.rkey
+where bedmsg.effective=1 and Bedroomusemsg.enddate is NULL
+
+
+
+
+
+
+
+select
+Bedroomusemsg.rkey as bedroomuserkey,
+Bedmsg.rkey as BedRkey,
+Bedroommsg.R_name,
+Dormitorymsg.D_name,
+Dormitorymsg.D_code,Bedroommsg.R_code,Bedmsg.B_code,employeemsg_extra.idcard, 
+case when employeemsg_extra.sex=0 then '女' else '男' end as sex,
+Bedroomusemsg.rkey as BedUseMsgrkey,
+Bedroomusemsg.startdate,Bedroomusemsg.oper_time_in,Bedroomusemsg.enddate,Bedroomusemsg.oper_time_out,Bedroomusemsg.remark, 
+employeemsg_extra.rkey as Emprkey,
+employeemsg_extra.position,
+employeemsg_extra.departmentname,
+employeemsg_extra.employeecode,employeemsg_extra.chinesename , 
+(select data0005.employee_name from data0005 where data0005.rkey=Bedroomusemsg.operator_out) out_name, 
+(select data0005.employee_name from data0005 where data0005.rkey=Bedroomusemsg.operator_in) in_name 
+from Bedroomusemsg inner join employeemsg_extra on Bedroomusemsg.employeeid=employeemsg_extra.rkey
+inner join Bedmsg on Bedroomusemsg.bedid=Bedmsg.rkey
+inner join Bedroommsg on Bedmsg.bedroomid=Bedroommsg.rkey
+inner join Dormitorymsg on Bedroommsg.Dormitoryid=Dormitorymsg.rkey
+where bedmsg.effective=1 and Bedroomusemsg.enddate is NULL
+
+
+
+
+
+select
+Bedroomusemsg.rkey as bedroomuserkey,
+Bedmsg.rkey as BedRkey,
+Bedroommsg.R_name,
+Dormitorymsg.D_name,
+Dormitorymsg.D_code,Bedroommsg.R_code,Bedmsg.B_code,employeemsg_extra.idcard, 
+case when employeemsg_extra.sex=0 then '女' else '男' end as sex,
+Bedroomusemsg.rkey as BedUseMsgrkey,
+Bedroomusemsg.startdate,Bedroomusemsg.oper_time_in,Bedroomusemsg.enddate,Bedroomusemsg.oper_time_out,Bedroomusemsg.remark, 
+employeemsg_extra.rkey as Emprkey,
+employeemsg_extra.position,
+employeemsg_extra.departmentname,
+employeemsg_extra.employeecode,employeemsg_extra.chinesename , 
+(select data0005.employee_name from data0005 where data0005.rkey=Bedroomusemsg.operator_out) out_name, 
+(select data0005.employee_name from data0005 where data0005.rkey=Bedroomusemsg.operator_in) in_name 
+from Bedroomusemsg inner join employeemsg_extra on Bedroomusemsg.employeeid=employeemsg_extra.rkey
+inner join Bedmsg on Bedroomusemsg.bedid=Bedmsg.rkey
+inner join Bedroommsg on Bedmsg.bedroomid=Bedroommsg.rkey
+inner join Dormitorymsg on Bedroommsg.Dormitoryid=Dormitorymsg.rkey
+where bedmsg.effective=1 and Bedroomusemsg.enddate is NULL
+
+
+
+
+
+
+
+select count(*) as CountTotal from employeemsg_extra where isnull(roomcode,'')<>''
+
+select roomcode from employeemsg_extra 
+where isnull(roomcode,'')<>''
+group by roomcode
+having count(roomcode)>1
+
+select * from bedmsg
+where b_code='01070501'
+
+3471	587	01070501	1034	NULL	1
+
+
+select * from employeemsg_extra where roomcode='01070501'
+
+update employeemsg_extra
+set roomcode=null
+from employeemsg_extra
+where rkey=1394
+
+
+
+
+
+
+select top 1 * from bedmsg
+
+select top 1 * from bedroomusemsg
+
+
+bedroomusemsg
+
+
+      InputVar.Sqlstr :='select Dormitorymsg.d_name, '+
+        ' bedmsg.b_code,employeemsg_extra.chinesename,employeemsg_extra.employeecode,'+
+        ' bedroommsg.r_code,  ' +
+        ' bedroommsg.r_name,d_floor,'   +
+        ' bedmsg.employeeid,'+
+        ' bedmsg.rkey as rkey,   '    +
+        ' bedroomusemsg.rkey as beduseid '+
+        ' from bedmsg join bedroommsg on bedmsg.bedroomid=bedroommsg.rkey  '  +
+        ' join Dormitorymsg on bedroommsg.dormitoryid=Dormitorymsg.rkey     '   +      
+        ' left join employeemsg_extra on bedmsg.employeeid=employeemsg_extra.rkey'+
+        ' left join bedroomusemsg on bedroomusemsg.employeeid=employeemsg_extra.rkey and bedmsg.rkey=bedroomusemsg.bedid and enddate is null	';
+
+
+
+
+
+select Dormitorymsg.d_name, 
+         bedmsg.b_code,employeemsg_extra.chinesename,employeemsg_extra.employeecode,
+         bedroommsg.r_code,   
+         bedroommsg.r_name,d_floor,   
+         bedmsg.employeeid,
+         bedmsg.rkey as rkey,
+         bedroomusemsg.rkey as beduseid     
+         from bedmsg join bedroommsg on bedmsg.bedroomid=bedroommsg.rkey    
+         join Dormitorymsg on bedroommsg.dormitoryid=Dormitorymsg.rkey              
+         left join employeemsg_extra on bedmsg.employeeid=employeemsg_extra.rkey
+         left join bedroomusemsg on bedroomusemsg.employeeid=employeemsg_extra.rkey
+      and bedmsg.rkey=bedroomusemsg.bedid and enddate is null	 
+
+
+
+select * from bedroomusemsg
+
+
+
+2	1619	488	2011-12-30 00:00:00.000	3	2011-04-01 00:00:00.000	NULL	NULL	NULL	NULL
+3	1620	998	2012-04-14 00:00:00.000	3	2011-04-01 00:00:00.000	NULL	NULL	NULL	NULL
+
+
+
+declare @operator int
+declare @cur_empid int
+declare @des_empid int
+declare @cur_bedid int
+declare @des_bedid int
+declare @cur_beduseid int
+declare @des_beduseid int
+
+set @operator=3
+set @cur_empid=488
+set @des_empid=998
+set @cur_bedid=1619
+set @des_bedid=1620
+set @cur_beduseid=2
+set @des_beduseid=3
+
+
+update bedroomusemsg
+set operator_out=@operator
+enddate=cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),
+oper_time_out=getdate()
+from bedroomusemsg
+where rkey in (@cur_beduseid,@des_beduseid)
+
+insert bedroomusemsg(bedid,employeeid,startdate,operator_in,oper_time_in,remark)
+select ,,cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),3,getdate(),'huanfang'
+insert bedroomusemsg(bedid,employeeid,startdate,operator_in,oper_time_in,remark)
+select ,,cast (substring(convert(nvarchar(20),getdate(),120),1,10) as datetime),3,getdate(),'huanfang'
+
+
+
+update employeemsg_extra
+set roomcode=(select B_code from bedmsg where rkey=)
+from employeemsg_extra
+where rkey=
+
+update employeemsg_extra
+set roomcode=(select B_code from bedmsg where rkey=)
+from employeemsg_extra
+where rkey=
+
+update employeemsg
+set roomcode=(select B_code from bedmsg where rkey=)
+from employeemsg where employeecode = 
+(select employeecode from employeemsg_extra where rkey=)
+ 
+
+
+
+
+
+
+
+
+

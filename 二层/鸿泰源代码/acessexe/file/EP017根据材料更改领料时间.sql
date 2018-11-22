@@ -1,0 +1,1 @@
+update data0207 set   tdate='2014-04-18' from data0207 ,data0017 where data0207.inventory_ptr=data0017.rkey and inv_name='²ÄÁÏÃû³Æ'

@@ -1,0 +1,393 @@
+object FrmQry: TFrmQry
+  Left = 351
+  Top = 121
+  Width = 649
+  Height = 395
+  Caption = #26597#35810
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnl3: TPanel
+    Left = 0
+    Top = 328
+    Width = 641
+    Height = 36
+    Align = alBottom
+    TabOrder = 2
+    object btn_qry: TBitBtn
+      Left = 216
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #26597#25214
+      ModalResult = 1
+      TabOrder = 0
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333330000333333333333333333333333F33333333333
+        00003333344333333333333333388F3333333333000033334224333333333333
+        338338F3333333330000333422224333333333333833338F3333333300003342
+        222224333333333383333338F3333333000034222A22224333333338F338F333
+        8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+        33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+        0000333333333A222433333333333338F338F33300003333333333A222433333
+        333333338F338F33000033333333333A222433333333333338F338F300003333
+        33333333A222433333333333338F338F00003333333333333A22433333333333
+        3338F38F000033333333333333A223333333333333338F830000333333333333
+        333A333333333333333338330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+    end
+    object btn_ReSet: TBitBtn
+      Left = 520
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #37325#32622
+      TabOrder = 1
+      OnClick = btn_ReSetClick
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333444444
+        33333333333F8888883F33330000324334222222443333388F3833333388F333
+        000032244222222222433338F8833FFFFF338F3300003222222AAAAA22243338
+        F333F88888F338F30000322222A33333A2224338F33F8333338F338F00003222
+        223333333A224338F33833333338F38F00003222222333333A444338FFFF8F33
+        3338888300003AAAAAAA33333333333888888833333333330000333333333333
+        333333333333333333FFFFFF000033333333333344444433FFFF333333888888
+        00003A444333333A22222438888F333338F3333800003A2243333333A2222438
+        F38F333333833338000033A224333334422224338338FFFFF8833338000033A2
+        22444442222224338F3388888333FF380000333A2222222222AA243338FF3333
+        33FF88F800003333AA222222AA33A3333388FFFFFF8833830000333333AAAAAA
+        3333333333338888883333330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+    end
+    object btn_Cancel: TBitBtn
+      Left = 424
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = #21462#28040
+      ModalResult = 2
+      TabOrder = 2
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00388888888877
+        F7F787F8888888888333333F00004444400888FFF444448888888888F333FF8F
+        000033334D5007FFF4333388888888883338888F0000333345D50FFFF4333333
+        338F888F3338F33F000033334D5D0FFFF43333333388788F3338F33F00003333
+        45D50FEFE4333333338F878F3338F33F000033334D5D0FFFF43333333388788F
+        3338F33F0000333345D50FEFE4333333338F878F3338F33F000033334D5D0FFF
+        F43333333388788F3338F33F0000333345D50FEFE4333333338F878F3338F33F
+        000033334D5D0EFEF43333333388788F3338F33F0000333345D50FEFE4333333
+        338F878F3338F33F000033334D5D0EFEF43333333388788F3338F33F00003333
+        4444444444333333338F8F8FFFF8F33F00003333333333333333333333888888
+        8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
+        333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
+        0000}
+      NumGlyphs = 2
+    end
+  end
+  object grp1: TGroupBox
+    Left = 337
+    Top = 0
+    Width = 304
+    Height = 328
+    Align = alClient
+    Caption = #24050#23450#20041#30340#26465#20214
+    TabOrder = 1
+    object EditorSgrid_condition: TStringGrid
+      Left = 2
+      Top = 15
+      Width = 300
+      Height = 311
+      Align = alClient
+      ColCount = 3
+      FixedCols = 0
+      TabOrder = 0
+      ColWidths = (
+        116
+        166
+        2)
+    end
+  end
+  object grps: TGroupBox
+    Left = 0
+    Top = 0
+    Width = 337
+    Height = 328
+    Align = alLeft
+    Caption = #26597#35810#26465#20214#23450#20041
+    TabOrder = 0
+    object lbl_fieldName: TLabel
+      Left = 152
+      Top = 24
+      Width = 65
+      Height = 13
+      Caption = #21592#24037#24037#21495#65306
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = #23435#20307
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl_to: TLabel
+      Left = 216
+      Top = 72
+      Width = 2
+      Height = 13
+      Caption = '|'
+      Visible = False
+    end
+    object lst_FieldsCN: TListBox
+      Left = 2
+      Top = 15
+      Width = 135
+      Height = 311
+      Align = alLeft
+      ItemHeight = 13
+      TabOrder = 0
+      OnClick = lst_FieldsCNClick
+    end
+    object btn1: TButton
+      Left = 240
+      Top = 216
+      Width = 75
+      Height = 25
+      Caption = #28155#21152
+      TabOrder = 12
+      OnClick = btn1Click
+    end
+    object btn2: TButton
+      Left = 145
+      Top = 216
+      Width = 75
+      Height = 25
+      Caption = #28165#38500
+      TabOrder = 13
+      OnClick = btn2Click
+    end
+    object rg_sex: TRadioGroup
+      Left = 144
+      Top = 48
+      Width = 185
+      Height = 41
+      Caption = #26465#20214
+      Columns = 2
+      ItemIndex = 0
+      Items.Strings = (
+        #22899
+        #30007)
+      TabOrder = 6
+      Visible = False
+    end
+    object cbb1: TComboBox
+      Left = 144
+      Top = 48
+      Width = 185
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      TabOrder = 7
+      Visible = False
+    end
+    object dtp1: TDateTimePicker
+      Left = 144
+      Top = 48
+      Width = 186
+      Height = 21
+      Date = 42253.364562141210000000
+      Time = 42253.364562141210000000
+      TabOrder = 5
+      Visible = False
+    end
+    object dtp_f: TDateTimePicker
+      Left = 144
+      Top = 48
+      Width = 186
+      Height = 21
+      Date = 42253.374074467600000000
+      Time = 42253.374074467600000000
+      TabOrder = 3
+      Visible = False
+    end
+    object dtp_t: TDateTimePicker
+      Left = 144
+      Top = 88
+      Width = 186
+      Height = 21
+      Date = 42253.374262650460000000
+      Time = 42253.374262650460000000
+      TabOrder = 11
+      Visible = False
+    end
+    object cbb_nation: TComboBox
+      Left = 152
+      Top = 48
+      Width = 177
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      TabOrder = 8
+      Visible = False
+      Items.Strings = (
+        #27721#26063
+        #26397#40092#26063
+        #33945#21476#26063
+        #28385#26063
+        #36203#21746#26063
+        #36798#26017#23572#26063
+        #37122#28201#20811#26063
+        #37122#20262#26149#26063
+        #22238#26063
+        #19996#20065#26063
+        #22303#26063
+        #25746#25289#26063
+        #20445#23433#26063
+        #35029#22266#26063
+        #32500#21566#23572#26063
+        #21704#33832#20811#26063
+        #26607#23572#20811#23388#26063
+        #38177#20271#26063
+        #22612#21513#20811#26063
+        #20044#23388#21035#20811#26063
+        #20420#32599#26031#26063
+        #22612#22612#23572#26063
+        #34255#26063
+        #38376#24052#26063
+        #29662#24052#26063
+        #32652#26063
+        #24413#26063
+        #30333#26063
+        #21704#23612#26063
+        #20643#26063
+        #20616#20723#26063
+        #20324#26063
+        #25289#31068#26063
+        #32435#35199#26063
+        #26223#39047#26063
+        #24067#26391#26063
+        #38463#26124#26063
+        #26222#31859#26063
+        #24594#26063
+        #24503#26114#26063
+        #29420#40857#26063
+        #22522#35834#26063
+        #33495#26063
+        #24067#20381#26063
+        #20375#26063
+        #27700#26063
+        #20193#20332#26063
+        #22766#26063
+        #29814#26063
+        #20203#20332#26063
+        #27611#21335#26063
+        #20140#26063
+        #22303#23478#26063
+        #40654#26063
+        #30066#26063
+        #39640#23665#26063)
+    end
+    object rg_How: TRadioGroup
+      Left = 144
+      Top = 72
+      Width = 185
+      Height = 41
+      Caption = #26465#20214
+      Columns = 2
+      ItemIndex = 0
+      Items.Strings = (
+        #31934#30830#26597#25214
+        #27169#31946#26597#25214)
+      TabOrder = 9
+      Visible = False
+    end
+    object cbb_month: TComboBox
+      Left = 144
+      Top = 48
+      Width = 185
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      TabOrder = 4
+      Visible = False
+      Items.Strings = (
+        '1'
+        '2'
+        '3'
+        '4'
+        '5'
+        '6'
+        '7'
+        '8'
+        '9'
+        '10'
+        '11'
+        '12')
+    end
+    object edt_QryieldName: TEdit
+      Left = 144
+      Top = 40
+      Width = 153
+      Height = 21
+      TabOrder = 1
+      Visible = False
+    end
+    object rg_FH: TRadioGroup
+      Left = 143
+      Top = 74
+      Width = 185
+      Height = 73
+      Caption = #26465#20214
+      Columns = 2
+      ItemIndex = 0
+      Items.Strings = (
+        #31561#20110' ='
+        #22823#20110' >'
+        #23567#20110' <'
+        #30456#20284' like')
+      TabOrder = 10
+      Visible = False
+    end
+    object btn_Qry1: TBitBtn
+      Left = 298
+      Top = 40
+      Width = 28
+      Height = 25
+      TabOrder = 2
+      Visible = False
+      OnClick = btn_Qry1Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+        333333777777777F33333330B00000003333337F7777777F3333333000000000
+        333333777777777F333333330EEEEEE033333337FFFFFF7F3333333300000000
+        333333377777777F3333333330BFBFB03333333373333373F33333330BFBFBFB
+        03333337F33333F7F33333330FBFBF0F03333337F33337F7F33333330BFBFB0B
+        03333337F3F3F7F7333333330F0F0F0033333337F7F7F773333333330B0B0B03
+        3333333737F7F7F333333333300F0F03333333337737F7F33333333333300B03
+        333333333377F7F33333333333330F03333333333337F7F33333333333330B03
+        3333333333373733333333333333303333333333333373333333}
+      NumGlyphs = 2
+    end
+  end
+end

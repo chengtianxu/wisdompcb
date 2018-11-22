@@ -1,0 +1,124 @@
+object FrmDEPT_Edit: TFrmDEPT_Edit
+  Left = 490
+  Top = 142
+  BorderStyle = bsDialog
+  Caption = 'FA'#27979#35797#32534#36753
+  ClientHeight = 552
+  ClientWidth = 435
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 24
+    Top = 13
+    Width = 52
+    Height = 13
+    Caption = #24037#24207#20195#30721
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 23
+    Top = 40
+    Width = 52
+    Height = 13
+    Caption = #24037#33402#38590#28857
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 27
+    Top = 190
+    Width = 52
+    Height = 13
+    Caption = #25511#21046#35201#27714
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 29
+    Top = 344
+    Width = 52
+    Height = 13
+    Caption = #27979#35797#32467#26524
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = #23435#20307
+    Font.Style = []
+    ParentFont = False
+  end
+  object Button1: TButton
+    Left = 134
+    Top = 503
+    Width = 75
+    Height = 25
+    Caption = #30830#23450
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 213
+    Top = 503
+    Width = 75
+    Height = 25
+    Caption = #21462#28040
+    TabOrder = 1
+    OnClick = Button2Click
+  end
+  object Memo1: TMemo
+    Left = 24
+    Top = 62
+    Width = 377
+    Height = 113
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 2
+  end
+  object Memo2: TMemo
+    Left = 27
+    Top = 212
+    Width = 377
+    Height = 113
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 3
+  end
+  object Memo3: TMemo
+    Left = 27
+    Top = 364
+    Width = 377
+    Height = 113
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 4
+  end
+  object Edit1: TEdit
+    Left = 80
+    Top = 8
+    Width = 121
+    Height = 21
+    TabOrder = 5
+    Text = 'Edit1'
+  end
+end

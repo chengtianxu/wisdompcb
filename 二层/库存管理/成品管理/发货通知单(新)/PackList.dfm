@@ -1,0 +1,526 @@
+object Form_PackList: TForm_PackList
+  Left = 160
+  Top = 61
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = #25253#20851#21457#36135#21333#35814#32454#20449#24687
+  ClientHeight = 551
+  ClientWidth = 916
+  Color = clBtnFace
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnActivate = FormActivate
+  OnCloseQuery = FormCloseQuery
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 20
+    Top = 40
+    Width = 72
+    Height = 13
+    Caption = #21457#36135#21333#32534#21495':'
+  end
+  object Label2: TLabel
+    Left = 46
+    Top = 62
+    Width = 46
+    Height = 13
+    Caption = #21345#26495#25968':'
+  end
+  object Label3: TLabel
+    Left = 33
+    Top = 86
+    Width = 59
+    Height = 13
+    Caption = #30456#20851#22791#27880':'
+  end
+  object Label4: TLabel
+    Left = 350
+    Top = 62
+    Width = 59
+    Height = 13
+    Caption = #25253#20851#26041#24335':'
+  end
+  object Label5: TLabel
+    Left = 350
+    Top = 86
+    Width = 59
+    Height = 13
+    Caption = #25253#20851#26085#26399':'
+  end
+  object Label6: TLabel
+    Left = 33
+    Top = 157
+    Width = 59
+    Height = 13
+    Caption = #36865#36135#22320#28857':'
+  end
+  object Label7: TLabel
+    Left = 33
+    Top = 110
+    Width = 59
+    Height = 13
+    Caption = #23458#25143#20195#30721':'
+  end
+  object Label9: TLabel
+    Left = 7
+    Top = 181
+    Width = 85
+    Height = 13
+    Caption = #25910#36135#20844#21496#20013#25991':'
+  end
+  object Label10: TLabel
+    Left = 59
+    Top = 204
+    Width = 33
+    Height = 13
+    Caption = #33521#25991':'
+  end
+  object Label11: TLabel
+    Left = 7
+    Top = 230
+    Width = 85
+    Height = 13
+    Caption = #25910#36135#22320#22336#20013#25991':'
+  end
+  object Label12: TLabel
+    Left = 59
+    Top = 257
+    Width = 33
+    Height = 13
+    Caption = #33521#25991':'
+  end
+  object Label13: TLabel
+    Left = 20
+    Top = 279
+    Width = 72
+    Height = 13
+    Caption = #25910#36135#32852#31995#20154':'
+  end
+  object Label16: TLabel
+    Left = 304
+    Top = 280
+    Width = 33
+    Height = 13
+    Caption = #30005#35805':'
+  end
+  object Label17: TLabel
+    Left = 547
+    Top = 280
+    Width = 33
+    Height = 13
+    Caption = #20256#30495':'
+  end
+  object Label18: TLabel
+    Left = 245
+    Top = 108
+    Width = 7
+    Height = 13
+  end
+  object Label8: TLabel
+    Left = 60
+    Top = 133
+    Width = 39
+    Height = 13
+    Caption = #36135#24065#65306
+  end
+  object Label15: TLabel
+    Left = 350
+    Top = 40
+    Width = 59
+    Height = 13
+    Caption = #21457#31080#32534#21495':'
+  end
+  object Label14: TLabel
+    Left = 214
+    Top = 133
+    Width = 7
+    Height = 13
+  end
+  object Label19: TLabel
+    Left = 350
+    Top = 133
+    Width = 59
+    Height = 13
+    Caption = #20851#32852#23458#25143':'
+  end
+  object Edit1: TEdit
+    Left = 94
+    Top = 35
+    Width = 150
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 10
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object Edit16: TEdit
+    Left = 94
+    Top = 153
+    Width = 240
+    Height = 21
+    Color = clInfoBk
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 50
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object Edit17: TEdit
+    Left = 94
+    Top = 105
+    Width = 121
+    Height = 21
+    Color = clWhite
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 20
+    TabOrder = 2
+    OnEnter = Edit17Enter
+    OnExit = Edit17Exit
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 916
+    Height = 33
+    Align = alTop
+    TabOrder = 3
+    object BtnClose: TBitBtn
+      Left = 62
+      Top = 1
+      Width = 59
+      Height = 28
+      Cursor = crHandPoint
+      Hint = #20851#38381
+      Caption = #20851#38381
+      ModalResult = 2
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnClick = BtnCloseClick
+      Glyph.Data = {
+        EE000000424DEE000000000000007600000028000000100000000F0000000100
+        0400000000007800000000000000000000001000000000000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFF0FFFFFF
+        FFFFFFFF00FFFFFFFFFFFFF030FFFFFFFFFFFF0330FFFFFFFFFF003330000000
+        0FFFF03330FF0FFFFFFFF03300FF0FFFF4FFF03330FF0FFF44FFF03330FF0FF4
+        4444F03330FF0F444444F03330FF0FF44444F0330FFF0FFF44FFF030FFFF0FFF
+        F4FFF00FFFFF0FFFFFFFF00000000FFFFFFF}
+    end
+    object BtnSave: TBitBtn
+      Left = 4
+      Top = 1
+      Width = 59
+      Height = 28
+      Cursor = crHandPoint
+      Hint = #20445#23384
+      Caption = #20445#23384
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = BtnSaveClick
+      Glyph.Data = {
+        C6050000424DC605000000000000360400002800000014000000140000000100
+        08000000000090010000C40E0000C40E0000000100000000000000000000E8E0
+        18008868080048484800D8D8E000C8C8C8001078F00070500000B0900800F8F8
+        F800A8880800D0D8D800B8A81000A0800800C8D0D000E8E8E80068686800B0A0
+        100098700800A8900800D0D0D000D8D8D80090700800B0981000C0A81000E0E0
+        E0009878080090680800A0880800D8E0D800B8A01000B0901000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000100000000
+        000000130000301A1600000000000000E400F712000035A6FC00770000001300
+        0700A7FC7700080613000083A600FC7700000000000035A5FC0077FFFF000000
+        6800010000000000000000000000000000000000000000000000000000000000
+        31000000000000E2EC0000640000660000004716000078011300000047001600
+        780001130000F8461600000000000000C000F7120000C8F3EB007770F5001200
+        0000ECFD7F0002000000000000001300AF000000000001000A0000884000F877
+        30001A1600000100000000998400E6775400F71200000101010001D8F8001200
+        450090FB7700801FF80077FFFF00FFFF6000F8120000AD84E6007760F8001200
+        D80084E677000000000000FFFF000000C800E2EC0000C8E2EC00001800000000
+        00000000000044F8120000400000000000000000000028F81200000000000000
+        00000000000000000000000C000000000200000000000101120000872B00F877
+        0000ECFD7F00000000000002000000006C00001A0200381A1600007FFF00FFFF
+        000000000000381A1600000500000000870031E6770084F8120000218600E677
+        9800F81200006713000010FFFF000000680001000000C8E2EC00000000000000
+        7000F8120000ACF8120000D8F8001200100030001000F8400000105F5400E677
+        680001000000D0F8120000D8F80012000800000000000E0000000F0505BF05BF
+        05BF05BF05BF05BF05BF05BF05C7BF0000000000000000000000000000000000
+        00050500E1138CE0E0E0E0E0E0E0E0E0E006BD1B00BFBF00031305050505BF05
+        050505050505181B00050500C60705050F050FC70F050FC70FBF011B00BFBF00
+        011B05A7C7090383BF0503030305011300050500010705091003050503031003
+        0305011B00BFBF00011BBF031005BF03101010101005181300050500010705C7
+        0FC709C70FC70FC70F05011300BFBF00011B03171017101710171017101B1B18
+        00050500011318131813181B181318131813181300BFBF0001181BC601C618C6
+        01C601C60101181800050500E11713000003C210050505050510C61800BFBF00
+        01181B000010C705C705BF0FC71718C600050500E113180000100F0505000005
+        A717C61800BFBF0001C61B000010C70505000005C71718C600050500E1171300
+        00100F05050000050F10C60100BFBF00BD0101000010090F0510100FC7170101
+        00E90500000000000300000000000000000000000005C705BF05BF0509E9BF05
+        BF05BF05BF05BF05BF09}
+    end
+  end
+  object BitBtn2: TBitBtn
+    Left = 337
+    Top = 150
+    Width = 25
+    Height = 25
+    TabOrder = 4
+    TabStop = False
+    OnClick = BitBtn2Click
+    Glyph.Data = {
+      EE000000424DEE000000000000007600000028000000100000000F0000000100
+      04000000000078000000130B0000130B00001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+      888800000888880000080F000888880F00080F000888880F0008000000080000
+      000800F000000F00000800F000800F00000800F000800F000008800000000000
+      0088880F00080F000888880000080000088888800088800088888880F08880F0
+      888888800088800088888888888888888888}
+  end
+  object BitBtn1: TBitBtn
+    Left = 216
+    Top = 103
+    Width = 25
+    Height = 25
+    TabOrder = 5
+    TabStop = False
+    OnClick = BitBtn1Click
+    Glyph.Data = {
+      EE000000424DEE000000000000007600000028000000100000000F0000000100
+      04000000000078000000130B0000130B00001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+      888800000888880000080F000888880F00080F000888880F0008000000080000
+      000800F000000F00000800F000800F00000800F000800F000008800000000000
+      0088880F00080F000888880000080000088888800088800088888880F08880F0
+      888888800088800088888888888888888888}
+  end
+  object DBEdit1: TDBEdit
+    Left = 94
+    Top = 57
+    Width = 150
+    Height = 21
+    DataField = 'MAWB_NO'
+    DataSource = DM.DataSource3
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    TabOrder = 6
+  end
+  object DBEdit3: TDBEdit
+    Left = 94
+    Top = 81
+    Width = 150
+    Height = 21
+    DataField = 'HAWB_NO'
+    DataSource = DM.DataSource3
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    TabOrder = 7
+  end
+  object MaskEdit1: TMaskEdit
+    Left = 410
+    Top = 81
+    Width = 121
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    TabOrder = 8
+    Text = '____-__-__'
+    OnExit = MaskEdit1Exit
+  end
+  object Edit2: TEdit
+    Left = 94
+    Top = 177
+    Width = 400
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 100
+    TabOrder = 9
+  end
+  object Edit3: TEdit
+    Left = 94
+    Top = 203
+    Width = 400
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 100
+    TabOrder = 10
+  end
+  object Edit4: TEdit
+    Left = 94
+    Top = 227
+    Width = 400
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 100
+    TabOrder = 11
+  end
+  object Edit5: TEdit
+    Left = 94
+    Top = 251
+    Width = 400
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 100
+    TabOrder = 12
+  end
+  object Edit6: TEdit
+    Left = 94
+    Top = 275
+    Width = 200
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 100
+    TabOrder = 13
+  end
+  object Edit7: TEdit
+    Left = 337
+    Top = 275
+    Width = 200
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 50
+    TabOrder = 14
+  end
+  object Edit8: TEdit
+    Left = 584
+    Top = 275
+    Width = 200
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 50
+    TabOrder = 15
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Top = 301
+    Width = 916
+    Height = 250
+    Align = alBottom
+    ColCount = 12
+    Ctl3D = False
+    DefaultRowHeight = 21
+    FixedCols = 0
+    RowCount = 2
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing]
+    ParentCtl3D = False
+    PopupMenu = PopupMenu1
+    TabOrder = 16
+    OnKeyPress = StringGrid1KeyPress
+    OnKeyUp = StringGrid1KeyUp
+    OnSelectCell = StringGrid1SelectCell
+    ColWidths = (
+      83
+      85
+      51
+      104
+      122
+      66
+      69
+      68
+      117
+      57
+      2
+      64)
+  end
+  object StringGrid2: TStringGrid
+    Left = 22
+    Top = 371
+    Width = 291
+    Height = 172
+    ColCount = 4
+    DefaultRowHeight = 19
+    FixedCols = 0
+    RowCount = 2
+    TabOrder = 17
+    Visible = False
+  end
+  object Edit9: TEdit
+    Left = 94
+    Top = 129
+    Width = 88
+    Height = 21
+    Color = clInfoBk
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 50
+    ReadOnly = True
+    TabOrder = 18
+  end
+  object ComboBox1: TComboBox
+    Left = 410
+    Top = 58
+    Width = 121
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#25628#29399#20116#31508#36755#20837#27861
+    ItemHeight = 13
+    TabOrder = 19
+    Items.Strings = (
+      #30452#25509#20986#28207
+      'DHL'
+      #32852#37030
+      #22269#20869#36716#21378
+      #20837#29289#27969#22253
+      #20986#28207#36208#24555#36882)
+  end
+  object Edit10: TEdit
+    Left = 410
+    Top = 35
+    Width = 121
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 10
+    TabOrder = 20
+  end
+  object BitBtn3: TBitBtn
+    Left = 184
+    Top = 127
+    Width = 25
+    Height = 25
+    TabOrder = 21
+    TabStop = False
+    OnClick = BitBtn3Click
+    Glyph.Data = {
+      EE000000424DEE000000000000007600000028000000100000000F0000000100
+      04000000000078000000130B0000130B00001000000000000000000000000000
+      8000008000000080800080000000800080008080000080808000C0C0C0000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
+      888800000888880000080F000888880F00080F000888880F0008000000080000
+      000800F000000F00000800F000800F00000800F000800F000008800000000000
+      0088880F00080F000888880000080000088888800088800088888880F08880F0
+      888888800088800088888888888888888888}
+  end
+  object Edit11: TEdit
+    Left = 410
+    Top = 128
+    Width = 121
+    Height = 21
+    ImeName = #20013#25991' ('#31616#20307') - '#26497#28857#20116#31508
+    MaxLength = 10
+    TabOrder = 22
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 228
+    Top = 374
+    object N1: TMenuItem
+      Caption = #22686#21152#35013#36816#25351#27966
+      OnClick = N1Click
+    end
+    object N2: TMenuItem
+      Caption = #21024#38500#35013#36816#25351#27966
+      OnClick = N2Click
+    end
+  end
+end

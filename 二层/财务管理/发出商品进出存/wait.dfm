@@ -1,0 +1,42 @@
+object frmWait: TfrmWait
+  Left = 502
+  Top = 410
+  BorderStyle = bsNone
+  Caption = #31561#24453#31383#21475
+  ClientHeight = 67
+  ClientWidth = 115
+  Color = clWhite
+  Font.Charset = ANSI_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = #23435#20307
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 12
+  object Label1: TLabel
+    Left = 7
+    Top = 54
+    Width = 105
+    Height = 12
+    Caption = #27491#22312#26597#35810','#35831#31245#31561'!'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -12
+    Font.Name = #23435#20307
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Animate1: TAnimate
+    Left = 18
+    Top = 1
+    Width = 80
+    Height = 50
+    AutoSize = False
+    CommonAVI = aviFindFolder
+    StopFrame = 29
+  end
+end

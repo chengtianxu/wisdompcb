@@ -1,0 +1,225 @@
+unit damo;
+
+interface
+
+uses
+  SysUtils, Classes, DB, ADODB,common, DBClient, Provider;
+
+type
+  TDM = class(TDataModule)
+    ADOConnection1: TADOConnection;
+    ADOQuery1: TADOQuery;
+    DataSource1: TDataSource;
+    ADOQuery2: TADOQuery;
+    DataSource2: TDataSource;
+    ADOQuery3: TADOQuery;
+    DataSource3: TDataSource;
+    ADOTMP: TADOQuery;
+    ADOQuery1employeeid: TIntegerField;
+    ADOQuery1orginal_departmentid: TIntegerField;
+    ADOQuery1departmentname: TWideStringField;
+    ADOQuery1orginal_employeecode: TWideStringField;
+    ADOQuery1chinesename: TWideStringField;
+    ADOQuery1Languages: TWideStringField;
+    ADOQuery1ondutytime: TStringField;
+    ADOQuery1outdutytime: TStringField;
+    ADOQuery1sextext: TStringField;
+    ADOQuery1addr: TWideStringField;
+    ADOQuery1province: TWideStringField;
+    ADOQuery1IDCard: TWideStringField;
+    ADOQuery1Cardno: TStringField;
+    ADOQuery1phone: TWideStringField;
+    ADOQuery1roomcode: TWideStringField;
+    ADOQuery1nation: TWideStringField;
+    ADOQuery1birthday: TStringField;
+    ADOQuery1blood_type: TWideStringField;
+    ADOQuery1Height: TIntegerField;
+    ADOQuery1graduatedschool: TWideStringField;
+    ADOQuery1majorsubject: TWideStringField;
+    ADOQuery1iDCardtime: TDateTimeField;
+    ADOQuery1sicardno: TStringField;
+    ADOQuery1Residencepermit: TStringField;
+    ADOQuery1bankaccount: TStringField;
+    ADOQuery1bankname: TWideStringField;
+    ADOQuery1contactpersonname: TWideStringField;
+    ADOQuery1contactpersontel: TWideStringField;
+    ADOQuery1contactpersonaddr: TWideStringField;
+    ADOQuery1recommendpersonname: TWideStringField;
+    ADOQuery1recommendpersontel: TWideStringField;
+    ADOQuery1recommendaddr: TWideStringField;
+    ADOQuery1recommendworkplace: TWideStringField;
+    ADOQuery1GraduateTime: TWideStringField;
+    ADOQuery1Positionitem: TWideStringField;
+    ADOQuery1Rankitem: TWideStringField;
+    ADOQuery1educationitem: TWideStringField;
+    ADOQuery1Politics_faceitem: TWideStringField;
+    ADOQuery1employ_typeitem: TWideStringField;
+    ADOQuery1marriageitem: TWideStringField;
+    ADOQuery1source: TWideStringField;
+    ADOQuery1station: TWideStringField;
+    ADOQuery1status: TWordField;
+    ADOQuery1accountname: TWideStringField;
+    ADOQuery1attendancename: TStringField;
+    ADOQuery1leavetype: TWideStringField;
+    ADOQuery1leavereason: TWideStringField;
+    ADOQuery1remark: TWideStringField;
+    tmp: TADOQuery;
+    qry_info: TADOQuery;
+    ds_info: TDataSource;
+    qry_msg: TADOQuery;
+    ds_msg: TDataSource;
+    qry_alt: TADOQuery;
+    qry_dept: TADOQuery;
+    qryTemp: TADOQuery;
+    qry_detail: TADOQuery;
+    ds_detail: TDataSource;
+    qrySchEmpID: TADOQuery;
+    qrySchEmpCode: TADOQuery;
+    qryCheckLZ: TADOQuery;
+    qryUpdateLZ: TADOQuery;
+    qryDelteDL: TADOQuery;
+    qryUpdateBD: TADOQuery;
+    qry_info_bd: TADOQuery;
+    qry_info_db: TDataSource;
+    qry_info_bdrkey: TAutoIncField;
+    qry_info_bdemployeeid: TIntegerField;
+    qry_info_bdtype: TIntegerField;
+    qry_info_bdreason: TIntegerField;
+    qry_info_bdalterdate: TDateTimeField;
+    qry_info_bdorginal_employeecode: TWideStringField;
+    qry_info_bdorginal_departmentid: TIntegerField;
+    qry_info_bdorginal_position: TIntegerField;
+    qry_info_bdorginal_employ_type: TIntegerField;
+    qry_info_bdorginal_politics_face: TIntegerField;
+    qry_info_bdorginal_education: TIntegerField;
+    qry_info_bdorginal_outdutytime: TWideStringField;
+    qry_info_bdorginal_ondutytime: TWideStringField;
+    qry_info_bdorginal_marriage: TIntegerField;
+    qry_info_bdorginal_rank: TIntegerField;
+    qry_info_bdnew_employeecode: TWideStringField;
+    qry_info_bdnew_departmentid: TIntegerField;
+    qry_info_bdnew_position: TIntegerField;
+    qry_info_bdnew_employ_type: TIntegerField;
+    qry_info_bdnew_politics_face: TIntegerField;
+    qry_info_bdnew_education: TIntegerField;
+    qry_info_bdnew_marriage: TIntegerField;
+    qry_info_bdnew_rank: TIntegerField;
+    qry_info_bdoper_date: TDateTimeField;
+    qry_info_bdactive: TIntegerField;
+    qry_info_bdEMPLOYEE_NAME: TStringField;
+    qry_info_bdchinesename: TWideStringField;
+    qry_info_bdemployeecode: TWideStringField;
+    qry_info_bdemploy_type: TIntegerField;
+    qry_info_bdsex: TIntegerField;
+    qry_info_bdrank: TWideStringField;
+    qry_info_bdrreason: TWideStringField;
+    qry_info_bdttype: TWideStringField;
+    qry_info_bdpposition: TWideStringField;
+    qry_info_bddictid: TIntegerField;
+    qry_info_bdnposition: TWideStringField;
+    qry_info_bdoposition: TWideStringField;
+    qry_info_bdnhtype: TWideStringField;
+    qry_info_bdohtype: TWideStringField;
+    qry_info_bdphtype: TWideStringField;
+    qry_info_bdnrank: TWideStringField;
+    qry_info_bdorank: TWideStringField;
+    qry_info_bddepartmentname: TWideStringField;
+    qry_info_bdndepartmentname: TWideStringField;
+    qry_info_bdodepartmentname: TWideStringField;
+    qry_info_bdsexy: TStringField;
+    qry_info_bdremark: TWideStringField;
+    tmp1: TADOQuery;
+    tmp2: TADOQuery;
+    det_updata: TADOQuery;
+    qry_inforkey: TAutoIncField;
+    qry_infoemployeeid: TIntegerField;
+    qry_infotype: TIntegerField;
+    qry_inforeason: TIntegerField;
+    qry_infoalterdate: TDateTimeField;
+    qry_infoorginal_employeecode: TWideStringField;
+    qry_infoorginal_departmentid: TIntegerField;
+    qry_infoorginal_position: TIntegerField;
+    qry_infoorginal_employ_type: TIntegerField;
+    qry_infoorginal_politics_face: TIntegerField;
+    qry_infoorginal_education: TIntegerField;
+    qry_infoorginal_outdutytime: TWideStringField;
+    qry_infoorginal_marriage: TIntegerField;
+    qry_infoorginal_rank: TIntegerField;
+    qry_infonew_employeecode: TWideStringField;
+    qry_infonew_departmentid: TIntegerField;
+    qry_infonew_position: TIntegerField;
+    qry_infonew_employ_type: TIntegerField;
+    qry_infonew_politics_face: TIntegerField;
+    qry_infonew_education: TIntegerField;
+    qry_infonew_marriage: TIntegerField;
+    qry_infonew_rank: TIntegerField;
+    qry_infooper_date: TDateTimeField;
+    qry_infooper_person: TIntegerField;
+    qry_infoactive: TIntegerField;
+    qry_infoEMPLOYEE_NAME: TStringField;
+    qry_infochinesename: TWideStringField;
+    qry_infoemployeecode: TWideStringField;
+    qry_infoondutytime: TStringField;
+    qry_infooutdutytime: TStringField;
+    qry_infoemploy_type: TIntegerField;
+    qry_infosex: TIntegerField;
+    qry_inforank: TWideStringField;
+    qry_inforreason: TWideStringField;
+    qry_infottype: TWideStringField;
+    qry_infopposition: TWideStringField;
+    qry_infodictid: TIntegerField;
+    qry_infonposition: TWideStringField;
+    qry_infooposition: TWideStringField;
+    qry_infonhtype: TWideStringField;
+    qry_infoohtype: TWideStringField;
+    qry_infophtype: TWideStringField;
+    qry_infonrank: TWideStringField;
+    qry_infoorank: TWideStringField;
+    qry_infodepartmentname: TWideStringField;
+    qry_infondepartmentname: TWideStringField;
+    qry_infoodepartmentname: TWideStringField;
+    qry_infosexy: TStringField;
+    qry_infohascard: TStringField;
+    qry_infohasroom: TIntegerField;
+    qry_inforemark: TWideStringField;
+    qry_infohastrain: TIntegerField;
+    qry_infosend: TADOQuery;
+    qry_infosendselected: TBooleanField;
+    qry_infosendemployeecode: TStringField;
+    qry_infosendchinesename: TStringField;
+    qry_infosendphone: TStringField;
+    qry_infosendoutdutytime: TStringField;
+    ds_infosend: TDataSource;
+    DataSetProvider1: TDataSetProvider;
+    cds_infosend: TClientDataSet;
+    cds_infosendselected: TBooleanField;
+    cds_infosendemployeecode: TStringField;
+    cds_infosendchinesename: TStringField;
+    cds_infosendphone: TStringField;
+    cds_infosendoutdutytime: TStringField;
+    ADOQuery4: TADOQuery;
+    DataSource4: TDataSource;
+    ADOQuery4orginal_employeecode: TWideStringField;
+    ADOQuery4chinesename: TWideStringField;
+    ADOQuery4orginal_ondutytime: TWideStringField;
+    ADOQuery4alterdate: TDateTimeField;
+  private
+    { Private declarations }
+  public
+       { Public declarations }
+    AUTag: Integer;
+    FZTime: TDateTime;
+    program_rkey: integer;
+    data05_rkey: string;
+  end;
+
+var
+  DM: TDM;
+  base:string; //¿Î÷∞±Íº«
+
+
+implementation
+
+{$R *.dfm}
+
+end.

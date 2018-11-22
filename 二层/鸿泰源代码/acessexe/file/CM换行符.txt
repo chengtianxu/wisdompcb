@@ -1,0 +1,29 @@
+update data0010 set BILLING_ADDRESS_1=replace(BILLING_ADDRESS_1,char(10),'') 
+update data0010 set BILLING_ADDRESS_1=replace(BILLING_ADDRESS_1,char(13),'') 
+
+update data0010 set BILLING_ADDRESS_2=replace(BILLING_ADDRESS_2,char(10),'') 
+update data0010 set BILLING_ADDRESS_2=replace(BILLING_ADDRESS_2,char(13),'') 
+
+
+update data0010 set BILLING_ADDRESS_3=replace(BILLING_ADDRESS_3,char(10),'') 
+update data0010 set BILLING_ADDRESS_3=replace(BILLING_ADDRESS_3,char(13),'') 
+
+update data0060 set REFERENCE_NUMBER=replace(REFERENCE_NUMBER,char(10),'') 
+update data0060 set REFERENCE_NUMBER=replace(REFERENCE_NUMBER,char(13),'') 
+
+LILI  11:23:40
+update a set  a.customer_part_number=replace(a.customer_part_number,char(10),'') from data0050 a
+update a set  a.customer_part_number=replace(a.customer_part_number,char(13),'') from data0050 a
+update a set  a.customer_part_desc=replace(a.customer_part_desc,char(10),'') from data0059 a
+update a set  a.customer_matl_desc=replace(a.customer_matl_desc,char(10),'') from data0059 a
+update a set  a.customer_part_desc=replace(a.customer_part_desc,char(13),'') from data0059 a
+update a set  a.customer_matl_desc=replace(a.customer_matl_desc,char(13),'') from data0059 a
+
+update a set  a.inv_name=replace(a.inv_name,char(10),'') from data0017 a
+update a set  a.inv_description=replace(a.inv_description,char(10),'') from data0017 a
+update a set  a.inv_name=replace(a.inv_name,char(13),'') from data0017 a
+update a set  a.inv_description=replace(a.inv_description,char(13),'') from data0017 a
+
+
+还出现过当59表客户型号为带TYPE内容出来数据为1
+
