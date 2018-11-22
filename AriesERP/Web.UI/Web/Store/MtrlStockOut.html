@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+   <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+ <table id="dg"></table>
+</body>
+</html>
+<script>
+    var isLoad = 0;
+    var isSelect = 0;
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -1, "month");
+    var defdate = startDate + "," + endDate;
+    var dg = new AR.DataGrid("v_MtrlStockOut_list");
+    dg.isShowCheckBox = false;
+    dg.ToolBar.isHidden = true;
+    dg.options = {
+        pageSize: 10,
+        onBeforeLoad: function (param) {
+            if (!isSelect) { setTimeout(function () { getSearchCombox() }, 5); }
+            return Re_searchInfo(param);
+        },
+        onLoadSuccess: function () {
+        }
+    };
+
+    function getSearchCombox() {
+        if (typeof (AR.Global.comboxData.C_Iss_SEARCHINFO) != "undefined") {
+            var data = $('#Iss_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#Iss_searchinfo2').combobox('select', data[1].value);
+            }
+            isSelect = 1;
+            return;
+        }
+        setTimeout(function () { getSearchCombox() }, 5);
+    }
+    function ResetInput(record) {
+        $('#ShowSearch').css("display", "none");
+        $('#udef_searchinfo_input').css("display", "");
+        $('#udef_searchinfo_input').val("");
+        if ($('#udef_searchinfo_select').length > 0) {
+            $('#udef_searchinfo_select').parent().remove();
+        }
+        if (record.value == "直接或间接") {
+            if ($('#udef_searchinfo_select').length <= 0) {
+                $('#udef_searchinfo_input').css("display", "none");
+                $('#udef_searchinfo_input').parent().append('<div style="float:left"><input type="text" defaultitem="false" configkey="直接或间接" id="udef_searchinfo_select"  /></div>')
+                AR.Combobox.onInit(1);
+            }
+        }
+
+    }
+
+    function ResetInput2(record) {
+        $('#ShowSearch2').css("display", "none");
+        $('#udef_searchinfo2_input').css("display", "");
+        $('#udef_searchinfo2_input').val("");
+        if ($('#udef_searchinfo2_select').length > 0) {
+            $('#udef_searchinfo2_select').parent().remove();
+        }
+        if (record.value == "直接或间接") {
+            if ($('#udef_searchinfo2_select').length <= 0) {
+                $('#udef_searchinfo2_input').css("display", "none");
+                $('#udef_searchinfo2_input').parent().append('<div style="float:left"><input type="text" defaultitem="false" configkey="直接或间接" id="udef_searchinfo2_select"  /></div>')
+                AR.Combobox.onInit(1);
+            }
+        }
+
+    }
+
+    dg.Search.onAfterExecute = function () {
+        //修改搜索区的显示方式
+        if ($('#udef_searchinfo_label') && typeof ($('#udef_searchinfo_label')[0]) != "undefined") {
+            $('#udef_searchinfo_label')[0].outerHTML = '<label id="udef_searchinfo_label" style="width:160px">&nbsp; <input type="text" id="Iss_searchinfo" objname="C_Iss_SEARCHINFO" onchange="ResetInput" defaultitem="false" name="Iss_searchinfo" />&nbsp;</label>'
+        }
+        if ($('#udef_searchinfo2_label') && typeof ($('#udef_searchinfo2_label')[0]) != "undefined") {
+            $('#udef_searchinfo2_label')[0].outerHTML = '<label id="udef_searchinfo2_label" style="width:160px">&nbsp; <input type="text" id="Iss_searchinfo2" objname="C_Iss_SEARCHINFO" onchange="ResetInput2" defaultitem="false" name="Iss_searchinfo2" />&nbsp;</label>'
+        }
+        if ($('#发放日期_input2').length > 0) {
+            $('#发放日期_input2').attr("style", "WIDTH: 95px");
+            $('#发放日期_input2').attr("class", "easyui-datebox easyui-validatebox");
+            $('#发放日期_input2').attr("validtype", "datebox");
+            $('#发放日期_input').attr("style", "WIDTH: 95px");
+            $('#发放日期_input').attr("class", "easyui-datebox easyui-validatebox");
+            $('#发放日期_input').attr("validtype", "datebox");
+        }
+        if ($('#selcom_input').length > 0 && typeof ($('#selcom_input')[0]) != "undefined") {
+            $('#selcom_label')[0].innerText = AR.Lang.selCompany || $('#selcom_label')[0].innerText;
+            $('#selcom_input')[0].outerHTML = '<input type="text" id="selCompany"  name="selCompany" />'
+            BindCompany("selCompany");//绑定公司下拉框
+        }
+        SearchBind_BtnExport();//创建按钮到查询区
+
+        ////插入隐藏搜索(目前只能查公用数据库,暂时注释)
+        //if ($('#udef_searchinfo_input').length > 0) {
+        //    var curLeft = parseInt($('#udef_searchinfo_input')[0].offsetLeft) + parseInt($('#udef_searchinfo_input')[0].offsetWidth) - 20;
+        //    $('#udef_searchinfo_input').parent().append('<a href="#" id="ShowSearch" class="searchIcon" style="left:' + curLeft + 'px;display:none"></a>')
+        //}
+        //if ($('#udef_searchinfo2_input').length > 0) {
+        //    var curLeft = parseInt($('#udef_searchinfo2_input')[0].offsetLeft) + parseInt($('#udef_searchinfo2_input')[0].offsetWidth) - 20;
+        //    $('#udef_searchinfo2_input').parent().append('<a href="#" id="ShowSearch2" class="searchIcon" style="left:' + curLeft + 'px;display:none"></a>')
+        //}
+       
+    }
+
+    dg.Search.BtnReset.onAfterExecute = function () {
+        if ($('#发放日期_input2')) {
+            //重置时日期,自定义下拉框默认值要重新赋值
+            $('#发放日期_input').datebox('setValue', endDate);
+            $('#发放日期_input2').datebox('setValue', startDate);
+        }
+        if ($('#Iss_searchinfo')) {
+            var data = $('#Iss_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#Iss_searchinfo').combobox('select', data[0].value);
+            }
+        }
+        if ($('#Iss_searchinfo2')) {
+            var data = $('#Iss_searchinfo2').combobox('getData');
+            if (data.length > 0) {
+                $('#Iss_searchinfo2').combobox('select', data[1].value);
+            }
+        }
+    }
+
+    dg.Search.BtnQuery.onBeforeExecute = function (para) {
+        if ($('#发放日期_input2')) {
+            var newdate1 = $('#发放日期_input2').datebox('getValue').substr(0, 10);
+            var newdate2 = $('#发放日期_input').datebox('getValue').substr(0, 10);
+            if ((newdate1 == "" && newdate2 != "") || (newdate1 != "" && newdate2 == "")) {
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsg3"], "info");//"日期条件不全!"
+                return false;
+            }
+            var days = dateDiff(newdate1, newdate2);
+            if (days > 366) {
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsg"], "info"); //"日期区间不能大于1年!"
+                return false;
+            }
+            if (days < 0) {
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsg2"], "info");//"开始日期不能大于结束日期!"
+                return false;
+            }
+        }
+
+    }
+
+    dg.bind();
+
+    function ShowBillNo(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_出库单号"] + ": " + row.出库单号 + "<br/>" + AR.Lang["v_MtrlStockOut_list_领料单号"] + ": " + row.领料单号
+            + "<br/>" + AR.Lang["v_MtrlStockOut_list_入仓单号"] + ": "
+            + row.入仓单号 + "<br/>" + AR.Lang["v_MtrlStockOut_list_采购单号"] + ": " + row.采购单号;
+    }
+
+    function ShowMtrl(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_材料编码"] + ": " + row.材料编码 + "<br/>" + AR.Lang["v_MtrlStockOut_list_材料名称"] + ": "
+            + row.材料名称 + "<br/>" + AR.Lang["v_MtrlStockOut_list_材料规格"] + ": " + row.材料规格;
+    }
+    function ShowType(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_材料类别"] + ": " + row.材料类别 + "<br/>" + AR.Lang["v_MtrlStockOut_list_材料组别"] + ": " + row.材料组别;
+    }
+    function ShowVendor(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_供应商代码"] + ": " + row.供应商代码 + "<br/>" + AR.Lang["v_MtrlStockOut_list_供应商简称"] + ": " + row.供应商简称;
+    }
+    function ShowQty(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_发料数量"] + ": " + row.发料数量 + "<br/>" + AR.Lang["v_MtrlStockOut_list_退料数量"] + ": " + row.退料数量
+            + "<br/>" + AR.Lang["v_MtrlStockOut_list_发放面积"] + ": " + row.发放面积 + "<br/>" + AR.Lang["v_MtrlStockOut_list_单位"] + ": " + row.单位;
+    }
+    function ShowMoney(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_币别"] + ": " + row.币别 + "<br/>" + AR.Lang["v_MtrlStockOut_list_税率"] + ": " + row.税率
+            + "<br/>" + AR.Lang["v_MtrlStockOut_list_汇率"] + ": " + row.汇率 + "<br/>" + AR.Lang["v_MtrlStockOut_list_含税价"] + ": " + row.含税价
+            + "<br/>" + AR.Lang["v_MtrlStockOut_list_含税金额"] + ": " + row.含税金额;
+    }
+    function ShowLocation(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_库存工厂"] + ": " + row.库存工厂 + "<br/>" + AR.Lang["v_MtrlStockOut_list_发料人员"] + ": " + row.发料人员
+            + "<br/>" + AR.Lang["v_MtrlStockOut_list_发放仓库名称"] + ": " + row.发放仓库名称;
+    }
+    function ShowReq(value, row, index) {
+        return AR.Lang["v_MtrlStockOut_list_领料工厂"] + ": " + row.领料工厂 + "<br/>" + AR.Lang["v_MtrlStockOut_list_领料人员"] + ": " + row.领料人员
+            + "<br/>" + AR.Lang["v_MtrlStockOut_list_领料部门编号"] + ": " + row.领料部门编号 + "<br/>" + AR.Lang["v_MtrlStockOut_list_领料部门名称"] + ": " + row.领料部门名称;
+    }
+
+    dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+        return Re_searchInfo(param);
+    }
+
+    function Re_searchInfo(param) {
+
+        //定制查询条件
+        if (!param.sys_search) { return; }
+        var searchArr = JSON.parse(param.sys_search);
+        var newpara = searchArr.select("name", "Iss_searchinfo");
+        var inputvalue = "";
+        if ($('#udef_searchinfo_input').length > 0) { inputvalue =$.trim( $('#udef_searchinfo_input').val()); }
+        if ($('#udef_searchinfo_select').length > 0) { inputvalue = $('#udef_searchinfo_select').combobox("getValue"); }
+        if (newpara != null && inputvalue != "") {
+             if (newpara.contains("出库单号", "value")) {
+                 searchArr.push({ "name": "出库单号", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("材料编码", "value")) {
+                searchArr.push({ "name": "材料编码", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("材料类别", "value")) {
+                searchArr.push({ "name": "材料类别", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("配料单号", "value")) {
+                searchArr.push({ "name": "配料单号", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料部门名称", "value")) {
+                searchArr.push({ "name": "领料部门名称", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("材料组别", "value")) {
+                searchArr.push({ "name": "材料组别", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料工厂", "value")) {
+                searchArr.push({ "name": "领料工厂", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料单号", "value")) {
+                searchArr.push({ "name": "领料单号", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("供应商简称", "value")) {
+                searchArr.push({ "name": "供应商简称", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料人员", "value")) {
+                searchArr.push({ "name": "领料人员", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("发放仓库名称", "value")) {
+                searchArr.push({ "name": "发放仓库名称", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("入仓单号", "value")) {
+                searchArr.push({ "name": "入仓单号", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("入仓类型", "value")) {
+                searchArr.push({ "name": "入仓类型", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("库存工厂", "value")) {
+                searchArr.push({ "name": "库存工厂", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("部门类型", "value")) {
+                searchArr.push({ "name": "部门类型", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("直接或间接", "value")) {
+                searchArr.push({ "name": "直接或间接", "value": "'" + inputvalue + "'", "pattern": "=" })
+            }
+
+        }
+        var newpara = searchArr.select("name", "Iss_searchinfo2");
+        var inputvalue2 = "";
+        if ($('#udef_searchinfo2_input').length > 0) { inputvalue2 = $.trim($('#udef_searchinfo2_input').val()); }
+        if ($('#udef_searchinfo2_select').length > 0) { inputvalue2 = $('#udef_searchinfo2_select').combobox("getValue"); }
+        if (newpara != null && inputvalue2 != "") {
+            if (newpara.contains("出库单号", "value")) {
+                searchArr.push({ "name": "出库单号", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("材料编码", "value")) {
+                searchArr.push({ "name": "材料编码", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("材料类别", "value")) {
+                searchArr.push({ "name": "材料类别", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("配料单号", "value")) {
+                searchArr.push({ "name": "配料单号", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料部门名称", "value")) {
+                searchArr.push({ "name": "领料部门名称", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("材料组别", "value")) {
+                searchArr.push({ "name": "材料组别", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料工厂", "value")) {
+                searchArr.push({ "name": "领料工厂", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料单号", "value")) {
+                searchArr.push({ "name": "领料单号", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("供应商简称", "value")) {
+                searchArr.push({ "name": "供应商简称", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("领料人员", "value")) {
+                searchArr.push({ "name": "领料人员", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("发放仓库名称", "value")) {
+                searchArr.push({ "name": "发放仓库名称", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("入仓单号", "value")) {
+                searchArr.push({ "name": "入仓单号", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("入仓类型", "value")) {
+                searchArr.push({ "name": "入仓类型", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("库存工厂", "value")) {
+                searchArr.push({ "name": "库存工厂", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("部门类型", "value")) {
+                searchArr.push({ "name": "部门类型", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("直接或间接", "value")) {
+                searchArr.push({ "name": "直接或间接", "value": "'" + inputvalue2 + "'", "pattern": "=" })
+            }
+
+        }
+        searchArr.remove("Iss_searchinfo", "name");
+        searchArr.remove("udef_searchinfo", "name");
+        searchArr.remove("Iss_searchinfo2", "name");
+        searchArr.remove("udef_searchinfo2", "name");
+        newpara = searchArr.select("name", "selCompany");
+        if (newpara != null) {
+            $.each(newpara, function (index, data) {
+                searchArr.remove("selCompany", "name");
+                if (index == 0) { param.SelCompany = data.value.replace(/\'/g, ""); }
+                else { param.SelCompany += "," + data.value.replace(/\'/g, ""); }
+            })
+        }
+
+        var str = JSON.stringify(searchArr).replace(/\'/g, "!#");
+        eval("sys_search = '" + str + "'");
+        param.sys_search = sys_search.replace(/!#/g, "'");
+
+        //默认结束日期加一天
+        if ($('#发放日期_input2') && $('#发放日期_input2').datebox('getValue') != "") {
+            var tmpdate = $('#发放日期_input').datebox('getValue').substr(0, 10);
+            var tmpdate2 = AddDate(tmpdate, 1, "day");
+            var searchstr = param.sys_search;
+            var pos = searchstr.lastIndexOf(tmpdate);
+            if (pos > 0) {
+                var str = searchstr.substr(0, pos) + searchstr.substr(pos).replace(tmpdate, tmpdate2);
+                param.sys_search = str;
+            }
+        }
+        param.isCompany = 1; //多公司查询标记
+
+   
+
+        if (searchArr.length == 0) {
+            $.messager.alert(AR.Lang["msg"], AR.Lang["com_SearchValidateMsg"], "info");//"条件不能全部为空!"
+            return false;
+        }
+        return true;
+    }
+
+</script>

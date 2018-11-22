@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    var CompanyList = AR.Utility.Ajax.post("GetList", "V_Common_Data0015"); //取公司列表
+    var rkey28 = parent.dg.getSelected().rkey;
+    var dg = new AR.DataGrid("V_SuppPriceSynSet", "DATA0028_15");
+    dg.isEditor = true;
+    //dg.ToolBar.isHidden = true;
+    //dg.PKColumn.Editor.BtnDel.hidden = true;
+    dg.ToolBar.add(AR.Lang.close, 'AR.Utility.Window.close', 1);
+    dg.ToolBar.BtnAdd.isHidden = true;
+    dg.ToolBar.BtnExport.isHidden = true;
+    dg.ToolBar.BtnImport.isHidden = true;
+    dg.ToolBar.BtnExportTemplate.isHidden = true;
+    dg.isShowCheckBox = false;
+    dg.options = {
+        sortName: "rkey15 asc",
+        onLoadSuccess: function (data) {
+            //默认插入未保存的公司
+            $.each(CompanyList.rows, function (index, row) {
+                if (!data.rows.select("abbr_name", row.abbr_name)) {
+                    dg.datagrid("appendRow", row);
+                }
+            })
+        }
+    }
+
+     dg.addWhere("RKEY28", rkey28, "=");//只带出对应的记录的设置信息
+    dg.bind();
+
+
+    //完成编辑后对字段赋值
+    dg.options.onAfterEdit = function (index, row, changes) {
+
+    }
+    //保存前事件
+    dg.PKColumn.Editor.BtnSave.onBeforeExecute = function (value, index, postData)  //todo
+    {
+        var row = dg.getData().rows[index];
+        if (!row.rkey) {//如果是页面插入的记录,标示为新增记录
+            postData.rkey28 = rkey28;
+            postData.rkey15 = row.rkey15;
+            dg.PKColumn.Editor.operator = "Add";
+        }
+    }
+</script>

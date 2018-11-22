@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>1</title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+    <div style="display:none;">
+        <div id="mm" class="easyui-menu" data-options="onClick:menuHandler" style="width: 150px;">
+            <!--<div id="cmbtn_New">新增</div>
+            <div id="cmbtn_Edit">编辑</div>-->
+            <div id="cmbtn_View">查看</div>
+            <!--<div id="cmbtn_Dele">删除</div>-->
+
+            <div id="cmbtn_synSet">工厂同步设置</div>
+            <div id="cmbtn_sync">工厂数据同步</div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    var dg = new AR.DataGrid("V_Data0017List", "Data0017");
+    dg.PKColumn.add("edit", "编辑", null, "Data0017Edit.html", "材料编码定义", "edit");
+    dg.PKColumn.add("del", "删除", null, null, null, "del");
+    dg.options = {
+        sortName: "INV_PART_NUMBER asc",
+        pageSize: 20,
+        onBeforeLoad: function (param) {
+            var whereobj = [{ name: "GROUP_NAME", value: $("#group_name_input").val(), pattern: "like" }];
+            whereobj.push({ name: "INV_PART_NUMBER", value: $("#INV_PART_NUMBER_input".toLowerCase()).val(), pattern: "like" });
+            //alert(JSON.stringify(whereobj))
+            param.sys_search = JSON.stringify(whereobj);
+            return true;
+        },
+        onRowContextMenu: function (e, rowIndex, rowData) {
+            e.preventDefault(); //阻止浏览器捕获右键事件
+            //$(this).datagrid("clearSelections"); //取消所有选中项
+            $(this).datagrid("selectRow", rowIndex); //根据索引选中该行
+            $('#mm').menu('show', {
+                left: e.pageX,
+                top: e.pageY,
+                hideOnUnhover: false //菜单不自动隐藏
+            });
+        }
+    };
+
+    dg.Search.onAfterExecute = function () {
+        var curLeft = parseInt($('#group_name_input')[0].offsetLeft) + parseInt($('#group_name_input')[0].offsetWidth) - 20;
+        $("#group_name_input").parent().append("<a href='#' id='ShowSearch' class='searchIcon' dialog='V_Common_Data0496' style='left: " + curLeft + "px;'></a>");
+    }
+
+    AR.Combobox.onAfterExecute = function (type, $input, backPara) {
+        if (type == "dialog" && $input.attr("id") == "ShowSearch" && !$input.attr("mutiple")) {
+            $("#group_name_input").val(backPara.option.data[0].value);
+        }
+    }
+
+    //右键菜单点击事件
+    function menuHandler(item) {
+        if (item.id == "cmbtn_View") {
+            AR.Utility.Window.open("Data0017Edit.html?isView=1", "材料编码信息", 1);
+        };
+        if (item.id == "cmbtn_synSet") { 
+            AR.Utility.Window.open("Data0017FactorySynSet.html", $('#cmbtn_synSet')[0].children[0].innerText, 1);
+        };
+        if (item.id == "cmbtn_sync") { FactorySync(); };
+    }
+
+    //工厂数据同步
+    function FactorySync() {
+        var row = dg.getSelected();
+        //调用一般存储过程的方法名:"Exec_SP",存储过程名,参数,回调函数,是否显示进度提示
+        AR.Utility.Ajax.post("Exec_SP", "sp_data0017FactorySync", { rkey: row.rkey }, function (data) {
+            //返回信息: data.errorMsg 错误信息,data.rowcount 记录条数,data.rows 记录数组,data.success 是否成功,data.total 记录总数
+            if (data.success && (data.errorMsg == "" || data.errorMsg == "ok")) {
+                $.messager.alert("", '操作成功', "info")
+            } else {
+                $.messager.alert("", '操作失败' + data.errorMsg, "info")
+            }
+
+        }, true);
+    }
+
+    dg.bind();
+
+        $(function () {
+        $('#cmbtn_view')[0].children[0].innerText = AR.Lang.cmbtn_view || "检查";
+        $('#cmbtn_modfiNote')[0].children[0].innerText = AR.Lang.cmbtn_modfiNote || "变更记录";
+        $('#cmbtn_synSet')[0].children[0].innerText=AR.Lang.factorySynSet || "工厂同步设置";
+        $('#cmbtn_sync')[0].children[0].innerText=AR.Lang.factorySync || "工厂数据同步";
+    });
+</script>

@@ -1,0 +1,676 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js?v=2.0.0.1"></script>
+    <link href="../../Style/CSS/base.css" rel="stylesheet"/>
+    <link href="../../Style/CSS/basic_info.css?v=2.0.0.1" rel="stylesheet"/>
+    
+</head>
+ <body>   
+      <div class="cont-box">        
+ <form  class="cont-box-form" id="form1">
+      <div class="btn" style="margin-top:30px;width:100%;text-align: left" >
+           <a><input class="return" id="btn_back" type="button" name="返回" value="" /></a>
+           <a><input class="submit" id="btn_save" type="submit" name="保存" value="" /></a>           
+        </div>   
+        <input type="hidden" name="rkey" id="rkey" value="" />
+		<table class="kv-table" id="A01"  >
+			<tbody>
+				<tr>
+					<td class="kv-label"   style=" text-align:right" id="INV_PART_NUMBER11">库存原材料</td>
+					<td class="kv-label" colspan="1"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner">
+                        <input class="text textread" data-options="required:true"  type="text" name="INV_PART_NUMBER" id="INV_PART_NUMBER" />
+                        <input class="text" type="text" name="INVENTORY_PTR" id="INVENTORY_PTR" style="display:none" />
+                       </b></b></div>
+                        <div style="float:left"><a href="#" id="ShowMtrls" dialog="V_Common_Data0017" class="searchIcon2" ></a></div>
+					</td> 
+                    <td class="kv-label" style=" text-align:right"></td>                 
+                     <td class="kv-label"  style=" text-align:right" id="USER_FULL_NAME11" >AVL审批人员</td>
+                     <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread"type="text"  name="USER_FULL_NAME" id="USER_FULL_NAME" /></b></b></td>  
+                </tr>
+                <tr>
+                    <td class="kv-label" style=" text-align:right" id="INV_PART_DESCRIPTION11" >原材料规格</td>
+                      <td class="kv-label" colspan="4"><b class="fluid-input"><b class="fluid-input-inner">
+                          <input class="text textread" type="text" readonly="true" name="INV_PART_DESCRIPTION" id="INV_PART_DESCRIPTION" /> </b></b>    
+                      </td>             
+                </tr>
+                	<tr>
+					<td class="kv-label"  style=" text-align:right" id="CODE11" >供应商</td>
+					<td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner">
+                        <input class="text textread" type="text" data-options="required:true"   name="CODE" id="CODE" /></b></b></div>
+                        <input class="text" type="text" name="SUPPLIER_PTR" id="SUPPLIER_PTR" style="display:none" />
+                        <div style="float:left"><a href="#" id="ShowVendor" dialog="V_common_Data0023" class="searchIcon2" ></a></div></td>
+                     <td class="kv-label" colspan="1"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="ABBR_NAME" id="ABBR_NAME" /></b></b></td> 
+                     <td class="kv-label" style=" text-align:right"  id="TDate11"  >最后保存日期</td>
+                     <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text"  readonly="true" name="TDate" id="TDate" /></b></b></td>  
+                </tr>
+
+                <tr>
+					<td class="kv-label" style=" text-align:right"  id="curr_code11" >货币</td>
+					<td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner">
+                        <input class="text textread" type="text"  name="curr_code" id="curr_code" /></b></b></div>
+                          <input class="text" type="text" name="CURRENCY_PTR" id="CURRENCY_PTR" style="display:none" />
+                        <div style="float:left"><a href="#" id="ShowCurrency" dialog="V_Common_Data0001" class="searchIcon2" ></a></div></td>
+                     <td class="kv-label" colspan="1"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="curr_name" id="curr_name" /></b></b></td> 
+                     <td class="kv-label" style=" text-align:right"  id="AVL_FLAG11"  >AVL标记</td>
+                    	<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text"   type="text"  disabled="disabled" configkey="AVL标记" defaultitem="false" name="AVL_FLAG" id="AVL_FLAG" /></b></b></td>
+                </tr>
+
+                <tr>
+                    <td class="kv-label" style="text-align:right" id="SUPPLIER_PART_NO11" >供应商原材料代码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="SUPPLIER_PART_NO" id="SUPPLIER_PART_NO" /></b></b></td>
+                    <td class="kv-label" colspan="1"> </td>  
+					<td class="kv-label" style=" text-align:right"  id="AMT_QUAN_FLAG11">订购方法</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"    onchange="setValue" configkey="订购方法" defaultitem="false" name="AMT_QUAN_FLAG" id="AMT_QUAN_FLAG" /></b></b></td>                 
+				</tr>
+              
+                  <tr>
+                    <td class="kv-label" style="text-align:right" id="LEAD_TIME11" >供应商交货时间</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="LEAD_TIME" id="LEAD_TIME" /></b></b></td>
+                    <td class="kv-label"  colspan="1" style="text-align:left" id="lbl_days" >天数</td>                     
+					 <td class="kv-label" style=" text-align:right" id="MIN_ORDER_QTY11">最少定购数量/金额</td>
+                     <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"   name="MIN_ORDER_QTY" id="MIN_ORDER_QTY" /></b></b></td> 
+                </tr>
+
+                <tr>
+                    <td class="kv-label" style="text-align:right"  id="qte_price211">保存期限</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="qte_price2" id="qte_price2" /></b></b></td>
+                    <td class="kv-label"  colspan="1" style="text-align:left" id="lbl_day" >天</td>                     
+					 <td class="kv-label" style=" text-align:right" id="SUGG_REORDER_QTY11" >建议重购数量</td>
+                     <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"   name="SUGG_REORDER_QTY" id="SUGG_REORDER_QTY" /></b></b></td> 
+                </tr>
+
+                <tr>
+					<td class="kv-label" style=" text-align:right" id="UNIT_CODE211">存货单位</td>
+					<td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner">
+                        <input class="text textread" type="text"  readonly="true" name="UNIT_CODE2" id="UNIT_CODE2" />
+                         <input class="text" type="text" name="STOCK_UNIT_PTR" id="STOCK_UNIT_PTR" style="display:none" />
+                       </b></b></div>
+                       <!-- <div style="float:left"><a href="#" id="ShowSUnit" dialog="V_Common_Data0002" class="searchIcon2" ></a></div>-->
+					</td>               
+                     <td class="kv-label" colspan="1"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="UNIT_NAME2" id="UNIT_NAME2" /></b></b></td> 
+                    <td class="kv-label" style=" text-align:right" id="PRICE_111">供应商价格</td>
+                     <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"   name="PRICE_1" id="PRICE_1" /></b></b></td> 
+                         
+                </tr>
+
+                <tr>
+					<td class="kv-label" style=" text-align:right" id="UNIT_CODE11">采购单位</td>
+					<td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner">
+                        <input class="text textread" type="text"  name="UNIT_CODE" id="UNIT_CODE" />
+                         <input class="text" type="text" name="PURCHASE_UNIT_PTR" id="PURCHASE_UNIT_PTR" style="display:none" />
+                       </b></b></div>
+                        <div style="float:left"><a href="#" id="ShowPUnit" dialog="V_Common_Data0002" class="searchIcon2" ></a></div>
+					</td>               
+                     <td class="kv-label" colspan="1"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="UNIT_NAME" id="UNIT_NAME" /></b></b></td> 
+                     <td class="kv-label"> </td>
+					<td class="kv-content" colspan="1">
+                        <input type="checkbox" id="tax_flag_chk" checked="checked" /><label for="tax_flag_chk" id="tax_flag11" >供应商价格是否含税</label>
+                        <input class="text" type="text"  name="tax_flag" id="tax_flag"   value="Y" style="display:none" /></td>
+                </tr>
+                <tr>
+                    <td class="kv-label" style=" text-align:right"  id="CONVERSION_FACTOR11">存货/采购</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="CONVERSION_FACTOR" id="CONVERSION_FACTOR" /></b></b></td>
+                    <td class="kv-label" colspan="1"> </td>  
+					<td class="kv-label" style=" text-align:right" id="quote_type11">购入方式</td>
+					<td class="kv-content">
+                        <input type="radio" name="quote_type" id="quote_type1" /><label for="quote_type1" id="quote_type11">内销</label>
+                        <input type="radio" name="quote_type" id="quote_type2" /><label for="quote_type2" id="quote_type22">转厂</label>
+                        <input class="text" type="text"  name="EDI_FLAG_FOR_PO" id="quote_type" value="0" style="display:none" />
+					</td>
+				</tr>
+                <tr>
+                    <td class="kv-label" style=" text-align:right" id="rohs11">环保等级</td>
+                    <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" 
+                          configkey="环保等级" defaultitem="false" name="rohs" id="rohs" /></b></b></td> 
+                   <td class="kv-label" colspan="1"> </td> 
+                     <td class="kv-label" style=" text-align:right" id="IF_CAF11">耐CAF</td>
+                    <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" 
+                          configkey="是否2" defaultitem="false" name="IF_CAF" id="IF_CAF" /></b></b>
+                    </td>   
+                  
+                </tr>
+                <tr>
+                   <td class="kv-label" style=" text-align:right" id="TAX_211">增值税</td>
+                    <td class="kv-content" style=" text-align:right"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="TAX_2" id="TAX_2" /></b></b></td>  
+                    <td class="kv-label" style=" text-align:left">%</td>
+                    <td class="kv-label" style=" text-align:right"  id="qte_price11">市场报价价格</td>
+                     <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text"  readonly="true" name="qte_price" id="qte_price" /></b></b></td>                    
+                     <td></td>
+                </tr>
+                <tr>          
+                    <td class="kv-label" style=" text-align:right" id="employee_name11">最后保存人员</td>
+                     <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text"  readonly="true" name="employee_name" id="employee_name" /></b></b></td> 
+                          <td  class="kv-label" colspan="3"></td>
+                </tr>
+                  <tr>
+                     <td class="kv-label" style=" text-align:right" id="remark11">备注</td>
+                     <td class="kv-content" colspan="4"> <b class="fluid-input"><b class="fluid-input-inner"><textarea class="text" style="height:80px"  name="remark" id="remark"></textarea></b></b></td>     
+                </tr>
+
+			</tbody>
+		</table> 
+     <div id="priceFile11">价格审批文件：</div>
+      <table id="dg"></table> 
+            
+     </form>
+</div>
+      <div style="display: none;">
+    <div id="mm" class="easyui-menu" data-options="onClick:menuHandler" style="width: 150px;">
+        <div id="cmbtn_UpLoad"></div>
+        <div id="cmbtn_DownLoad"></div>
+        <div id="cmbtn_Del"></div>
+
+    </div>
+    </div>
+
+    </body>
+</html>
+<script>
+   
+    $(function () {
+        //语言：
+        $('#quote_type11').html(AR.Lang["soldInside"]);
+        $('#quote_type22').html(AR.Lang["co-operation"]);
+        $('#btn_back').html(AR.Lang["btn_back"]);
+        $('#btn_save').html(AR.Lang["btn_save"]);
+
+        $('#INV_PART_NUMBER11').html(AR.Lang["V_SuppPriceList_inv_part_number"]);
+        $('#INV_PART_DESCRIPTION11').html(AR.Lang["V_SuppPriceList_inv_part_description"]);
+        $('#USER_FULL_NAME11 ').html(AR.Lang["V_SuppPriceList_user_full_name"]);
+        $('#CODE11').html(AR.Lang["V_SuppPriceList_code"]);
+        $('#TDate11').html(AR.Lang["V_SuppPriceList_tdate"]);
+        $('#curr_code11').html(AR.Lang["V_SuppPriceList_curr_code"]);
+        $('#AVL_FLAG11').html(AR.Lang["V_SuppPriceList_avl_flag"]);
+        $('#SUPPLIER_PART_NO11').html(AR.Lang["V_SuppPriceList_supplier_part_no"]);
+        $('#AMT_QUAN_FLAG11').html(AR.Lang["V_SuppPriceList_amt_quan_flag"]);
+        $('#LEAD_TIME11 ').html(AR.Lang["V_SuppPriceList_lead_time"]);
+        $('#MIN_ORDER_QTY11').html(AR.Lang["V_SuppPriceList_min_order_qty"]);
+        $('#qte_price211').html(AR.Lang["V_SuppPriceList_qte_price2"]);
+        $('#SUGG_REORDER_QTY11').html(AR.Lang["V_SuppPriceList_sugg_reorder_qty"]);
+        $('#UNIT_CODE211').html(AR.Lang["V_SuppPriceList_unit_code2"]);
+        $('#PRICE_111').html(AR.Lang["V_SuppPriceList_price_1"]);
+        $('#UNIT_CODE11').html(AR.Lang["V_SuppPriceList_unit_code"]);
+        $('#tax_flag11').html(AR.Lang["V_SuppPriceList_tax_flag"]);
+        $('#CONVERSION_FACTOR11').html(AR.Lang["V_SuppPriceList_conversion_factor"]);
+        $('#quote_type11').html(AR.Lang["V_SuppPriceList_quote_type"]);
+        $('#rohs11').html(AR.Lang["V_SuppPriceList_rohs"]);
+        $('#IF_CAF11').html(AR.Lang["V_SuppPriceList_if_caf"]);
+        $('#TAX_211').html(AR.Lang["V_SuppPriceList_tax_2"]);
+        $('#qte_price11').html(AR.Lang["V_SuppPriceList_qte_price"]);
+        $('#employee_name11').html(AR.Lang["V_SuppPriceList_employee_name"]);
+        $('#remark11').html(AR.Lang["common_remark"]);//公用备注
+        $('#priceFile11').html(AR.Lang["V_SuppPriceList_priceFile"]);
+        $('#lbl_day').html(AR.Lang["V_SuppPriceList_lbl_day"]);
+        $('#lbl_days').html(AR.Lang["V_SuppPriceList_lbl_days"]);
+    }
+)
+  
+    var rkey28 = -1;
+    var isView = AR.Utility.queryString("isView");
+    var AType = AR.Utility.queryString("AType");  //按供应商还是物料
+    if (isView == "1") { $('#form1').form('load', parent.dg.getSelected()); }
+
+    var dg = new AR.DataGrid("V_FileList", "Data0028_FileList");
+    dg.ToolBar.BtnImport.isHidden = true;
+    dg.ToolBar.BtnExportTemplate.isHidden = true;
+    var row =parent.dg.getSelected();
+    if (row && parent.AR.Global.DG.action != "Add") {
+        rkey28 = parent.dg.getSelected().rkey;
+    }
+
+    dg.options = {
+        pageSize: 10, 
+        onLoadSuccess: function (data) {
+            if (data.rows.length == 0) {
+                dg.addWhere("rkey28", "-1", "=");
+                dg.reload();
+            } else {
+                dg.removeWhere("rkey28");
+                dg.addWhere("rkey28", rkey28, "=");
+            }
+        },
+        
+        onRowContextMenu: function (e, rowIndex, rowData) { //右键
+            e.preventDefault(); //阻止浏览器捕获右键事件
+            if ($('#rkey').val() == "") {
+              //  $.messager.alert("", "请先保存之后再上传文件!", "info");
+               $.messager.alert(AR.Lang["msg"], AR.Lang["com_fileSave"], "info");//请先保存之后再上传文件!
+                return false;
+            }
+            if (isView != "1") {
+                opts.data = { "rkey28": $('#rkey').val(), "FtpFileField": "FtpIDKey", "para_FtpID": 1 };
+                new AR.Upload($('#cmbtn_UpLoad'), opts);//为按钮增加上传事件
+            }
+            
+            $(this).datagrid("selectRow", rowIndex); //根据索引选中该行
+            $('#mm').menu('show', {
+                left: e.pageX,
+                top: e.pageY,
+                hideOnUnhover: false //菜单不自动隐藏
+            });
+        }
+    }
+    dg.addWhere("rkey28", rkey28, "=");
+    dg.ToolBar.isHidden = true;
+    dg.isShowCheckBox = false;
+    //dg.ToolBar.BtnImport.isHidden = true;
+    //dg.ToolBar.BtnExportTemplate.isHidden = true;
+    dg.bind();
+     
+    $("#ShowVendor").attr("options", "{sortName: 'CODE asc'}");
+    $("#ShowCurrency").attr("options", "{sortName: 'curr_code asc'}");
+    $("#ShowPUnit").attr("options", "{sortName: 'UNIT_CODE asc'}");
+    $("#ShowSUnit").attr("options", "{sortName: 'UNIT_CODE asc'}");
+    $("#ShowMtrls").attr("options", "{sortName: 'INV_PART_NUMBER asc'}");
+
+    //对字段赋初值
+    $(function () {
+        if (parent.AR.Global.DG.action == "Update") {
+            
+        }
+        if ($("#tax_flag").val() == "Y") { $("#tax_flag_chk").attr("checked", true); } //供应商价格是否含税
+        if ($("#quote_type").val() == "0") { $("#quote_type1").attr("checked", true); }
+        if ($("#quote_type").val() == "1") { $("#quote_type2").attr("checked", true); }
+
+        if (parent.dg.getSelected()) {
+            $("#AVL_FLAG").val(parent.dg.getSelected().avl_flag); //AVL 标记 
+            var CURRENCY_PTR = parent.dg.getSelected().rkey
+        }
+
+         if (parent.AR.Global.DG.action == "Add") { 
+          
+             //默认值：
+             $("#LEAD_TIME").val("0");
+             $("#MIN_ORDER_QTY").val("0");
+             $("#CONVERSION_FACTOR").val("0"); //CONVERSION_FACTOR
+             $("#SUGG_REORDER_QTY").val("0");//SUGG_REORDER_QTY
+             //var data = ("#AMT_QUAN_FLAG").combobox('getData');
+             // $("#AMT_QUAN_FLAG").combobox("select", data[0].value);  //订购方法
+
+             
+
+             $("#TAX_2").val("0");  //TAX_2
+             $("#PRICE_1").val("0");//PRICE_1
+             $("#qte_price").val("0");          //qte_price
+             $("#qte_price2").val("0"); 
+
+             // $("#tax_flag").attr("checked", true);
+            if (parent.AType == 0)  //供应商新增 
+            {
+               
+                //供应商：
+                var revalue = AR.Utility.Ajax.post("Get", "V_common_Data0023", { id: '', sys_search: '[{"name":"rkey","value":"'+parent.rkey23+'","pattern":"="}]' });
+                if (revalue) {
+                    $("#SUPPLIER_PTR").val(revalue.RKEY);
+                    $("#CODE").val(revalue.CODE);
+                    $("#ABBR_NAME").val(revalue.ABBR_NAME);
+
+                    //币别：
+                    $("#CURRENCY_PTR").val(revalue.CURRENCY_PTR);
+                    $("#curr_code").val(revalue.curr_code);
+                    $("#curr_name").val(revalue.curr_name);
+
+                    $("#TAX_2").val(revalue.STATE_TAX);
+                    $("#LEAD_TIME").val(revalue.SHIPPING_LEAD_TIME); //供应商交货时间
+
+
+                    $("#ShowVendor").attr("disabled", true);
+                    $("#ShowCurrency").attr("disabled", true);
+                    $("#ShowPUnit").attr("disabled", true);
+                    $("#PRICE_1").attr("disabled", true); 
+                   // $("#CONVERSION_FACTOR").attr("disabled", true);
+                }
+            }   
+            else if (parent.AType == 1)//物料新增 
+            {
+                //物料
+                var revalue = AR.Utility.Ajax.post("Get", "V_Common_Data0017", { id: '', sys_search: '[{"name":"rkey","value":"' + parent.rkey17 + '","pattern":"="}]' });
+                if (revalue) {
+                    $("#INVENTORY_PTR").val(revalue.RKEY);
+                    $("#INV_PART_NUMBER").val(revalue.INV_PART_NUMBER);
+                    $("#INV_PART_DESCRIPTION").val(revalue.INV_PART_DESCRIPTION);
+
+                    //采购单位：
+                    $("#PURCHASE_UNIT_PTR").val(revalue.PURCH_UNIT_PTR);
+                    $("#UNIT_CODE").val(revalue.UNIT_CODE);
+                    $("#UNIT_NAME").val(revalue.UNIT_NAME);
+
+                    //存货单位：
+                    $("#STOCK_UNIT_PTR").val(revalue.STOCK_UNIT_PTR);
+                    $("#UNIT_CODE2").val(revalue.UNIT_CODE2);
+                    $("#UNIT_NAME2").val(revalue.UNIT_NAME2);
+
+                    $("#CONVERSION_FACTOR").val(revalue.STOCK_PURCH); //采购与存货单位换算率
+                    $("#qte_price2").val(revalue.SHELF_LIFE); //保存期限
+                    $("#SUPPLIER_PART_NO").val(revalue.manufacturer_name); //供应商材料型号代码
+
+                    $("#ShowMtrls").attr("disabled", true);
+                    $("#ShowPUnit").attr("disabled", true);
+                    // $("CONVERSION_FACTOR").attr("disabled", true);
+                    $("PRICE_1").attr("disabled", true);
+                    $("#ShowCurrency").attr("disabled", true);
+                }
+            }
+        }
+
+        if (isView == "1") { ToView(); }
+    });
+
+    function ToView() {
+        $("#form1").find(":input[type!='button'][type!='rest']").each(function () {
+            if ($(this).attr("type") == "checkbox" || $(this).attr("type") == "radio") {
+                $(this).attr("disabled", true);
+            }
+            else if ($(this).attr("type") == 'submit') {
+                $(this).css("display", "none");
+            }
+            else {
+                $(this).attr("readonly", true);
+            }
+        })
+        $("#form1").find("a").each(function () {
+            $(this).unbind();
+        })
+        var itemEl = $('#cmbtn_UpLoad')[0];
+        var item = $('#mm').menu('getItem', itemEl);
+        $('#mm').menu('disableItem', item.target);
+        itemEl = $('#cmbtn_Del')[0];
+        item = $('#mm').menu('getItem', itemEl);
+        $('#mm').menu('disableItem', item.target);
+    }
+
+    //绑定事件
+   
+    $("#tax_flag").change(function () {
+        if ($(this).attr("checked") == "checked") { $("#tax_flag").val("Y"); }
+        else { $("#tax_flag").val("N"); }
+    });
+ 
+    //弹窗选择之后事件。
+    AR.Combobox.onAfterExecute = function (type, $input, backPara) {
+        if (type == "dialog") {
+            if ($input.attr("id") == "ShowCurrency") {
+                $('#CURRENCY_PTR').val(backPara.datas.rkey);
+                $('#curr_code').val(backPara.datas.curr_code);
+                $('#curr_name').val(backPara.datas.curr_name);
+            }
+            if ($input.attr("id") == "ShowPUnit") {
+                $('#PURCHASE_UNIT_PTR').val(backPara.datas.rkey);
+                $('#UNIT_CODE').val(backPara.datas.unit_code);
+                $('#UNIT_NAME').val(backPara.datas.unit_name);
+
+                //if( $('#UNIT_CODE').val()!= $('#UNIT_CODE2').val())   //两个单位不一样由可以修改换算率
+                //{
+                //  $("#CONVERSION_FACTOR").attr("dislabled", false);
+                //}
+
+            }
+            if ($input.attr("id") == "ShowSUnit") {
+                $('#STOCK_UNIT_PTR').val(backPara.datas.rkey);
+                $('#UNIT_CODE2').val(backPara.datas.unit_code);
+                $('#UNIT_NAME2').val(backPara.datas.unit_name);
+            }
+
+            //选物料
+            if ($input.attr("id") == "ShowMtrls") {
+                $('#INVENTORY_PTR').val(backPara.datas.rkey);
+                $('#INV_PART_NUMBER').val(backPara.datas.inv_part_number);
+                $('#INV_PART_DESCRIPTION').val(backPara.datas.inv_part_description);
+
+                var revalue = AR.Utility.Ajax.post("Get", "V_Common_Data0028", { id: '', sys_search: '[{"name":"SUPPLIER_PTR","value":"' + parent.rkey23 + '", "pattern":"="},{ "name":"INVENTORY_PTR","value":"' + backPara.datas.rkey + '", "pattern":"="}]' });
+                if (revalue)
+                {
+                   // $.messager.alert("", "该供应商已存在该物料的报价！", "info");
+                    $.messager.alert(AR.Lang["msg"], AR.Lang["com_vendormtrlexists"], "info");//该供应商已存在该物料的报价!
+                    $('#INV_PART_NUMBER').focus();
+                    $('#INV_PART_NUMBER').val("");
+                    $('#INV_PART_DESCRIPTION').val("");
+                    return false;
+                }
+
+                //带出单位
+                $('#PURCHASE_UNIT_PTR').val(backPara.datas.purch_unit_ptr);//采购
+                $('#UNIT_CODE').val(backPara.datas.unit_code);
+                $('#UNIT_NAME').val(backPara.datas.unit_name);
+
+                $('#STOCK_UNIT_PTR').val(backPara.datas.stock_unit_ptr); //存货
+                $('#UNIT_CODE2').val(backPara.datas.unit_code2);
+                $('#UNIT_NAME2').val(backPara.datas.unit_name2);
+
+                if (backPara.datas.CATALOG_NUM == "Y")
+                {
+                    $("#AMT_QUAN_FLAG").attr("checked", true);
+                }
+
+                $("#CONVERSION_FACTOR").val(backPara.datas.stock_purch); //单位换算
+                $("#qte_price2").val(backPara.datas.shelf_life); //保质期
+                $("#SUPPLIER_PART_NO").val(backPara.datas.manufacturer_name); //供应商材料型号代码
+             
+                var data = $("#AVL_FLAG").combobox('getData');
+                if (backPara.datas.avl_flag == "N") {
+                    $("#AVL_FLAG").combobox("select", data[1].value);
+                }
+                else {
+                    $("#AVL_FLAG").combobox("select", data[0].value);
+                }
+
+                //if ($("#UNIT_CODE2").val() != $("#UNIT_CODE").val()) {
+                //    $("#CONVERSION_FACTOR").attr("dislabled", false);
+                //}
+                //else {
+                //    $("#CONVERSION_FACTOR").attr("dislabled", true);
+                //}
+                 
+                $("#ShowCurrency").attr("disabled", false);
+                $("#ShowPUnit").attr("disabled", false);
+                $("#PRICE_1").attr("disabled", false);
+               
+
+                return false;
+            }
+            //选供应商
+            if ($input.attr("id") == "ShowVendor") {
+                $('#SUPPLIER_PTR').val(backPara.datas.rkey);
+                $('#CODE').val(backPara.datas.code);
+                $('#ABBR_NAME').val(backPara.datas.abbr_name);
+
+                var revalue = AR.Utility.Ajax.post("Get", "V_common_Data0023", { id: '', sys_search: '[{"name":"SUPPLIER_PTR","value":"' + backPara.datas.rkey + '", "pattern":"="},{ "name":"INVENTORY_PTR","value":"' + parent.rkey17 + '", "pattern":"=" }]' });
+                if (revalue) {
+                   // $.messager.alert("", "该供应商已存在该物料的报价！", "info");
+                    $.messager.alert(AR.Lang["msg"], AR.Lang["com_vendormtrlexists"], "info");//该供应商已存在该物料的报价!
+                    $('#CODE').focus();
+                    $('#CODE').val("");
+                    $('#ABBR_NAME').val("");
+                    return false;
+                }
+
+                $("#CURRENCY_PTR").val(backPara.datas.currency_ptr);
+                $("#curr_code").val(backPara.datas.curr_code);
+                $("#curr_name").val(backPara.datas.curr_name);
+
+                $("#TAX_2").val(backPara.datas.state_tax); //带出增值税
+                $("#LEAD_TIME").val(backPara.datas.shipping_lead_time); //供应商交货时间
+
+                //供应商新增：
+                $("#ShowCurrency").attr("disabled", false);
+                $("#ShowPUnit").attr("disabled", false);
+                return false;  
+            }
+        }
+    }
+   
+    //保存前事件(主要做完整性检查,赋默认值等)
+    AR.Form.BtnCommit.onBeforeExecute = function (arrayData) {
+        if ($('#CODE').val() == "") {
+          //  $.messager.alert("", "供应商代码不能为空!", "info");
+            $.messager.alert(AR.Lang["msg"], AR.Lang["com_vendorrequired"], "info");//供应商代码不能为空!
+            return false;
+        }
+       
+        if ($('#INV_PART_NUMBER').val() == "") {
+            // $.messager.alert("", "物料代码不能为空!", "info");
+            $.messager.alert(AR.Lang["msg"], AR.Lang["com_mtrlcoderequired"], "info");//物料代码不能为空!
+            return false;
+        }
+
+        if( $("#qte_price2").val()=="")
+            $("#qte_price2").val("0");
+
+        // 计算市场报价价格 todo
+        GetPrice();
+      
+    //记录价格变更信息
+    var ModiNode = [];
+    var rowData = AR.Form.data;
+    for (var i = 0; i < arrayData.length; i++) {
+        arrayData[i].value = arrayData[i].value.replace(/\r\n/g, "\n");//处理一下回车符,否则每次保存多一个空格
+        if (arrayData[i].name.toLowerCase() == "price_1") {
+            if (rowData[arrayData[i].name] != arrayData[i].value) {
+                var tmpData = {};
+                tmpData.old_price = rowData[arrayData[i].name];
+                tmpData.new_price = arrayData[i].value;
+                tmpData.reason="";
+                ModiNode.push(tmpData);
+            }
+        }        
+     }
+  
+    var FormModiData = JSON.stringify(ModiNode).replace(/\'/g, "!#");
+    eval("FormModiData = '" + FormModiData + "'");
+    FormModiData = FormModiData.replace(/!#/g, "'");
+
+    var FormModiNode = [];
+    FormModiNode.name = "FormModiData";
+    FormModiNode.value = FormModiData;
+    arrayData.push(FormModiNode);
+    }
+    //保存后事件
+    AR.Form.BtnCommit.onAfterExecute = function () {
+        
+    }
+
+    $(function () {
+        $('#cmbtn_UpLoad')[0].children[0].innerText = AR.Lang.cmbtn_UpLoad || "上传文件";
+        $('#cmbtn_DownLoad')[0].children[0].innerText = AR.Lang.cmbtn_DownLoad || "下载文件";
+        $('#cmbtn_Del')[0].children[0].innerText = AR.Lang.cmbtn_Del || "删除文件";
+    });
+
+    //右键菜单点击事件
+    function menuHandler(item) {
+        var data= dg.getData(); 
+        if (item.id == "cmbtn_UpLoad")
+        {             
+            UpLoadFile();
+        }
+        else if (item.id == "cmbtn_DownLoad") 
+        {
+            if (!data.rows || data.rows.length<1)
+            {
+               // $.messager.alert("", "没有文件！", "info");
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_fileexists"], "info");
+                return false;
+            }
+            var row = dg.getSelected();
+            if (row) {
+                DownLoadFile(row["ftpidkey"]);
+            }
+        }
+    else if (item.id == "cmbtn_Del") 
+    {
+            if (!data.rows || data.rows.length<1)//无数据时
+            {
+              //  $.messager.alert("", "没有文件！", "info");
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_fileexists"], "info");//"没有文件！
+                return false;
+            }
+            DelFile();
+        }
+        
+    }
+    //文件上传
+    var opts = {};
+    opts.action = 'ajax.html?sys_method=UploadFtpFile&sys_tableName=Data0028_FileList';//提交的方法及要更新的表名
+    opts.data = {};//提交的参数(在绑定时动态赋值)
+    opts.onSubmit = function (file, ext) {
+        //if (ext.toLowerCase() != "pdf") {
+        //    $.messager.alert("", "只能上传PDF文件!", "info")
+        //    return false;
+        //}
+        //if ($('#isfile').val() == 'Y') {
+        //    if (!confirm("已经存在附件,是否要覆盖?")) {
+        //        return false;
+        //    }
+        //}
+        $("#dg").datagrid("loading", "正在上传,请稍候...");
+    }
+    opts.onComplete = function (file, data) {
+        if (data.toString().indexOf("True") >= 0) {
+            $.messager.alert("", AR.Lang.uploadSuccess, "info")
+            dg.reload();
+        } else {
+            $.messager.alert("", AR.Lang.uploadFail, "info")
+        }
+        $("#dg").datagrid("loaded");
+    }
+    function  UpLoadFile(){
+        
+    }
+   
+    function  DownLoadFile(FtpIDKey){
+        //Download_FTP("DownloadFtpFile", FtpIDKey);
+        AR.Utility.download("DownloadFtpFile", { FtpIDKey: FtpIDKey })
+    }
+    function DelFile() {
+        var row = dg.getSelected();
+        var rowIndex=$('#dg').datagrid("getRowIndex", row);
+        if (row) {
+            dg.PKColumn.Editor.BtnDel.onExecute(dg, row.ftpidkey, rowIndex);
+            dg.PKColumn.Editor.BtnDel.onAfterExecute = function (value, index, result) {
+                if (result.success) { dg.reload();}
+            }
+        }
+    }
+
+    function setValue(record) {
+         if (record.value == "金额") {
+            $("#MIN_ORDER_QTY").val(0);
+        }
+    }
+
+    //供应商价格改变时
+    $("#PRICE_1").blur(function () {
+        if ($("#PRICE_1").val() == "") { $("#PRICE_1").val("0"); }
+        if ((isView != "1") && ($("#TAX_2").val()!=""))
+        {
+            GetPrice();
+        }
+    })
+
+    //增值税改变时
+    $("#TAX_2").blur(function () {
+        if ($("#TAX_2").val() == "") { $("#TAX_2").val("0"); }
+        if ((isView != "1") && ($("#PRICE_1").val() != "")) {
+            GetPrice();
+        }
+    })
+
+    function GetPrice() {     
+        var percent;
+        var revalue = AR.Utility.Ajax.post("Get", "V_common_192", { id: '', sys_search: '[{"name":"ID","value":"0","pattern":"="}]' });
+        if (revalue) {
+            percent = revalue.QTE_CONTROL4;
+        }
+  
+        if ($("#tax_flag_chk").attr("checked") == "checked") {
+            $("#qte_price").val((parseFloat($("#PRICE_1").val()) * (1 + percent * 0.01) / (1 + parseFloat($("#TAX_2").val() * 0.01)).toFixed(2)));
+           // $.messager.alert("", "test", "info");
+        }
+        else {
+            $("#qte_price").val((parseFloat($("#PRICE_1").val()) * (1 + percent * 0.01)).toFixed(2));
+        }
+    }
+  
+</script>

@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    var isSelect = 0;
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -3, "month");
+    var defdate = startDate + "," + endDate;
+    var dg = new AR.DataGrid("V_StoreList");
+    dg.isShowCheckBox = false;
+    dg.ToolBar.isHidden = true;
+    dg.options = {
+        pageSize: 10,
+        onBeforeLoad: function (param) {
+            if (!isSelect) { setTimeout(function () { getSearchCombox() }, 5); }
+            return Re_searchInfo(param);
+        },
+        onLoadSuccess: function () {
+        }
+    };
+    function getSearchCombox() {
+        if (typeof (AR.Global.comboxData.C_SL_SEARCHINFO) != "undefined") {
+            var data = $('#SL_searchinfo').combobox('getData');
+                if (data.length > 0) {
+                    $('#SL_searchinfo1').combobox('select', data[1].value);
+                }
+                isSelect = 1;
+                return;
+            
+        }
+        setTimeout(function () { getSearchCombox() }, 5);
+    }
+    dg.Search.onAfterExecute = function () {
+        //修改搜索区的显示方式
+        if ($('#stock_searchinfo_label') && typeof ($('#stock_searchinfo_label')[0]) != "undefined") {
+            $('#stock_searchinfo_label')[0].outerHTML = '<label id="stock_searchinfo_label" style="width:160px">&nbsp;<input type="text" id="SL_searchinfo" objname="C_SL_SEARCHINFO" defaultitem="false" name="SL_searchinfo" />&nbsp;</label>'
+        }
+        if ($('#stock_searchinfo1_label') && typeof ($('#stock_searchinfo1_label')[0]) != "undefined") {
+            $('#stock_searchinfo1_label')[0].outerHTML = '<label id="stock_searchinfo1_label" style="width:160px">&nbsp;<input type="text" id="SL_searchinfo1" objname="C_SL_SEARCHINFO" defaultitem="false" name="SL_searchinfo1" />&nbsp;</label>'
+        }
+        if ($('#udef_company_input').length > 0 && typeof ($('#udef_company_input')[0]) != "undefined") {
+            $('#udef_company_label')[0].innerText = AR.Lang.selCompany || $('#udef_company_label')[0].innerText;
+            $('#udef_company_input')[0].outerHTML = '<input type="text" id="selCompany"  name="selCompany" />'
+            BindCompany("selCompany");//绑定公司下拉框
+        }
+
+            if ($('#入仓日期_input2')) {
+                $('#入仓日期_input2').attr("style", "WIDTH:95px");
+                $('#入仓日期_input2').attr("class", "easyui-datebox easyui-validatebox");
+                $('#入仓日期_input2').attr("validtype", "datebox");
+                $('#入仓日期_input').attr("style", "WIDTH:95px");
+                $('#入仓日期_input').attr("class", "easyui-datebox easyui-validatebox");
+                $('#入仓日期_input').attr("validtype", "datebox");
+            }
+        
+            SearchBind_BtnExport();//创建按钮到查询区
+    }
+
+        //导出条件
+    dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+        return Re_searchInfo(param);
+    }
+
+
+        dg.Search.BtnQuery.onBeforeExecute = function (para) {
+            if ($('#入仓日期_input2')) {
+                var newdate1 = $('#入仓日期_input2').datebox('getValue').substr(0, 10);
+                var newdate2 = $('#入仓日期_input').datebox('getValue').substr(0, 10);
+                if ((newdate1 == "" && newdate2 != "") || (newdate1 != "" && newdate2 == "")) {
+                    $.messager.alert("提示", "日期条件不全!", "info");
+                    return false;
+                }
+                var days = dateDiff(newdate1, newdate2);
+                if (days > 366) {
+                    $.messager.alert("提示", "日期区间不能大于1年!", "info");
+                    return false;
+                }
+                if (days < 0) {
+                    $.messager.alert("提示", "开始日期不能大于结束日期!", "info");
+                    return false;
+                }
+            }
+            //alert(JSON.stringify(para));
+        }
+        dg.Search.BtnReset.onAfterExecute = function () {
+            if ($('#入仓日期_input2')) {
+                //重置时日期,自定义下拉框默认值要重新赋值
+                $('#入仓日期_input').datebox('setValue', endDate);
+                $('#入仓日期_input2').datebox('setValue', startDate);
+            }
+            if ($('#SL_searchinfo')) {
+                //$('#OD_searchinfo').combobox('select', "销售订单号");
+                var data = $('#SL_searchinfo').combobox('getData');
+                if (data.length > 0) {
+                    $('#SL_searchinfo').combobox('select', data[0].value);
+                }
+            }
+            if ($('#SL_searchinfo1')) {
+                //$('#OD_searchinfo').combobox('select', "销售订单号");
+                var data = $('#SL_searchinfo1').combobox('getData');
+                if (data.length > 0) {
+                    $('#SL_searchinfo1').combobox('select', data[1].value);
+                }
+            }
+        }
+        dg.bind();
+
+        function ShowList1(value, row, index) {
+            return AR.Lang["V_StoreList_作业单号"] + "：" + row.作业单号 + "<br>" + AR.Lang["V_StoreList_销售订单号"] + "：" + row.销售订单号 + "<br>" + AR.Lang["V_StoreList_客户订单号"] + "：" + row.客户订单号;
+        }
+        function ShowList2(value, row, index) {
+            return AR.Lang["V_StoreList_本厂编号"] + "：" + row.本厂编号 + "<br>" + AR.Lang["V_StoreList_客户型号"] + "：" + row.客户型号 + "<br>" + AR.Lang["V_StoreList_客户物料号"] + "：" + row.客户物料号 + "<br>" +
+                AR.Lang["V_StoreList_产品属性"] + "：" + row.产品属性 + "<br>" + AR.Lang["V_StoreList_测式成型备注"] + "：" + row.测式成型备注 + "<br>" + AR.Lang["V_StoreList_产品阶数"] + "：" + row.产品阶数;
+        }
+        function ShowList3(value, row, index) {
+            return AR.Lang["V_StoreList_订单数量"] + "：" + row.订单数量 + "<br>" + AR.Lang["V_StoreList_库存数量"] + "：" + row.库存数量;
+        }
+        function ShowList4(value, row, index) {
+            return AR.Lang["V_StoreList_最新价格"] + "：" + row.最新价格 + "<br>" + AR.Lang["V_StoreList_货币名称"] + "：" + row.货币名称 + "<br>" + AR.Lang["V_StoreList_付款方法"] + "：" + row.付款方法
+                + "<br>" + "成本:" + row.成本;
+        }
+        function ShowList5(value, row, index) {
+            return AR.Lang["V_StoreList_入仓日期"] + "：" + row.入仓日期 + "<br>" + AR.Lang["V_StoreList_回复交期"] + "：" + row.回复交期 + "<br>" + AR.Lang["V_StoreList_过期日期"] + "：" + row.过期日期 + "<br>" +
+                 AR.Lang["V_StoreList_状态"] + "：" + row.状态;
+        }
+        function ShowList6(value, row, index) {
+            return AR.Lang["V_StoreList_客户代码"] + "：" + row.客户代码 + "<br>" + AR.Lang["V_StoreList_客户简称"] + "：" + row.客户简称 + "<br>" + AR.Lang["V_StoreList_关联原客户"] + "：" + row.关联原客户;
+        }
+        function ShowList7(value, row, index) {
+            return AR.Lang["V_StoreList_产品类别"] + "：" + row.产品类别 + "<br>" + AR.Lang["V_StoreList_产品类别名称"] + "：" + row.产品类别名称;
+        }
+        function ShowList8(value, row, index) {
+            return AR.Lang["V_StoreList_工厂"] + "：" + row.工厂 + "<br>" + AR.Lang["V_StoreList_仓库"] + "：" + row.仓库 + "<br>" + AR.Lang["V_StoreList_具体位置"] + "：" + row.具体位置;
+        }
+        function ShowList9(value, row, index) {
+            return AR.Lang["V_StoreList_好板叉板"] + "：" + row.好板叉板 + "<br>" + AR.Lang["V_StoreList_周期"] + "：" + row.周期 + "<br>" + AR.Lang["V_StoreList_入仓类型"] + "：" + row.入仓类型;
+        }
+        function ShowList10(value, row, index) {
+            return AR.Lang["V_StoreList_备注"] + "：" + row.备注 + "<br>" + AR.Lang["V_StoreList_订单参考"] + "：" + row.订单参考;
+        }
+        function ShowList11(value, row, index) {
+            return AR.Lang["V_StoreList_入库人员"] + "：" + row.入库人员 + "<br>" + AR.Lang["V_StoreList_业务员姓名"] + "：" + row.业务员姓名;
+        }
+        function ShowList12(value, row, index) {
+            return AR.Lang["V_StoreList_单重(g)"] + "：" + row["单重(g)"] + "<br>" + AR.Lang["V_StoreList_总重(kg)"] + "：" + row["总重(kg)"] + "<br>" + AR.Lang["V_StoreList_库存面积"] + "：" + row.库存面积;
+        }
+
+        dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+            return Re_searchInfo(param);
+        }
+
+        function Re_searchInfo(param) {
+            //定制查询条件
+            if (!param.sys_search) { return false; }
+            var searchArr = JSON.parse(param.sys_search);
+            var newpara = searchArr.select("name", "SL_searchinfo");
+            if (newpara != null && $('#stock_searchinfo_input') && $('#stock_searchinfo_input').val() != "") {
+                if (newpara.contains("产品类别", "value")) {
+                    searchArr.push({ "name": "产品类别", "value": "'" + $('#stock_searchinfo_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("工厂", "value")) {
+                    searchArr.push({ "name": "工厂", "value": "'" + $('#stock_searchinfo_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("仓库", "value")) {
+                    searchArr.push({ "name": "仓库", "value": "'" + $('#stock_searchinfo_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("产品阶数", "value")) {
+                    searchArr.push({ "name": "产品阶数", "value": "'" + $('#stock_searchinfo_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("本厂编号", "value")) {
+                    searchArr.push({ "name": "本厂编号", "value": "'" + $('#stock_searchinfo_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("客户代码", "value")) {
+                    searchArr.push({ "name": "客户代码", "value": "'" + $('#stock_searchinfo_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("客户简称", "value")) {
+                    searchArr.push({ "name": "客户简称", "value": "'" + $('#stock_searchinfo_input').val() + "'", "pattern": "like" })
+                }
+            }
+            var newpara = searchArr.select("name", "SL_searchinfo1");
+            if (newpara != null && $('#stock_searchinfo1_input') && $('#stock_searchinfo1_input').val() != "") {
+                if (newpara.contains("产品类别", "value")) {
+                    searchArr.push({ "name": "产品类别", "value": "'" + $('#stock_searchinfo1_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("工厂", "value")) {
+                    searchArr.push({ "name": "工厂", "value": "'" + $('#stock_searchinfo1_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("仓库", "value")) {
+                    searchArr.push({ "name": "仓库", "value": "'" + $('#stock_searchinfo1_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("产品阶数", "value")) {
+                    searchArr.push({ "name": "产品阶数", "value": "'" + $('#stock_searchinfo1_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("本厂编号", "value")) {
+                    searchArr.push({ "name": "本厂编号", "value": "'" + $('#stock_searchinfo1_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("客户代码", "value")) {
+                    searchArr.push({ "name": "客户代码", "value": "'" + $('#stock_searchinfo1_input').val() + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("客户简称", "value")) {
+                    searchArr.push({ "name": "客户简称", "value": "'" + $('#stock_searchinfo1_input').val() + "'", "pattern": "like" })
+                }
+            }
+            searchArr.remove("SL_searchinfo1", "name");
+            searchArr.remove("stock_searchinfo1", "name");
+            searchArr.remove("SL_searchinfo", "name");
+            searchArr.remove("stock_searchinfo", "name");
+            
+            newpara = searchArr.select("name", "selCompany");
+            if (newpara != null) {
+                $.each(newpara, function (index, data) {
+                    searchArr.remove("selCompany", "name");
+                    if (index == 0) { param.SelCompany = data.value.replace(/\'/g, ""); }
+                    else { param.SelCompany += "," + data.value.replace(/\'/g, ""); }
+                })
+
+            }
+            var str = JSON.stringify(searchArr).replace(/\'/g, "!#");
+            eval("sys_search = '" + str + "'");
+            param.sys_search = sys_search.replace(/!#/g, "'");
+            //默认结束日期加一天
+            if ($('#入仓日期_input2') && $('#入仓日期_input2').datebox('getValue') != "") {
+                var tmpdate = $('#入仓日期_input').datebox('getValue').substr(0, 10);
+                var tmpdate2 = AddDate(tmpdate, 1, "day");
+                var searchstr = param.sys_search;
+                var pos = searchstr.lastIndexOf(tmpdate);
+                if (pos > 0) {
+                    var str = searchstr.substr(0, pos) + searchstr.substr(pos).replace(tmpdate, tmpdate2);
+                    param.sys_search = str;
+                }
+            }
+            param.isCompany = 1; //多公司查询标记
+        }
+    
+   
+</script>
+

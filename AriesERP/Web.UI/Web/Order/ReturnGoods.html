@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+   
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    var orderid = AR.Utility.queryString("orderid");//订单明细关连查询
+    var companyValue = AR.Utility.queryString("companyValue");//订单明细关连查询
+    var isSelect = 0;
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -1, "month");
+    var defdate = startDate + "," + endDate;
+    var dg = new AR.DataGrid("V_ReturnGoods");
+    dg.isShowCheckBox = false;  // 屏蔽勾选
+    dg.ToolBar.isHidden = true;  //屏蔽功能模块
+
+   
+
+    dg.options = {
+        pageSize: 10,
+        onBeforeLoad: function (param) {
+            if (!isSelect) { setTimeout(function () { getSearchCombox() }, 5); }
+            return Re_searchInfo(param);
+        },
+        onLoadSuccess: function () {
+        }
+    };
+    //关连查询时调用,多下拉框时初始化选项
+    function getSearchCombox() {
+        if (typeof (AR.Global.comboxData.C_RG_SEARCHINFO) != "undefined") {
+            if (orderid) {
+                $('#udef_searchinfo_input').val(orderid);
+                $('#退货日期_input2').datebox('setValue', "");
+                $('#退货日期_input').datebox('setValue', "");
+                var data = $('#RG_searchinfo').combobox('getData');
+                if (data.length > 0) {
+                    $('#RG_searchinfo').combobox('select', data[6].value);
+                }
+                $('#selCompany').combobox('setValues', companyValue.split(","));
+                orderid = null;
+                dg.reload();
+                return;
+            }
+            else {
+                var data = $('#RG_searchinfo2').combobox('getData');
+                if (data.length > 0) {
+                    $('#RG_searchinfo2').combobox('select', data[1].value);
+                }
+                isSelect = 1;
+                return;
+            }
+        }
+        setTimeout(function () { getSearchCombox() }, 5);
+    }
+    dg.Search.BtnReset.onAfterExecute = function () {
+        if ($('#退货日期_input2').length>0) {
+            //重置时日期,自定义下拉框默认值要重新赋值
+            $('#退货日期_input').datebox('setValue', endDate);
+            $('#退货日期_input2').datebox('setValue', startDate);
+        }
+        if ($('#RG_searchinfo').length>0) {
+            var data = $('#RG_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#RG_searchinfo').combobox('select', data[0].value);
+            }
+        }
+
+        if ($('#RG_searchinfo2').length > 0) {
+            var data = $('#RG_searchinfo2').combobox('getData');
+            if (data.length > 0) {
+                $('#RG_searchinfo2').combobox('select', data[1].value);
+            }
+        }
+    }
+    dg.Search.BtnQuery.onBeforeExecute = function (para) {
+        if ($('#退货日期_input2').length>0) {
+            var newdate1 = $('#退货日期_input2').datebox('getValue').substr(0, 10);
+            var newdate2 = $('#退货日期_input').datebox('getValue').substr(0, 10);
+            if ((newdate1 == "" && newdate2 != "") || (newdate1 != "" && newdate2 == "")) {
+                $.messager.alert("提示", "日期条件不全!", "info");
+                return false;
+            }
+            var days = dateDiff(newdate1, newdate2);
+            if (days > 366) {
+                $.messager.alert("提示", "日期区间不能大于1年!", "info");
+                return false;
+            }
+            if (days < 0) {
+                $.messager.alert("提示", "开始日期不能大于结束日期!", "info");
+                return false;
+            }
+        }
+    }
+
+    dg.Search.onAfterExecute = function () {
+        //修改搜索区的显示方式
+        if ($('#udef_searchinfo_label').length>0 && typeof ($('#udef_searchinfo_label')[0]) != "undefined") {
+            $('#udef_searchinfo_label')[0].outerHTML = '<label id="udef_searchinfo_label" style="width:160px">&nbsp;<input type="text" id="RG_searchinfo" objname="C_RG_SEARCHINFO" defaultitem="false" name="RG_searchinfo" />&nbsp;</label>'
+        }
+        if ($('#udef_searchinfo2_label').length > 0 && typeof ($('#udef_searchinfo2_label')[0]) != "undefined") {
+            $('#udef_searchinfo2_label')[0].outerHTML = '<label id="udef_searchinfo2_label" style="width:160px">&nbsp;<input type="text" id="RG_searchinfo2" objname="C_RG_SEARCHINFO" defaultitem="false" name="RG_searchinfo2" />&nbsp;</label>'
+        }
+        if ($('#退货日期_input2').length>0) {
+            $('#退货日期_input2').attr("style", "WIDTH: 95px");
+            $('#退货日期_input2').attr("class", "easyui-datebox easyui-validatebox");
+            $('#退货日期_input2').attr("validtype", "datebox");
+            $('#退货日期_input').attr("style", "WIDTH: 95px");
+            $('#退货日期_input').attr("class", "easyui-datebox easyui-validatebox");
+            $('#退货日期_input').attr("validtype", "datebox");
+        }
+
+        SearchBind_BtnExport();//创建按钮到查询区
+
+        //alert($('#下单日期_input2')[0].outerHTML)
+        if ($('#udef_company_input').length > 0 && typeof ($('#udef_company_input')[0]) != "undefined") {
+            $('#udef_company_label')[0].innerText = AR.Lang.selCompany || $('#udef_company_label')[0].innerText;
+            $('#udef_company_input')[0].outerHTML = '<input type="text" id="selCompany"  name="selCompany" />'
+            BindCompany("selCompany");//绑定公司下拉框
+        }
+
+
+    }
+
+    dg.bind(); //显示数据
+
+    //按特定格式显示网格记录
+    function ShowList1(value, row, index) {
+        return AR.Lang["V_ReturnGoods_退货单号码"] + "： " + row.退货单号码 + "<br>" + AR.Lang["V_ReturnGoods_工厂"] + "： " + ((row.工厂代码 == null) ? "" : row.工厂代码) + "<br>" + AR.Lang["V_ReturnGoods_客户订单号"] + "： " + ((row.客户订单号 == null) ? "" : row.客户订单号) + "<br>" + AR.Lang["V_ReturnGoods_订单编号"] + "： " + ((row.订单编号 == null) ? "" : row.订单编号);
+    }
+    function ShowList2(value, row, index) {
+        return AR.Lang["V_ReturnGoods_本厂编号"] + "： " + row.本厂编号 + "<br>" + AR.Lang["V_ReturnGoods_客户型号"] + "： " + row.客户型号 + "<br>" + AR.Lang["V_ReturnGoods_产品类别"] + "： " + row.产品类别;
+    }
+    function ShowList3(value, row, index) {
+        return AR.Lang["V_ReturnGoods_客户代码"] + "： " + row.客户代码 + "<br>" + AR.Lang["V_ReturnGoods_客户简称"] + "： " + row.客户简称 + "<br>" + AR.Lang["V_ReturnGoods_外发供应商"] + "： " + ((row.外发供应商 == null) ? "" : row.外发供应商) + "<br>" + AR.Lang["V_ReturnGoods_订单类别"] + "： " + ((row.订单类别 == null) ? "" : row.订单类别);
+    }
+    function ShowList5(value, row, index) {
+        return AR.Lang["V_ReturnGoods_退货日期"] + "： " + row.退货日期 + "<br>" + AR.Lang["V_ReturnGoods_录入人员"] + "： " + row.录入人员 + "<br>" + AR.Lang["V_ReturnGoods_退货状态"] + "： " + row.退货状态 + "<br>" + AR.Lang["V_ReturnGoods_退货类型"] + "： " + row.退货类型;
+    }
+    function ShowList6(value, row, index) {
+        return AR.Lang["V_ReturnGoods_原币不含税单价"] + "： " + ((row.原币不含税单价 == null) ? "" : row.原币不含税单价) + "<br>" + AR.Lang["V_ReturnGoods_本币不含税单价"] + "： " + ((row.本币不含税单价 == null) ? "" : row.本币不含税单价) + "<br>" + AR.Lang["V_ReturnGoods_货币"] + "： " + ((row.货币 == null) ? "" : row.货币) + "<br>" + AR.Lang["V_ReturnGoods_原币含税退货金额"] + "： " + ((row.原币含税退货金额 == null) ? "" : row.原币含税退货金额);
+    }
+    function ShowList7(value, row, index) {
+        return AR.Lang["V_ReturnGoods_退货数量"] + "： " + row.退货数量 + "<br>" + AR.Lang["V_ReturnGoods_已接收数量"] + "： " + row.已接收数量 + "<br>" + AR.Lang["V_ReturnGoods_欠货数PCS"] + "： " + ((row.欠货数PCS == null) ? "" : row.欠货数PCS) + "<br>" + AR.Lang["V_ReturnGoods_单只面积"] + "： " + row.单只面积 + "<br>" + AR.Lang["V_ReturnGoods_总面积"] + "： " + row.总面积 + "<br>" + AR.Lang["V_ReturnGoods_总重量"] + "： " + row.总重量 + "<br>" + AR.Lang["V_ReturnGoods_需补货数"] + "： " + row.需补货数;
+    }
+    function ShowList8(value, row, index) {
+        return AR.Lang["V_ReturnGoods_备忘号"] + "： " + ((row.备忘号 == null) ? "" : row.备忘号) + "<br>" + AR.Lang["V_ReturnGoods_常用备注"] + "： " + ((row.常用备注 == null) ? "" : row.常用备注);
+    }
+    
+    dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+        return Re_searchInfo(param);
+    }
+
+    function Re_searchInfo(param) {
+        //定制查询条件
+        if (!param.sys_search) { return; }
+        var searchArr = JSON.parse(param.sys_search);
+        
+        var newpara = searchArr.select("name", "RG_searchinfo");
+        var inputvalue = "";
+        if ($('#udef_searchinfo_input').length > 0) { inputvalue = $('#udef_searchinfo_input').val(); }
+        if ($('#udef_searchinfo_select').length > 0) { inputvalue = $('#udef_searchinfo_select').combobox("getValue"); }
+        if (newpara != null && inputvalue != "") {
+            if (newpara.contains("退货单号码", "value")) {
+                searchArr.push({ "name": "退货单号码", "value": "'" + $('#udef_searchinfo_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户代码", "value")) {
+                searchArr.push({ "name": "客户代码", "value": "'" + $('#udef_searchinfo_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户简称", "value")) {
+                searchArr.push({ "name": "客户简称", "value": "'" + $('#udef_searchinfo_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户型号", "value")) {
+                searchArr.push({ "name": "客户型号", "value": "'" + $('#udef_searchinfo_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("本厂编号", "value")) {
+                searchArr.push({ "name": "本厂编号", "value": "'" + $('#udef_searchinfo_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("订单编号", "value")) {
+                searchArr.push({ "name": "订单编号", "value": "'" + $('#udef_searchinfo_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户订单号", "value")) {
+                searchArr.push({ "name": "客户订单号", "value": "'" + $('#udef_searchinfo_input').val() + "'", "pattern": "like" })
+            }
+        }
+
+        var newpara = searchArr.select("name", "RG_searchinfo2");
+        var inputvalue2 = "";
+        if ($('#udef_searchinfo2_input').length > 0) { inputvalue2 = $('#udef_searchinfo2_input').val(); }
+        if ($('#udef_searchinfo2_select').length > 0) { inputvalue2 = $('#udef_searchinfo2_select').combobox("getValue"); }
+        if (newpara != null && inputvalue2 != "") {
+            if (newpara.contains("退货单号码", "value")) {
+                searchArr.push({ "name": "退货单号码", "value": "'" + $('#udef_searchinfo2_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户代码", "value")) {
+                searchArr.push({ "name": "客户代码", "value": "'" + $('#udef_searchinfo2_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户简称", "value")) {
+                searchArr.push({ "name": "客户简称", "value": "'" + $('#udef_searchinfo2_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户型号", "value")) {
+                searchArr.push({ "name": "客户型号", "value": "'" + $('#udef_searchinfo2_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("本厂编号", "value")) {
+                searchArr.push({ "name": "本厂编号", "value": "'" + $('#udef_searchinfo2_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("订单编号", "value")) {
+                searchArr.push({ "name": "订单编号", "value": "'" + $('#udef_searchinfo2_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("客户订单号", "value")) {
+                searchArr.push({ "name": "客户订单号", "value": "'" + $('#udef_searchinfo2_input').val() + "'", "pattern": "like" })
+            }
+        }
+
+        searchArr.remove("RG_searchinfo", "name");
+        searchArr.remove("udef_searchinfo", "name");
+        searchArr.remove("RG_searchinfo2", "name");
+        searchArr.remove("udef_searchinfo2", "name");
+
+        newpara = searchArr.select("name", "selCompany");
+        if (newpara != null) {
+            $.each(newpara, function (index, data) {
+                searchArr.remove("selCompany", "name");
+                if (index == 0) { param.SelCompany = data.value.replace(/\'/g, ""); }
+                else { param.SelCompany += "," + data.value.replace(/\'/g, ""); }
+            })
+
+        }
+
+        var str = JSON.stringify(searchArr).replace(/\'/g, "!#");
+        eval("sys_search = '" + str + "'");
+        param.sys_search = sys_search.replace(/!#/g, "'");
+
+        //默认结束日期加一天
+        if ($('#退货日期_input2').length>0 && $('#退货日期_input2').datebox('getValue') != "") {
+            var tmpdate = $('#退货日期_input').datebox('getValue').substr(0, 10);
+            var tmpdate2 = AddDate(tmpdate, 1, "day");
+            var searchstr = param.sys_search;
+            var pos = searchstr.lastIndexOf(tmpdate);
+            if (pos > 0) {
+                var str = searchstr.substr(0, pos) + searchstr.substr(pos).replace(tmpdate, tmpdate2);
+                param.sys_search = str;
+            }
+        }
+        if (searchArr.length == 0) {
+            $.messager.alert("提示", "条件不能全部为空!", "info");
+            return false;
+        }
+        //alert(param.sys_search);
+        param.isCompany = 1; //多公司查询标记
+        return true;
+    }
+</script>

@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    var isLoad = 0;
+    var isSelect = 0;
+    var companyValue = "";
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -15, "day");
+    var defdate = startDate + "," + endDate;
+    var dg = new AR.DataGrid("V_POList");
+    dg.isShowCheckBox = false;
+    dg.ToolBar.isHidden = true;
+    dg.options = {
+        pageSize: 20,
+        onBeforeLoad: function (param) {
+            if (!isSelect) { setTimeout(function () { getSearchCombox() }, 5); }
+            return Re_searchInfo(param);
+        }
+
+    };
+
+    function getSearchCombox() {
+        if (typeof (AR.Global.comboxData.C_POList_Search) != "undefined") {
+            var data = $('#PO_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#PO_searchinfo2').combobox('select', data[2].value);
+            }
+            isSelect = 1;
+            return;
+        }
+        setTimeout(function () { getSearchCombox() }, 5);
+    }
+
+    function ResetInput(record) {
+        $('#ShowSearch').css("display", "none");
+        $('#searchinfo_input').css("display", "");
+        $('#searchinfo_input').val("");
+        if ($('#searchinfo_select').length > 0) {
+            $('#searchinfo_select').parent().remove();
+        }
+        if (record.value == "类型") {
+            if ($('#searchinfo_select').length <= 0) {
+                $('#searchinfo_input').css("display", "none");
+                $('#searchinfo_input').parent().append('<div style="float:left"><input type="text" defaultitem="false" configkey="采购订单类型" id="searchinfo_select"  /></div>')
+                AR.Combobox.onInit(1);
+            }
+        }
+        if (record.value == "状态") {
+            if ($('#searchinfo_select').length <= 0) {
+                $('#searchinfo_input').css("display", "none");
+                $('#searchinfo_input').parent().append('<div style="float:left"><input type="text" defaultitem="false" configkey="采购订单状态" id="searchinfo_select"  /></div>')
+                AR.Combobox.onInit(1);
+            }
+        }
+
+    }
+
+    function ResetInput2(record) {
+        $('#ShowSearch2').css("display", "none");
+        $('#searchinfo2_input').css("display", "");
+        $('#searchinfo2_input').val("");
+        if ($('#searchinfo2_select').length > 0) {
+            $('#searchinfo2_select').parent().remove();
+        }
+        if (record.value == "类型") {
+                if ($('#searchinfo2_select').length <= 0) {
+                    $('#searchinfo2_input').css("display", "none");
+                    $('#searchinfo2_input').parent().append('<div style="float:left"><input type="text" defaultitem="false" configkey="采购订单类型" id="searchinfo2_select"  /></div>')
+                    AR.Combobox.onInit(1);
+                }
+            }
+        if (record.value == "状态") {
+                if ($('#searchinfo2_select').length <= 0) {
+                    $('#searchinfo2_input').css("display", "none");
+                    $('#searchinfo2_input').parent().append('<div style="float:left"><input type="text" defaultitem="false" configkey="采购订单状态" id="searchinfo2_select"  /></div>')
+                    AR.Combobox.onInit(1);
+                }
+            }
+        
+    }
+
+    dg.Search.onAfterExecute = function () {
+        if ($('#searchinfo_label') && typeof ($('#searchinfo_label')[0]) != "undefined") {
+            $('#searchinfo_label')[0].outerHTML = '<label id="searchinfo_label" style="width:160px">&nbsp;<input type="text" id="PO_searchinfo" objname="C_POList_Search" onchange="ResetInput" defaultitem="false" name="PO_searchinfo" />&nbsp;</label>'
+        }
+        if ($('#searchinfo2_label') && typeof ($('#searchinfo2_label')[0]) != "undefined") {
+            $('#searchinfo2_label')[0].outerHTML = '<label id="searchinfo2_label" style="width:160px">&nbsp;<input type="text" id="PO_searchinfo2" objname="C_POList_Search" onchange="ResetInput2" defaultitem="false" name="PO_searchinfo2" />&nbsp;</label>'
+        }
+        if ($('#下单日期_input2')) {
+            $('#下单日期_input2').attr("style", "WIDTH: 95px");
+            $('#下单日期_input2').attr("class", "easyui-datebox easyui-validatebox");
+            $('#下单日期_input2').attr("validtype", "datebox");
+            $('#下单日期_input').attr("style", "WIDTH: 95px");
+            $('#下单日期_input').attr("class", "easyui-datebox easyui-validatebox");
+            $('#下单日期_input').attr("validtype", "datebox");
+        }
+        if ($('#selcom_input').length > 0 && typeof ($('#selcom_input')[0]) != "undefined") {
+            $('#selcom_label')[0].innerText = AR.Lang.selCompany || $('#selcom_label')[0].innerText;
+            $('#selcom_input')[0].outerHTML = '<input type="text" id="selCompany"  name="selCompany" />'
+            BindCompany("selCompany");//绑定公司下拉框
+        }
+
+        SearchBind_BtnExport();//创建按钮到查询区
+
+        //插入隐藏搜索
+        //if ($('#searchinfo_input').length > 0) {
+        //    var curLeft = parseInt($('#searchinfo_input')[0].offsetLeft) + parseInt($('#searchinfo_input')[0].offsetWidth) - 20;
+        //    $('#searchinfo_input').parent().append('<a href="#" id="ShowSearch" class="searchIcon" style="left:' + curLeft + 'px;display:none"></a>')
+        //}
+        //if ($('#searchinfo2_input').length > 0) {
+        //    var curLeft = parseInt($('#searchinfo2_input')[0].offsetLeft) + parseInt($('#searchinfo2_input')[0].offsetWidth) - 20;
+        //    $('#searchinfo2_input').parent().append('<a href="#" id="ShowSearch2" class="searchIcon" style="left:' + curLeft + 'px;display:none"></a>')
+        //}
+        
+    }
+    dg.Search.BtnReset.onAfterExecute = function () {
+        if ($('#下单日期_input2')) {
+            //重置时日期,自定义下拉框默认值要重新赋值
+            $('#下单日期_input').datebox('setValue', endDate);
+            $('#下单日期_input2').datebox('setValue', startDate);
+        }
+        if ($('#PO_searchinfo')) {
+            //$('#PO_searchinfo').combobox('select', "采购订单号");
+            var data = $('#PO_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#PO_searchinfo').combobox('select', data[0].value);
+            }
+        }
+        if ($('#PO_searchinfo2')) {
+            //$('#PO_searchinfo').combobox('select', "采购订单号");
+            var data = $('#PO_searchinfo2').combobox('getData');
+            if (data.length > 0) {
+                $('#PO_searchinfo2').combobox('select', data[1].value);
+            }
+        }
+    }
+    dg.Search.BtnQuery.onBeforeExecute = function (para) {
+        if ($('#下单日期_input2')) {
+            var newdate1 = $('#下单日期_input2').datebox('getValue').substr(0, 10);
+            var newdate2 = $('#下单日期_input').datebox('getValue').substr(0, 10);
+            if ((newdate1 == "" && newdate2 != "") || (newdate1 != "" && newdate2 == "")) {
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsg3"], "info");//"日期条件不全!"
+                return false;
+            }
+            var days = dateDiff(newdate1, newdate2);
+            if (days > 366) {
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsg"], "info"); //"日期区间不能大于1年!"
+                return false;
+            }
+            if (days < 0) {
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsg2"], "info");//"开始日期不能大于结束日期!"
+                return false;
+            }
+        }
+    }
+    dg.bind();
+
+        function List1(value, row, index) {
+            return AR.Lang["V_POList_材料编码"] +": " + row.材料编码 + "<br>" + AR.Lang["V_POList_材料名称"] +": " + row.材料名称
+             + "<br>" + AR.Lang["V_POList_材料规格"] +": " + row.材料规格;
+        }
+        function List2(value, row, index) {
+            return AR.Lang["V_POList_采购订单号"] +": " + row.采购订单号 + "<br>" + AR.Lang["V_POList_下单日期"] +": " + row.下单日期
+                + "<br>" + AR.Lang["V_POList_采购人员"] +": " + row.采购人员;
+        }
+        function List3(value, row, index) {
+            return AR.Lang["V_POList_订单数量"] +": " + row.订单数量 + "<br>" + AR.Lang["V_POList_已接收数量"] +": " + row.已接收数量
+                + "<br>" + AR.Lang["V_POList_欠货数量"] +": " + row.欠货数量 + "<br>" + AR.Lang["V_POList_采购单位"] +": " + row.采购单位;
+        }
+        function List4(value, row, index) {
+            return AR.Lang["V_POList_不含税价"] +": " + row.不含税价 + "<br>" + AR.Lang["V_POList_含税价"] +": " + row.含税价 + "<br>" + AR.Lang["V_POList_税率"] +": " + row.税率;
+        }
+        function List5(value, row, index) {
+            return AR.Lang["V_POList_货币"] +": " + row.货币 + "<br>" + AR.Lang["V_POList_汇率"] +": " + row.汇率;
+        }
+        function List6(value, row, index) {
+            return AR.Lang["V_POList_要求到货日期"] +": " + row.要求到货日期 + "<br>" + AR.Lang["V_POList_最后收货日期"] +": " + row.最后收货日期;
+        }
+
+        function List7(value, row, index) {
+            return AR.Lang["V_POList_特别要求"] +": " + row.特别要求 + "<br>" + AR.Lang["V_POList_环保等级"] +": " + row.环保等级
+                + "<br>" + AR.Lang["V_POList_是否紧急"] +": " + (row.是否紧急 == "0" ? "否" : "是");
+        }
+        function List8(value, row, index) {
+            return AR.Lang["V_POList_请购编号"] +": " + (row.请购编号 == null ? "" : row.请购编号) + "<br>" + AR.Lang["V_POList_请购部门"] +": " + (row.请购部门 == null ? "" : row.请购部门)
+                 + "<br>" + AR.Lang["V_POList_请购人员"] +": " + (row.请购人员 == null ? "" : row.请购人员) + "<br>" + AR.Lang["V_POList_请购原因"] +": " + (row.请购原因 == null ? "" : row.请购原因);
+        }
+        function List9(value, row, index) {
+            var restr = '<a href="#" onclick="showTab(\'/Web/Store/inStock22.html?PO_NUMBER=' + escape($.trim(row["采购订单号"])) + '&PART_NUMBER=' +$.trim(row["材料编码"]) + '&companyValue=' + companyValue + '\',\'材料入库明细查询\')">入库信息</a>';
+            return restr;
+        }
+
+        dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+            return Re_searchInfo(param);
+        }
+
+        function Re_searchInfo(param) {
+            if (!param.sys_search) { return; }
+            var searchArr = JSON.parse(param.sys_search);
+
+            var newpara = searchArr.select("name", "PO_searchinfo");       //后台增加字段名为searchinfo列，引藏并搜索
+            var inputvalue = "";
+            if ($('#searchinfo_input').length > 0) { inputvalue = $.trim($('#searchinfo_input').val()); }
+            if ($('#searchinfo_select').length > 0) { inputvalue = $('#searchinfo_select').combobox("getValue"); }
+            if (newpara != null && inputvalue != "") {
+                if (newpara.contains("采购订单号", "value")) {
+                    searchArr.push({ "name": "采购订单号", "value": "'" + inputvalue + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("材料编码", "value")) {
+                    searchArr.push({ "name": "材料编码", "value": "'" + inputvalue + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("材料名称", "value")) {
+                    searchArr.push({ "name": "材料名称", "value": "'" + inputvalue + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("材料规格", "value")) {
+                    searchArr.push({ "name": "材料规格", "value": "'" + inputvalue + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("供应商简称", "value")) {
+                    searchArr.push({ "name": "供应商简称", "value": "'" + inputvalue + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("类型", "value")) {
+                    searchArr.push({ "name": "类型", "value": "'" + inputvalue + "'", "pattern": "=" })
+                }
+                else if (newpara.contains("状态", "value")) {
+                    searchArr.push({ "name": "状态", "value": "'" + inputvalue + "'", "pattern": "=" })
+                }
+                else if (newpara.contains("请购部门", "value")) {
+                    searchArr.push({ "name": "请购部门", "value": "'" + inputvalue + "'", "pattern": "like" })
+                }
+            }
+            var newpara = searchArr.select("name", "PO_searchinfo2");
+            var inputvalue2 = "";
+            if ($('#searchinfo2_input').length > 0) { inputvalue2 = $.trim($('#searchinfo2_input').val()); }
+            if ($('#searchinfo2_select').length > 0) { inputvalue2 = $('#searchinfo2_select').combobox("getValue"); }
+            if (newpara != null && inputvalue2 != "") {
+                if (newpara.contains("采购订单号", "value")) {
+                    searchArr.push({ "name": "采购订单号", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("材料编码", "value")) {
+                    searchArr.push({ "name": "材料编码", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("材料名称", "value")) {
+                    searchArr.push({ "name": "材料名称", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("材料规格", "value")) {
+                    searchArr.push({ "name": "材料规格", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("供应商简称", "value")) {
+                    searchArr.push({ "name": "供应商简称", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+                }
+                else if (newpara.contains("类型", "value")) {
+                    searchArr.push({ "name": "类型", "value": "'" + inputvalue2 + "'", "pattern": "=" })
+                }
+                else if (newpara.contains("状态", "value")) {
+                    searchArr.push({ "name": "状态", "value": "'" + inputvalue2 + "'", "pattern": "=" })
+                }
+                else if (newpara.contains("请购部门", "value")) {
+                    searchArr.push({ "name": "请购部门", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+                }
+            }
+            searchArr.remove("PO_searchinfo", "name");
+            searchArr.remove("searchinfo", "name");
+            searchArr.remove("PO_searchinfo2", "name");
+            searchArr.remove("searchinfo2", "name");
+            newpara = searchArr.select("name", "selCompany");
+            if (newpara != null) {
+                $.each(newpara, function (index, data) {
+                    searchArr.remove("selCompany", "name");
+                    if (index == 0) { param.SelCompany = data.value.replace(/\'/g, ""); }
+                    else { param.SelCompany += "," + data.value.replace(/\'/g, ""); }
+                })
+
+            }
+            companyValue = param.SelCompany;//关连查询时须带公司信息
+
+            var str = JSON.stringify(searchArr).replace(/\'/g, "!#");
+            eval("sys_search = '" + str + "'");
+            param.sys_search = sys_search.replace(/!#/g, "'");
+
+            //默认结束日期加一天
+            if ($('#下单日期_input2').length > 0 && $('#下单日期_input2').datebox('getValue') != "") {
+                var tmpdate = $('#下单日期_input').datebox('getValue').substr(0, 10);
+                var tmpdate2 = AddDate(tmpdate, 1, "day");
+                var searchstr = param.sys_search;
+                var pos = searchstr.lastIndexOf(tmpdate);
+                if (pos > 0) {
+                    var str = searchstr.substr(0, pos) + searchstr.substr(pos).replace(tmpdate, tmpdate2);
+                    param.sys_search = str;
+                }
+            }
+            if (searchArr.length == 0) {
+                $.messager.alert(AR.Lang["msg"], AR.Lang["com_SearchValidateMsg"], "info");//"条件不能全部为空!"
+                return false;
+            }
+            param.isCompany = 1; //多公司查询标记
+
+            //alert(param.sys_search);
+            return true;
+        }
+</script>

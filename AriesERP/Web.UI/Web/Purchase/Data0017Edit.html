@@ -1,0 +1,1215 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="../../Style/JS/Aries.Loader.js?v=2.0.0.1"></script>
+    <link href="../../Style/CSS/base.css" rel="stylesheet" />
+    <link href="../../Style/CSS/basic_info.css?v=2.0.0.1" rel="stylesheet" />
+    <script src="../../Style/JS/AriesJS/Aries.Utility.js"></script>
+    <script src="../../Style/JS/AriesJS/Aries.Global.js"></script>
+    <script src="../../Style/JS/AriesJS/Aries.Common.js"></script>
+    <title></title>
+    <!--<style>
+        table {
+            /*display: none;*/
+            border-spacing: 20px;
+            margin: 50px,10px,50px,50px;
+        }
+
+        input {
+            width: 200px;
+        }
+    </style>-->
+</head>
+<body>
+    <div class="easyui-layout" style="overflow: hidden" data-options="fit:true,scroll:'no'">
+        <!--树形菜单-->
+        <div data-options="region:'west',split:'true'" style="width:150px;">
+            <ul id="tt" style="border:none"></ul>
+        </div>
+        <div data-options="region:'center'">
+            <form class="cont-box-form" id="form1">
+                <input type="hidden" name="rkey" id="rkey" value="" />
+                <table class="kv-table" id="A01" style="display:none">
+                    <tr>
+                        <td class="kv-label">材料类别</td>
+                        <td class="kv-label">
+                            <div style="float:left;width:90%">
+                                <b class="fluid-input">
+                                    <b class="fluid-input-inner">
+                                        <input class="text textread" type="text" readonly="readonly" name="GROUP_DESC" id="GROUP_DESC" required="true"/>
+                                        <input class="text" type="text" name="GROUP_PTR" id="GROUP_PTR" style="display:none" />
+                                    </b>
+                                </b>
+                            </div><div style="float:left"><a href="#" id="ShowGROUP" dialog="V_Common_Data0496" class="searchIcon2"></a></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">材料编码</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="INV_PART_NUMBER" id="INV_PART_NUMBER" data-options="required:true" /></b></b></td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" style="display:none" type="text" name="if_flag" id="if_flag" data-options="required:true"/></b></b></td>
+                        <!--<td><div style="float:left"><a href="#" id="editbianma" onclick="$('#win').window('open')" class="searchIcon2"></a></div></td>-->
+                    </tr>
+                    <tr>
+                        <td class="kv-label">材料名称</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="INV_NAME" id="INV_NAME" data-options="required:true" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">材料规格</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="INV_DESCRIPTION" id="INV_DESCRIPTION"  readonly="readonly" data-options="required:true" /></b></b>
+                            <!--<input class="text easyui-validatebox" type="text" name="INV_PART_DESCRIPTION" id="INV_PART_DESCRIPTION" style="display:none" />-->
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td class="kv-label">采购单位</td>
+                        <td class="kv-label">
+                            <div style="float:left;width:90%">
+                                <b class="fluid-input">
+                                    <b class="fluid-input-inner">
+                                        <input class="text textread" type="text" readonly="readonly" name="UNIT_CODE" id="UNIT_CODE" data-options="required:true" />
+                                        <input class="text" type="text" name="PURCH_UNIT_PTR" id="PURCH_UNIT_PTR" style="display:none" />
+                                    </b>
+                                </b>
+                            </div><div style="float:left"><a href="#" id="Showdanwei" dialog="V_Common_Data0002" class="searchIcon2"></a></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">存货单位</td>
+                        <td class="kv-label">
+                            <div style="float:left;width:90%">
+                                <b class="fluid-input">
+                                    <b class="fluid-input-inner">
+                                        <input class="text textread" type="text" readonly="readonly" name="STOCK_UNIT_name" id="STOCK_UNIT_name" data-options="required:true" />
+                                        <input class="text" type="text" name="STOCK_UNIT_PTR" id="STOCK_UNIT_PTR" style="display:none" />
+                                    </b>
+                                </b>
+                            </div><div style="float:left"><a href="#" id="Showdanwei2" dialog="V_Common_Data0002" class="searchIcon2"></a></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">制造商代码</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="MANUFACTURER_CODE" id="INV_NAME" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">特别要求</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="MANUFACTURER_NAME" id="INV_NAME" /></b></b></td>
+                    </tr>
+                    <!--<tr>
+        <td class="kv-label">特别要求</td>
+        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="MANUFACTURER_NAME" id="INV_NAME" /></b></b></td>
+    </tr>-->
+
+                    <tr>
+                        <td class="kv-label">材料重要性分类</td>
+                        <td class="kv-content" colspan="5"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" configkey="材料重要性分类" defaultitem="false" name="MODIFY_ENGG_RTE_CODE" id="MODIFY_ENGG_RTE_CODE" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">重要材料</td>
+                        <td class="kv-content" colspan="5">
+                            <input type="checkbox" id="CRITICAL_MATL_FLAG_chk" /><label for="CRITICAL_MATL_FLAG_chk">重要材料</label>
+                            <input class="text" type="text" name="CRITICAL_MATL_FLAG" id="CRITICAL_MATL_FLAG" style="display:none" />
+                        </td>
+                    </tr>
+                </table>
+                <table class="kv-table" id="A02" style="display:none">
+                    <tr>
+                        <td class="kv-label">采购员</td>
+                        <td class="kv-label">
+                            <div style="float:left;width:90%">
+                                <b class="fluid-input">
+                                    <b class="fluid-input-inner">
+                                        <input class="text textread" type="text" readonly="readonly" name="employee_name" id="employee_name" />
+                                        <input class="text" type="text" name="AUTHORIZED_BUYER_PTR" id="AUTHORIZED_BUYER_PTR" style="display:none" />
+                                    </b>
+                                </b>
+                            </div><div style="float:left"><a href="#" id="Showcaigouyuan" dialog="V_Common_Data0005" class="searchIcon2"></a></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">首选供应商</td>
+                        <td class="kv-label">
+                            <div style="float:left;width:90%">
+                                <b class="fluid-input">
+                                    <b class="fluid-input-inner">
+                                        <input class="text textread" type="text" readonly="readonly" name="SUPPLIER_NAME" id="SUPPLIER_NAME" />
+                                        <input class="text" type="text" name="PREF_SUPPLIER_PTR" id="PREF_SUPPLIER_PTR" style="display:none" />
+                                    </b>
+                                </b>
+                            </div><div style="float:left"><a href="#" id="Showshouxuangongyingshang" dialog="V_common_Data0023" class="searchIcon2"></a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="kv-label">存货/采购</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="STOCK_PURCH" id="STOCK_PURCH" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">损耗率%</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="FAILURE_RATE" id="FAILURE_RATE" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">停止采购</td>
+                        <td class="kv-content" colspan="5">
+                            <input type="checkbox" id="STOP_PURCH_chk" /><label for="STOP_PURCH_chk"></label>
+                            <input class="text" type="text" name="STOP_PURCH" id="STOP_PURCH" style="display:none" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">要求认可供应商</td>
+                        <td class="kv-content" colspan="5">
+                            <input type="checkbox" id="AVL_FLAG_chk" /><label for="AVL_FLAG_chk"></label>
+                            <input class="text" type="text" name="AVL_FLAG" id="AVL_FLAG" style="display:none" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">是否需要环保测试报告</td>
+                        <td class="kv-content" colspan="5">
+                            <input type="checkbox" id="CATALOG_NUM_chk" /><label for="CATALOG_NUM_chk"></label>
+                            <input class="text" type="text" name="CATALOG_NUM" id="CATALOG_NUM" style="display:none" />
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="kv-table" id="A03" style="display:none">
+                    <tr>
+                        <td class="kv-label">储存方法</td>
+                        <td class="kv-content" colspan="5"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" configkey="储存方法" defaultitem="false" name="S_B_N" id="S_B_N" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">实际盘点方法</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="" id="" value="按周期计数" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">检验</td>
+                        <td class="kv-content" colspan="5">
+                            <input type="checkbox" id="INSPECT_chk" /><label for="INSPECT_chk"></label>
+                            <input class="text" type="text" name="INSPECT" id="INSPECT" style="display:none" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">保存期限</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="SHELF_LIFE" id="SHELF_LIFE" /></b></b></td>
+                    </tr>
+                    <tr>
+      
+                        <td class="kv-label">标准产出(平米)</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="REPORT_VALUE1" id="REPORT_VALUE1" /></b></b></td>
+
+                    </tr>
+                    <tr>
+                        <td class="kv-label">存货/ 采购</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="STOCK_PURCH" id="STOCK_PURCH" /></b></b></td>
+
+                    </tr>
+                    <tr>
+                        <td class="kv-label">标准成本</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="STD_COST" id="STD_COST" /></b></b></td>
+
+                    </tr>
+                    <tr>
+                        <td class="kv-label">标准单位重量</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="STOCK_BASE" id="STOCK_BASE" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">标准单位面积</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="STOCK_SELL" id="STOCK_SELL" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">标准单位面积</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="STOCK_SELL" id="STOCK_SELL" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">当前库存</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="QUAN_ON_HAND" id="QUAN_ON_HAND" /></b></b></td>
+                        <td class="kv-label">已分配库存</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="QUAN_ASSIGN" id="QUAN_ASSIGN" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">有效库存</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="quan_alloc" id="quan_alloc" /></b></b></td>
+                        <td class="kv-label">在途数量</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="zaitu" id="zaitu" /></b></b></td>
+
+                    </tr>
+                    <tr>
+                        <td class="kv-label">安全库存</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="CONSIGN_ONHAND_QTY" id="CONSIGN_ONHAND_QTY" /></b></b></td>
+                        <td class="kv-label">最高库存</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="REPORT_VALUE2" id="REPORT_VALUE2" /></b></b></td>
+
+                    </tr>
+                    <tr>
+                        <td class="kv-label">再订购点</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="CONSIGN_QTY_IN_INSP" id="CONSIGN_QTY_IN_INSP" /></b></b></td>
+                        <td class="kv-label">VMI库存</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="vmi_quantotal" id="vmi_quantotal" /></b></b></td>
+
+                    </tr>
+                    <tr>
+                        <td class="kv-label">允许混合部件</td>
+                        <td class="kv-content" colspan="5">
+                            <input type="checkbox" id="MIX_PARTS_chk" /><label for="MIX_PARTS_chk"></label>
+                            <input class="text" type="text" name="MIX_PARTS" id="MIX_PARTS" style="display:none" />
+                        </td>
+                    </tr>
+                </table>
+                <table class="kv-table" id="A04" style="display:none">
+                    <tr>
+                        <td class="kv-label">记事本资料库搜索</td>
+                        <td class="kv-label">
+                            <div style="float:left"><a href="#" id="Showdanwei" class="searchIcon2"></a></div>
+                        </td>
+
+                    </tr>
+                    <tr></tr>
+                </table>
+                <table class="kv-table" id="A05" style="display:none">
+                    <tr>
+                        <td class="kv-label">IES1</td>
+                        <td class="kv-content">
+                        <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE1" id="IES_PARAMETER_VALUE1" /></b></b>
+                        <input style="display:none" name="IES_PARAMETER_KEY1" id="IES_PARAMETER_KEY1" />
+                        <input style="display:none" name="IES_PARAMETER_PKEY1" id="IES_PARAMETER_PKEY1" />
+                        </td>
+                        <td class="kv-label">
+                            <div style="float:left;width:90%">
+                                <b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE1" id="IES_PARAMETER_CODE1" /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show1" dialog="Data0594" class="searchIcon2"></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME1" id="IES_PARAMETER_NAME1" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES2</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE2" id="IES_PARAMETER_VALUE2" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY2" id="IES_PARAMETER_KEY2" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY2" id="IES_PARAMETER_PKEY2" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE2" id="IES_PARAMETER_CODE2"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show2" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME2" id="IES_PARAMETER_NAME2" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES3</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE3" id="IES_PARAMETER_VALUE3" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY3" id="IES_PARAMETER_KEY3" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY3" id="IES_PARAMETER_PKEY3" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE3" id="IES_PARAMETER_CODE3"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show3" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME3" id="IES_PARAMETER_NAME3" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES4</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE4" id="IES_PARAMETER_VALUE4" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY4" id="IES_PARAMETER_KEY4" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY4" id="IES_PARAMETER_PKEY4" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE4" id="IES_PARAMETER_CODE4"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show4" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME4" id="IES_PARAMETER_NAME4" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES5</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE5" id="IES_PARAMETER_VALUE5" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY5" id="IES_PARAMETER_KEY5" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY5" id="IES_PARAMETER_PKEY5" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE5" id="IES_PARAMETER_CODE5"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show5" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME5" id="IES_PARAMETER_NAME5" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES6</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE6" id="IES_PARAMETER_VALUE6" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY6" id="IES_PARAMETER_KEY6" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY6" id="IES_PARAMETER_PKEY6" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE6" id="IES_PARAMETER_CODE6"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show6" dialog="Data0594" class="searchIcon2" ></a></div> 
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME6" id="IES_PARAMETER_NAME6" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES7</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE7" id="IES_PARAMETER_VALUE7" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY7" id="IES_PARAMETER_KEY7" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY7" id="IES_PARAMETER_PKEY7" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE7" id="IES_PARAMETER_CODE7"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show7" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME7" id="IES_PARAMETER_NAME7" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES8</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE8" id="IES_PARAMETER_VALUE8" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY8" id="IES_PARAMETER_KEY8" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY8" id="IES_PARAMETER_PKEY8" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE8" id="IES_PARAMETER_CODE8"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show8" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME8" id="IES_PARAMETER_NAME8" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES9</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE9" id="IES_PARAMETER_VALUE9" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY9" id="IES_PARAMETER_KEY9" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY9" id="IES_PARAMETER_PKEY9" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE9" id="IES_PARAMETER_CODE9"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show9" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME9" id="IES_PARAMETER_NAME9" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES10</td>
+                        <td class="kv-content">
+                            <b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="IES_PARAMETER_VALUE10" id="IES_PARAMETER_VALUE10" /></b></b>
+                            <input style="display:none" name="IES_PARAMETER_KEY10" id="IES_PARAMETER_KEY10" />
+                            <input style="display:none" name="IES_PARAMETER_PKEY10" id="IES_PARAMETER_PKEY10" />
+                        </td>
+                        <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_CODE10" id="IES_PARAMETER_CODE10"  /></b></b>
+                            </div><div style="float:left;display:none"><a href="#" id="Show10" dialog="Data0594" class="searchIcon2" ></a></div>
+                        </td>
+                        <td class="kv-label"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="IES_PARAMETER_NAME10" id="IES_PARAMETER_NAME10" /></b></b></td>
+                    </tr>
+                </table>
+                <table class="kv-table" id="A06" style="display:none">
+                    <tr>
+                        <td class="kv-label">耐温性</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="ANALYSIS_CODE1" id="ANALYSIS_CODE1" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">使用寿命</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="ANALYSIS_CODE2" id="ANALYSIS_CODE2" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">化学性能</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="ANALYSIS_CODE3" id="ANALYSIS_CODE3" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">物理性能</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="ANALYSIS_CODE4" id="ANALYSIS_CODE4" /></b></b></td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">具体位置</td>
+                        <td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="ANALYSIS_CODE5" id="ANALYSIS_CODE5" /></b></b></td>
+                    </tr>
+                </table>
+                <div id="dv2">
+                    <table id="dg2" title="Client Side Pagination" style="width:700px;height:300px" data-options="
+				rownumbers:false,
+				singleSelect:true,
+				autoRowHeight:false,
+				pagination:false,
+				pageSize:10">
+                        <thead>
+                            <tr>
+                                <th field="code" width="80">供应商代码</th>
+                                <th field="supplier_name" width="100">供应商名称</th>
+                                <th field="supplier_part_no" width="100">品牌</th>
+                                <th field="lead_time" width="100">交期天数</th>
+                                <th field="price_1" width="100">单价</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <div class="btn" style="margin-top:30px;width:100%;text-align: center">
+                    <a><input class="submit" type="submit" name="保存" value="" /></a>
+                    <a><input class="return" type="button" name="返回" value="" /></a>
+                </div>
+            </form>
+        </div>
+    </div>
+<!--    <div id="win" class="easyui-window" title="My Window" style="width:600px;height:500px;display:none"
+         data-options="iconCls:'icon-save',modal:true, closed: true">
+        <div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'north',split:true" style="height:400px">
+                <table id="dg3" class="kv-table">
+                    <tr>
+                        <td class="kv-label">IES1</td>
+                        <td class="kv-label" id="lblIES1">
+                            板料类别
+                        </td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES1" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                                <option>FR1</option>
+                                <option>FR2</option>
+                                <option>FR3</option>
+                                <option>FR4</option>
+                                <option>FR5</option>
+                            </select>
+                            <input type="text" id="rkeyIES1" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES2</td>
+                        <td class="kv-label" id="lblIES2">基板供应商<label id="rkeyIES2" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES2" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                                <option value="A">广东生益</option>
+                                <option value="A">联茂</option>
+                                <option value="A">上海南亚</option>
+                                <option value="A">中山台光</option>
+                                <option  value="A">汕头超声</option>
+                                <option value="A">达克斯</option>
+                                <option value="A">泰康利</option>
+                                <option value="A">旺灵</option>
+                                <option value="A">珠海国能</option>
+                                <option value="A">TACONIC</option>
+                                <option value="A">世强先进</option>
+                                <option value="A">雅龙</option>
+                                <option value="A">罗杰斯</option>
+                               
+                            </select>
+                            <input type="text" id="rkeyIES2" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES3</td>
+                        <td class="kv-label" id="lblIES3">板料型号<label id="rkeyIES3" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES3" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                
+                                <option value="A">IT-140</option>
+                                <option value="A">IT-150G</option>
+                                <option value="A">IT-158</option>
+                                <option value="A">IT-168G</option>
+                                <option value="A">IT-168G1</option>
+                                <option value="A">IT-170GRA1</option>
+                          
+                            </select>
+                            <input type="text" id="rkeyIES3" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES4</td>
+                        <td class="kv-label" id="lblIES4">基板厚度MM<label id="rkeyIES4" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES4" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                 
+                                <option value="A">0.050</option>
+                                <option value="A">0.060</option>
+                                <option value="A">0.070</option>
+                                <option value="A">0.075</option>
+                                <option value="A">0.076</option>
+                                <option value="A">0.080</option>
+                                <option value="A">0.090</option>
+                                <option value="A">0.100</option>
+                                
+                            </select>
+                            <input type="text" id="rkeyIES4" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES5</td>
+                        <td class="kv-label" id="lblIES5">基板铜厚数字码<label id="rkeyIES5" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES5" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+               
+                                <option value="A">0/H</option>
+                                <option value="A">0/1</option>
+                                <option value="A">0/3</option>
+                                <option value="A">0/4</option>
+                                <option value="A">T/T</option>
+                                <option value="A">0.42/0.42</option>
+                                <option value="A">H/H</option>
+                                <option value="A">H/1</option>
+                                <option value="A">H/2</option>
+                                
+
+                            </select>
+                            <input type="text" id="rkeyIES5" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES6</td>
+                        <td class="kv-label" id="lblIES6">基板尺寸数字码<label id="rkeyIES6" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES6" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                                <option value="A">7.87*7.87</option>
+                                <option value="A">13*15.7</option>
+                                <option value="A">13.2*18.9</option>
+                                <option value="A">13.9*15.3</option>
+                                <option value="A">15*16.7</option>
+                                <option value="A">16*18</option>
+                                <option value="A">16.9*22.8</option>
+                                <option value="A">18*24</option>
+                                <option value="A">18.4*24.4</option>
+                                
+                            </select>
+                            <input type="text" id="rkeyIES6" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES7</td>
+                        <td class="kv-label" id="lblIES7">基板卤素<label id="rkeyIES7" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES7" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                                <option value="A">
+                                    无要求  
+                                </option>
+                                <option value="A">无卤素</option>
+                                <option value="A">有卤素</option>
+                       
+                            </select>
+                            <input type="text" id="rkeyIES7" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES8</td>
+                        <td class="kv-label" id="lblIES8">基板TG值代码<label id="rkeyIES8" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES8" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                                <option value="A">
+                                    无TG值
+                                </option>
+                                <option value="A">TG140</option>
+                                <option value="A">TG150</option>
+                                <option value="A">TG170</option>
+                                <option value="A">TG180</option>
+                                <option value="A">TG190</option>
+                             
+                            </select>
+                            <input type="text" id="rkeyIES8" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES9</td>
+                        <td class="kv-label" id="lblIES9">基板厚度是否含铜<label id="rkeyIES9" style="display:none"></label></td>
+                        <td>
+                            <select class="easyui-combobox" id="cbxIES9" style="width:200px"
+                                    data-options="valueField:'type_code',textField:'type_name'">
+                                <option value="A">DK：000</option>
+                                <option value="A">DK：16.0</option>
+                                <option value="A">DK：2.00</option>
+                                <option value="A">DK：2.14</option>
+                                <option value="A">DK：2.17</option>
+                                <option value="A">DK：2.20</option>
+                                <option value="A">DK：2.21</option>
+                                <option value="A">DK：2.50</option>
+                                <option value="A">DK：2.55</option>
+                                <option value="A">DK：2.56</option>
+                            </select>
+                            <input type="text" id="rkeyIES9" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-label">IES10</td>
+                        <td class="kv-label" id="lblIES10"><label id="rkeyIES10" style="display:none"></label></td>
+                        <td>
+                            <input class="easyui-combobox" id="cbxIES10" style="width:200px"
+                                   data-options="valueField:'type_code',textField:'type_name'" />
+                            <input type="text" id="rkeyIES10" style="display:none" value="100" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div data-options="region:'center'">
+                <button onclick="ok()">确定</button>
+                <button onclick="test()">关闭</button>
+            </div>
+        </div>
+    </div>-->
+ 
+</body>
+</html>
+<script>
+    _sufchar = "";
+    //function test() {
+    //    //$("#cbxIES1").combobox("reset");
+    //    //$("#cbxIES1").combobox("loadData", {});
+    //    $("#win").window("close");
+    //}
+    //function ok() {
+    //    //alert($('#cbxIES1').combobox('getText') + ":" + $('#cbxIES1').combobox('getValue'));
+    //    var s = "";
+    //    var s2 = "";
+    //    for (var i = 1; i < 11; i++) {
+
+    //        if ($("#lblIES" + i).text() != "") {
+    //            if ($('#cbxIES' + i).combobox('getValue') == "") {
+    //                $.messager.alert($("#lblIES" + i).text() + " 不能为空", $("#lblIES" + i).text() + " 不能为空");
+    //                //alert($("#lblIES" + i).text() + " 不能为空");
+    //                return false;
+    //            }
+    //        }
+    //        $("#IES_PARAMETER_VALUE" + i).val($('#cbxIES'+i).combobox('getValue'));
+    //        s = s + $('#cbxIES' + i).combobox('getValue');
+
+    //        s2 = s2 + $('#cbxIES' + i).combobox('getText');
+    //    }
+
+
+    //    $("#INV_PART_NUMBER").val(s);
+
+    //    $("#win").window("close");
+        
+    //}
+    
+
+    function initTree() {
+        //初始化树列表
+        var TreeData = [{
+            id: "A",
+            text: "原材料信息",
+            children: [{
+                id: "A01",
+                text: "一般资讯",
+                checked: true
+            },
+            {
+                id: "A02",
+                text: "采购信息"
+            },
+            {
+                id: "A03",
+                text: "存货信息",
+            },
+            {
+                id: "A04",
+                text: "记事本",
+            },
+            {
+                id: "A05",
+                text: "IES"
+            },
+            {
+                id: "A06",
+                text: "材料特性"
+            }]
+        }];
+
+        $("#tt").tree({
+            data: TreeData,
+            loadFilter: function (data) {
+                return data
+            },
+            onBeforeSelect: function (node) {
+                if (node.id == "A") {
+                    return false;
+                };
+                var oldNode = $("#tt").tree("getSelected");
+                if (oldNode) {
+                    $("#" + oldNode.id).css("display", "none");
+                }
+                if (node.id != "A02") {
+                    $("#dv2").css("visibility", "hidden");
+                }
+                return true;
+            },
+            onSelect: function (node) {
+                $("#" + node.id).css("display", "inline");
+                if (node.id == "A02") {
+                    $("#dv2").css("visibility", "visible");
+                }
+            },
+            onLoadSuccess: function (node, data) {
+                var node = $('#tt').tree('find', "A01");
+                $('#tt').tree('select', node.target);
+            },
+
+        })
+    };
+    function getSupplier() {
+        var whereobj = [{ name: "inventory_ptr", value: $("#rkey").val(), pattern: "=" }];
+        var d = AR.Utility.Ajax.post("GetList", "V_Data0017Supplier", { sys_search: JSON.stringify(whereobj) });
+        if (d) {
+            return d.rows;
+        }
+    }
+    function pagerFilter(data) {
+        if (typeof data.length == 'number' && typeof data.splice == 'function') {	// is array
+            data = {
+                total: data.length,
+                rows: data
+            }
+        }
+        return data;
+    }
+
+    
+    function isview() {
+        var isView = AR.Utility.queryString("isView");
+        if (isView == "1") {
+            $('#form1').form('load', parent.dg.getSelected());
+            $("input").attr("readonly", "readonly");
+            $(".searchIcon2").css("display", "none")
+            $("[type=checkbox]").attr("disabled","true")
+        }
+        
+        if (parent.AR.Global.DG.action == "Update") {
+            $("#ShowGROUP").css("display", "none");
+        }
+
+        var sss = parent.dg.getSelected();
+    };
+
+    function initCheckbox() {
+        //CheckBox
+        if ($("#CRITICAL_MATL_FLAG").val() == "1") { $("#CRITICAL_MATL_FLAG_chk").attr("checked", true); }
+        $("#CRITICAL_MATL_FLAG_chk").change(function () {
+            if ($(this).attr("checked") == "checked") { $("#CRITICAL_MATL_FLAG").val("1"); }
+            else { $("#CRITICAL_MATL_FLAG").val("0"); }
+        });
+
+        if ($("#STOP_PURCH").val() == "Y") { $("#STOP_PURCH_chk").attr("checked", true); }
+        $("#STOP_PURCH_chk").change(function () {
+            if ($(this).attr("checked") == "checked") { $("#STOP_PURCH").val("Y"); }
+            else { $("#STOP_PURCH").val("N"); }
+        });
+
+
+        if ($("#AVL_FLAG").val() == "Y") { $("#AVL_FLAG_chk").attr("checked", true); }
+        $("#AVL_FLAG_chk").change(function () {
+            if ($(this).attr("checked") == "checked") { $("#AVL_FLAG").val("Y"); }
+            else { $("#AVL_FLAG").val("N"); }
+        });
+
+        //alert($("#CATALOG_NUM").val())
+        if ($.trim($("#CATALOG_NUM").val()) == "Y") { $("#CATALOG_NUM_chk").attr("checked", true); }
+        $("#CATALOG_NUM_chk").change(function () {
+            if ($(this).attr("checked") == "checked") { $("#CATALOG_NUM").val("Y"); }
+            else { $("#CATALOG_NUM").val("N"); }
+        });
+
+        if ($("#INSPECT").val() == "Y") { $("#INSPECT_chk").attr("checked", true); }
+        $("#INSPECT_chk").change(function () {
+            if ($(this).attr("checked") == "checked") { $("#INSPECT").val("Y"); }
+            else { $("#INSPECT").val("N"); }
+        });
+
+        if ($("#MIX_PARTS").val() == "Y") { $("#MIX_PARTS_chk").attr("checked", true); }
+        $("#MIX_PARTS_chk").change(function () {
+            if ($(this).attr("checked") == "checked") { $("#MIX_PARTS").val("Y"); }
+            else { $("#MIX_PARTS").val("N"); }
+        });
+    }
+
+    function getGroupInfo() {
+        for (var i = 1; i < 11; i++) {
+            $("#IES_PARAMETER_VALUE" + i).attr("readonly", "readonly");
+        }
+        if ($("#if_flag").val() == '3') {
+            //载入596信息到IES
+            var whereobj = [{ name: "rkey595", value: parent.dg.getSelected().rkey595 == undefined ? 0 : parent.dg.getSelected().rkey595, pattern: "=" }];
+            var d = AR.Utility.Ajax.post("GetList", "V_Data0596", { sys_search: JSON.stringify(whereobj), sort: "rec_no asc" });
+            if (d) {
+               
+                for (var i = 1; i < 11; i++) {
+                    //$("#IES_PARAMETER_VALUE" + i).val("");
+                    $("#IES_PARAMETER_NAME" + i).val("");
+                    $("#IES_PARAMETER_KEY" + i).val("");
+                    $("#IES_PARAMETER_PKEY" + i).val("");
+                    //$("#Show" + i).parent().css("display", "none");
+                }
+                $.each(d.rows, function (index, row) {
+                    _sufchar = row.sufchar;
+                    $('#IES_PARAMETER_NAME' + (index + 1).toString()).val(row.invt_ttyename)
+                    $('#IES_PARAMETER_KEY' + (index + 1).toString()).val(row.rkey593)
+                    $('#IES_PARAMETER_PKEY' + (index + 1).toString()).val(row.prkey593)
+                    $("#Show" + (index + 1).toString()).parent().css("display", "");
+                    $("#Show" + (index + 1).toString()).attr("options", "{defaultWhere: [{ name: 'rkey593', pattern: '=', value: '" + row.rkey593 + "' }],sortName: 'rec_no asc'}");
+                });
+            }
+        }
+        else {
+            $("#INV_DESCRIPTION").removeAttr("readonly");
+            var whereobj = [{ name: "INV_GROUP_PTR", value: $("#GROUP_PTR").val(), pattern: "=" }];
+            var d = AR.Utility.Ajax.post("GetList", "V_Data0499", { sys_search: JSON.stringify(whereobj), sort: "seq_no asc" });
+            if (d) {
+
+                for (var i = 1; i < 11; i++) {
+                    $("#IES_PARAMETER_CODE" + i).val("");
+                    $("#IES_PARAMETER_NAME" + i).val("");
+                    $("#IES_PARAMETER_KEY" + i).val("");
+                    //$("#IES_PARAMETER_PKEY" + i).val("");
+                    //$("#Show" + i).parent().css("display", "none");
+                }
+                $.each(d.rows, function (index, row) {
+                    _sufchar = row.sufchar;
+                   
+                    $('#IES_PARAMETER_NAME' + (index + 1).toString()).val(row.parameter_desc)
+                    $('#IES_PARAMETER_KEY' + (index + 1).toString()).val(row.rkey278)
+                    //$('#IES_PARAMETER_PKEY' + (index + 1).toString()).val(row.prkey593)
+                    $("#Show" + (index + 1).toString()).parent().css("display", "");
+                    $("#Show" + (index + 1).toString()).attr("dialog", "V_Data0338");
+                    $("#Show" + (index + 1).toString()).attr("options", "{defaultWhere: [{ name: 'parameter_ptr', pattern: '=', value: '" + row.rkey278 + "' }],sortName: 'sequence_no asc'}");
+                });
+            }
+        }
+        var isView = AR.Utility.queryString("isView");
+        if (isView == "1") {
+            $('#form1').form('load', parent.dg.getSelected());
+            $("input").attr("readonly", "readonly");
+            $(".searchIcon2").css("display", "none")
+            $("[type=checkbox]").attr("disabled", "true")
+            $(".submit").css("display", "none");
+        }
+
+    }
+
+    $(function () {
+        isview();
+
+        getGroupInfo();
+        
+        
+        CreateInvNumber = function () {
+            if ($("#if_flag").val() == '3') {
+                var s = "";
+                var s2 = "";
+                for (var i = 1; i < 11; i++) {
+                    if ($("#IES_PARAMETER_NAME" + i).val() != "") {
+                        if ($('#IES_PARAMETER_CODE' + i).val() == "") {
+                            //$.messager.alert($("#IES_PARAMETER_NAME" + i).val() + " 不能为空", $("#IES_PARAMETER_NAME" + i).val() + " 不能为空");
+                            //alert($("#lblIES" + i).text() + " 不能为空");
+                            //return false;
+                        }
+                    }
+                    ;
+                    s = s + $('#IES_PARAMETER_CODE' + i).val();
+                    if (s2 != "") {
+                        s2 = s2 + " ";
+                    }
+                    s2 = s2 + $('#IES_PARAMETER_VALUE' + i).val();
+                }
+
+                s = _sufchar + s;
+                $("#INV_PART_NUMBER").val(s);
+                $("#INV_DESCRIPTION").val(s2);
+            }
+
+        }
+        //var curLeft = parseInt($('#group')[0].offsetLeft) + parseInt($('#group')[0].offsetWidth) - 20;
+        //var curTop = parseInt($('#group')[0].offsetTop);
+        //$("#ShowSearch").css("left", curLeft);
+        //$("#ShowSearch").css("top", curTop);
+        AR.Combobox.onBeforeExecute = function (type, $input) {
+            
+            if (type == "dialog" && !$input.attr("mutiple")) {
+                var no = $input.attr("id").replace("Show", "");
+                for (var i = 2; i < 11; i++) {
+                    if ($input.attr("id") == ("Show" + i)) {
+                        if (!$("#IES_PARAMETER_VALUE" + (parseInt(no) - 1)).val()) {
+                            return false;
+                        }
+                    }
+                }
+
+                if (Number(no) && $("#IES_PARAMETER_PKEY" + no).val()) {
+                    var check = 0;
+                    $.each($("input[name ^= 'IES_PARAMETER_KEY']"), function (index, input) {
+                        if (input.value == $("#IES_PARAMETER_PKEY" + no).val()) {
+                            if ($("#IES_PARAMETER_VALUE" + (index+1).toString()).val()) {
+                                $("#Show" + no).attr("options", "{defaultWhere: [{ name: 'rkey593', pattern: '=', value: '" + $("#IES_PARAMETER_KEY" + no).val() + "' },{ name: 'filter_name', pattern: '=', value: '" + $("#IES_PARAMETER_VALUE" + (index+1).toString()).val() + "' }],sortName: 'rec_no asc'}");
+                                check = 1;
+                            } else {
+                                //$.messager.alert("", "请先输入 " + $("#IES_PARAMETER_VALUE" + (index + 1).toString()).val() + " 信息", "info");
+                                check = 2;
+                            }
+                        }
+                    });
+                    if (check == 0) {
+                        $.messager.alert("", "没有找到对应的查询条件" + $("#IES_PARAMETER_PKEY" + no).val(), "info");
+                        return false;
+                    }
+                }
+            }
+        }
+        AR.Combobox.onAfterExecute = function (type, $input, backPara) {
+            if (type == "dialog" && $input.attr("id") == "ShowGROUP" && !$input.attr("mutiple")) {
+                $("#GROUP_DESC").val(backPara.datas.group_desc);
+                $("#GROUP_PTR").val(backPara.datas.rkey);
+                $("#if_flag").val(backPara.datas.if_flag);
+                $("#INSPECT").val(backPara.datas.inspect);
+                $("#CATALOG_NUM").val(backPara.datas.catalog_num);
+                $("#AVL_FLAG").val(backPara.datas.avl_flag);
+                $("#SHELF_LIFE").val(backPara.datas.shelf_lift);
+                initCheckbox();
+
+
+
+                if (backPara.datas.if_flag == '3') {
+                    for (var i = 1; i < 11; i++) {
+                        $("#IES_PARAMETER_VALUE" + i).attr("readonly", "readonly");
+                    }
+                    $("#INV_PART_NUMBER").attr("readonly", "readonly");
+                    $("#INV_DESCRIPTION").val("");
+                    
+                    $("#INV_DESCRIPTION").attr("readonly", "readonly");
+
+                    //载入596信息到IES
+                    var whereobj = [{ name: "rkey595", value: backPara.datas.rkey595, pattern: "=" }];
+                    var d = AR.Utility.Ajax.post("GetList", "V_Data0596", { sys_search: JSON.stringify(whereobj), sort: "rec_no asc" });
+                    if (d) {
+                        $("#INV_PART_NUMBER").val("");
+                        for (var i = 1; i < 11; i++) {
+                            $("#IES_PARAMETER_VALUE" + i).val("");
+                            $("#IES_PARAMETER_NAME" + i).val("");
+                            $("#IES_PARAMETER_KEY" + i).val("");
+                            $("#IES_PARAMETER_PKEY" + i).val("");
+                            $("#Show" + i).parent().css("display", "none");
+                        }
+                        $.each(d.rows, function (index, row) {
+                            _sufchar = row.sufchar;
+                            $('#IES_PARAMETER_NAME' + (index + 1).toString()).val(row.invt_ttyename)
+                            $('#IES_PARAMETER_KEY' + (index + 1).toString()).val(row.rkey593)
+                            $('#IES_PARAMETER_PKEY' + (index + 1).toString()).val(row.prkey593)
+                            $("#Show" + (index + 1).toString()).parent().css("display", "");
+                            $("#Show" + (index + 1).toString()).attr("dialog", "Data0594");
+                            $("#Show" + (index + 1).toString()).attr("options", "{defaultWhere: [{ name: 'rkey593', pattern: '=', value: '" + row.rkey593 + "' }],sortName: 'rec_no asc'}");
+                        });
+                    }
+
+                } else {
+                    for (var i = 1; i < 11; i++) {
+                        //$("#IES_PARAMETER_VALUE" + i).removeAttr("readonly");
+                    }
+                    $("#INV_PART_NUMBER").removeAttr("readonly");
+                    $("#INV_DESCRIPTION").removeAttr("readonly");
+                    //载入499信息到IES
+                    //var daat = parent.dg.getSelected();
+
+                    var whereobj = [{ name: "INV_GROUP_PTR", value: $("#GROUP_PTR").val(), pattern: "=" }];
+                    var d = AR.Utility.Ajax.post("GetList", "V_Data0499", { sys_search: JSON.stringify(whereobj), sort: "seq_no asc" });
+                    if (d) {
+                        
+                        for (var i = 1; i < 11; i++) {
+                            $("#IES_PARAMETER_CODE" + i).val("");
+                            $("#IES_PARAMETER_NAME" + i).val("");
+                            $("#IES_PARAMETER_KEY" + i).val("");
+                            $("#IES_PARAMETER_PKEY" + i).val("");
+                            $("#Show" + i).parent().css("display", "none");
+                        }
+                        $.each(d.rows, function (index, row) {
+                            _sufchar = row.sufchar;
+                            $("#IES_PARAMETER_VALUE" + (index + 1)).val(row.def_value);
+                            $('#IES_PARAMETER_NAME' + (index + 1).toString()).val(row.parameter_desc)
+                            $('#IES_PARAMETER_KEY' + (index + 1).toString()).val(row.rkey278)
+                            //$('#IES_PARAMETER_PKEY' + (index + 1).toString()).val(row.prkey593)
+                            $("#Show" + (index + 1).toString()).parent().css("display", "");
+                            $("#Show" + (index + 1).toString()).attr("dialog", "V_Data0338");
+                            $("#Show" + (index + 1).toString()).attr("options", "{defaultWhere: [{ name: 'parameter_ptr', pattern: '=', value: '" + row.rkey278 + "' }],sortName: 'sequence_no asc'}");
+                        });
+                    }
+                }
+
+            }
+            if (type == "dialog" && $input.attr("id") == "Showcaigouyuan" && !$input.attr("mutiple")) {
+                $("#employee_name").val(backPara.datas.employee_name);
+                $("#AUTHORIZED_BUYER_PTR").val(backPara.datas.rkey);
+            }
+            if (type == "dialog" && $input.attr("id") == "Showshouxuangongyingshang" && !$input.attr("mutiple")) {
+                $("#SUPPLIER_NAME").val(backPara.datas.supplier_name);
+                $("#PREF_SUPPLIER_PTR").val(backPara.datas.rkey);
+            }
+            if (type == "dialog" && $input.attr("id") == "Showdanwei" && !$input.attr("mutiple")) {
+                $("#UNIT_CODE").val(backPara.datas.unit_code);
+                
+                $("#PURCH_UNIT_PTR").val(backPara.datas.rkey);
+                $("#STOCK_UNIT_name").val(backPara.datas.unit_code);
+
+                $("#STOCK_UNIT_PTR").val(backPara.datas.rkey);
+                $("#STOCK_PURCH").val(1);
+            }
+            if (type == "dialog" && $input.attr("id") == "Showdanwei2" && !$input.attr("mutiple")) {
+                $("#STOCK_UNIT_name").val(backPara.datas.unit_code);
+                
+                $("#STOCK_UNIT_PTR").val(backPara.datas.rkey);
+            }
+
+            for (var i = 1; i < 11; i++) {
+                if (type == "dialog" && $input.attr("id") == "Show" + i && !$input.attr("mutiple")) {
+                    if ($("#if_flag").val() != '3') {
+                       // $("#IES_PARAMETER_CODE" + i).val(backPara.datas.type_code);
+                        $("#IES_PARAMETER_VALUE" + i).val(backPara.datas.tvalue);
+
+                    }
+                    else {
+                        $("#IES_PARAMETER_CODE" + i).val(backPara.datas.type_code);
+                        $("#IES_PARAMETER_VALUE" + i).val(backPara.datas.type_name);
+                    }
+
+                    if (CreateInvNumber() == false) {
+                        return;
+                    }
+                }
+            }
+            
+
+            //if (type == "dialog" && $input.attr("id") == "Show1" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE1").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME1").val(backPara.datas.type_name);
+                
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show2" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE2").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME2").val(backPara.datas.type_name);
+                
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show3" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE3").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME3").val(backPara.datas.type_name);
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show4" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE4").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME4").val(backPara.datas.type_name);
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show5" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE5").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME5").val(backPara.datas.type_name);
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show6" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE6").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME6").val(backPara.datas.type_name);
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show7" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE7").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME7").val(backPara.datas.type_name);
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show8" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE8").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME8").val(backPara.datas.type_name);
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show9" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE9").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME9").val(backPara.datas.type_name);
+            //}
+            //if (type == "dialog" && $input.attr("id") == "Show10" && !$input.attr("mutiple")) {
+            //    $("#IES_PARAMETER_CODE10").val(backPara.datas.type_code);
+            //    $("#IES_PARAMETER_NAME10").val(backPara.datas.type_name);
+            //}
+        }
+
+        initCheckbox();
+
+        $('#dg2').datagrid({ loadFilter: pagerFilter }).datagrid('loadData', getSupplier());
+
+        //var dg = new AR.DataGrid("V_Data0017Supplier", "", "dg2");
+
+        //dg.options = {
+        //    pageSize: 30,
+        //    onBeforeLoad: function (param) {
+        //        var whereobj = [{ name: "inventory_ptr", value: $("#rkey").val(), pattern: "=" }];
+        //        param.sys_search = JSON.stringify(whereobj);
+        //        return true;
+        //    },
+        //};
+        //dg.ToolArea.isHidden = true;
+
+        //dg.bind();
+
+        initTree();
+
+        for (var i = 1; i < 11; i++) {
+            $('#IES_PARAMETER_VALUE' + i).change(function () {
+                var s = "";
+                var s2 = "";
+                for (var i = 1; i < 11; i++) {
+                    if ($("#IES_PARAMETER_NAME" + i).val() != "") {
+                        if ($('#IES_PARAMETER_CODE' + i).val() == "") {
+                            //$.messager.alert($("#IES_PARAMETER_NAME" + i).val() + " 不能为空", $("#IES_PARAMETER_NAME" + i).val() + " 不能为空");
+                            //alert($("#lblIES" + i).text() + " 不能为空");
+                            //return false;
+                        }
+                    }
+                    ;
+                    s = s + $('#IES_PARAMETER_CODE' + i).val();
+                    if (s2 != "") {
+                        s2 = s2 + " ";
+                    }
+                    s2 = s2 + $('#IES_PARAMETER_VALUE' + i).val();
+                }
+
+                s = _sufchar + s;
+                //$("#INV_PART_NUMBER").val(s);
+                $("#INV_DESCRIPTION").val(s2);
+            });
+        }
+
+        if (parent.dg.getSelected().if_flag == '3') {
+            
+            $("#INV_PART_NUMBER").attr("readonly", "readonly");
+            
+            for (var i = 1; i < 11; i++) {
+                $('#IES_PARAMETER_VALUE' + i).attr("readonly", "readonly");
+
+            }
+        }
+
+       
+
+    });
+
+    //var data2 = [];
+    //data2.push({ invt_ttyename: "a" });
+    //data2.push({ invt_ttyename: "b" });
+    //data2.push({ invt_ttyename: "c" });
+
+
+
+    //var d = new Array();
+    //d[0] = { "productid": "FI-SW-01", "productname": "Koi", "unitcost": 10.00, "status": "P", "listprice": 36.50, "attr1": "Large", "itemid": "EST-1" };
+    //d[1] = { "productid": "K9-DL-01", "productname": "Dalmation", "unitcost": 12.00, "status": "P", "listprice": 18.50, "attr1": "Spotted Adult Female", "itemid": "EST-10" };
+    //d[2] = { "productid": "RP-SN-01", "productname": "Rattlesnake", "unitcost": 12.00, "status": "P", "listprice": 38.50, "attr1": "Venomless", "itemid": "EST-11" };
+
+    //$('#dg2').datagrid({
+    //    data: d,
+    //    columns: [[
+    //        { field: 'productid', title: 'productid', width: 100 }
+    //    ]]
+    //});
+
+
+
+    AR.Form.BtnCommit.onBeforeExecute = function (arrayData) {
+        if (!$("#PURCH_UNIT_PTR").val() || !$("#STOCK_UNIT_PTR").val()) {
+            $.messager.alert("", '采购单位和库存代为不能为空' + $("#PURCH_UNIT_PTR").val() + ' ' + $("#STOCK_UNIT_PTR").val());
+            return false;
+        };
+
+        if ($("#if_flag").val() == '3') {
+            for (var i = 1; i < 11; i++) {
+                if ($("#IES_PARAMETER_NAME" + i).val() != "") {
+                    if ($('#IES_PARAMETER_Value' + i).val() == "") {
+                        $.messager.alert($("#IES_PARAMETER_NAME" + i).val() + " 不能为空", $("#IES_PARAMETER_NAME" + i).val() + " 不能为空");
+                        //alert($("#lblIES" + i).text() + " 不能为空");
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    
+        //alert(JSON.stringify(arrayData));
+    }
+
+
+
+</script>

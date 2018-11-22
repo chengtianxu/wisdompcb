@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>supplier_test</title>
+    <!--<script src="../../Style/JS/Aries.Loader.js"></script>-->
+    <script>
+        //调试时可以这样写，避免浏览器缓存
+        document.write('<s' + 'cript src="../../Style/JS/Aries.Loader.js?"' + Math.random() + '></s' + 'cript>');
+    </script>
+    
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -1, "month");
+    var defdate = startDate + "," + endDate;
+
+    AR.Global.userName = parent.AR.Global.userName; //从上级窗口取到用户名(各级窗口都可以这样取)
+    var dg = new AR.DataGrid("V_priceChangeDetail");
+    dg.ToolBar.BtnImport.isHidden = true;
+    dg.ToolBar.BtnExportTemplate.isHidden = true;
+    dg.ToolBar.isHidden = true;
+    dg.options = {
+        sortName: "GROUP_NAME asc",
+        onBeforeLoad: function (param) {
+            return Re_searchInfo(param);
+        },
+        onLoadSuccess: function (data) {
+             $(".datagrid-header-check").html("");
+          //  $("#DataGrid").parent().find("div.datagrid-header-check").children("input[type='checkbox']").eq(0).attr("style", "display:none;");
+        }
+    }
+
+    dg.Search.onAfterExecute = function () {
+        if ($('#sys_longdate_input2').length > 0) {
+            $('#sys_longdate_input2').attr("style", "WIDTH: 95px");
+            $('#sys_longdate_input2').attr("class", "easyui-datebox easyui-validatebox");
+            $('#sys_longdate_input2').attr("validtype", "datebox");
+            $('#sys_longdate_input').attr("style", "WIDTH: 95px");
+            $('#sys_longdate_input').attr("class", "easyui-datebox easyui-validatebox");
+            $('#sys_longdate_input').attr("validtype", "datebox");
+        }
+    }
+
+    //dg.Search.BtnQuery.onBeforeExecute = function (para) {
+    //    if ($('#change_rate_input2').length > 0) {
+    //        var newdate1 = $('#sys_longdate_input2').datebox('getValue').substr(0, 10);
+    //        var newdate2 = $('#sys_longdate_input').datebox('getValue').substr(0, 10);
+    //        if ((newdate1 == "" && newdate2 != "") || (newdate1 != "" && newdate2 == "")) {
+    //            $.messager.alert("提示", "日期条件不全!", "info");
+    //            return false;
+    //        }
+
+    //        if (days < 0) {
+    //            $.messager.alert("提示", "开始日期不能大于结束日期!", "info");
+    //            return false;
+    //        }
+    //    }        
+    //}
+
+    dg.bind();
+    var searchPara = {};
+    dg.Search.BtnQuery.onBeforeExecute = function (param) {
+        if ($("#sel_input").val() != "") {
+            dg = new AR.DataGrid('V_priceAVGChange');
+            //dg.isEditor = true;
+            dg.ToolArea.isHidden = true;
+            dg.isShowCheckBox = false;
+            dg.options.onBeforeLoad = function (param) {
+                if (!param.sys_search) {
+                    param.sys_search = searchPara.sys_search;
+                }
+                return Re_searchInfo(param);
+            }
+            dg.bind();
+        } else {
+            //var sys_search = dg.options.queryParams['sys_search'];
+            dg = new AR.DataGrid('V_priceChangeDetail');
+            dg.ToolArea.isHidden = true;
+            dg.isShowCheckBox = false;
+            dg.options.onBeforeLoad = function (param) {
+                if (!param.sys_search) {
+                    param.sys_search = searchPara.sys_search;
+                }
+                return Re_searchInfo(param);
+            }
+           // alert(param.sys_search);
+            dg.bind();
+        }
+    }
+
+    function Re_searchInfo(param) {
+        //定制查询条件
+        searchPara = param;
+        if (!param.sys_search) { return; }
+        var searchArr = JSON.parse(param.sys_search);
+
+        //默认结束日期加一天
+        if ($('#sys_longdate_input2').length > 0 && $('#sys_longdate_input2').datebox('getValue') != "") {
+            var tmpdate = $('#sys_longdate_input').datebox('getValue').substr(0, 10);
+            var tmpdate2 = AddDate(tmpdate, 1, "day");
+            var searchstr = param.sys_search;
+            var pos = searchstr.lastIndexOf(tmpdate);
+            if (pos > 0) {
+                var str = searchstr.substr(0, pos) + searchstr.substr(pos).replace(tmpdate, tmpdate2);
+                param.sys_search = str;
+            }
+        }
+        if (searchArr.length == 0) {
+            $.messager.alert("提示", "条件不能全部为空!", "info");
+            return false;
+        }
+      // alert(param.sys_search);
+
+        return true;
+    }
+
+</script>

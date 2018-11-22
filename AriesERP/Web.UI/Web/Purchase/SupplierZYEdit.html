@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js?v=2.0.0.1"></script>
+    <link href="../../Style/CSS/base.css" rel="stylesheet"/>
+    <link href="../../Style/CSS/basic_info.css?v=2.0.0.1" rel="stylesheet"/>
+</head>
+<body>
+    <form  class="cont-box-form" id="form1">
+        <input type="hidden" name="rkey" id="rkey" value="" />
+		<table class="kv-table">
+			<tbody>
+				<tr>
+					<td class="kv-label">装运地点</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text"  name="factory_location" id="factory_location" data-options="required:true" validtype="length[1,20]"/></b></b></td>
+					<td class="kv-label">联系人</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="contact" id="contact" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">详细地址</td>
+					<td class="kv-content" colspan="3"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="factory_address_1" id="factory_address_1" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">州/省</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="state" id="state" /></b></b></td>
+                    <td class="kv-label">国家或地区</td>
+					<td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="country_name" id="country_name" />
+                        <input class="text" type="text" name="country_ptr" id="country_ptr" style="display:none" /></b></b></div><div style="float:left"><a href="#" id="ShowCountry" dialog="V_Common_Data0250" class="searchIcon2" ></a></div>
+					</td>
+                </tr>
+                <tr>
+					<td class="kv-label">邮政编码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="zip" id="zip"  /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="phone" id="phone" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">传真号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="fax" id="fax" /></b></b></td>
+					<td class="kv-label">电子邮件</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="email_for_contact" id="email_for_contact" /></b></b></td>
+				</tr>
+                <tr>
+                    <td class="kv-label">装运提前天数</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" value="0" name="shipping_lead_time" id="shipping_lead_time" /></b></b></td>
+					<td class="kv-label">离岸价格</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="fob" id="fob" /></b></b></td>
+                </tr>
+                <tr>
+					<td class="kv-label">装运方法</td>
+					<td class="kv-content"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="shipping_method" id="shipping_method"  />
+                        </b></b></div><div style="float:left"><a href="#" id="ShowZYMethod" dialog="V_Common_Data0370" onlytext="true" class="searchIcon2" ></a></div>
+                    </td>
+                    <td class="kv-label" colspan="2"></td>
+				</tr>
+                <tr>
+					<td class="kv-label">增值税代码</td>
+					<td class="kv-label">
+                        <input name="city_tax_ptr" id="city_tax_ptr" style="display:none"/>
+                        <div style="float:left"><input class="text textread" readonly="true" style="border:0" type="text" name="state_id" id="state_id" data-options="required:true" />
+                        </div><div style="float:left"><a href="#" id="ShowTax" dialog="V_Common_Data0189" class="searchIcon2" ></a>
+                        </div><div style="float:left">&nbsp;&nbsp;&nbsp;&nbsp;<input class="text textread" readonly="true" style="border:0" type="text" name="state_name" id="state_name" />
+                        </div></td>
+                    <td class="kv-label" colspan="2">
+                        <div style="float:left">税率&nbsp;&nbsp;<input class="text textread" readonly="true" style="border:0" type="text" name="state_tax" id="state_tax" /><label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </div><div style="float:left"><input name="state_ship_tax_flag" id="state_ship_tax_flag" value="N" style="display:none"/><input type="checkbox" id="state_ship_tax_flag_chk" /><label for="state_ship_tax_flag_chk">装运&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </div><div style="float:left"><input name="state_invt_tax_flag" id="state_invt_tax_flag" value="Y" style="display:none"/><input type="checkbox" id="state_invt_tax_flag_chk" checked="checked" /><label for="state_invt_tax_flag_chk">材料&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </div><div style="float:left"><input name="state_misc_tax_flag" id="state_misc_tax_flag" value="N" style="display:none"/><input type="checkbox" id="state_misc_tax_flag_chk" /><label for="state_misc_tax_flag_chk">杂项</label></div>
+					</td>
+                </tr>
+			</tbody>
+		</table>
+        <div id="btnArea" style="margin-top:30px;width:100%;text-align: center">
+            <a href="#" class="easyui-linkbutton" onclick="BtnOK();">确定</a><span style="width:40px">　　</span>
+            <a href="#" class="easyui-linkbutton" onclick="BtnCancel();">取消</a>
+        </div>
+    </form>
+</body>
+</html>
+<script>
+    var isView = AR.Utility.queryString("isView");
+    //绑定事件
+    $("#state_ship_tax_flag_chk").change(function () {
+        if ($(this).attr("checked") == "checked") { $("#state_ship_tax_flag").val("Y"); }
+        else { $("#state_ship_tax_flag").val("N"); }
+    });
+    $("#state_invt_tax_flag_chk").change(function () {
+        if ($(this).attr("checked") == "checked") { $("#state_invt_tax_flag").val("Y"); }
+        else { $("#state_invt_tax_flag").val("N"); }
+    });
+    $("#state_misc_tax_flag_chk").change(function () {
+        if ($(this).attr("checked") == "checked") { $("#state_misc_tax_flag").val("Y"); }
+        else { $("#state_misc_tax_flag").val("N"); }
+    });
+    
+    //弹窗选择之后事件。
+    AR.Combobox.onAfterExecute = function (type, $input, backPara) {
+        if (type == "dialog") {
+            if ($input.attr("id") == "ShowCountry") {
+                $('#country_ptr').val(backPara.datas.country_rkey);
+                $('#country_name').val(backPara.datas.country_name);
+            }
+            if ($input.attr("id") == "ShowCurrency") {
+                $('#currency_ptr').val(backPara.datas.rkey);
+                $('#curr_name').val(backPara.datas.curr_name);
+            }
+            if ($input.attr("id") == "ShowTax") {
+                $('#city_tax_ptr').val(backPara.datas.rkey);
+                $('#state_id').val(backPara.datas.state_id);
+                $('#state_name').val(backPara.datas.state_name);
+                $('#state_tax').val(backPara.datas.state_tax);
+            }
+            if ($input.attr("id") == "ShowZYMethod") {
+                $('#shipping_method').val(backPara.datas.description);
+            }
+            
+            
+        }
+    }
+    //Form载入数据
+    function reloadData() {
+        $('#form1').form('load', parent.ZYData);
+    }
+    $('#form1').form({
+        onLoadSuccess: function (data) {
+            //对字段赋初值
+            if ($("#state_ship_tax_flag").val() == "Y") { $("#state_ship_tax_flag_chk").attr("checked", true); }
+            else { $("#state_ship_tax_flag_chk").attr("checked", false); }
+            if ($("#state_invt_tax_flag").val() == "Y") { $("#state_invt_tax_flag_chk").attr("checked", true); }
+            else { $("#state_invt_tax_flag_chk").attr("checked", false); }
+            if ($("#state_misc_tax_flag").val() == "Y") { $("#state_misc_tax_flag_chk").attr("checked", true); }
+            else { $("#state_misc_tax_flag_chk").attr("checked", false); }
+        }
+    });
+    $(function () {
+        if (!parent.ZYData) {
+            $("#state").val(parent.$("#state").val());
+            $("#country_ptr").val(parent.$("#country_ptr").val());
+            $("#country_name").val(parent.$("#country_name").val());
+            $("#zip").val(parent.$("#zip").val());
+            $("#contact").val(parent.$("#contact_name_1").val());
+            $("#phone").val(parent.$("#phone").val());
+            $("#fax").val(parent.$("#fax").val());
+        }
+        if (isView == "1") { ToView(); }
+    });
+    //view
+    function ToView() {
+        $("#form1").find(":input[type!='button'][type!='rest']").each(function () {
+            if ($(this).attr("type") == "checkbox" || $(this).attr("type") == "radio") {
+                $(this).attr("disabled", true);
+            }
+            else {
+                $(this).attr("readonly", true);
+            }
+        })
+        $("#form1").find("a").each(function () {
+            $(this).unbind();
+        })
+        $('#btnArea').css("display", "none");
+    }
+    ///取消
+    function BtnCancel() {
+        parent.initForm();
+    }
+    //确定
+    function BtnOK() {
+        if ($('#factory_location').val() == "") {
+            $.messager.alert("", "装运地点不能为空!", "info");
+            return;
+        }
+        if ($('#state_id').val() == "") {
+            $.messager.alert("", "对应的增值税不允许为空!", "info");
+            return;
+        }
+        //if (!$('#form1').form("validate")) {
+        //    AR.Utility.Window.showMsg(AR.Lang.fillTheBlank);
+        //    return;
+        //}
+        var $targetForm = $('#form1').find("[name]:input");
+        var tmpData = $('#form1').find("[name]:input").serializeArray();
+        if (!parent.ZYData) {
+            var formData = {};
+            for (var i = 0; i < tmpData.length; i++) {
+                formData[tmpData[i].name] = tmpData[i].value;
+            }
+            if (!parent.ZYTreeNode.rows) { parent.ZYTreeNode.rows = []; }
+            parent.ZYTreeNode.rows.push(formData);
+
+        } else {
+            for (var i = 0; i < tmpData.length; i++) {
+                parent.ZYData[tmpData[i].name] = tmpData[i].value;
+            }
+        }
+        parent.UpdateZYItem();
+    }
+</script>

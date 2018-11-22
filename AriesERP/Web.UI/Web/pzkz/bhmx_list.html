@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title></title>
+        <script src="../../Style/JS/Aries.Loader.js"></script>
+    </head>
+    <body>
+        <table id="dg" ></table>   
+    </body>
+</html>
+
+<script>
+    var isSelect = 0;
+    var Cut_no = AR.Utility.queryString("cut_no")//投产明细关连查询
+    var companyValue = AR.Utility.queryString("companyValue");//投产明细关连查询
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -1, "month");
+    var defdate = startDate + "," + endDate;
+
+    var dg = new AR.DataGrid("V_bhmx");
+    dg.isShowCheckBox = false;
+    dg.ToolBar.isHidden = true;
+    //dg.isEditor = true;
+    dg.bind();
+    dg.options = {
+       pageSize: 10,
+        onBeforeLoad: function (param) {
+            if (Cut_no) {
+                setTimeout(function () { getSearchCombox() }, 5);
+                return false;
+            }
+            else if (!isSelect) { setTimeout(function () { getSearchCombox() }, 5); }
+           return Re_searchInfo(param);
+       },
+       onLoadSuccess: function () {
+           if (Cut_no) {
+               getSearchCombox();
+           }
+       }
+    };
+    //关连查询时调用
+    function getSearchCombox() {
+        if (typeof (AR.Global.comboxData.C_combobox) != "undefined") {
+            if (Cut_no) {
+                $('#udef_下拉_input').val(Cut_no);
+                $('#日期_input2').datebox('setValue', "");
+                $('#日期_input').datebox('setValue', "");
+                var data = $('#pz_search').combobox('getData');
+                if (data.length > 0) {
+                    $('#pz_search').combobox('select', data[1].value);
+                }
+                $('#selCompany').combobox('setValues', companyValue.split(","));
+                Cut_no = null;
+                dg.Search.BtnQuery.$target.click(); //调用查询,等同于dg.reload();
+                return;
+            }
+            else {
+                var data = $('#pz_search').combobox('getData');
+                if (data.length > 0) {
+                    $('#pz_search1').combobox('select', data[1].value);
+                }
+                isSelect = 1;
+                return;
+            }
+        }
+        setTimeout(function () { getSearchCombox() }, 5);
+    }
+    dg.Search.BtnReset.onAfterExecute = function () {
+        if ($('#日期_input2')) {
+            //重置时日期,自定义下拉框默认值要重新赋值
+            $('#日期_input').datebox('setValue', endDate);
+            $('#日期_input2').datebox('setValue', startDate);
+        }
+        if ($('#pz_search')) {
+            var data = $('#pz_search').combobox('getData');
+            if (data.length > 0) {
+                $('#pz_search').combobox('select', data[0].value);
+            }
+        }
+        if ($('#pz_search1')) {
+            var data = $('#pz_search1').combobox('getData');
+            if (data.length > 0) {
+                $('#pz_search1').combobox('select', data[1].value);
+            }
+        }
+    }
+    dg.Search.BtnQuery.onBeforeExecute = function (para) {
+        if ($('#日期_input2').length>0) {
+            var newdate1 = $('#日期_input2').datebox('getValue').substr(0, 10);
+            var newdate2 = $('#日期_input').datebox('getValue').substr(0, 10);
+            if ((newdate1 == "" && newdate2 != "") || (newdate1 != "" && newdate2 == "")) {
+                $.messager.alert("提示", "日期条件不全!", "info");
+                return false;
+            }
+            var days = dateDiff(newdate1, newdate2);
+            if (days > 366) {
+                $.messager.alert("提示", "日期区间不能大于1年!", "info");
+                return false;
+            }
+            if (days < 0) {
+                $.messager.alert("提示", "开始日期不能大于结束日期!", "info");
+                return false;
+            }
+        }
+    }
+    dg.Search.onAfterExecute = function () {
+        //修改搜索区的显示方式 页面设定名字+固定的_label
+        if ($('#udef_下拉_label').length>0 && typeof ($('#udef_下拉_label')[0]) != "undefined") {
+            $('#udef_下拉_label')[0].outerHTML = '<label id="udef_下拉_label" style="width:160px">&nbsp;<input type="text" id="pz_search" objname="C_combobox" defaultitem="false" name="pz_search" />&nbsp;</label>';
+        }
+        if ($('#udef_下拉1_label').length > 0 && typeof ($('#udef_下拉1_label')[0]) != "undefined") {
+            $('#udef_下拉1_label')[0].outerHTML = '<label id="udef_下拉1_label" style="width:160px">&nbsp;<input type="text" id="pz_search1" objname="C_combobox" defaultitem="false" name="pz_search1" />&nbsp;</label>';
+        }
+        if ($('#udef_company_input').length > 0 && typeof ($('#udef_company_input')[0]) != "undefined") {
+            $('#udef_company_label')[0].innerText = AR.Lang.selCompany || $('#udef_company_label')[0].innerText;
+            $('#udef_company_input')[0].outerHTML = '<input type="text" id="selCompany"  name="selCompany" />'
+            BindCompany("selCompany");//绑定公司下拉框
+        }
+        SearchBind_BtnExport();//创建按钮到查询区
+    
+
+    //导出条件
+    dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+        return Re_searchInfo(param);
+    }
+
+        //alert($('#下单日期_input2')[0].outerHTML)
+    }
+
+    function sen(value, row, index) {
+        return AR.Lang["V_bhmx_报废单号"] + "：" + row.报废单号 + "<br>" + AR.Lang["V_bhmx_本厂编号"] + "： " + row.本厂编号 + "<br>" + AR.Lang["V_bhmx_销售订单"] + ": " + row.销售订单 + "<br>" + AR.Lang["V_bhmx_客户订单号"] + ": " + row.客户订单号;
+    }
+
+    function ppn(value, row, index) {
+        return AR.Lang["V_bhmx_单只面积"] + "：" + row.单只面积 + "<br>" + AR.Lang["V_bhmx_报废面积"] + "： " + row.报废面积 + "<br>" + AR.Lang["V_bhmx_顶层报废面积"] + ": " + row.顶层报废面积 + "<br>" + AR.Lang["V_bhmx_报率面积含板边"] + ": " + row.报率面积含板边;
+    }
+    function number(value, row, index) {
+        return AR.Lang["V_bhmx_报废PCS"] + "： " + row.报废pcs + "<br>" + AR.Lang["V_bhmx_报废PNL"] + "： " + row.报废pnl + "<br>" + AR.Lang["V_bhmx_投产数量"] + ": " + row.投产数量 + "<br>" + AR.Lang["V_bhmx_报废数量"] + ": " + row.报废数量;
+    } 
+
+    function Re_searchInfo(param) {
+       
+        //定制查询条件
+        if (!param.sys_search) { return; }
+        var searchArr = JSON.parse(param.sys_search);
+
+        var newpara = searchArr.select("name", "pz_search");
+        if (newpara != null && $('#udef_下拉_input').length > 0 && $('#udef_下拉_input').val() != "") {
+            if (newpara.contains("报废单号", "value")) {
+                searchArr.push({ "name": "报废单号", "value": "'" + $('#udef_下拉_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("配料单号", "value")) {
+                searchArr.push({ "name": "配料单号", "value": "'" + $('#udef_下拉_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("作业单号", "value")) {
+                searchArr.push({ "name": "作业单号", "value": "'" + $('#udef_下拉_input').val() + "'", "pattern": "like" })
+            }
+            
+        }
+        var newpara = searchArr.select("name", "pz_search1");
+        if (newpara != null && $('#udef_下拉1_input').length > 0 && $('#udef_下拉1_input').val() != "") {
+            if (newpara.contains("报废单号", "value")) {
+                searchArr.push({ "name": "报废单号", "value": "'" + $('#udef_下拉1_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("配料单号", "value")) {
+                searchArr.push({ "name": "配料单号", "value": "'" + $('#udef_下拉1_input').val() + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("作业单号", "value")) {
+                searchArr.push({ "name": "作业单号", "value": "'" + $('#udef_下拉1_input').val() + "'", "pattern": "like" })
+            }
+
+        }
+        searchArr.remove("pz_search", "name");
+        searchArr.remove("udef_下拉", "name");
+        searchArr.remove("pz_search1", "name");
+        searchArr.remove("udef_下拉1", "name");
+
+        newpara = searchArr.select("name", "selCompany");
+        if (newpara != null) {
+            $.each(newpara, function (index, data) {
+                searchArr.remove("selCompany", "name");
+                if (index == 0) { param.SelCompany = data.value.replace(/\'/g, ""); }
+                else { param.SelCompany += "," + data.value.replace(/\'/g, ""); }
+            })
+
+        }
+
+        var str = JSON.stringify(searchArr).replace(/\'/g, "!#");
+        eval("sys_search = '" + str + "'");
+        param.sys_search = sys_search.replace(/!#/g, "'");
+
+
+
+        //默认结束日期加一天
+        if ($('#日期_input2').length>0 && $('#日期_input2').datebox('getValue') != "") {
+            var tmpdate = $('#日期_input').datebox('getValue').substr(0, 10);
+            var tmpdate2 = AddDate(tmpdate, 1, "day");
+            var searchstr = param.sys_search;
+            var pos = searchstr.lastIndexOf(tmpdate);
+            if (pos > 0) {
+                var str = searchstr.substr(0, pos) + searchstr.substr(pos).replace(tmpdate, tmpdate2);
+                param.sys_search = str;
+            }
+        }
+        if (searchArr.length == 0) {
+            $.messager.alert("提示", "条件不能全部为空!", "info");
+            return false;
+        }
+        //alert(param.sys_search);
+        param.isCompany = 1; //多公司查询标记
+        return true;
+    }
+</script>

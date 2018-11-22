@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="grid"></table>
+</body>
+</html>
+<script>
+    var dgNote = new AR.DataGrid("V_SupplierModiNote", null, "grid");
+    dgNote.ToolBar.isHidden = true;
+    dgNote.isShowCheckBox = false;
+    dgNote.options = {
+        sortName: "TRANS_DATE asc"
+    }
+    dgNote.addWhere("supplier_ptr", parent.dg.getSelected().rkey, "=");
+    dgNote.bind();
+</script>

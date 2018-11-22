@@ -1,0 +1,771 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js?v=2.0.0.1"></script>
+    <link href="../../Style/CSS/base.css" rel="stylesheet"/>
+    <link href="../../Style/CSS/basic_info.css?v=2.0.0.1" rel="stylesheet"/>
+    
+</head>
+<body>
+<div class="easyui-layout" style="overflow: hidden"  data-options="fit:true,scroll:'no'">
+    <!--树形菜单-->
+    <div data-options="region:'west',split:'true'" style="width:150px;">
+        <ul id="tt" style="border:none"></ul>
+    </div>
+    <div data-options="region:'center'">
+    <form  class="cont-box-form" id="form1">
+        <input type="hidden" name="rkey" id="rkey" value="" />
+        <input type="hidden" name="isfile" id="isfile" value="" />
+		<table class="kv-table" id="A01" style="display:none">
+			<tbody>
+				<tr>
+					<td class="kv-label" id="suppliercode"><script>$(suppliercode).html(AR.Lang["V_SuppPriceList_code"])</script></td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text"  name="code" id="code" data-options="required:true,validType:['length[1,10]','exists[\'code\',$(\'#rkey\').val() || -1]']" /></b></b></td>
+					<td class="kv-label">供应商名称</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text" name="supplier_name" id="supplier_name" data-options="required:true,validType:['length[1,100]','exists[\'supplier_name\',$(\'#rkey\').val() || -1]']" /></b></b></td>
+					<td class="kv-label">名称缩写</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text easyui-validatebox" type="text"  name="abbr_name" id="abbr_name" data-options="required:true,validType:['length[1,10]','exists[\'abbr_name\',$(\'#rkey\').val() || -1]']" /></b></b></td>
+				</tr>
+                <tr>
+                    <td class="kv-label">关联公司</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" configkey="是否" defaultitem="false"  name="brother_flag" id="brother_flag" /></b></b></td>
+					<td class="kv-label">营业执照</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="EDI_ID" id="EDI_ID" /></b></b></td>
+					<td class="kv-label">供应商评分</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" value="0" name="TAX_1" id="TAX_1"  /></b></b></td>                  
+				</tr>
+                <tr>
+                    <td class="kv-label">供应商开发人</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="developer" id="developer" /></b></b></td>
+                    <td class="kv-label">上传文件</td>
+					<td class="kv-label" colspan="3">
+                        <div style="float:left;width:10%"><input type="button" id="Btn_Upload" value="上传" /></div>
+                        <div style="float:left;"><input type="button" id="Btn_Download" onclick="BtnDownload()" value="下载" /></div>
+                    </td>
+                </tr>
+                <tr>
+					<td class="kv-label">详细地址</td>
+					<td class="kv-content" colspan="5"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="billing_address_1" id="billing_address_1" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">州/省</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="state" id="state" /></b></b></td>
+					<td class="kv-label">邮政编码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="zip" id="zip"  /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="phone" id="phone" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">传真号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="fax" id="fax" /></b></b></td>
+					<td class="kv-label">开户银行</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="telex" id="telex"  /></b></b></td>
+					<td class="kv-label">银行帐户</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="gen_email_address" id="gen_email_address" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">国家或地区</td>
+					<td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="country_name" id="country_name" />
+                        <input class="text" type="text" name="country_ptr" id="country_ptr" style="display:none" /></b></b></div><div style="float:left"><a href="#" id="ShowCountry" dialog="V_Common_Data0250" class="searchIcon2" ></a></div>
+					</td>
+					<td class="kv-label">货币类型</td>
+					<td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="curr_name" id="curr_name"  />
+                        <input class="text" type="text" name="currency_ptr" id="currency_ptr"style="display:none" /></b></b></div><div style="float:left"><a href="#" id="ShowCurrency" dialog="V_Common_Data0001" class="searchIcon2" ></a></div>
+                    </td>
+					<td class="kv-label">状态</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" configkey="有无效" defaultitem="false" name="status" id="status" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">供应商类型</td>
+					<td class="kv-content"  colspan="5"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" configkey="供应商类型" defaultitem="false" name="ttype" id="ttype" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">供应商无效说明</td>
+					<td class="kv-content" colspan="5"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="invalid_explain" id="invalid_explain" /></b></b></td>
+				</tr>
+			</tbody>
+		</table>
+        <table class="kv-table" id="A02" style="display:none">
+			<tbody>
+                <tr>
+					<td class="kv-label">暂缓应付款项</td>
+					<td class="kv-content" colspan="5">
+                        <input type="checkbox" id="put_all_inv_hold_chk" /><label for="put_all_inv_hold_chk">暂缓应付款项</label>
+                        <input class="text" type="text"  name="put_all_inv_hold" id="put_all_inv_hold" value="N" style="display:none" /></td>
+				</tr>
+				<tr>
+					<td class="kv-label">付款方式</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="tax_id_number" id="tax_id_number" /></b></b></td>
+					<td class="kv-label">付款地点</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="analysis_code2" id="analysis_code2"  /></b></b></td>
+					<td class="kv-label">票据种类</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" configkey="票据种类" defaultitem="false" name="analysis_code1" id="analysis_code1" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">纳税人识别码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="EDI_ID_2" id="EDI_ID_2" /></b></b></td>
+					<td class="kv-label">净付款天数</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" value="0" name="payment_terms" id="payment_terms"  /></b></b></td>
+					<td class="kv-label">付款折扣1(%)</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" value="0" name="discount" id="discount" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">折扣天数1</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" value="0" name="discount_days" id="discount_days" /></b></b></td>
+					<td class="kv-label">付款折扣2(%)</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"value="0" name="discount2" id="discount2"  /></b></b></td>
+					<td class="kv-label">折扣天数2</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" value="0" name="discount2_days" id="discount2_days" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">委外加工入库成本折率(%)</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" value="0" name="TAX_2" id="TAX_2" /></b></b></td>
+					<td class="kv-label">A/P帐目</td>
+                    <td class="kv-label"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="gl_acc_number" id="gl_acc_number"  />
+                        <input class="text" type="text" name="acc_payable_ptr" id="acc_payable_ptr" style="display:none" /></b></b></div><div style="float:left"><a href="#" id="ShowAccount" dialog="V_Common_Data0103" class="searchIcon2" ></a></div>
+                    </td>
+                    <td class="kv-label" colspan="2"><b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="gl_description" id="gl_description" /></b></b></td>
+				</tr>
+			</tbody>
+		</table>
+        <table class="kv-table" id="A03" style="display:none">
+			<tbody>
+				<tr>
+					<td class="kv-label">联系人1</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="contact_name_1" id="contact_name_1" /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="cont_phone_1" id="cont_phone_1" /></b></b></td>
+					<td class="kv-label">电子邮件</td>
+					<td class="kv-content" style="width:40%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="email_for_contact1" id="email_for_contact1" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">联系人2</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="contact_name_2" id="contact_name_2" /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="cont_phone_2" id="cont_phone_2" /></b></b></td>
+					<td class="kv-label">电子邮件</td>
+					<td class="kv-content" style="width:40%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="email_for_contact2" id="email_for_contact2" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">联系人3</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="contact_name_3" id="contact_name_3" /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="cont_phone_3" id="cont_phone_3" /></b></b></td>
+					<td class="kv-label">电子邮件</td>
+					<td class="kv-content" style="width:40%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="email_for_contact3" id="email_for_contact3" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">联系人4</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="contact_name_4" id="contact_name_4" /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="cont_phone_4" id="cont_phone_4" /></b></b></td>
+					<td class="kv-label">电子邮件</td>
+					<td class="kv-content" style="width:40%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="email_for_contact4" id="email_for_contact4" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">联系人5</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="contact_name_5" id="contact_name_5" /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="cont_phone_5" id="cont_phone_5" /></b></b></td>
+					<td class="kv-label">电子邮件</td>
+					<td class="kv-content" style="width:40%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="email_for_contact5" id="email_for_contact5" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">联系人6</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="contact_name_6" id="contact_name_6" /></b></b></td>
+					<td class="kv-label">电话号码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="cont_phone_6" id="cont_phone_6" /></b></b></td>
+					<td class="kv-label">电子邮件</td>
+					<td class="kv-content" style="width:40%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="email_for_contact6" id="email_for_contact6" /></b></b></td>
+				</tr>
+			</tbody>
+		</table>
+        <table class="kv-table" id="A04" style="display:none">
+			<tbody>
+				<tr>
+					<td class="kv-label">板材专用代码</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text"  name="analysis_code3" id="analysis_code3" /></b></b></td>
+					<td class="kv-label">供应商性质</td>
+					<td class="kv-content"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" configkey="供应商性质" defaultitem="false" name="ADDRESS2_FOR_FORM" id="ADDRESS2_FOR_FORM" /></b></b></td>
+				</tr>
+                <tr>
+					<td class="kv-label">VMI供应商</td>
+					<td class="kv-content">
+                        <input type="checkbox" id="edi_out_new_po_chk" /><label for="edi_out_new_po_chk">VMI供应商(寄卖)</label>
+                        <input class="text" type="text" value="0"  name="edi_out_new_po" id="edi_out_new_po" style="display:none" />
+					</td>
+                    <td class="kv-label">VMI入库价格取值方法</td>
+					<td class="kv-content">
+                        <input type="radio" name="EDI_FLAG_FOR_PO_rdo" id="EDI_FLAG_FOR_PO_rdo1" /><label for="EDI_FLAG_FOR_PO_rdo1">从最新价格交付中取</label>
+                        <input type="radio" name="EDI_FLAG_FOR_PO_rdo" id="EDI_FLAG_FOR_PO_rdo2" /><label for="EDI_FLAG_FOR_PO_rdo2">从原VMI采购订单取</label>
+                        <input class="text" type="text"  name="EDI_FLAG_FOR_PO" id="EDI_FLAG_FOR_PO" value="0" style="display:none" />
+					</td>
+				</tr>
+                <tr>
+					<td class="kv-label">物料供应</td>
+                    <td class="kv-content" colspan="3"><div style="float:left;width:96%"><b class="fluid-input"><b class="fluid-input-inner"><input class="text" type="text" name="ADDRESS1_FOR_FORM" id="ADDRESS1_FOR_FORM" /></b></b>
+                        </div><div style="float:left"><a href="#" id="ShowMtrlType" dialog="V_Common_Data0496" multiple="true" onlytext="true" class="searchIcon2" ></a></div>
+                    </td>
+				</tr>
+                <tr>
+					<td class="kv-label">采购订单记事本</td>
+                    <td class="kv-content" colspan="3">
+                       <b class="fluid-input"><b class="fluid-input-inner"><textarea class="text" style="height:60px" name="remark" id="remark"></textarea></b></b>
+                    </td>
+				</tr>
+                <tr>
+					<td class="kv-label">借项备忘录</td>
+                    <td class="kv-label" colspan="3">
+                       <b class="fluid-input"><b class="fluid-input-inner"><textarea class="text textread" style="height:20px"  readonly="true" name="memo_text1" id="memo_text1"></textarea></b></b>
+                    </td>
+				</tr>
+                <tr>
+					<td class="kv-label">交货记事本</td>
+                    <td class="kv-label" colspan="3">
+                       <b class="fluid-input"><b class="fluid-input-inner"><textarea class="text textread" style="height:20px" textreadname="memo_text2" id="memo_text2"></textarea></b></b>
+                    </td>
+				</tr>
+                <tr>
+					<td class="kv-label">供应商特别说明</td>
+                    <td class="kv-content" colspan="3">
+                       <b class="fluid-input"><b class="fluid-input-inner"><textarea class="text" style="height:120px"  name="RemarkSpec" id="RemarkSpec"></textarea></b></b>
+                    </td>
+				</tr>
+                <tr>
+					<td class="kv-label">创建日期</td>
+                    <td class="kv-label" colspan="3">
+                       <b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" name="suppier_ent_date" id="suppier_ent_date" /></b></b>
+                    </td>
+				</tr>
+                <tr>
+					<td class="kv-label">最后修改日期</td>
+                    <td class="kv-label">
+                       <b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text" readonly="true" name="update_date" id="update_date" /></b></b>
+                    </td>
+                    <td class="kv-label">最后修改人员</td>
+                    <td class="kv-label">
+                       <b class="fluid-input"><b class="fluid-input-inner"><input class="text textread" type="text"  readonly="true" name="employee_name" id="employee_name" /></b></b>
+                    </td>
+				</tr>
+			</tbody>
+		</table>
+        <div class="btn" style="margin-top:30px;width:100%;text-align: center">
+            <a><input class="submit" type="submit" name="保存" value="" /></a>
+            <a><input class="return" type="button" name="返回" value="" /></a>
+        </div>
+    </form> 
+    <iframe id="iframe1" frameborder="0" style="border:0;width:100%;height:99%;display:none"></iframe>
+    </div>  
+ </div>
+ <div style="display: none;">
+    <div id="mm" class="easyui-menu" data-options="onClick:menuHandler" style="width: 120px;">
+        <div data-options="iconCls:'icon-add'" id="cmbtn_add">新增</div>
+        <div data-options="iconCls:'icon-remove'" id="cmbtn_del">删除</div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    
+    var isView = AR.Utility.queryString("isView");
+    if (isView == "1") { $('#form1').form('load', parent.dg.getSelected()); }
+    //追加固定的过滤条件。
+    //$("input[name = 'F6']").attr("options", "{defaultWhere: [{ name: 'F1', pattern: 'like', value: '1' }]}");
+    $("#ShowCountry").attr("options", "{sortName: 'country_code asc'}");
+    $("#ShowCurrency").attr("options", "{sortName: 'curr_code asc'}");
+    $("#ShowAccount").attr("options", "{sortName: 'gl_acc_number asc'}");
+    $("#ShowMtrlType").attr("options", "{sortName: 'group_name asc'}");
+
+    //对字段赋初值
+    $(function () {
+        if (parent.AR.Global.DG.action == "Update") {
+            initZYTreeNode();
+        }
+        if ($("#put_all_inv_hold").val() == "Y") {$("#put_all_inv_hold_chk").attr("checked", true);}
+        if ($("#edi_out_new_po").val() == "1") {
+            $("#edi_out_new_po_chk").attr("checked", true);
+            if ($("#EDI_FLAG_FOR_PO").val() == "0") { $("#EDI_FLAG_FOR_PO_rdo1").attr("checked", true); }
+            if ($("#EDI_FLAG_FOR_PO").val() == "1") { $("#EDI_FLAG_FOR_PO_rdo2").attr("checked", true); }
+        }
+
+        $("#EDI_ID_2").val($("#EDI_ID").val());//不同地方编辑同一个字段,name,id都不能相同,需另外处理
+
+        if (parent.AR.Global.DG.action == "Add"){
+            var revalue = AR.Utility.Ajax.post("Get", "V_Common_Data0001", { id: '', sys_search: '[{"name":"curr_code","value":"RMB","pattern":"="}]' });
+            if (revalue) {
+                $("#currency_ptr").val(revalue.rkey);
+                $("#curr_name").val(revalue.curr_name);
+            }
+            var revalue = AR.Utility.Ajax.post("Get", "V_Common_Data0250", { id: '', sys_search: '[{"name":"country_code","value":"China","pattern":"="}]' });
+            if (revalue) {
+                $("#country_ptr").val(revalue.country_rkey);
+                $("#country_name").val(revalue.country_name);
+            }
+        }
+
+        $("#iframe1").attr('src', 'SupplierZYEdit.html?isView=' + isView);
+
+        //文件上传
+        var opts = {};
+        opts.action = 'ajax.html?sys_method=UploadDBFile&sys_tableName=Data0023';//提交的方法及要更新的表名
+        opts.data = {};//提交的参数(在绑定时动态赋值)
+        opts.onSubmit = function (file, ext) {
+            if (ext.toLowerCase() != "pdf") {
+                $.messager.alert("", "只能上传PDF文件!", "info")
+                return false;
+            }
+            if ($('#isfile').val() == 'Y') {
+                //if (!$.messager.confirm('Confirm', '已经存在附件,是否要覆盖?', function (data) {return data;})) {
+                //    return false
+                //}
+                if (!confirm("已经存在附件,是否要覆盖?")) {
+                    return false;
+                }
+            }
+        }
+        opts.onComplete = function (file, data) {
+            if (data.toString().indexOf("True") >= 0) {
+                $.messager.alert("", AR.Lang.uploadSuccess, "info")
+                $('#isfile').val('Y');
+                $('#Btn_Download').attr("disabled", false);
+            } else {
+                $.messager.alert("", AR.Lang.uploadFail, "info")
+            }
+        }
+        opts.data = { "rkey": $('#rkey').val(), "fileDocField": "attachfile", "fileNameField": "" };
+        new AR.Upload($('#Btn_Upload'), opts);//为按钮增加上传事件
+        if ($('#isfile').val() != "Y") { $('#Btn_Download').attr("disabled", true) }
+
+        //查看禁用操作
+        if (isView == "1") { ToView(); }
+    });
+    //view
+    function ToView() {
+        $("#form1").find(":input").each(function () {
+            if ($(this).attr("type") == "checkbox" || $(this).attr("type") == "radio") {
+                $(this).attr("disabled", true);
+            }
+            else if ($(this).attr("type") == 'submit') {
+                $(this).css("display", "none");
+            }
+            else if ($(this).attr("type") == 'button') {
+                if ($(this).attr("id") == 'Btn_Upload') {
+                    $(this).attr("disabled", true);
+                }
+            }
+            else {
+                $(this).attr("readonly", true);
+            }
+        })
+        $("#form1").find("a").each(function () {
+            $(this).unbind();
+        })
+    }
+
+    //绑定事件
+    $("#EDI_ID_2").change(function () {
+        //不同地方编辑同一个字段,name,id都不能相同,需另外处理
+        $("#EDI_ID").val($("#EDI_ID_2").val());
+    });
+    $("#put_all_inv_hold_chk").change(function () {
+        if ($(this).attr("checked") == "checked") {$("#put_all_inv_hold").val("Y");}
+        else {$("#put_all_inv_hold").val("N");}
+    });
+    $("#edi_out_new_po_chk").change(function () {
+        if ($(this).attr("checked") == "checked") {
+            $("#edi_out_new_po").val("1");
+            $("#EDI_FLAG_FOR_PO_rdo1").click();
+        }
+        else {
+            $("#edi_out_new_po").val("0");
+            $("#EDI_FLAG_FOR_PO_rdo1").attr("checked", false);
+            $("#EDI_FLAG_FOR_PO_rdo1").attr("checked", false);
+            $("#EDI_FLAG_FOR_PO").val("0");
+        }
+    });
+    $("#EDI_FLAG_FOR_PO_rdo1").click(function () {
+        if ($("#edi_out_new_po").val() != "1") { $(this).attr("checked", false); return; }
+        if ($(this).attr("checked") == "checked") { $("#EDI_FLAG_FOR_PO").val("0"); }
+    });
+    $("#EDI_FLAG_FOR_PO_rdo2").click(function () {
+        if ($("#edi_out_new_po").val() != "1") { $(this).attr("checked", false); return; }
+        if ($(this).attr("checked") == "checked") { $("#EDI_FLAG_FOR_PO").val("1"); }
+    });
+
+    //弹窗选择之后事件。
+    AR.Combobox.onAfterExecute = function (type, $input, backPara) {
+        if (type == "dialog") {
+            if ($input.attr("id")=="ShowCountry") {
+                $('#country_ptr').val(backPara.datas.country_rkey);
+                $('#country_name').val(backPara.datas.country_name);
+            }
+            if ($input.attr("id") == "ShowCurrency") {
+                $('#currency_ptr').val(backPara.datas.rkey);
+                $('#curr_name').val(backPara.datas.curr_name);
+            }
+            if ($input.attr("id") == "ShowAccount") {
+                $('#acc_payable_ptr').val(backPara.datas.rkey);
+                $('#gl_acc_number').val(backPara.datas.gl_acc_number);
+                $('#gl_description').val(backPara.datas.gl_description);
+            }
+            if ($input.attr("id") == "ShowMtrlType") {
+                var tmpvalue = backPara.values.toString().replace(/,/g," ");
+                $('#ADDRESS1_FOR_FORM').val(tmpvalue);
+                return false;
+            }
+            
+        }
+    }
+
+    //初始化树列表
+    var TreeData = [{
+        id: "A",
+        text: "供应商资讯",
+        children: [{
+            id: "A01",
+            text: "一般信息",
+            checked: true
+        },
+        {
+            id: "A02",
+            text: "财务信息"
+        },
+        {
+            id: "A03",
+            text: "联络人员",
+        },
+        {
+            id: "A04",
+            text: "其它信息",
+        }]
+    },
+    {
+        id: "B",
+        text: "装运地点",
+        children: []
+    }];
+    $('#tt').tree({
+        data: TreeData,
+        loadFilter: function (data) {
+            return data
+        },
+        onLoadSuccess: function (node, data) {
+            initForm();
+        },
+        onBeforeSelect: function (node) {
+            if (node.id == "A" || node.id == "B") { return false;}
+            var node = $('#tt').tree('getSelected');
+            if (node) {
+                var parentNode = $('#tt').tree('getParent', node.target);
+                if (parentNode && parentNode.id=="B") {
+                    $('#form1').css("display", "none");
+                    $('#iframe1').css("display", "");
+                } else {
+                    $('#form1').css("display", "");
+                    $('#iframe1').css("display", "none");
+                    $('#' + node.id).css("display", "none");
+                }
+            }
+        },
+        onSelect: function (node) {
+            if (node.id == "A" || node.id == "B") { return false; }
+            var parentNode = $('#tt').tree('getParent', node.target);
+            if (parentNode && parentNode.id == "B") {
+                $('#form1').css("display", "none");
+                $('#iframe1').css("display", "");
+                ShowZYTreeNode(node);
+            } else {
+                $('#form1').css("display", "");
+                $('#iframe1').css("display", "none");
+                $('#' + node.id).css("display", "");
+            }
+        },
+        onContextMenu: function (e, node) {
+            if (isView == "1") { return;}//查看状态禁止弹菜单
+            if (node.id == "B") {
+                e.preventDefault();
+                var itemEl = $('#cmbtn_add')[0];
+                var item = $('#mm').menu('getItem', itemEl);
+                $('#mm').menu('enableItem', item.target);
+                itemEl = $('#cmbtn_del')[0];
+                item = $('#mm').menu('getItem', itemEl);
+                $('#mm').menu('disableItem', item.target);
+                $(this).tree('select', node.target);
+                $('#mm').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                });
+
+            } else {
+                var parentNode = $('#tt').tree('getParent', node.target);
+                if (parentNode && parentNode.id == "B") {
+                    e.preventDefault();
+                    var itemEl = $('#cmbtn_add')[0];
+                    var item = $('#mm').menu('getItem', itemEl);
+                    $('#mm').menu('disableItem', item.target);
+                    itemEl = $('#cmbtn_del')[0];
+                    item = $('#mm').menu('getItem', itemEl);
+                    $('#mm').menu('enableItem', item.target);
+                    $(this).tree('select', node.target);
+                    $('#mm').menu('show', {
+                        left: e.pageX,
+                        top: e.pageY
+                    });
+                }
+            }
+        } 
+    });
+    //右键菜单点击事件
+    function menuHandler(item) {
+        if (item.id == "cmbtn_add") { addZYItem(); }
+        else if (item.id == "cmbtn_del") { DelZYItem(); }
+    }
+    //初始化窗口
+    function initForm() {
+        $('#form1').css("display", "");
+        $('#iframe1').css("display", "none");
+        var node = $('#tt').tree('find', "A01");
+        $('#tt').tree('select', node.target);
+    }
+    //取装运地点
+    var ZYTreeNode = {};
+    function initZYTreeNode() {
+        ZYTreeNode = AR.Utility.Ajax.post("GetList", "V_SupplierZY", { sys_search: '[{"name":"supplier_ptr","value":"' + $('#rkey').val() + '","pattern":"="}]' });
+        if (ZYTreeNode && ZYTreeNode.rows.length > 0)
+        {
+            var tempData = [];
+            for (var i = 0; i < ZYTreeNode.rows.length; i++) {
+                var tempnode = {};
+                tempnode.id = i;
+                tempnode.text = ZYTreeNode.rows[i].factory_location;
+                tempData.push(tempnode);
+            }
+            var selected = $('#tt').tree('find', "B");
+            $('#tt').tree('append', {
+                parent: selected.target,
+                data: tempData
+            });
+        }
+    }
+    //载入装运信息
+    var ZYData;
+    function ShowZYTreeNode(node) {
+        ZYData = ZYTreeNode.rows[node.id];
+        $("#iframe1")[0].contentWindow.reloadData();
+    }
+
+    //新增装运点
+    function addZYItem() {
+        ZYData = null;
+        var node = $('#tt').tree('getSelected');
+        $('#' + node.id).css("display", "none");
+        $('#tt').find('.tree-node-selected').removeClass('tree-node-selected');
+        $('#form1').css("display", "none");
+        $('#iframe1').css("display", "");
+        $("#iframe1")[0].contentWindow.location.reload();
+
+    }
+    //更新装运点
+    function UpdateZYItem() {
+        var node = $('#tt').tree('getSelected');
+        if (node) {
+            var parentNode = $('#tt').tree('getParent', node.target);
+            if (parentNode && parentNode.id == "B") {
+                $('#tt').tree('update', {
+                    target: node.target,
+                    text: ZYData.factory_location
+                });
+            }
+        } else {
+            var selected = $('#tt').tree('find', "B");
+            var tempData = {};
+            tempData.id = ZYTreeNode.rows.length - 1;
+            tempData.text = ZYTreeNode.rows[tempData.id].factory_location;
+            $('#tt').tree('append', {
+                parent: selected.target,
+                data: tempData
+            });
+            ZYTreeNode.rows[tempData.id].supplier_ptr=$('#rkey').val(); //新增时加入外键key
+        }
+        initForm();
+    }
+    //删除装运点
+    function DelZYItem() {
+        var node = $('#tt').tree('getSelected');
+        if (node) {
+            $('#tt').tree('remove', node.target);
+            var tmpData = ZYTreeNode.rows[node.id];
+            if (!tmpData.rkey) {
+                ZYTreeNode.rows.remove(ZYTreeNode.rows[node.id]);
+            } else {
+                tmpData.isUIDelete = true;
+            }
+            initForm();
+        }
+    }
+    //保存前事件(主要做完整性检查,赋默认值等)
+    AR.Form.BtnCommit.onBeforeExecute = function (arrayData) {
+        if ($('#code').val() == "") {
+            $.messager.alert("", "供应商代码不能为空!", "info");
+            return false;
+        }
+        if (isNaN(parseInt($('#code').val().substr($('#code').val().length-1)))){
+            $.messager.alert("", "供应商代码最后一位必须为数字!", "info");
+            return false;
+        }
+        if ($('#supplier_name').val()=="") {
+            $.messager.alert("", "供应商名称不能为空!", "info");
+            return false;
+        }
+        if ($('#abbr_name').val() == "") {
+            $.messager.alert("", "名称缩写不能为空!", "info");
+            return false;
+        }
+        //用validType验证规则代替下面的字段唯一性判断,缩短保存反应时间
+        if(!$('#form1').form("validate")){
+            $.messager.alert("", "供应商代码,名称,缩写 不能有重复记录!", "info");
+            return false;
+        }
+        //判断字段值是否存在用Exists方法更简洁
+        //var result = AR.Utility.Ajax.get("Exists", "Data0023", { id: $('#rkey').val() || -1, n: 'code', v: $('#code').val() });
+        //if (result && result.success) {
+        //    $.messager.alert("", "供应商代码不能重复!", "info");
+        //    return false;
+        //}
+        //var result = AR.Utility.Ajax.get("Exists", "Data0023", { id: $('#rkey').val() || -1, n: 'supplier_name', v: $('#supplier_name').val() });
+        //if (result && result.success) {
+        //    $.messager.alert("", "供应商名称不能重复!", "info");
+        //    return false;
+        //}
+        //var result = AR.Utility.Ajax.get("Exists", "Data0023", { id: $('#rkey').val() || -1, n: 'abbr_name', v: $('#abbr_name').val() });
+        //if (result && result.success) {
+        //    $.messager.alert("", "名称缩写不能重复!", "info");
+        //    return false;
+        //}
+        //取一笔记录用Get方法(可以替代Exists方法,条件更灵活,但会带出不必要的字段)
+        //var revalue = AR.Utility.Ajax.post("Get", "Data0023", { id: '', sys_search: '[{"name":"code","value":"' + $('#code').val() + '","pattern":"="},{"name":"rkey","value":"' + $('#rkey').val() + '","pattern":"<>"}]' });
+        //if (revalue) {
+        //    $.messager.alert("", "供应商代码不能重复!", "info");
+        //    return false;
+        //} 
+        //revalue = AR.Utility.Ajax.post("Get", "Data0023", { id: '', sys_search: '[{"name":"supplier_name","value":"' + $('#supplier_name').val() + '","pattern":"="},{"name":"rkey","value":"' + $('#rkey').val() + '","pattern":"<>"}]' });
+        //if (revalue) {
+        //    $.messager.alert("", "供应商名称不能重复!", "info");
+        //    return false;
+        //} 
+        //revalue = AR.Utility.Ajax.post("Get", "Data0023", { id: '', sys_search: '[{"name":"abbr_name","value":"' + $('#abbr_name').val() + '","pattern":"="},{"name":"rkey","value":"' + $('#rkey').val() + '","pattern":"<>"}]' });
+        //if (revalue) {
+        //    $.messager.alert("", "名称缩写不能重复!", "info");
+        //    return false;
+        //}
+        //记录部分变更信息
+        var ModiNode = [];
+        var rowData = AR.Form.data;
+        for (var i = 0; i < arrayData.length; i++) {
+            arrayData[i].value = arrayData[i].value.replace(/\r\n/g, "\n");//处理一下回车符,否则每次保存多一个空格
+            if (arrayData[i].name.toLowerCase() == "code") {
+                if (rowData[arrayData[i].name] != arrayData[i].value) {
+                    var tmpData = {};
+                    tmpData.TRANS_TYPE = "100";
+                    tmpData.TRANS_DESCRIPTION = "更改供应商代码";
+                    tmpData.FROM_STRING = rowData[arrayData[i].name];
+                    tmpData.TO_STRING = arrayData[i].value;
+                    ModiNode.push(tmpData);
+                }
+            }
+            else if (arrayData[i].name.toLowerCase() == "supplier_name") {
+                if (rowData[arrayData[i].name] != arrayData[i].value) {
+                    var tmpData = {};
+                    tmpData.TRANS_TYPE = "101";
+                    tmpData.TRANS_DESCRIPTION = "更改供应商名称";
+                    tmpData.FROM_STRING = rowData[arrayData[i].name];
+                    tmpData.TO_STRING = arrayData[i].value;
+                    ModiNode.push(tmpData);
+                }
+            }
+            else if (arrayData[i].name.toLowerCase() == "abbr_name") {
+                if (rowData[arrayData[i].name] != arrayData[i].value) {
+                    var tmpData = {};
+                    tmpData.TRANS_TYPE = "102";
+                    tmpData.TRANS_DESCRIPTION = "更改供应商简称";
+                    tmpData.FROM_STRING = rowData[arrayData[i].name];
+                    tmpData.TO_STRING = arrayData[i].value;
+                    ModiNode.push(tmpData);
+                }
+            }
+            else if (arrayData[i].name.toLowerCase() == "status") {
+                if (rowData[arrayData[i].name] != arrayData[i].value) {
+                    var tmpData = {};
+                    tmpData.TRANS_TYPE = "103";
+                    tmpData.TRANS_DESCRIPTION = "更改状态";
+                    tmpData.FROM_STRING = rowData[arrayData[i].name];
+                    tmpData.TO_STRING = arrayData[i].value;
+                    ModiNode.push(tmpData);
+                }
+            }
+            else if (arrayData[i].name.toLowerCase() == "put_all_inv_hold") {
+                if (rowData[arrayData[i].name] != arrayData[i].value) {
+                    var tmpData = {};
+                    tmpData.TRANS_TYPE = "104";
+                    tmpData.TRANS_DESCRIPTION = "更改暂缓付款";
+                    tmpData.FROM_STRING = rowData[arrayData[i].name];
+                    tmpData.TO_STRING = arrayData[i].value;
+                    ModiNode.push(tmpData);
+                }
+            }
+            else if (arrayData[i].name.toLowerCase() == "edi_out_new_po") {
+                if (rowData[arrayData[i].name] != arrayData[i].value) {
+                    var tmpData = {};
+                    tmpData.TRANS_TYPE = "105";
+                    tmpData.TRANS_DESCRIPTION = "是否VMI采购";
+                    tmpData.FROM_STRING = rowData[arrayData[i].name];
+                    tmpData.TO_STRING = arrayData[i].value;
+                    ModiNode.push(tmpData);
+                }
+            }
+        }
+        var FormModiData = JSON.stringify(ModiNode).replace(/\'/g, "!#");
+        eval("FormModiData = '" + FormModiData + "'");
+        FormModiData = FormModiData.replace(/!#/g, "'");
+
+        var FormModiNode = [];
+        FormModiNode.name = "FormModiData";
+        FormModiNode.value = FormModiData;
+        arrayData.push(FormModiNode);
+
+        //加入装运数据
+        var isZY = 0;
+        if (ZYTreeNode.rows) {
+            $.each(ZYTreeNode.rows, function (index, data) {
+                if (!data.isUIDelete) {isZY=1; return;}
+            }) 
+        }
+        if (!isZY) { 
+            $.messager.alert("", "至少需要一个装运地址!", "info");
+            addZYItem()
+            return false;
+        }
+        var ZYFormData = JSON.stringify(ZYTreeNode.rows).replace(/\'/g, "!#");
+        eval("ZYFormData = '" + ZYFormData + "'");
+        ZYFormData = ZYFormData.replace(/!#/g, "'");
+
+        var ZYFormNode = [];
+        ZYFormNode.name = "ZYFormData";
+        ZYFormNode.value = ZYFormData;
+        arrayData.push(ZYFormNode);
+
+    }
+    //保存后事件
+    AR.Form.BtnCommit.onAfterExecute = function () {
+        
+    }
+    
+    //文件下载
+    function BtnDownload() {
+        var searchStr = '[{"name":"rkey","value":' + $('#rkey').val() + ',"pattern":"="}]';
+        //下载数据库文件的方法,参数[method 方法名, tableName 表名, searchStr 查询条件, fileDocField 文件内容字段, fileNameField 文件名字段, Extension 扩展名(没有文件名字段时才需要指定)]
+        Download_DB("DownloadDBFile", "Data0023", searchStr, 'attachfile','','.pdf');
+    }
+</script>

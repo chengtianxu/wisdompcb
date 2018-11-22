@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+     <title>供应商价格管理</title>
+    <script>
+        document.write('<s' + 'cript src="../../Style/JS/Aries.Loader.js?"' + Math.random() + '></s' + 'cript>');
+    </script>
+    
+</head>
+<body>
+<div class="cont-box">
+        <div class="cont-box-tit">
+            <h3>更新供应商信息</h3>
+            <a class="arrows hover"></a>
+        </div>
+        <div class="cont-box-in">
+            <div class="cont-box-form">                              
+                    <div class="line">
+
+                        <div class="short">
+                            <label>更新供应商所有物料交付时间：</label>
+                            <input   id="SuppDay" class='text' data-options="required:true" />
+                             <a>
+                            <input class="submit" type="submit" name="更新" value="" />
+                        </a>      
+                        </div>
+                         <div class="short">
+                            <label>更新供应商所有物料的增值税率：</label>
+                            <input   id="Tax" class='text' data-options="required:true" />
+                             <a>
+                            <input class="submit" type="submit" name="更新" value="" />
+                        </a>      
+                       </div>
+              </div>
+         </div>
+        </div>
+    </div>
+    <table id="dg"></table>
+    <div style="display: none;">
+    <div id="mm" class="easyui-menu" data-options="onClick:menuHandler" style="width: 150px;">
+        <div id="cmbtn_view"></div>
+        <div id="cmbtn_PriceChangeDetail"></div>
+        <div id="cmbtn_ChangeDetail"></div>
+        <div id="cmbtn_UpdateSet"></div>
+        <div id="cmbtn_synSet"></div>
+        <div id="cmbtn_sync"></div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+ 
+  AR.Global.userName = parent.AR.Global.userName; //从上级窗口取到用户名(各级窗口都可以这样取)
+   
+    var dg = new AR.DataGrid("V_SupplierPrice", "Data0028");
+    //dg.isEditor = true;
+    dg.ToolBar.BtnImport.isHidden = true;
+    dg.ToolBar.BtnExportTemplate.isHidden = true;
+    dg.PKColumn.add("edit", "编辑", null, "SupplierPriceEdit.html", "供应商价格详细信息", "edit");
+    dg.PKColumn.add("del", "删除", null, null, null, "del");
+ 
+    dg.options = {
+        pageSize: 10,
+        onBeforeLoad: function (param) {
+            if (!isSelect) { setTimeout(function () { getSearchCombox() }, 5); }
+            //return Re_searchInfo(param);
+        },
+        onLoadSuccess: function () {
+        },
+        onRowContextMenu: function (e, rowIndex, rowData) { //行右键
+            e.preventDefault(); //阻止浏览器捕获右键事件
+            $(this).datagrid("selectRow", rowIndex); //根据索引选中该行
+            $('#mm').menu('show', {
+                left: e.pageX,
+                top: e.pageY,
+                hideOnUnhover: false //菜单不自动隐藏
+            });
+        },
+    }
+
+    dg.Search.onAfterExecute = function () {
+        if ($('#searchinfo_label').length > 0 && typeof ($('#searchinfo_label')[0]) != "undefined") {
+            $('#searchinfo_label')[0].outerHTML = '<label id="searchinfo_label" style="width:160px">&nbsp;<input type="text" id="SuppPrice_searchinfo" objname="C_SuppPrice_Search" defaultitem="false" name="SuppPrice_searchinfo" />&nbsp;</label>'
+        }     
+    }
+
+    //关连查询时调用,多下拉框时初始化选项
+    function getSearchCombox() {
+        if (typeof (AR.Global.comboxData.C_SuppPrice_Search) != "undefined") {
+            var data = $('#SuppPrice_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#SuppPrice_searchinfo').combobox('select', data[0].value);
+            }
+            isSelect = 1;
+            return;
+        }
+        setTimeout(function () { getSearchCombox() }, 5);
+    }
+
+    //下拉查询条件变更时处理
+    function ResetInput(record) {
+        $('#ShowSearch').css("display", "none");
+        $('#udef_searchinfo_input').css("display", "");
+        $('#udef_searchinfo_input').val("");
+        if ($('#udef_searchinfo_select').length > 0) {
+            $('#udef_searchinfo_select').parent().remove();
+        }
+        if (record.value == "供应商") {
+            $('#ShowSearch').css("display", "");
+            $('#ShowSearch').attr("dialog", "V_Common_Data0028");
+            AR.Combobox.onInit(1);
+        }
+        else if (record.value == "物料代码") {
+            $('#ShowSearch').css("display", "");
+            $('#ShowSearch').attr("dialog", "V_Common_Data0017");
+            AR.Combobox.onInit(1);
+        }
+    }
+    dg.bind();
+
+    //右键菜单点击事件
+    function menuHandler(item) {
+        if  (item.id == "cmbtn_view") { ShowView(); }
+        else if (item.id == "cmbtn_PriceChangeDetail") { PriceChangeDetail(); }
+        else if (item.id == "cmbtn_ChangeDetail") { ChangeDetail(); }
+        else if (item.id == "cmbtn_UpdateSet") { UpdateSet(); }
+        else if (item.id == "cmbtn_synSet") { FactorysynSet(); }
+        else if (item.id == "cmbtn_sync") { Factorysync(); }
+    }
+    // 查看明细资料：
+    function ShowView(){
+        AR.Utility.Window.open("SuppPriceEdit.html?FEType=1&&", "供应商详细信息", 1);
+    }
+   
+    //价格变动记录
+    function cmbtn_PriceChangeDetail() {
+         
+    }
+    //变动记录
+    function cmbtn_ChangeDetail() {
+
+    }
+
+    //更新供应商所有物料的交付天数和增值税：
+    function cmbtn_UpdateSet() {
+        AR.Utility.Window.open("SuppPriceFactorySynSet.html", $('#cmbtn_synSet')[0].children[0].innerText, 1);
+    }
+
+    //工厂同步设置
+    function FactorySynSet() {
+        AR.Utility.Window.open("SuppPriceFactorySynSet.html", $('#cmbtn_synSet')[0].children[0].innerText, 1);
+    }
+
+  //各工厂供应商价格数据同步    
+    function FactorySync() {
+        var row = dg.getSelected();
+        //调用一般存储过程的方法名:"Exec_SP",存储过程名,参数,回调函数,是否显示进度提示
+        AR.Utility.Ajax.post("Exec_SP", "sp_SupplierFactorySync", { rkey: row.rkey }, function (data) {
+            //返回信息: data.errorMsg 错误信息,data.rowcount 记录条数,data.rows 记录数组,data.success 是否成功,data.total 记录总数
+            if (data.success && (data.errorMsg == "" || data.errorMsg == "ok")) {
+                $.messager.alert("", AR.Lang.execSuccess, "info")
+            } else {
+                $.messager.alert("", data.errorMsg, "info")
+            }
+
+        }, true);
+    }
+
+    $(function () {
+        $('#cmbtn_synSet')[0].children[0].innerText = AR.Lang.factorySynSet || "工厂同步设置";
+        $('#cmbtn_sync')[0].children[0].innerText = AR.Lang.factorySync || "工厂数据同步";
+    });
+
+</script>

@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    var isLoad = 0;
+    var isSelect = 0;
+    var dg = new AR.DataGrid("V_EmpMsg");
+    dg.isShowCheckBox = false;
+    dg.ToolBar.isHidden = true;
+    dg.options = {
+        pageSize: 20,
+        onBeforeLoad: function (param) {
+            if (!isSelect) { setTimeout(function () { getSearchCombox() }, 5); }
+            return Re_searchInfo(param);
+        }
+
+    };
+
+    function getSearchCombox() {
+        if (typeof (AR.Global.comboxData.C_EmpList_Search) != "undefined") {
+            var data = $('#Emp_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#Emp_searchinfo2').combobox('select', data[1].value);
+            }
+            isSelect = 1;
+            return;
+        }
+        setTimeout(function () { getSearchCombox() }, 5);
+    }
+    function ResetInput(record) {
+        $('#ShowSearch').css("display", "none");
+        $('#searchinfo_input').css("display", "");
+        $('#searchinfo_input').val("");
+        if ($('#searchinfo_select').length > 0) {
+            $('#searchinfo_select').parent().remove();
+        }
+
+    }
+
+    function ResetInput2(record) {
+        $('#ShowSearch2').css("display", "none");
+        $('#searchinfo2_input').css("display", "");
+        $('#searchinfo2_input').val("");
+        if ($('#searchinfo2_select').length > 0) {
+            $('#searchinfo2_select').parent().remove();
+        }
+
+    }
+    dg.Search.onAfterExecute = function () {
+        if ($('#searchinfo_label') && typeof ($('#searchinfo_label')[0]) != "undefined") {
+            $('#searchinfo_label')[0].outerHTML = '<label id="searchinfo_label" style="width:160px">&nbsp;<input type="text" id="Emp_searchinfo" objname="C_EmpList_Search" onchange="ResetInput" defaultitem="false" name="Emp_searchinfo" />&nbsp;</label>'
+        }
+        if ($('#searchinfo2_label').length > 0 && typeof ($('#searchinfo2_label')[0]) != "undefined") {
+            $('#searchinfo2_label')[0].outerHTML = '<label id="searchinfo2_label" style="width:160px">&nbsp;<input type="text" id="Emp_searchinfo2" objname="C_EmpList_Search"  onchange="ResetInput2" defaultitem="false" name="Emp_searchinfo2" />&nbsp;</label>'
+        }
+        if ($('#selcom_input').length > 0 && typeof ($('#selcom_input')[0]) != "undefined") {
+            $('#selcom_label')[0].innerText = AR.Lang.selCompany || $('#selcom_label')[0].innerText;
+            $('#selcom_input')[0].outerHTML = '<input type="text" id="selCompany"  name="selCompany" />'
+            BindCompany("selCompany");//绑定公司下拉框
+        }
+            SearchBind_BtnExport();//创建按钮到查询区
+
+            //插入隐藏搜索
+            //if ($('#searchinfo_input').length > 0) {
+            //    var curLeft = parseInt($('#searchinfo_input')[0].offsetLeft) + parseInt($('#searchinfo_input')[0].offsetWidth) - 20;
+            //    $('#searchinfo_input').parent().append('<a href="#" id="ShowSearch" class="searchIcon" style="left:' + curLeft + 'px;display:none"></a>')
+            //}
+            //if ($('#searchinfo2_input').length > 0) {
+            //    var curLeft = parseInt($('#searchinfo2_input')[0].offsetLeft) + parseInt($('#searchinfo2_input')[0].offsetWidth) - 20;
+            //    $('#searchinfo2_input').parent().append('<a href="#" id="ShowSearch2" class="searchIcon" style="left:' + curLeft + 'px;display:none"></a>')
+            //}
+     }
+
+    dg.Search.BtnReset.onAfterExecute = function () {
+        if ($('#Emp_searchinfo')) {
+            //$('#Emp_searchinfo').combobox('select', "工号");
+            var data = $('#Emp_searchinfo').combobox('getData');
+            if (data.length > 0) {
+                $('#Emp_searchinfo').combobox('select', data[0].value);
+            }
+            var data = $('#Emp_searchinfo2').combobox('getData');
+            if (data.length > 0) {
+                $('#Emp_searchinfo2').combobox('select', data[1].value);
+            }
+        }
+    }
+    dg.bind();
+    function ShowList1(value, row, index) {
+        return AR.Lang["V_EmpMsg_工号"] + ": " + row.工号 + "<br>" + AR.Lang["V_EmpMsg_姓名"] + ": " + row.姓名 + "<br>" + AR.Lang["V_EmpMsg_部门名称"] + ": " + row.部门名称 + "<br>" + AR.Lang["V_EmpMsg_职务"] + ": " + row.职务;
+    }
+    function ShowList2(value, row, index) {
+        return AR.Lang["V_EmpMsg_性别"] + ": " + row.性别 + "<br>" + AR.Lang["V_EmpMsg_出生年月"] + ": " + row.出生年月;
+    }
+    function ShowList3(value, row, index) {
+        return AR.Lang["V_EmpMsg_籍贯"] + ": " + row.籍贯 + "<br>" + AR.Lang["V_EmpMsg_民族"] + ": " + row.民族
+            + "<br>" + AR.Lang["V_EmpMsg_婚姻状况"] + ": " + row.婚姻状况;
+    }
+    function ShowList4(value, row, index) {
+        return AR.Lang["V_EmpMsg_电话"] + ": " + (row.电话 == null ? "" : row.电话) + "<br>" + AR.Lang["V_EmpMsg_地址"] + ": " + (row.地址 == null ? "" : row.地址);
+    }
+    function ShowList5(value, row, index) {
+        return AR.Lang["V_EmpMsg_入职日期"] + ": " + (row.入职日期 == null ? "" : row.入职日期) + "<br>" + AR.Lang["V_EmpMsg_房间号"] + ": " + (row.房间号 == null ? "" : row.房间号)
+            + "<br>" + AR.Lang["V_EmpMsg_身份证号"] + ": " + row.身份证号 + "<br>" + AR.Lang["V_EmpMsg_证有效期"] + ": " + row.证有效期;
+    }
+    function ShowList6(value, row, index) {
+        return AR.Lang["V_EmpMsg_学历"] + ": " + (row.学历 == null ? "" : row.学历) + "<br>" + AR.Lang["V_EmpMsg_毕业院校"] + ": " + (row.毕业院校 == null ? "" : row.毕业院校)
+        + "<br>" + AR.Lang["V_EmpMsg_专业"] + ": " + (row.专业 == null ? "" : row.专业) + "<br>" + AR.Lang["V_EmpMsg_毕业时间"] + ": " + (row.毕业时间 == null ? "" : row.毕业时间);
+    }
+    function ShowList7(value, row, index) {
+        return AR.Lang["V_EmpMsg_紧急联系人"] + ": " + (row.紧急联系人 == null ? "" : row.紧急联系人) + "<br>" + AR.Lang["V_EmpMsg_紧急联系人电话"] + ": " + (row.紧急联系人电话 == null ? "" : row.紧急联系人电话)
+        + "<br>" + AR.Lang["V_EmpMsg_紧急联系人地址"] + ": " + (row.紧急联系人地址 == null ? "" : row.紧急联系人地址);
+    }
+
+    function ShowList8(value, row, index) {
+        return AR.Lang["V_EmpMsg_合同类型"] + ": " + row.合同类型 + "<br>" + AR.Lang["V_EmpMsg_职级"] + ": " + (row.职级 == null ? "" : row.职级)
+        + "<br>" + AR.Lang["V_EmpMsg_岗位"] + ": " + (row.岗位 == null ? "" : row.岗位);
+    }
+    function ShowList9(value, row, index) {
+        return AR.Lang["V_EmpMsg_工资账套"] + ": " + row.工资账套 + "<br>" + AR.Lang["V_EmpMsg_备注"] + ": " + (row.备注 == null ? "" : row.备注);
+    }
+
+    dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+        return Re_searchInfo(param);
+    }
+
+    function Re_searchInfo(param) {
+
+        if (!param.sys_search) { return; }
+        var searchArr = JSON.parse(param.sys_search);
+
+        var newpara = searchArr.select("name", "Emp_searchinfo");       //后台增加字段名为searchinfo列，引藏并搜索
+        var inputvalue = "";
+        if ($('#searchinfo_input').length > 0) { inputvalue = $.trim($('#searchinfo_input').val()); }
+        if ($('#searchinfo_select').length > 0) { inputvalue = $('#searchinfo_select').combobox("getValue"); }
+
+
+        if (newpara != null && inputvalue != "") {
+            if (newpara.contains("工号", "value")) {
+                searchArr.push({ "name": "工号", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("姓名", "value")) {
+                searchArr.push({ "name": "姓名", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("职务", "value")) {
+                searchArr.push({ "name": "职务", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("籍贯", "value")) {
+                searchArr.push({ "name": "籍贯", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("身份证号", "value")) {
+                searchArr.push({ "name": "身份证号", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("部门", "value")) {
+                searchArr.push({ "name": "部门", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("工资账套", "value")) {
+                searchArr.push({ "name": "工资账套", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("学历", "value")) {
+                searchArr.push({ "name": "学历", "value": "'" + inputvalue + "'", "pattern": "like" })
+            }
+        }
+
+        var newpara = searchArr.select("name", "Emp_searchinfo2");       //后台增加字段名为searchinfo列，引藏并搜索
+        var inputvalue2 = "";
+        if ($('#searchinfo2_input').length > 0) { inputvalue2 = $.trim($('#searchinfo2_input').val()); }
+        if ($('#searchinfo2_select').length > 0) { inputvalue2 = $('#searchinfo2_select').combobox("getValue"); }
+        if (newpara != null && inputvalue2 != "") {
+            if (newpara.contains("工号", "value")) {
+                searchArr.push({ "name": "工号", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("姓名", "value")) {
+                searchArr.push({ "name": "姓名", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("职务", "value")) {
+                searchArr.push({ "name": "职务", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("籍贯", "value")) {
+                searchArr.push({ "name": "籍贯", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("身份证号", "value")) {
+                searchArr.push({ "name": "身份证号", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("部门", "value")) {
+                searchArr.push({ "name": "部门", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("工资账套", "value")) {
+                searchArr.push({ "name": "工资账套", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+            else if (newpara.contains("学历", "value")) {
+                searchArr.push({ "name": "学历", "value": "'" + inputvalue2 + "'", "pattern": "like" })
+            }
+        }
+        searchArr.remove("Emp_searchinfo", "name");
+        searchArr.remove("searchinfo", "name");
+        searchArr.remove("Emp_searchinfo2", "name");
+        searchArr.remove("searchinfo2", "name");
+        newpara = searchArr.select("name", "selCompany");
+
+        if (newpara != null) {
+            $.each(newpara, function (index, data) {
+                searchArr.remove("selCompany", "name");
+                if (index == 0) { param.SelCompany = data.value.replace(/\'/g, ""); }
+                else { param.SelCompany += "," + data.value.replace(/\'/g, ""); }
+            })
+        }
+        if (searchArr.length == 0) {
+            searchArr.push({ "name": "1", "value": "1", "pattern": "=" });
+        }
+        var str = JSON.stringify(searchArr).replace(/\'/g, "!#");
+        eval("sys_search = '" + str + "'");
+        param.sys_search = sys_search.replace(/!#/g, "'");
+
+        param.isCompany = 1; //多公司查询标记
+
+        return true;
+    }
+</script>

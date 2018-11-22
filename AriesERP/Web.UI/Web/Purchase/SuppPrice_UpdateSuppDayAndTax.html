@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+     <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+        <div class="cont-box">
+        <div class="cont-box-tit">
+           <!-- <h3>更新供应商信息</h3>-->
+            <a class="arrows hover"></a>
+        </div>
+        <div class="cont-box-in">
+            <div class="cont-box-form">
+                <form> 
+             <table class="kv-table" id="A01"  >
+			<tbody>
+				<tr>
+					<td class="kv-label"   style=" text-align:right" id="lbl_date" >更新供应商交付时间：</td>
+					<td class="kv-label" colspan="1"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner">
+                        <input class="text textread" data-options="required:true"  type="text" id="iDay" />                        
+                       </b></b></div>                    
+					</td> 
+                    <td class="kv-label" style=" text-align:right"></td>                 
+                     <td class="kv-label"  style=" text-align:right" ><input type="button"  style=" width:40px"  onclick="UpdateDay()" id="Button1" value="更新" /></td>   
+                </tr>
+                <tr><td colspan="3" style="width:50px"></td></tr>
+               <tr>
+					<td class="kv-label"   style=" text-align:right" id="lbl_tax" >更新供应商增值税率：</td>
+					<td class="kv-label" colspan="1"><div style="float:left;width:90%"><b class="fluid-input"><b class="fluid-input-inner">
+                        <input class="text textread" data-options="required:true"  type="text" id="iTax" />                        
+                       </b></b></div>                    
+					</td> 
+                    <td class="kv-label" style=" text-align:right"></td>                 
+                     <td class="kv-label"  style=" text-align:right" ><input type="button"  style=" width:40px"  onclick="UpdateTax()" id="Button2" value="更新" /></td>   
+                </tr> 
+                	</tbody>
+		  </table>                  
+                    
+                   <!-- <div class="short">
+                        <div class="short">
+                            <label  id="lbl_date" style="text-align:right">更新供应商交付时间：</label>
+                            <input   id="iDay" class='text' data-options="required:true" />
+                             <a>
+                            <input type="button"  style=" width:40px"  onclick="UpdateDay()" id="btn_update" value="更新" />
+                        </a>      
+                        </div>
+                        <div style="height:10px"></div>
+                         <div class="short"  >
+                            <label id="lbl_tax" style="text-align:right">更新供应商增值税率：</label>
+                            <input  id="iTax" class='text' data-options="required:true" />
+                             <a>
+                            <input  style=" width:40px" type="button" onclick="UpdateTax()"  id="btn_update1"  value="更新" />
+                        </a>      
+                        </div>
+              </div>-->
+                </form>
+         </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    //语言：
+    $(function ()
+        {
+        $('#lbl_date').html(AR.Lang["lbl_date"]);
+        $('#lbl_tax').html(AR.Lang["lbl_tax"]);
+        $('#btn_update').html(AR.Lang["btn_update"]);
+        $('#btn_update1').html(AR.Lang["btn_update1"]);
+        }
+    )
+
+
+    var irkey23=parent.rkey23;
+    function UpdateDay() {
+        ivalue=  $("#iDay").val();
+      
+   // var irkey23=parent.dg.rkey23;
+        AR.Utility.Ajax.post("Exec_SP", "sp_UpdateDayAndTax", { type: 0, rkey23: irkey23, avalue: ivalue }, function (data) {
+         if (data.success && (data.errorMsg == " " || data.errorMsg == "ok")) {
+             $.messager.alert("更新成功！", AR.Lang.execSuccess, "info")
+         } else {
+             $.messager.alert("", data.errorMsg, "info")
+         }
+     }, true);        
+}
+    function UpdateTax() {
+        ivalue = $("#iTax").val();
+        AR.Utility.Ajax.post("Exec_SP", "sp_UpdateDayAndTax", { type: 1, rkey23: irkey23, avalue: ivalue }, function (data) {
+             if (data.success && (data.errorMsg == " " || data.errorMsg == "ok")) {
+                 $.messager.alert("更新成功！", AR.Lang.execSuccess, "info")
+             } else {
+                 $.messager.alert("", data.errorMsg, "info")
+             }
+         }, true);            
+        }
+
+</script>

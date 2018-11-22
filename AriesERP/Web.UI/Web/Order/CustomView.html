@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -3, "month");
+    var defdate = startDate + "," + endDate;
+
+    var dg = new AR.DataGrid("v_Data0058_list");
+    dg.isShowCheckBox = false; 
+    dg.ToolBar.isHidden = true;
+    dg.bind();
+    dg.options = {
+        pageSize: 10,
+        onBeforeLoad: function (param) {
+            return param;
+        },
+        onLoadSuccess: function () {
+            //var pager = dg.datagrid('getPager');
+            //pager.pagination({
+            //    showPageList: false
+            //});
+        }
+    };
+    dg.Search.onAfterExecute = function () {
+        
+        if ($('#日期_input2')) {
+            $('#日期_input2').attr("style", "WIDTH: 95px");
+            $('#日期_input2').attr("class", "easyui-datebox easyui-validatebox");
+            $('#日期_input2').attr("validtype", "datebox");
+            $('#日期_input').attr("style", "WIDTH: 95px");
+            $('#日期_input').attr("class", "easyui-datebox easyui-validatebox");
+            $('#日期_input').attr("validtype", "datebox");
+        }
+        //alert($('#日期_input2')[0].outerHTML)
+    }
+    //按特定格式显示网格记录
+    function ShowList1(value, row, index) {
+        return "报废单号: " + row.报废单号 + "<br>" + "作业单号: " + row.作业单号;
+    }
+
+</script>

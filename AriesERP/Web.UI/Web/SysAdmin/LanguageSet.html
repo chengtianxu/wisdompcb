@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    AR.Global.userName = parent.AR.Global.userName;
+    var dg = new AR.DataGrid("Config_Language");
+    dg.ToolBar.add(AR.Lang["copyAdd"], "CopyAdd", 2, "", "edit", "BtnCopyAdd");
+    dg.options = { sortName: "langType,module,langId"};
+    dg.isEditor = true;
+    if (AR.Global.userName != "admin") {
+        dg.addWhere("module", "Login", "<>");
+    }
+    dg.bind();
+
+    var isCopy;
+    dg.ToolBar.BtnAdd.onBeforeExecute = function () {
+        if (isCopy) {
+            var row = dg.getSelected();
+            if (row) {
+                dg.defaultInsertData = { langid: row.langid, sysdesc: row.sysdesc, langdesc: row.langdesc, module: row.module, langtype: row.langtype, remark: row.remark } //新增赋初值
+            } else {
+                dg.defaultInsertData = { module: $("#module_input").combobox("getValue"), langtype: $("#langtype_input").combobox("getValue") } //新增赋初值
+            }
+        } else {
+            dg.defaultInsertData = { module: $("#module_input").combobox("getValue"), langtype: $("#langtype_input").combobox("getValue") } //新增赋初值
+        }
+    }
+    //复制新增
+    function CopyAdd() {
+        isCopy = 1;
+        dg.ToolBar.BtnAdd.$target.click();
+        isCopy = 0;
+    }
+</script>

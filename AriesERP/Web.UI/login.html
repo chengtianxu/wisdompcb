@@ -1,0 +1,328 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ERP登录</title>
+    <link href="./Style/CSS/login.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./Style/JS/EasyUI/themes/default/easyui.css" />
+    <script src="./Style/JS/jquery-1.7.1.min.js"></script>
+     <script src="./Style/JS/EasyUI/jquery.easyui.min.js"></script>
+    <script src="./Style/JS/AriesJS/Aries.Global.js"></script>
+    <script src="./Style/JS/AriesJS/Aries.Utility.js"></script>
+    <script>if (parent != null && parent != this) { parent.location = location.href; }</script>
+    <script>
+        /**
+        * 获得光标位置兼容IE/FF
+        */
+        function getCaretPosition(obj) {
+            var result = 0;
+            if (obj.selectionStart) { //IE以外 
+                result = obj.selectionStart;
+            } else { //IE 
+                try {
+                    var rng;
+                    if (obj.tagName == "textarea") { //TEXTAREA 
+                        rng = event.srcElement.createTextRange();
+                        rng.moveToPoint(event.x, event.y);
+                    } else { //Text 
+                        rng = document.selection.createRange();
+                    }
+                    rng.moveStart("character", -event.srcElement.value.length);
+                    result = rng.text.length;
+                } catch (e) {
+                    //throw new Error(10, "asdasdasd")
+                }
+            }
+            return result;
+        }
+        /**
+         * 设置光标位置兼容IE/FF
+         */
+        function setCaretPosition(tObj, sPos) {
+            if (tObj && sPos) {
+                if (tObj.setSelectionRange) {
+                    setTimeout(function () {
+                        tObj.setSelectionRange(sPos, sPos);
+                        tObj.focus();
+                    }, 0);
+                } else if (tObj.createTextRange) {
+                    var rng = tObj.createTextRange();
+                    rng.move('character', sPos);
+                    rng.select();
+                }
+            }
+        }
+        var EventUtil = {
+            // 添加事件监听
+            add: function (element, type, callback) {
+
+                if (element.addEventListener) {
+                    element.addEventListener(type, callback, false);
+                } else if (element.attachEvent) {
+                    element.attachEvent('on' + type, callback);
+                } else {
+                    element['on' + type] = callback;
+                }
+            }
+        }
+        var isPropertychange = true;
+        window.onload = function () {
+            var obj = document.getElementById("password");
+            var EventKey="input";
+            var ie = (!!window.ActiveXObject || "ActiveXObject" in window); 
+            if (ie) {
+                EventKey = "keyup";
+            }
+            
+            EventUtil.add(obj, EventKey, function (o) {
+                var newPassword = $("#password").val();
+                var oldPassword = $("#newpd").val();
+                var deta = newPassword.length - oldPassword.length;
+
+                var truePassword = "";
+                p = getCaretPosition(obj)////获取光标位置
+
+                for (var i = 0; i < newPassword.length; i++) {
+                    var c = newPassword.charAt(i);
+                    if (i < p && c != '●') {
+                        truePassword += c;
+                    } else if (i < p && c == '●') {
+                        truePassword += oldPassword.charAt(i);
+                    } else {
+                        truePassword += oldPassword.substr(oldPassword.length - newPassword.length + p, newPassword.length - p);
+                        break;
+                    }
+                }
+                newPassword = truePassword.replace(/\S/g, '●');
+
+                $("#newpd").val(truePassword);
+                $("#password").val(newPassword);
+                setCaretPosition(obj, p);//光标重新定位
+            }, false);
+        }
+        function changePwd(obj) {
+            var ie = !!window.ActiveXObject; 
+            if (ie) {
+                setTimeout(function(){
+                    var newPassword = $("#password").val();
+                    var oldPassword = $("#newpd").val();
+                    var deta = newPassword.length - oldPassword.length;
+
+                    var truePassword = "";
+                    p = newPassword.length;
+
+                    for (var i = 0; i < newPassword.length; i++) {
+                        var c = newPassword.charAt(i);
+                        if (i < p && c != '●') {
+                            truePassword += c;
+                        } else if (i < p && c == '●') {
+                            truePassword += oldPassword.charAt(i);
+                        } else {
+                            truePassword += oldPassword.substr(oldPassword.length - newPassword.length + p, newPassword.length - p);
+                            break;
+                        }
+                    }
+                    newPassword = truePassword.replace(/\S/g, '●');
+
+                    $("#newpd").val(truePassword);
+                    $("#password").val(newPassword);
+                },10)
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="all">
+        <div class="box_top"></div>
+        <div class="box">
+            <h2 id="compTitle">五株科技企业资源管理系统</h2>
+            <div class="login_r">
+            <table>
+                <tr style="display:none"><td style="text-align:right"><label id="companylab">公司</label></td><td><select id="company" class="easyui-combobox" style="width:206px;height:32px;"></select></td></tr>
+                <tr><td style="text-align:right"><label id="userlab">用户</label></td><td><input type="text" value="admin" id="username" required="true" /></td></tr>
+                <tr><td style="text-align:right"><label id="pwdlab">密码</label></td><td><input type="text" id="password" onpaste="changePwd(this)" /><input type="text" id="newpd" style="display:none"/></td></tr>
+                <tr><td style="text-align:right"><label id="langlab">语言</label></td><td><div style="margin-top:3px;margin-bottom:8px"><input id="LangSet" class="easyui-combobox" style="width:206px;height:32px;"/></div></td></tr>
+                <tr><td colspan="2"><div class="btn" style="float:right"><input type="button" id="btnLogin" name="btnLogin" value="登录" onclick="login()" /></div></td></tr>
+            </table>
+                </div>
+        </div>
+    </div>
+    <div class="login-foot">
+        <span id="Copyright">Copyright©2018-2023 深圳市锌智泉科技有限公司版权所有.</span>
+    </div>
+    <script>
+        document.onkeydown = function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) // Enter
+            {
+                login();
+            }
+        }
+        function handleResponse(data)
+        {
+            //alert("ok");
+        }
+        function login() {
+            //ClearPwd(); //清空密码以防浏览器记录
+            var host = window.location.host;
+            var cpy=$('#company').combobox('getValue');
+            //var url = _data[cpy];
+            var uid = $("#username").val();
+            var pwd = $("#newpd").val();//$("#password").attr("password");
+            var date = new Date();//避免浏览器私自缓存
+            AR.Utility.Cookie.set("aries_lang", $('#LangSet').combobox('getValue'), 30);
+            AR.Utility.Cookie.set("aries_company", $('#company').combobox('getValue'), 30);
+            AR.Utility.Cookie.set("aries_companyName", $('#company').combobox('getText'), 30);
+            AR.Utility.Cookie.set('aries_user', $("#username").val(), 30);
+            //单点跨域登录暂时不用
+            //if (host != url)
+            //{
+            //    $.ajax({
+            //        async: false,
+            //        url: "http://" + url + "/CorsLogin.html",
+            //        type: "GET",
+            //        dataType: "jsonp", // 返回的数据类型，设置为JSONP方式
+            //        jsonp: 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
+            //        jsonpCallback: 'handleResponse', //设置回调函数名
+            //        data: {
+            //            "iscorscookie": 1, "sys_method": "login", "cpy": cpy, "uid": uid, "pwd": pwd, r: date.getSeconds()
+            //        },
+            //        success: function (response, status, xhr) {
+            //            //alert('状态为：' + status + ',状态是：' + xhr.statusText);
+            //            //alert(response);
+            //            location.href = "http://" + url + "/index.html";
+            //        },
+            //        error: function () {
+            //            alert("跨域登录失败!");
+            //        },
+            //        timeout: 10000
+            //    });
+            //    return;
+            //}
+            
+            var data = { "cpy":cpy,"uid": uid, "pwd": pwd, r: date.getSeconds() };
+            var result = AR.Utility.Ajax.post("Login", null, data);
+            if (result) {
+                if (result.success) {
+                    location.href = "index.html";
+                }
+                else {
+                    if (result.msg) {
+                        alert(result.msg);
+                    }
+                    else {
+                        var msg = JSON.stringify(result);
+                        if (msg == "{}") { msg = "please check web.config's httpmoudle!"; }
+                        alert(msg);
+                    }
+                }
+            }
+        }
+        var user = AR.Utility.Cookie.get('aries_user');
+        if (user) {
+            $("#username").val(user);//记住用户名
+        }
+        var _data = [];
+        var langValue = "";
+        //取公司名称
+        $('#company').combobox({
+            url: 'ajax.html?sys_method=Getcompany',
+            valueField: 'value',
+            textField: 'text',
+            editable: false,
+            formatter: function (row) {
+                //_data[row.value] = row.text.substr(row.text.indexOf(",") + 1);
+                return '<span style="height:25px;line-height:25px;font-size:14px;color:#6c7f8c;">' + '&nbsp;' + row.text + '</span>'; //row.text.substr(0, row.text.indexOf(","))
+            },
+            onLoadSuccess: function () {
+                //var lcompany = AR.Utility.Cookie.get('aries_company');
+                //if (lcompany) {
+                //    $('#company').combobox('select', lcompany);
+                //} else {
+                    var gdata = $('#company').combobox('getData');
+                    $('#company').combobox('select', gdata[0].value);
+                //}
+            },
+            onSelect: function (record) {
+                this.nextSibling.style.borderRadius = "4px";
+                //var txtlen = $('#company').combobox('textbox').val().indexOf(",");
+                //$('#company').combobox('textbox').val($('#company').combobox('textbox').val().substr(0, txtlen));
+            }
+        })
+        $("#company").combobox('textbox').css("font-size", "14px");
+
+        $('#LangSet').combobox({
+            valueField: 'value',
+            textField: 'text',
+            editable: false,
+            data: [{ 'value': 'China', 'text': '中文' }, { 'value': 'English', 'text': '英文' }],
+            formatter: function (row) {
+                return '<span style="height:25px;line-height:25px;font-size:14px;color:#6c7f8c;">' + '&nbsp;' + row.text + '</span>';
+            },
+            onLoadSuccess: function () {
+                if (langValue != "") { $('#LangSet').combobox('select', langValue); return; }
+                var lang = AR.Utility.Cookie.get('aries_lang');
+                if (lang) {
+                    $('#LangSet').combobox('select', lang);
+                } else {
+                    var gdata = $('#LangSet').combobox('getData');
+                    $('#LangSet').combobox('select', gdata[0].value);
+                }
+            },
+            onSelect: function (record) {
+                this.nextSibling.style.borderRadius = "4px";
+                //if (record.value == langValue) { return; }
+                getLang()
+            }
+        })
+        $("#LangSet").combobox('textbox').css("font-size", "14px");
+
+        function post(url, params) {
+            var temp = document.createElement("form");
+            temp.action = url;
+            temp.method = "post";
+            temp.style.display = "none";
+            for (var x in params) {
+                var opt = document.createElement("textarea");
+                opt.name = x;
+                opt.value = params[x];
+                temp.appendChild(opt);
+            }
+            document.body.appendChild(temp);
+            temp.submit();
+            return temp;
+        }
+        //取系统语言
+        function getLang() {
+            var date = new Date();//避免浏览器私自缓存
+            var data = { "langType": $('#LangSet').combobox('getValue'), "module": 'Login', r: date.getSeconds() };
+            var result = AR.Utility.Ajax.post("GetLang", null, data);
+            if (result) {
+                if (result.success) {
+                    $.each(result.rows, function (index, data) {
+                        AR.Lang[data.langId] = data.langDesc;
+                    })
+                    $(document).attr("title", AR.Lang.SysLogin);
+                    $('#compTitle').text(AR.Lang.compTitle);
+                    $('#companylab').text(AR.Lang.LoginCompany);
+                    $('#userlab').text(AR.Lang.LoginUser);
+                    $('#pwdlab').text(AR.Lang.LoginPwd);
+                    $('#langlab').text(AR.Lang.LoginLang);
+                    $('#btnLogin').val(AR.Lang.btnLogin);
+                    $.each($('#LangSet').combobox("options").data, function (index, data) {
+                        data.text = AR.Lang[data.value];
+                    })
+                    //if (langValue != "") { $('#LangSet').combobox(); }
+                    langValue = $('#LangSet').combobox('getValue');
+                    $('#LangSet').combobox("loadData", $('#LangSet').combobox("options").data)
+                    $('#Copyright').text(AR.Lang.Copyright);
+                }
+                else {
+                    $.messager.alert("", result.msg, "error");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

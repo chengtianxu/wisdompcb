@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+    <script type="text/javascript" src="../../echarts/echarts.common.min.js"></script>
+    <script type="text/javascript" src="../../echarts/shine.js"></script>
+    <script type="text/javascript" src="../../Style/JS/ComAnalysis.js"></script>
+
+</head>
+
+<body>
+    
+    <!--定制查询条件-->
+    <div id="div_search" class="easyui-accordion" style="display:none">
+    <div id="searchTitle" title="查询条件">
+        <div style="margin-top:10px;margin-bottom:10px">&nbsp;<span id="summaryMode1">汇总方式(一维)</span>：
+            <input type="radio" name="rdotype1" id="rdo1_arq" value="日期" onclick="checkRadio(this, 1)" checked="checked" style="width:30px"/><label id="rdo1_arq_label" for="rdo1_arq">按日期</label>
+            <input type="radio" name="rdotype1" id="rdo1_ayf" value="月份" onclick="checkRadio(this, 1)" style="width:30px"/><label id="rdo1_ayf_label" for="rdo1_ayf">按月份</label>          
+            <input type="radio" name="rdotype1" id="rdo1_akh" value="客户简称" onclick="checkRadio(this, 1)" style="width:30px"/><label id="rdo1_akh_label" for="rdo1_akh">按客户</label>
+            <input type="radio" name="rdotype1" id="rdo1_abcbh" value="本厂编号" onclick="checkRadio(this, 1)" style="width:30px"/><label id="rdo1_abcbh_label" for="rdo1_abcbh">按本厂编号</label>
+            <input type="radio" name="rdotype1" id="rdo1_acplx" value="产品类型" onclick="checkRadio(this, 1)" style="width:30px"/><label id="rdo1_acplx_label" for="rdo1_acplx">按产品类型</label>
+            <input type="radio" name="rdotype1" id="rdo1_comp" value="所属公司" onclick="checkRadio(this, 1)" style="width:30px" /><label id="rdo1_comp_label" for="rdo1_comp">按公司</label>
+        </div>
+        <div style="margin-top:10px;margin-bottom:10px">&nbsp;<span id="summaryMode2">汇总方式(二维)</span>：
+            <input type="radio" name="rdotype2" id="rdo2_arq" value="日期" onclick="checkRadio(this, 2)" style="width:30px"/><label id="rdo2_arq_label" for="rdo2_arq">按日期</label>
+            <input type="radio" name="rdotype2" id="rdo2_ayf" value="月份" onclick="checkRadio(this, 2)" style="width:30px"/><label id="rdo2_ayf_label" for="rdo2_ayf">按月份</label>          
+            <input type="radio" name="rdotype2" id="rdo2_akh" value="客户简称" onclick="checkRadio(this, 2)" style="width:30px"/><label id="rdo2_akh_label" for="rdo2_akh">按客户</label>
+            <input type="radio" name="rdotype2" id="rdo2_abcbh" value="本厂编号" onclick="checkRadio(this, 2)" style="width:30px"/><label id="rdo2_abcbh_label" for="rdo2_abcbh">按本厂编号</label>
+            <input type="radio" name="rdotype2" id="rdo2_acplx" value="产品类型" onclick="checkRadio(this, 2)" style="width:30px"/><label id="rdo2_acplx_label" for="rdo2_acplx">按产品类型</label>
+            <input type="radio" name="rdotype2" id="rdo2_comp" value="所属公司" onclick="checkRadio(this, 2)" style="width:30px" /><label id="rdo2_comp_label" for="rdo2_comp">按公司</label>
+        </div>
+        <div class="line"> 
+            <div class="short"><label id="bcbh_label">本厂编号：</label><input class="easyui-textbox" id="本厂编号"/></div>
+            <div class="short"><label id="khxh_label">客户型号：</label><input class="easyui-textbox" id="客户型号"/></div>
+            <div class="short"><label id="khdm_label">客户代码：</label><input class="easyui-textbox" id="客户代码"/></div>                    
+            <div class="short"><label id="thrq_label">退货日期：</label><input id="udef_thrq1" class="easyui-datebox easyui-validatebox" data-options="validType:'datebox'" style="WIDTH: 95px"/>
+            <span>&nbsp;ˉ&nbsp;</span><input id="udef_thrq2" class="easyui-datebox easyui-validatebox" data-options="validType:'datebox'"  style="WIDTH: 95px"/></div>
+            <div class="short"><label id="ddlb_label">订单类别：</label><input type="text" defaultitem="false" configkey="订单类别" id="订单类别" /></div>
+            <div class="short"><label id="selcompany_label">选择公司：</label><input type="text" id="selCompany" name="selCompany" /></div>
+            <!--       
+            <div class="short"><label>订单类别：</label><select id="订单类别" class="easyui-combobox" style="width:150px;"><option value="">全部</option><option>自制</option><option>外发</option><option>半制程</option></select></div>
+            -->
+        </div>
+    </div>
+    </div>
+
+     <!--记录List-->
+    <div  title="数据记录" id="divListTitle" style="height:580px;"><table id="dg"></table></div>
+
+    <div id="divCharts" class="easyui-accordion" style="height:480px;">
+        <!--图表或汇总-->
+        <div id="divChartTitle" title="图表分析">
+            <label id="showtype_label">显示方式: </label><input type="radio" name="showtype1" id="showChart"  onclick="ShowTypes()" checked="checked" style="width:20px"/><label id="showChartLab" for="showChart">图表分析</label>
+                <input type="radio" name="showtype1" id="ShowTotal"  onclick="ShowTypes()" style="width:20px"/><label id="ShowTotalLab" for="ShowTotal">数据汇总</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;<label id="showunit_label">统计单位：</label><input type="text" defaultitem="false" configkey="图表统计单位" id="showUnit" onchange="onchange" />
+            <div id="container" style="height:400px;"></div>
+            <div id="totals" style="display:none;height:426px;"><table id="dg2"></table></div>
+        </div>
+    </div>
+  
+</body>
+</html>
+
+<script>
+    $('#searchTitle').attr("title", AR.Lang["searchTitle"]);
+    $('#summaryMode1').html(AR.Lang["summaryMode1"]);
+    $('#summaryMode2').html(AR.Lang["summaryMode2"]);
+    $('#rdo1_arq_label,#rdo2_arq_label').html(AR.Lang["return_byDate"]);
+    $('#rdo1_ayf_label,#rdo2_ayf_label').html(AR.Lang["return_byMonth"]);
+    $('#rdo1_akh_label,#rdo2_akh_label').html(AR.Lang["return_byCustomer"]);
+    $('#rdo1_abcbh_label,#rdo2_abcbh_label').html(AR.Lang["return_byFactoryCode"]);
+    $('#rdo1_acplx_label,#rdo2_acplx_label').html(AR.Lang["return_byProductType"]);
+    $('#rdo1_comp_label,#rdo2_comp_label').html(AR.Lang["byCompany"]);
+    $('#bcbh_label').html(AR.Lang["order_bcbh"] + "： ");
+    $('#khxh_label').html(AR.Lang["order_khxh"] + "： ");
+    $('#khdm_label').html(AR.Lang["order_khdm"] + "： ");
+    $('#thrq_label').html(AR.Lang["order_thrq"] + "： ");
+    $('#ddlb_label').html(AR.Lang["order_ddlb"] + "： ");
+    $('#selcompany_label').html(AR.Lang["selCompany"]);
+
+    $('#divChartTitle').attr("title", AR.Lang["chartTitle"]);
+    $('#showtype_label').html(AR.Lang["showType"] + "： ");
+    $('#showunit_label').html(AR.Lang["showUnit"] + "： ");
+    $('#showChartLab').html(AR.Lang["chartAnalysis"]);
+    $('#ShowTotalLab').html(AR.Lang["dataTotal"]);
+</script>
+
+<script>
+    var isLoad = 0;    //标记是否第一次打开页面
+    var rowData = [];   //本地分页使用的变量
+    var curData = [];   //本地分页使用的变量
+    var groupValue1;    //一维汇总方式
+    var groupValue2;    //二维汇总方式
+    var rowGroup1 = []; //一维分组记录
+    var rowGroup2 = []; //二维分组记录
+    var showUnit;       //总计单位
+    var showUnitTitle = "";
+ 
+    var endDate = (new Date()).format("yyyy-MM-dd");    //默认结束日期
+    var startDate = AddDate(endDate, -1, "month");     //默认开始日期
+    var defdate = startDate + "," + endDate;            //Datagrid配置使用的变量
+    var dom = document.getElementById("container");     //图表控件
+    var myChart = echarts.init(dom, 'shine');           //取图表样式
+    //初始化Datagrid明细列表
+    var dg = new AR.DataGrid("VS_sp_return_analysis");
+    dg.isShowCheckBox = false;
+    dg.Search.$target = $('#div_search'); //绑定自定义查询区;
+    dg.ToolBar.isHidden = true;
+    dg.bind();
+
+    //Datagrid控件的选项设定
+    dg.options = {
+        //pageList: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        pageSize: 10,
+        //表格载入前触发
+        onBeforeLoad: function (param) {
+            return Re_searchInfo(param);
+        },
+        //表格载入成功触发
+        onLoadSuccess: function (data) {
+            ShowTypes(data);//显示图表或汇总
+        }
+    }
+    //查询区域设置完成后触发
+    dg.Search.onAfterExecute = function () {
+        BindCompany("selCompany");//绑定公司下拉框
+        SearchBind_BtnExport();//创建按钮到查询区
+    }
+
+    //导出按钮执行前触发
+    dg.ToolBar.BtnExport.onBeforeExecute = function (param) {
+        Re_searchInfo(param);
+    }
+    //查询按钮执行前触发
+    dg.Search.BtnQuery.onBeforeExecute = function (para) {
+        GridShowStyle();//根据条件重新定义显式格式
+    }
+    //初始化数据汇总的Datagrid
+    var dg2 = new AR.DataGrid("VS_sp_return_analysis", null, "dg2");
+    dg2.isShowCheckBox = false;
+    dg2.ToolBar.isHidden = true;
+    dg2.Search.isHidden = true;
+    dg2.bind();
+    dg2.options = {
+        pagination: false,
+        onBeforeLoad: function (param) {
+            return false;
+        },
+        onLoadSuccess: function (data) {
+            computeTotal(dg2);//数据汇总中的汇总
+        }
+    }
+    //折叠面板相关触发事件
+    $('#div_search').accordion({
+        onSelect: function (title, index) {
+            dg.resize();
+        },
+        onUnselect: function (title, index) {
+            dg.resize();
+        }
+    });
+    $('#divCharts').accordion({
+        onSelect: function (title, index) {
+
+        },
+        onUnselect: function (title, index) {
+            $('#divCharts').css({ 'height': 'auto' });
+        }
+    });
+    //重新定义Datagrid显示格式
+    function GridShowStyle() {
+        groupValue1 = $('input:radio[name="rdotype1"]:checked').val();
+        groupValue2 = $('input:radio[name="rdotype2"]:checked').val();
+        var groupArr = [];
+        var frozenColumns = [];
+        if (groupValue1) {
+            frozenColumns.push({ align: "left", field: groupValue1, title: AR.Lang["return_" + groupValue1] || AR.Lang[groupValue1], width: 150 });
+        }
+        if (groupValue2) {
+            frozenColumns.push({ align: "left", field: groupValue2, title: AR.Lang["return_" + groupValue2] || AR.Lang[groupValue2], width: 150 });
+        }
+        groupArr.push({ field: "数量", align: "right" });
+        groupArr.push({ field: "面积", align: "right" });
+        groupArr.push({ field: "含税金额", align: "right" });
+
+        var columns = [];
+        $.each(groupArr, function (key, val) {
+            columns.push({ align: val.align ? val.align : "left", field: val.field, title: AR.Lang[dg.objName + "_" + val.field], width: val.width ? val.width : 150 });
+        });        dg.datagrid("options").frozenColumns[0] = frozenColumns        dg.datagrid("options").columns[0] = columns;
+        dg.datagrid("options").queryParams.sys_search = "GetHeader";
+        dg.datagrid();
+    }
+    //定制查询条件
+    function Re_searchInfo(param) {
+
+        if ($('#udef_thrq1').datebox('getValue') == "") {
+            $('#udef_thrq1').datebox('setValue', startDate);
+            $('#udef_thrq2').datebox('setValue', endDate);
+        }
+        //第一次打开不直接查询
+        // if (isLoad == 0) {
+        //     isLoad = 1;
+        //    return false;
+        // }
+        if (param.sys_search == "GetHeader") { return false; }
+        param.sys_search = "";//清空原有的查询条件
+        var searchArr = [];
+        var newdate1 = $('#udef_thrq1').datebox('getValue');
+        var newdate2 = $('#udef_thrq2').datebox('getValue');
+        var days = dateDiff(newdate1, newdate2);
+        if (days > 366) {
+            $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsg"], "info"); //"日期区间不能大于1年!"
+            return false;
+        }
+        //处理一般输入框查询条件,须以id作为字段名
+        $('.short input.easyui-textbox').each(function (i) {
+            if ($(this).val() != "") {
+
+                searchArr.push({ name: $(this).attr("id"), value: $(this).val(), pattern: "like" });
+             
+            }
+        });
+
+       
+       
+        
+        if ($('#订单类别').combobox('getValue') != '全部' & $('#订单类别').combobox('getValue') != '') {
+            searchArr.push({ name: $('#订单类别').attr("id"), value: $('#订单类别').combobox('getValue'), pattern: "like" });
+        };
+        
+        
+        //日期条件需另处理
+        searchArr.push({ name: "日期", value: "'" + newdate1 + "'", pattern: ">=" });//OrAnd:or/and
+        searchArr.push({ name: "日期", value: "'" + newdate2 + "'", pattern: "<=" });
+
+        //公司条件
+        var newpara = $('#selCompany').combobox("getValues")
+        if (newpara != null) {
+            $.each(newpara, function (index, value) {
+                searchArr.remove("selCompany", "name");
+                if (index == 0) { param.SelCompany = value.replace(/\'/g, ""); }
+                else { param.SelCompany += "," + value.replace(/\'/g, ""); }
+            })
+
+        }
+
+        var str = JSON.stringify(searchArr).replace(/\'/g, "!#"); //IE8需要这样转换一下,否则中文无法自动识别
+        eval("sys_search = '" + str + "'");
+        param.sys_search = sys_search.replace(/!#/g, "'");
+
+        if (param.sys_search.length <= 2) {
+            $.messager.alert(AR.Lang["msg"], AR.Lang["com_SearchValidateMsg"], "info");//"条件不能全部为空!"
+            return false;
+        }
+
+        var groupValue1 = $('input:radio[name="rdotype1"]:checked').val();
+        var groupValue2 = $('input:radio[name="rdotype2"]:checked').val();
+        var groupstr = "";
+        if (groupValue1) { groupstr = groupValue1; }
+        if (groupValue2) { groupstr += groupstr == "" ? groupValue2 : "," + groupValue2; }
+        param.GroupBy = groupstr;
+        param.OrderBy = groupstr;
+        param.ShowGroup = groupstr;
+        param.ShowStr = groupstr;
+
+        // alert(param.sys_search);
+        //alert($('#订单类别').combobox('getValue'));
+        return true;
+    }
+
+    //调用显示方式
+    function ShowTypes(data) {
+        if (!data) {
+            data = dg.getData();
+        }
+        if (data.rows && data.rows.length > 0) {
+            groupValue1 = $('input:radio[name="rdotype1"]:checked').val();
+            groupValue2 = $('input:radio[name="rdotype2"]:checked').val();
+            showUnitTitle = $('#showUnit').combobox('getText');
+            showUnit = $('#showUnit').combobox('getValue');
+            SetRowGroup(data); //按汇总方式赋值
+
+            if ($("#showChart").attr("checked")) {
+                $('.panel-title').each(function (i) {
+                    if ($(this).text() == $('#ShowTotalLab').text()) {
+                        $(this).text($('#showChartLab').text());
+                    }
+                })
+                $('#container').css({ 'display': '' });
+                $('#totals').css({ 'display': 'none' });
+
+                ShowCharts(data);
+            } else {
+                $('.panel-title').each(function (i) {
+                    if ($(this).text() == $('#showChartLab').text()) {
+                        $(this).text($('#ShowTotalLab').text());
+                    }
+                })
+                $('#container').css({ 'display': 'none' });
+                $('#totals').css({ 'display': '' });
+                ShowTotals(data,dg2);
+            }
+        }
+    }
+
+    //改变汇总方式时检查
+    var rdovalue1 = "";
+    var rdovalue2 = "";
+    function checkRadio(which, no) {
+        if (no == 1) {
+            if (rdovalue1 == which.id) {
+                $(which).attr("checked", false);
+                rdovalue1 = "";
+            }
+            else { rdovalue1 = which.id; }
+        }
+        else {
+            if (rdovalue2 == which.id) {
+                $(which).attr("checked", false);
+                rdovalue2 = "";
+            }
+            else { rdovalue2 = which.id; }
+        }
+        if ($(which).attr("checked") && $('input:radio[name="rdotype1"]:checked').val() == $('input:radio[name="rdotype2"]:checked').val()) {
+            $.messager.alert(AR.Lang["msg"], AR.Lang["com_dateValidateMsgRep"], "info");//"一维二维汇总不能重复!"
+            $(which).attr("checked", false);
+            no == 1 ? rdovalue1 = "" : rdovalue2 = "";
+        }
+    }
+    //改变统计单位时调用
+    function onchange(record) {
+        if (record.value) {
+            ShowTypes();
+        }
+
+    }
+ 
+   
+</script>

@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>supplier_test</title>
+    <!--<script src="../../Style/JS/Aries.Loader.js"></script>-->
+    <script>
+        //调试时可以这样写，避免浏览器缓存
+        document.write('<s' + 'cript src="../../Style/JS/Aries.Loader.js?"' + Math.random() + '></s' + 'cript>');
+    </script>
+   <script src="../../Style/JS/Aries.Loader.js"></script>
+    <script type="text/javascript" src="../../echarts/echarts.common.min.js"></script>
+    <script type="text/javascript" src="../../echarts/shine.js"></script>
+    <script type="text/javascript" src="../../Style/JS/ComAnalysis.js"></script>
+</head>
+<body>
+   <div id="tb" style="height:400px"> <table id="dg"></table></div>
+    <div id="divCharts" class="easyui-accordion" style="height:480px;">
+       <div id="container" style="height:300px;"></div>
+    </div>
+</body>
+</html>
+<script>
+    var rowData = [];   //本地分页使用的变量
+    var curData = [];   //本地分页使用的变量
+    var groupValue1;    //一维汇总方式
+    var groupValue2;    //二维汇总方式
+    var rowGroup1 = []; //一维分组记录
+    var rowGroup2 = []; //二维分组记录
+    var showUnit;       //总计单位
+    var showUnitTitle = "";
+
+
+    var endDate = (new Date()).format("yyyy-MM-dd");
+    var startDate = AddDate(endDate, -7, "day");
+    var defdate = startDate + "," + endDate;
+
+
+    var dom = document.getElementById("container");     //图表控件
+    var myChart = echarts.init(dom, 'shine');           //取图表样式
+    groupValue1 = "sys_sortdate";
+    showUnit = "new_price"
+    showUnitTitle = "价格";
+   AR.Global.userName = parent.AR.Global.userName; //从上级窗口取到用户名(各级窗口都可以这样取)
+    var dg = new AR.DataGrid("V_changeDetail");
+  dg.ToolBar.BtnImport.isHidden = true;
+  dg.ToolBar.BtnExportTemplate.isHidden = true;
+  dg.ToolBar.isHidden = true;
+  
+    dg.options = {
+        sortName: "sys_longdate asc",
+        onBeforeLoad: function (param) {         
+            return Re_searchInfo(param);
+        },
+        onLoadSuccess: function (data) {
+             $(".datagrid-header-check").html("");
+            if (data.rows && data.rows.length > 0) {
+                SetRowGroup(data);
+                ShowCharts(data);
+            }
+        }
+    }
+     dg.addWhere("price_ptr", parent.rkey28, "="); //parent.rkey28
+
+    dg.Search.onAfterExecute = function () {  
+        if ($('#sys_longdate_input2').length > 0) {
+            $('#sys_longdate_input2').attr("style", "WIDTH: 95px");
+            $('#sys_longdate_input2').attr("class", "easyui-datebox easyui-validatebox");
+            $('#sys_longdate_input2').attr("validtype", "datebox");
+            $('#sys_longdate_input').attr("style", "WIDTH: 95px");
+            $('#sys_longdate_input').attr("class", "easyui-datebox easyui-validatebox");
+            $('#sys_longdate_input').attr("validtype", "datebox");
+        } 
+    }
+
+    dg.Search.BtnQuery.onBeforeExecute = function (para) {
+        if ($('#sys_longdate_input2').length > 0) {
+            var newdate1 = $('#sys_longdate_input2').datebox('getValue').substr(0, 10);
+            var newdate2 = $('#sys_longdate_input').datebox('getValue').substr(0, 10);
+            if ((newdate1 == "" && newdate2 != "") || (newdate1 != "" && newdate2 == "")) {
+                $.messager.alert("提示", "日期条件不全!", "info");
+                return false;
+            }           
+        }
+    }
+   
+   // $.messager.alert("", parent.rkey28,"info");
+    dg.bind();
+
+    function Re_searchInfo(param) {
+        //定制查询条件
+        if (!param.sys_search) { return; }
+        var searchArr = JSON.parse(param.sys_search); 
+
+        //默认结束日期加一天
+        if ($('#sys_longdate_input2').length > 0 && $('#sys_longdate_input2').datebox('getValue') != "") {
+            var tmpdate = $('#sys_longdate_input').datebox('getValue').substr(0, 10);
+            var tmpdate2 = AddDate(tmpdate, 1, "day");
+            var searchstr = param.sys_search;
+            var pos = searchstr.lastIndexOf(tmpdate);
+            if (pos > 0) {
+                var str = searchstr.substr(0, pos) + searchstr.substr(pos).replace(tmpdate, tmpdate2);
+                param.sys_search = str;
+            }
+        }
+        if (searchArr.length == 0) {
+            $.messager.alert("提示", "条件不能全部为空!", "info");
+            return false;
+        }
+        // alert(param.sys_search);
+        
+        return true;
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

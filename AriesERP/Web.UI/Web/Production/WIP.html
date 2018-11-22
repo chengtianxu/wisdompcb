@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+</body>
+</html>
+<script>
+    var rowData = []; //本地分页使用的变量
+    var curData = {}; //本地分页使用的变量
+    var isLoad = 0;   //载入标记:0第一次打开页面,1后台载入,2本地载入
+    var dg = new AR.DataGrid("VS_WIP_Web");
+    dg.isShowCheckBox = false;
+    dg.ToolBar.isHidden = true;
+    dg.options = {
+        pageSize: 10,
+        onBeforeLoad: function (param) {
+            return Re_searchInfo(param);
+        },
+        onLoadSuccess: function (data) {
+            //================本地分页=================
+            var pager = dg.datagrid("getPager");
+            if (rowData.length == 0) {
+                rowData = data;
+                var currPageSize = pager.data("pagination").options.pageSize
+                curData.rows = rowData.rows.slice(0, currPageSize);
+                curData.total = rowData.total;
+                dg.datagrid("loadData", curData);
+                GridShowStyle(curData);//根据条件重新定义显式格式
+            } else {
+                pager.pagination({
+                    onSelectPage: function (pageNo, pageSize) {
+                        var start = (pageNo - 1) * pageSize;
+                        var end = start + pageSize;
+                        curData.rows = rowData.rows.slice(start, end);
+                        curData.total = rowData.total;
+                        dg.datagrid('options').pageNumber = pageNo;
+                        dg.datagrid('options').pageSize = pageSize;
+                        dg.datagrid("loadData", curData);
+                        pager.pagination('refresh', {
+                            total: rowData.total,
+                            pageNumber: pageNo
+                        });
+                    },
+                    onBeforeRefresh: function (pageNo, pageSize) {
+                        isLoad = 1;
+                        rowData = [];
+                        dg.datagrid();
+                        dg.datagrid("options").frozenColumns[0] = [];                        dg.datagrid("options").columns[0] = [];
+                        return false;
+                    }
+                });
+            }
+            
+        }
+    }
+    //重新定义Datagrid显示标题列
+    function GridShowStyle(data) {
+        if (isLoad == 2) { isLoad = 1; return; } //避免死循环
+        var frozenColumns = [];
+        var columns = [];
+        var i = 0;
+        if (data.rows.length == 0) { return;}
+        $.each(data.rows[0], function (key, val) {
+            i++;
+            if (i == 1) {
+                columns.push({ align: "left", field: key, title: AR.Lang["VS_WIP_Web_" + key] || key, width: 100, hidden: true });
+            }
+            else if (i <= 5) {
+                frozenColumns.push({ align: "left", field: key, title: AR.Lang["VS_WIP_Web_" + key] || key, width: 100 });
+            }
+            else {
+                columns.push({ align: "left", field: key, title: AR.Lang["VS_WIP_Web_" + key] || key, width: 100 });
+            }
+        });        dg.datagrid("options").frozenColumns[0] = frozenColumns;        dg.datagrid("options").columns[0] = columns;
+        isLoad = 2;//标记做过标题列处理
+        dg.datagrid();
+    }
+    dg.bind();
+
+    //查询区域设置完成后触发
+    dg.Search.onAfterExecute = function () {
+        if ($('#udef_company_input').length > 0 && typeof ($('#udef_company_input')[0]) != "undefined") {
+            $('#udef_company_label')[0].innerText = AR.Lang.selCompany || $('#udef_company_label')[0].innerText;
+            $('#udef_company_input')[0].outerHTML = '<input type="text" id="selCompany"  name="selCompany" />'
+            BindCompanyOnly("selCompany");//绑定公司下拉框
+        }
+        SearchBind_BtnExport();//创建按钮到查询区
+    }
+    dg.Search.BtnQuery.onBeforeExecute = function () {
+        isLoad = 1;
+        rowData = [];
+        dg.datagrid("options").frozenColumns[0] = [];        dg.datagrid("options").columns[0] = [];
+    }
+    function Re_searchInfo(param) {
+        //第一次打开不直接查询
+        if (isLoad == 0) {
+            isLoad = 1;
+            return false;
+        }
+        //处理Datagrid标题列后只要本地加载即可
+        if (isLoad == 2) {
+            dg.datagrid("loadData", curData);
+            return false;
+        }
+        if (!param.sys_search) { return false; }
+
+        var searchArr = JSON.parse(param.sys_search);
+        var newpara = searchArr.select("name", "selCompany");
+        if (newpara != null) {
+            searchArr.remove("selCompany", "name");
+            $.each(newpara, function (index, data) {
+                param.SelCompany = data.value.replace(/\'/g, "");
+            })
+        }
+        var str = JSON.stringify(searchArr).replace(/\'/g, "!#");
+        eval("sys_search = '" + str + "'");
+        param.sys_search = sys_search.replace(/!#/g, "'");
+
+        //if (param.sys_search.length <= 2) {
+        //    $.messager.alert("提示", "条件不能全部为空!", "info");
+        //    return false;
+        //}
+        //alert(param.sys_search);
+        return true;
+    }
+
+</script>

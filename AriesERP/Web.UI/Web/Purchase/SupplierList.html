@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>供应商信息</title>
+    <script src="../../Style/JS/Aries.Loader.js"></script>
+</head>
+<body>
+    <table id="dg"></table>
+    <div style="display: none;">
+    <div id="mm" class="easyui-menu" data-options="onClick:menuHandler" style="width: 150px;">
+        <div id="cmbtn_view"></div>
+        <div id="cmbtn_modfiNote"></div>
+        <div class="menu-sep"></div>
+        <div id="cmbtn_synSet"></div>
+        <div id="cmbtn_sync"></div>
+    </div>
+
+</div>
+</body>
+</html>
+<script>
+
+    AR.Global.userName = parent.AR.Global.userName; //从上级窗口取到用户名(各级窗口都可以这样取)
+    var dg = new AR.DataGrid("V_SupplierList", "Data0023");
+    //dg.isEditor = true;
+    dg.ToolBar.BtnImport.isHidden = true;
+    dg.ToolBar.BtnExportTemplate.isHidden = true;
+    dg.PKColumn.add("edit", "编辑", null, "SupplierEdit.html", "供应商详细信息", "edit");
+    dg.PKColumn.add("del", "删除", null, null, null, "del");
+    dg.options = {
+        sortName: "code asc",
+        onLoadSuccess: function (data) {
+        },
+        onRowContextMenu: function (e, rowIndex, rowData) { //行右键
+            e.preventDefault(); //阻止浏览器捕获右键事件
+            //$(this).datagrid("clearSelections"); //取消所有选中项
+            $(this).datagrid("selectRow", rowIndex); //根据索引选中该行
+            $('#mm').menu('show', {
+                left: e.pageX,
+                top: e.pageY,
+                hideOnUnhover: false //菜单不自动隐藏
+            }); 
+        },
+    }
+    dg.bind();
+
+    //右键菜单点击事件
+    function menuHandler(item) {
+        if (item.id == "cmbtn_view") { ShowView(); }
+        if (item.id == "cmbtn_modfiNote") { ShowModfiNote(); }
+        else if (item.id == "cmbtn_synSet") { FactorySynSet(); }
+        else if (item.id == "cmbtn_sync") { FactorySync(); }         
+    }
+
+    //查看详细信息
+    function ShowView() {
+        AR.Utility.Window.open("SupplierEdit.html?isView=1", "供应商详细信息", 1);
+    }
+    //显示变更记录
+    function ShowModfiNote() {
+        AR.Utility.Window.open("SupplierModiNote.html", "变更记录", 1);
+    }
+    //工厂同步设置
+    function FactorySynSet() {
+        AR.Utility.Window.open("SupplierFactorySynSet.html", $('#cmbtn_synSet')[0].children[0].innerText, 1);
+    }
+    //工厂数据同步
+    function FactorySync() {
+        var row=dg.getSelected();
+        //调用一般存储过程的方法名:"Exec_SP",存储过程名,参数,回调函数,是否显示进度提示
+        AR.Utility.Ajax.post("Exec_SP", "sp_SupplierFactorySync", { rkey: row.rkey }, function (data) {
+            //返回信息: data.errorMsg 错误信息,data.rowcount 记录条数,data.rows 记录数组,data.success 是否成功,data.total 记录总数
+            if (data.success && (data.errorMsg == "" || data.errorMsg == "ok")) {
+                $.messager.alert("", AR.Lang.execSuccess, "info")
+            } else {
+                $.messager.alert("", data.errorMsg, "info")
+            }
+
+        }, true);
+    }
+
+    $(function () {
+        $('#cmbtn_view')[0].children[0].innerText = AR.Lang.cmbtn_view || "检查";
+        $('#cmbtn_modfiNote')[0].children[0].innerText = AR.Lang.cmbtn_modfiNote || "变更记录";
+        $('#cmbtn_synSet')[0].children[0].innerText=AR.Lang.factorySynSet || "工厂同步设置";
+        $('#cmbtn_sync')[0].children[0].innerText=AR.Lang.factorySync || "工厂数据同步";
+    });
+</script>
