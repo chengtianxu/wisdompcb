@@ -1,6 +1,6 @@
-二层/.svn/
-二层/dcu/
-二层/dcp/
+*/.svn/
+*/dcu/
+*/dcp/
 *.dcu
 *.exe
 *.ddp
