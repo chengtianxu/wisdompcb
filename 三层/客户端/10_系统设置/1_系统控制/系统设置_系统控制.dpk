@@ -1,0 +1,43 @@
+package 系统设置_系统控制;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr;
+
+contains
+  uEnterMod_25 in 'uEnterMod_25.pas',
+  MainFrm_Mod02 in '1_单位代码定义\MainFrm_Mod02.pas' {FrmMain_Mod02},
+  ReturnFrm_Mod02 in '1_单位代码定义\ReturnFrm_Mod02.pas' {FrmReturn_Mod02};
+
+end.

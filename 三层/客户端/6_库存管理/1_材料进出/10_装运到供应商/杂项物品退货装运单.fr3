@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.4.6" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="预设" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="42675.4415639468" ReportOptions.Description.Text="" ReportOptions.LastChange="42678.7261555903" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="frxdbdtst209" DataSetName="frxDBDataset1"/>
+    <item DataSet="frxdbdtst493" DataSetName="frxDBDataset2"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="宋体" Font.Style="0" Height="710.55164" Left="0" ParentFont="False" Top="18.89765" Width="718.1107">
+      <TfrxMemoView Name="frxDBDataset2Company_Name" Left="188.9765" Top="3.77953" Width="381.73253" Height="30.23624" DataField="Company_Name" DataSet="frxdbdtst493" DataSetName="frxDBDataset2" Font.Charset="1" Font.Color="0" Font.Height="-24" Font.Name="宋体" Font.Style="0" ParentFont="False" Text="[frxDBDataset2.&#34;Company_Name&#34;]"/>
+      <TfrxMemoView Name="Memo2" Left="321.26005" Top="45.35436" Width="75.5906" Height="18.89765" Font.Charset="1" Font.Color="0" Font.Height="-12" Font.Name="宋体" Font.Style="0" ParentFont="False" Text="退货装运单"/>
+      <TfrxPictureView Name="Picture1" Left="35.35436" Top="7.55906" Width="105.82684" Height="56.69295" DataField="Company_Icon" DataSet="frxdbdtst493" DataSetName="frxDBDataset2" HightQuality="False" Transparent="False" TransparentColor="16777215"/>
+      <TfrxMemoView Name="Memo3" Left="39.13389" Top="103.70872" Width="52.91342" Height="18.89765" Text="供应商:"/>
+      <TfrxMemoView Name="Memo4" Left="39.13389" Top="140.72449" Width="52.91342" Height="18.89765" Text="联系人:"/>
+      <TfrxMemoView Name="Memo5" Left="53.47248" Top="177.74026" Width="37.7953" Height="18.89765" Text="地址:"/>
+      <TfrxMemoView Name="Memo6" Left="100.3859" Top="103.70872" Width="279.68522" Height="18.89765" AutoWidth="True" DataField="供应商" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;供应商&#34;]"/>
+      <TfrxMemoView Name="Memo7" Left="100.3859" Top="140.72449" Width="207.87415" Height="18.89765" DataField="联系人" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;联系人&#34;]"/>
+      <TfrxMemoView Name="frxDBDataset1" Left="102.3859" Top="177.74026" Width="275.90569" Height="30.23624" DataField="地址" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;地址&#34;]"/>
+      <TfrxMemoView Name="Memo8" Left="449.52783" Top="140.72449" Width="37.7953" Height="18.89765" Text="电话:"/>
+      <TfrxMemoView Name="Memo9" Left="427.07112" Top="177.74026" Width="64.25201" Height="18.89765" Text="装运日期:"/>
+      <TfrxMemoView Name="Memo10" Left="494.00031" Top="140.72449" Width="211.65368" Height="18.89765" AutoWidth="True" DataField="联系电话" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;联系电话&#34;]"/>
+      <TfrxMemoView Name="Memo11" Left="494.00031" Top="177.74026" Width="211.65368" Height="18.89765" DataField="装运日期" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;装运日期&#34;]"/>
+      <TfrxMemoView Name="Memo12" Left="47.11812" Top="247.65368" Width="79.37013" Height="18.89765" Text="采购订单号:"/>
+      <TfrxMemoView Name="Memo13" Left="136.48825" Top="247.65368" Width="204.09462" Height="18.89765" DataField="采购订单号" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;采购订单号&#34;]"/>
+      <TfrxMemoView Name="Memo14" Left="61.45671" Top="286.7718" Width="64.25201" Height="18.89765" Text="要求日期:"/>
+      <TfrxMemoView Name="Memo15" Left="60.11812" Top="328.00804" Width="64.25201" Height="18.89765" Text="订购数量:"/>
+      <TfrxMemoView Name="Memo16" Left="60.11812" Top="370.24428" Width="64.25201" Height="18.89765" Text="物品名称:"/>
+      <TfrxMemoView Name="Memo17" Left="60.11812" Top="414.48052" Width="64.25201" Height="18.89765" Text="物品规格:"/>
+      <TfrxMemoView Name="Memo18" Left="44.11812" Top="456.71676" Width="79.37013" Height="18.89765" Text="已接收数量:"/>
+      <TfrxMemoView Name="Memo19" Left="61.45671" Top="497.953" Width="64.25201" Height="18.89765" Text="接收日期:"/>
+      <TfrxMemoView Name="Memo20" Left="61.45671" Top="541.18924" Width="64.25201" Height="18.89765" Text="退货数量:"/>
+      <TfrxMemoView Name="Memo21" Left="61.45671" Top="583.42548" Width="64.25201" Height="18.89765" Text="退货备注:"/>
+      <TfrxMemoView Name="Memo22" Left="426.85065" Top="246.53556" Width="64.25201" Height="18.89765" Text="入库单号:"/>
+      <TfrxMemoView Name="Memo23" Left="426.07112" Top="286.7718" Width="64.25201" Height="18.89765" Text="送货单号:"/>
+      <TfrxMemoView Name="Memo24" Left="426.07112" Top="328.00804" Width="64.25201" Height="18.89765" Text="物品类别:"/>
+      <TfrxMemoView Name="Memo25" Left="426.07112" Top="370.24428" Width="64.25201" Height="18.89765" Text="订购单位:"/>
+      <TfrxMemoView Name="Memo26" Left="386.39394" Top="414.48052" Width="105.82684" Height="18.89765" Text="接收单价(含税):"/>
+      <TfrxMemoView Name="Memo27" Left="386.39394" Top="456.71676" Width="105.82684" Height="18.89765" Text="退货金额(含税):"/>
+      <TfrxMemoView Name="Memo28" Left="426.63018" Top="497.953" Width="64.25201" Height="18.89765" Text="装运方法:"/>
+      <TfrxMemoView Name="Memo29" Left="427.07112" Top="541.18924" Width="64.25201" Height="18.89765" Text="装运人员:"/>
+      <TfrxMemoView Name="Memo30" Left="135.51979" Top="286.7718" Width="204.09462" Height="18.89765" DataField="要求日期" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;要求日期&#34;]"/>
+      <TfrxMemoView Name="Memo31" Left="135.51979" Top="328.00804" Width="204.09462" Height="18.89765" DataField="订购数量" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;订购数量&#34;]"/>
+      <TfrxMemoView Name="Memo32" Left="135.51979" Top="370.24428" Width="204.09462" Height="18.89765" DataField="物品名称" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;物品名称&#34;]"/>
+      <TfrxMemoView Name="Memo33" Left="135.51979" Top="414.48052" Width="204.09462" Height="34.01577" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;物品规格&#34;]                                           "/>
+      <TfrxMemoView Name="Memo34" Left="135.51979" Top="456.71676" Width="204.09462" Height="18.89765" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;已接收数量&#34;]"/>
+      <TfrxMemoView Name="Memo35" Left="135.51979" Top="497.953" Width="204.09462" Height="18.89765" DataField="接收日期" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;接收日期&#34;]"/>
+      <TfrxMemoView Name="Memo36" Left="135.51979" Top="541.18924" Width="204.09462" Height="18.89765" DataField="退货数量" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;退货数量&#34;]"/>
+      <TfrxMemoView Name="Memo37" Left="137.51979" Top="583.42548" Width="566.9295" Height="30.23624" AutoWidth="True" DataField="退货备注" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;退货备注&#34;]"/>
+      <TfrxMemoView Name="Memo38" Left="497.00031" Top="246.53556" Width="207.87415" Height="18.89765" DataField="入库单号" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;入库单号&#34;]"/>
+      <TfrxMemoView Name="Memo39" Left="497.00031" Top="286.7718" Width="207.87415" Height="18.89765" DataField="送货单号" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;送货单号&#34;]"/>
+      <TfrxMemoView Name="Memo40" Left="497.00031" Top="328.00804" Width="207.87415" Height="18.89765" AutoWidth="True" DataField="物品类别" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;物品类别&#34;]"/>
+      <TfrxMemoView Name="Memo41" Left="497.00031" Top="370.24428" Width="207.87415" Height="18.89765" DataField="订购单位" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;订购单位&#34;]"/>
+      <TfrxMemoView Name="Memo42" Left="497.00031" Top="414.48052" Width="207.87415" Height="18.89765" DataField="接收单价" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;接收单价&#34;]"/>
+      <TfrxMemoView Name="Memo43" Left="497.00031" Top="455.71676" Width="207.87415" Height="18.89765" DataField="退货金额" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;退货金额&#34;]"/>
+      <TfrxMemoView Name="Memo44" Left="497.00031" Top="497.953" Width="207.87415" Height="18.89765" DataField="装运方法" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;装运方法&#34;]"/>
+      <TfrxMemoView Name="Memo45" Left="497.00031" Top="541.18924" Width="207.87415" Height="18.89765" DataField="装运人员" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;装运人员&#34;]"/>
+    </TfrxReportTitle>
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="11.33859" Left="0" Top="789.92177" Width="718.1107" ColumnWidth="0" ColumnGap="0" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" RowCount="0"/>
+    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="宋体" Font.Style="0" Height="41.57483" Left="0" ParentFont="False" Top="861.73284" Width="718.1107">
+      <TfrxMemoView Name="Memo1" Left="642.5201" Top="0" Width="75.5906" Height="18.89765" HAlign="haRight" Text="[Page#]"/>
+      <TfrxMemoView Name="Memo46" Left="105.82684" Top="11.33859" Width="52.91342" Height="18.89765" Text="制单人:"/>
+      <TfrxMemoView Name="Memo47" Left="165.07885" Top="11.33859" Width="79.37013" Height="18.89765" DataField="退货人员" DataSet="frxdbdtst209" DataSetName="frxDBDataset1" Text="[frxDBDataset1.&#34;退货人员&#34;]"/>
+      <TfrxMemoView Name="Memo48" Left="300.3624" Top="11.33859" Width="52.91342" Height="18.89765" Text="退货人:"/>
+      <TfrxMemoView Name="Memo49" Left="494.57514" Top="11.33859" Width="52.91342" Height="18.89765" Text="签收人:"/>
+      <TfrxLineView Name="Line1" Left="357.39394" Top="29.45671" Width="83.14966" Height="0" Color="0" Frame.Typ="4"/>
+      <TfrxLineView Name="Line2" Left="551.82715" Top="29.45671" Width="83.14966" Height="0" Color="0" Frame.Typ="4"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

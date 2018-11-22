@@ -1,0 +1,484 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{723184BB-891C-4EF9-B927-D504F371D01E}</ProjectGuid>
+        <MainSource>库存管理_材料进出.dpk</MainSource>
+        <ProjectVersion>14.4</ProjectVersion>
+        <FrameworkType>VCL</FrameworkType>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Base)'=='true') or '$(Base_OSX32)'!=''">
+        <Base_OSX32>true</Base_OSX32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX32)'!=''">
+        <Cfg_2_OSX32>true</Cfg_2_OSX32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_UnitSearchPath>..\..\..\公共单元\dcp;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>2052</VerInfo_Locale>
+        <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
+        <DCC_BplOutput>D:\SJSYS\ERP_3_TIER</DCC_BplOutput>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <GenPackage>true</GenPackage>
+        <GenDll>true</GenDll>
+        <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
+        <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_E>false</DCC_E>
+        <DCC_N>false</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_UsePackage>vcl;frx17;frxADO17;frxBDE17;frxcs17;frxDB17;frxDBX17;frxe17;frxIBX17;fs17;fsADO17;fsBDE17;fsDB17;fsIBX17;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Build>4</VerInfo_Build>
+        <VerInfo_Release>2</VerInfo_Release>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.1.2.4;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Debugger_HostApplication>D:\SJSYS\ERP_3_TIER\MainApp.exe</Debugger_HostApplication>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_RemoteDebug>false</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
+        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="gsvrintf.dcp"/>
+        <DCCReference Include="gcommonfunc.dcp"/>
+        <DCCReference Include="glookupdm.dcp"/>
+        <DCCReference Include="gformclass.dcp"/>
+        <DCCReference Include="gcustomerctr.dcp"/>
+        <DCCReference Include="frx17.dcp"/>
+        <DCCReference Include="frxDB17.dcp"/>
+        <DCCReference Include="fs17.dcp"/>
+        <DCCReference Include="uEnterMod_20.pas"/>
+        <DCCReference Include="6_库存材料检查\MainFrm_Mod36.pas">
+            <Form>FrmMain_Mod36</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="6_库存材料检查\IQCFrm_Mod36.pas">
+            <Form>FrmIQC_Mod36</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="6_库存材料检查\BugFrm_Mod36.pas">
+            <Form>FrmBug_Mod36</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="7_退货给供应商(带采购单的生产物料)\MainFrm_Mod40.pas">
+            <Form>FrmMain_Mod40</Form>
+        </DCCReference>
+        <DCCReference Include="7_退货给供应商(带采购单的生产物料)\MainFrm_Mod41.pas">
+            <Form>FrmMain_Mod41</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="7_退货给供应商(带采购单的生产物料)\MainFrm_Mod352.pas">
+            <Form>FrmMain_Mod352</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="7_退货给供应商(带采购单的生产物料)\ReturnFrm_Mod40.pas">
+            <Form>FrmReturn_Mod40</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="7_退货给供应商(带采购单的生产物料)\DetailFrm_Mod40.pas">
+            <Form>FrmDetail_Mod40</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="7_退货给供应商(带采购单的生产物料)\DetailFrm_Mod352.pas">
+            <Form>FrmDetail_Mod352</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="7_退货给供应商(带采购单的生产物料)\MainFrm_ModAll.pas">
+            <Form>frmMain_Mod40Caller</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="10_装运到供应商\MainFrm_ModShipped.pas">
+            <Form>frmMain_Mod50Caller</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="10_装运到供应商\MainFrm_Mod50.pas">
+            <Form>FrmMain_Mod50</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="10_装运到供应商\MainFrm_Mod353.pas">
+            <Form>FrmMain_Mod353</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="10_装运到供应商\ReportFrm_Mod353.pas">
+            <Form>FrmReport_Mod353</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="10_装运到供应商\ReportFrm_Mod50.pas">
+            <Form>FrmReport_Mod50</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="10_装运到供应商\ShipFrm_Mod353.pas">
+            <Form>FrmShip_Mod353</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="10_装运到供应商\ShipFrm_Mod50.pas">
+            <Form>FrmShip_Mod50</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\Editchukushu.pas">
+            <Form>frmEditchukushu</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\Mainfrm_Mod564.pas">
+            <Form>frmMain_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\POruku_Mod564.pas">
+            <Form>frmPOruku_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\PoSearch_Mod564.pas">
+            <Form>frmPoSearch_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\SeleIQC.pas">
+            <Form>frmSeleIQC</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\SupplieReturnMX.pas">
+            <Form>frmSupplieReturnMX</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\Tree_Mod564.pas">
+            <Form>frmTree_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIchuku_Mod564.pas">
+            <Form>frmVMIchuku_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIchukushen_Mod564.pas">
+            <Form>frmVMIchukushen_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIQuery_Mod564.pas">
+            <Form>frmVMIQuery_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIruku_Mod564.pas">
+            <Form>frmVMIruku_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIrukuMX.pas">
+            <Form>frmVMIrukuMX</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIzhiruku.pas">
+            <Form>frmVMIzhiruku</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIzhishuru.pas">
+            <Form>frmVMIzhishuru</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\UAuditInfoFrm_Mod496.pas">
+            <Form>FrmAuditInfo_Mod496</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\UEditFrm_mod496.pas">
+            <Form>frmEdit_Mod496</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\UMainfrm_mod496.pas">
+            <Form>FrmMain_mod496</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\UMtlCheckFrm_mod496.pas">
+            <Form>frmMtlCheck</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\UReportFrm_mod496.pas">
+            <Form>frmReport_mod496</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\UReqDetailFrm_mod496.pas">
+            <Form>FrmReqDetail_mod496</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\USelAuditCodeFrm_mod496.pas">
+            <Form>FrmSelAuditCode</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\USelBomFrm_mod496.pas">
+            <Form>FrmSelBom_mod496</Form>
+        </DCCReference>
+        <DCCReference Include="3_生产领料申请\USelMtrlFrm_mod496.pas">
+            <Form>FrmSelMaterial_mod496</Form>
+        </DCCReference>
+        <DCCReference Include="4_工序领料审核\UAuditInfoFrm_Mod497.pas">
+            <Form>FrmAuditInfo_Mod497</Form>
+        </DCCReference>
+        <DCCReference Include="4_工序领料审核\UMainFrm_Mod497.pas">
+            <Form>FrmMain_Mod497</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38Caller.pas">
+            <Form>frmMain_Mod38Caller</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38OtherMtlOutToDept.pas">
+            <Form>frmMain_Mod38OtherMtlOutToDept</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38OutToBill.pas">
+            <Form>frmMain_Mod38OutToBill</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38OutToCheck.pas">
+            <Form>frmMain_Mod38OutToCheck</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38OutToDept.pas">
+            <Form>frmMain_Mod38OutToDept</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38OutToReq.pas">
+            <Form>frmMain_Mod38OutToReq</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38ReBackAndReprt.pas">
+            <Form>frmMain_Mod38ReBackAndReprt</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMainfrm_Mod38SendInfoForSafeQty.pas">
+            <Form>frmMain_Mod38SendInfoForSafeQty</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UMod38Common.pas"/>
+        <DCCReference Include="5_材料发放及退仓\UPutOutfrm_mod38.pas">
+            <Form>frmPutOut_mod38</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UReportFrm_mod38.pas">
+            <Form>frmReport_mod38</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UReportOtheFrm.pas">
+            <Form>frmReportOther_mod38</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\UReturnFrm_mod38.pas">
+            <Form>frmReturn_mod38</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\USel17Materialfrm_Mod38.pas">
+            <Form>frmSelMaterial_Mod38OutToDept</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\USel235Materialfrm_Mod38.pas">
+            <Form>frmSel235Material_Mod38</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\USel468MtlFrm_mod38.pas">
+            <Form>frmSel468Mtl_mod38</Form>
+        </DCCReference>
+        <DCCReference Include="5_材料发放及退仓\USendDetailFrm_mod38.pas">
+            <Form>frmSendDetail_mod38</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIrukuSummary.pas">
+            <Form>frmVMIrukuSummary</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIchukuMX.pas">
+            <Form>frmVMIchukuMX</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIchukuSummary.pas">
+            <Form>frmVMIchukuSummary</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\MVIkucunMX.pas">
+            <Form>frmMVIkucunMX</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIkucunSummary.pas">
+            <Form>frmVMIkucunSummary</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIStopNum_Mod564.pas">
+            <Form>frmVMIStopNum_Mod564</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIjieshuMX.pas">
+            <Form>frmVMIjieshuMX</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMIjieshuSummary.pas">
+            <Form>frmVMIjieshuSummary</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\Mainfrm_Mod33.pas">
+            <Form>frmMain_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\pasVMIpiciMX.pas">
+            <Form>frm_VMIpiciMX</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\POruku_Mod33.pas">
+            <Form>frmPOruku_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\PoSearch_Mod33.pas">
+            <Form>frmPoSearch_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\VMIrucang_mod33.pas">
+            <Form>frmVMIrucang_mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\Zazhiruku_Mod33.pas">
+            <Form>frmZazhiruku_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\Zazhishuru_Mod33.pas">
+            <Form>frmZazhishuru_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\zhishuru_Mod33.pas">
+            <Form>frmzhishuru_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\zhiruku_Mod33.pas">
+            <Form>frmzhiruku_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\EditRemark.pas">
+            <Form>frmEditRemark</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\PasshuReport_Mod564.pas">
+            <Form>frmshuReport_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\PasReport_Mod564.pas">
+            <Form>frmReport_Mod564</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\PasReport_mod33.pas">
+            <Form>frmReport_mod33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\JoinReport_mod33.pas">
+            <Form>frmJoinReport_mod33</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\PasVariousPrt_mod33.pas">
+            <Form>frmVariousPrt_mod33</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\PasCLoseOrders.pas">
+            <Form>frmCLoseOrders</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\SeleIQC_Mod33.pas">
+            <Form>frmSeleIQC_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\EditRemark_Mod564.pas">
+            <Form>frmEditRemark_Mod564</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\PasLogoCard_Rp33.pas">
+            <Form>frmLogoCard_Rp33</Form>
+        </DCCReference>
+        <DCCReference Include="2_按采购订单接收材料入仓\PasSetLocat_Mod33.pas">
+            <Form>frmSetLocat_Mod33</Form>
+        </DCCReference>
+        <DCCReference Include="1_供应商VMI库存管理\VMILogoCard_Mod564.pas">
+            <Form>frmVMILogoCard_Mod564</Form>
+        </DCCReference>
+        <None Include="ModelSupport_库存管理_材料进出\default.txaPackage"/>
+        <None Include="ModelSupport_库存管理_材料进出\default.txvpck"/>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">库存管理_材料进出.dpk</Source>
+                </Source>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">2052</VersionInfo>
+                    <VersionInfo Name="CodePage">936</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                    <VersionInfoKeys Name="CFBundleName"/>
+                    <VersionInfoKeys Name="CFBundleDisplayName"/>
+                    <VersionInfoKeys Name="CFBundleIdentifier"/>
+                    <VersionInfoKeys Name="CFBundleVersion"/>
+                    <VersionInfoKeys Name="CFBundlePackageType"/>
+                    <VersionInfoKeys Name="CFBundleSignature"/>
+                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
+                    <VersionInfoKeys Name="CFBundleExecutable"/>
+                </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDrivers170.bpl">Embarcadero Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversInt170.bpl">Embarcadero Intro Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginEnt170.bpl">DBExpress Enterprise Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversEnt170.bpl">Embarcadero Enterprise Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k170.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp170.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Deployment/>
+            <Platforms>
+                <Platform value="OSX32">False</Platform>
+                <Platform value="Win32">True</Platform>
+            </Platforms>
+            <ModelSupport>True</ModelSupport>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

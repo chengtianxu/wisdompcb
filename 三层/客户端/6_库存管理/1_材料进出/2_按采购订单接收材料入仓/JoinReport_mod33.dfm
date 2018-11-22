@@ -1,0 +1,181 @@
+inherited frmJoinReport_mod33: TfrmJoinReport_mod33
+  Caption = #36830#32493#25171#21360#20837#24211#21333
+  ClientHeight = 468
+  ClientWidth = 636
+  ExplicitHeight = 495
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlMain: TPanel
+    Width = 636
+    Height = 468
+    ExplicitLeft = 0
+    ExplicitTop = 0
+    ExplicitWidth = 636
+    ExplicitHeight = 468
+    inherited pnl1: TPanel
+      Width = 634
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 634
+      inherited btnSave: TBitBtn
+        Hint = #25171#21360
+        Caption = #25171#21360
+        Glyph.Data = {
+          26050000424D26050000000000003604000028000000100000000F0000000100
+          080000000000F000000000000000000000000001000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000C0DCC000F0C8
+          A400000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          000000000000000000000000000000000000F0FBFF00A4A0A000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00070707070707
+          0707070707070707070707070000000000000000000000070707070007070707
+          0707070707000700070700000000000000000000000000070007000707070707
+          07FBFBFB07070000000700070707070707101010070700070007000000000000
+          0000000000000007070000070707070707070707070007000700070000000000
+          00000000000700070000070700FFFFFFFFFFFFFFFF000700070007070700FF00
+          00000000FF000000000707070700FFFFFFFFFFFFFFFF000707070707070700FF
+          0000000000FF000707070707070700FFFFFFFFFFFFFFFF000707070707070700
+          00000000000000000707}
+        OnClick = btnSaveClick
+      end
+      inherited btnClose: TBitBtn
+        OnClick = btnCloseClick
+      end
+    end
+    inherited pnl2: TPanel
+      Width = 634
+      Height = 433
+      ExplicitLeft = 1
+      ExplicitTop = 34
+      ExplicitWidth = 634
+      ExplicitHeight = 433
+      object Label1: TLabel
+        Left = 34
+        Top = 16
+        Width = 123
+        Height = 13
+        Alignment = taRightJustify
+        Caption = ' '#36873#25321#38656#35201#25171#21360#30340#20837#20179#21333
+      end
+      object Label2: TLabel
+        Left = 368
+        Top = 17
+        Width = 96
+        Height = 13
+        Alignment = taRightJustify
+        Caption = #23558#35201#25171#21360#30340#20837#24211#21333
+      end
+      object SG1: TStringGrid
+        Left = 16
+        Top = 35
+        Width = 225
+        Height = 384
+        ColCount = 4
+        DefaultRowHeight = 20
+        FixedCols = 0
+        RowCount = 2
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect]
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ColWidths = (
+          130
+          74
+          44
+          40)
+      end
+      object Button1: TButton
+        Left = 264
+        Top = 174
+        Width = 75
+        Height = 37
+        Hint = #21333#20010#36873#20013
+        Caption = '------'#12297
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Left = 264
+        Top = 211
+        Width = 75
+        Height = 37
+        Hint = #20840#37096#36873#20013
+        Caption = '--'#12297#12297
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        OnClick = Button2Click
+      end
+      object Button3: TButton
+        Left = 264
+        Top = 248
+        Width = 75
+        Height = 37
+        Hint = #21333#20010#21462#28040
+        Caption = #12296'------'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 3
+        OnClick = Button3Click
+      end
+      object Button4: TButton
+        Left = 264
+        Top = 285
+        Width = 75
+        Height = 37
+        Hint = #20840#37096#21462#28040
+        Caption = #12296#12296'--'
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+        OnClick = Button4Click
+      end
+      object SG2: TStringGrid
+        Left = 360
+        Top = 35
+        Width = 226
+        Height = 384
+        ColCount = 4
+        DefaultRowHeight = 20
+        FixedCols = 0
+        RowCount = 2
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect]
+        ScrollBars = ssVertical
+        TabOrder = 5
+        ColWidths = (
+          128
+          92
+          44
+          42)
+      end
+    end
+  end
+end

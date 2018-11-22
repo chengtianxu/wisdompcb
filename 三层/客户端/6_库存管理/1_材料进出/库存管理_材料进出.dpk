@@ -1,0 +1,136 @@
+package 库存管理_材料进出;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr,
+  frx17,
+  frxDB17,
+  fs17;
+
+contains
+  uEnterMod_20 in 'uEnterMod_20.pas',
+  MainFrm_Mod36 in '6_库存材料检查\MainFrm_Mod36.pas' {FrmMain_Mod36},
+  IQCFrm_Mod36 in '6_库存材料检查\IQCFrm_Mod36.pas' {FrmIQC_Mod36},
+  BugFrm_Mod36 in '6_库存材料检查\BugFrm_Mod36.pas' {FrmBug_Mod36},
+  MainFrm_Mod40 in '7_退货给供应商(带采购单的生产物料)\MainFrm_Mod40.pas' {FrmMain_Mod40},
+  MainFrm_Mod41 in '7_退货给供应商(带采购单的生产物料)\MainFrm_Mod41.pas' {FrmMain_Mod41},
+  MainFrm_Mod352 in '7_退货给供应商(带采购单的生产物料)\MainFrm_Mod352.pas' {FrmMain_Mod352},
+  ReturnFrm_Mod40 in '7_退货给供应商(带采购单的生产物料)\ReturnFrm_Mod40.pas' {FrmReturn_Mod40},
+  DetailFrm_Mod40 in '7_退货给供应商(带采购单的生产物料)\DetailFrm_Mod40.pas' {FrmDetail_Mod40},
+  DetailFrm_Mod352 in '7_退货给供应商(带采购单的生产物料)\DetailFrm_Mod352.pas' {FrmDetail_Mod352},
+  MainFrm_ModAll in '7_退货给供应商(带采购单的生产物料)\MainFrm_ModAll.pas' {frmMain_Mod40Caller},
+  MainFrm_ModShipped in '10_装运到供应商\MainFrm_ModShipped.pas' {frmMain_Mod50Caller},
+  MainFrm_Mod50 in '10_装运到供应商\MainFrm_Mod50.pas' {FrmMain_Mod50},
+  MainFrm_Mod353 in '10_装运到供应商\MainFrm_Mod353.pas' {FrmMain_Mod353},
+  ReportFrm_Mod353 in '10_装运到供应商\ReportFrm_Mod353.pas' {FrmReport_Mod353},
+  ReportFrm_Mod50 in '10_装运到供应商\ReportFrm_Mod50.pas' {FrmReport_Mod50},
+  ShipFrm_Mod353 in '10_装运到供应商\ShipFrm_Mod353.pas' {FrmShip_Mod353},
+  ShipFrm_Mod50 in '10_装运到供应商\ShipFrm_Mod50.pas' {FrmShip_Mod50},
+  Editchukushu in '1_供应商VMI库存管理\Editchukushu.pas' {frmEditchukushu},
+  Mainfrm_Mod564 in '1_供应商VMI库存管理\Mainfrm_Mod564.pas' {frmMain_Mod564},
+  POruku_Mod564 in '1_供应商VMI库存管理\POruku_Mod564.pas' {frmPOruku_Mod564},
+  PoSearch_Mod564 in '1_供应商VMI库存管理\PoSearch_Mod564.pas' {frmPoSearch_Mod564},
+  SeleIQC in '1_供应商VMI库存管理\SeleIQC.pas' {frmSeleIQC},
+  SupplieReturnMX in '1_供应商VMI库存管理\SupplieReturnMX.pas' {frmSupplieReturnMX},
+  Tree_Mod564 in '1_供应商VMI库存管理\Tree_Mod564.pas' {frmTree_Mod564},
+  VMIchuku_Mod564 in '1_供应商VMI库存管理\VMIchuku_Mod564.pas' {frmVMIchuku_Mod564},
+  VMIchukushen_Mod564 in '1_供应商VMI库存管理\VMIchukushen_Mod564.pas' {frmVMIchukushen_Mod564},
+  VMIQuery_Mod564 in '1_供应商VMI库存管理\VMIQuery_Mod564.pas' {frmVMIQuery_Mod564},
+  VMIruku_Mod564 in '1_供应商VMI库存管理\VMIruku_Mod564.pas' {frmVMIruku_Mod564},
+  VMIrukuMX in '1_供应商VMI库存管理\VMIrukuMX.pas' {frmVMIrukuMX},
+  VMIzhiruku in '1_供应商VMI库存管理\VMIzhiruku.pas' {frmVMIzhiruku},
+  VMIzhishuru in '1_供应商VMI库存管理\VMIzhishuru.pas' {frmVMIzhishuru},
+  UAuditInfoFrm_Mod496 in '3_生产领料申请\UAuditInfoFrm_Mod496.pas' {FrmAuditInfo_Mod496},
+  UEditFrm_mod496 in '3_生产领料申请\UEditFrm_mod496.pas' {frmEdit_Mod496},
+  UMainfrm_mod496 in '3_生产领料申请\UMainfrm_mod496.pas' {FrmMain_mod496},
+  UMtlCheckFrm_mod496 in '3_生产领料申请\UMtlCheckFrm_mod496.pas' {frmMtlCheck},
+  UReportFrm_mod496 in '3_生产领料申请\UReportFrm_mod496.pas' {frmReport_mod496},
+  UReqDetailFrm_mod496 in '3_生产领料申请\UReqDetailFrm_mod496.pas' {FrmReqDetail_mod496},
+  USelAuditCodeFrm_mod496 in '3_生产领料申请\USelAuditCodeFrm_mod496.pas' {FrmSelAuditCode},
+  USelBomFrm_mod496 in '3_生产领料申请\USelBomFrm_mod496.pas' {FrmSelBom_mod496},
+  USelMtrlFrm_mod496 in '3_生产领料申请\USelMtrlFrm_mod496.pas' {FrmSelMaterial_mod496},
+  UAuditInfoFrm_Mod497 in '4_工序领料审核\UAuditInfoFrm_Mod497.pas' {FrmAuditInfo_Mod497},
+  UMainFrm_Mod497 in '4_工序领料审核\UMainFrm_Mod497.pas' {FrmMain_Mod497},
+  UMainfrm_Mod38Caller in '5_材料发放及退仓\UMainfrm_Mod38Caller.pas' {frmMain_Mod38Caller},
+  UMainfrm_Mod38OtherMtlOutToDept in '5_材料发放及退仓\UMainfrm_Mod38OtherMtlOutToDept.pas' {frmMain_Mod38OtherMtlOutToDept},
+  UMainfrm_Mod38OutToBill in '5_材料发放及退仓\UMainfrm_Mod38OutToBill.pas' {frmMain_Mod38OutToBill},
+  UMainfrm_Mod38OutToCheck in '5_材料发放及退仓\UMainfrm_Mod38OutToCheck.pas' {frmMain_Mod38OutToCheck},
+  UMainfrm_Mod38OutToDept in '5_材料发放及退仓\UMainfrm_Mod38OutToDept.pas' {frmMain_Mod38OutToDept},
+  UMainfrm_Mod38OutToReq in '5_材料发放及退仓\UMainfrm_Mod38OutToReq.pas' {frmMain_Mod38OutToReq},
+  UMainfrm_Mod38ReBackAndReprt in '5_材料发放及退仓\UMainfrm_Mod38ReBackAndReprt.pas' {frmMain_Mod38ReBackAndReprt},
+  UMainfrm_Mod38SendInfoForSafeQty in '5_材料发放及退仓\UMainfrm_Mod38SendInfoForSafeQty.pas' {frmMain_Mod38SendInfoForSafeQty},
+  UMod38Common in '5_材料发放及退仓\UMod38Common.pas',
+  UPutOutfrm_mod38 in '5_材料发放及退仓\UPutOutfrm_mod38.pas' {frmPutOut_mod38},
+  UReportFrm_mod38 in '5_材料发放及退仓\UReportFrm_mod38.pas' {frmReport_mod38},
+  UReportOtheFrm in '5_材料发放及退仓\UReportOtheFrm.pas' {frmReportOther_mod38},
+  UReturnFrm_mod38 in '5_材料发放及退仓\UReturnFrm_mod38.pas' {frmReturn_mod38},
+  USel17Materialfrm_Mod38 in '5_材料发放及退仓\USel17Materialfrm_Mod38.pas' {frmSelMaterial_Mod38OutToDept},
+  USel235Materialfrm_Mod38 in '5_材料发放及退仓\USel235Materialfrm_Mod38.pas' {frmSel235Material_Mod38},
+  USel468MtlFrm_mod38 in '5_材料发放及退仓\USel468MtlFrm_mod38.pas' {frmSel468Mtl_mod38},
+  USendDetailFrm_mod38 in '5_材料发放及退仓\USendDetailFrm_mod38.pas' {frmSendDetail_mod38},
+  VMIrukuSummary in '1_供应商VMI库存管理\VMIrukuSummary.pas' {frmVMIrukuSummary},
+  VMIchukuMX in '1_供应商VMI库存管理\VMIchukuMX.pas' {frmVMIchukuMX},
+  VMIchukuSummary in '1_供应商VMI库存管理\VMIchukuSummary.pas' {frmVMIchukuSummary},
+  MVIkucunMX in '1_供应商VMI库存管理\MVIkucunMX.pas' {frmMVIkucunMX},
+  VMIkucunSummary in '1_供应商VMI库存管理\VMIkucunSummary.pas' {frmVMIkucunSummary},
+  VMIStopNum_Mod564 in '1_供应商VMI库存管理\VMIStopNum_Mod564.pas' {frmVMIStopNum_Mod564},
+  VMIjieshuMX in '1_供应商VMI库存管理\VMIjieshuMX.pas' {frmVMIjieshuMX},
+  VMIjieshuSummary in '1_供应商VMI库存管理\VMIjieshuSummary.pas' {frmVMIjieshuSummary},
+  Mainfrm_Mod33 in '2_按采购订单接收材料入仓\Mainfrm_Mod33.pas' {frmMain_Mod33},
+  pasVMIpiciMX in '2_按采购订单接收材料入仓\pasVMIpiciMX.pas' {frm_VMIpiciMX},
+  POruku_Mod33 in '2_按采购订单接收材料入仓\POruku_Mod33.pas' {frmPOruku_Mod33},
+  PoSearch_Mod33 in '2_按采购订单接收材料入仓\PoSearch_Mod33.pas' {frmPoSearch_Mod33},
+  VMIrucang_mod33 in '2_按采购订单接收材料入仓\VMIrucang_mod33.pas' {frmVMIrucang_mod33},
+  Zazhiruku_Mod33 in '2_按采购订单接收材料入仓\Zazhiruku_Mod33.pas' {frmZazhiruku_Mod33},
+  Zazhishuru_Mod33 in '2_按采购订单接收材料入仓\Zazhishuru_Mod33.pas' {frmZazhishuru_Mod33},
+  zhishuru_Mod33 in '2_按采购订单接收材料入仓\zhishuru_Mod33.pas' {frmzhishuru_Mod33},
+  zhiruku_Mod33 in '2_按采购订单接收材料入仓\zhiruku_Mod33.pas' {frmzhiruku_Mod33},
+  EditRemark in '2_按采购订单接收材料入仓\EditRemark.pas' {frmEditRemark},
+  PasshuReport_Mod564 in '1_供应商VMI库存管理\PasshuReport_Mod564.pas' {frmshuReport_Mod564},
+  PasReport_Mod564 in '1_供应商VMI库存管理\PasReport_Mod564.pas' {frmReport_Mod564},
+  PasReport_mod33 in '2_按采购订单接收材料入仓\PasReport_mod33.pas' {frmReport_mod33},
+  JoinReport_mod33 in '2_按采购订单接收材料入仓\JoinReport_mod33.pas' {frmJoinReport_mod33},
+  PasVariousPrt_mod33 in '2_按采购订单接收材料入仓\PasVariousPrt_mod33.pas' {frmVariousPrt_mod33},
+  PasCLoseOrders in '2_按采购订单接收材料入仓\PasCLoseOrders.pas' {frmCLoseOrders},
+  SeleIQC_Mod33 in '2_按采购订单接收材料入仓\SeleIQC_Mod33.pas' {frmSeleIQC_Mod33},
+  EditRemark_Mod564 in '1_供应商VMI库存管理\EditRemark_Mod564.pas' {frmEditRemark_Mod564},
+  PasLogoCard_Rp33 in '2_按采购订单接收材料入仓\PasLogoCard_Rp33.pas' {frmLogoCard_Rp33},
+  PasSetLocat_Mod33 in '2_按采购订单接收材料入仓\PasSetLocat_Mod33.pas' {frmSetLocat_Mod33},
+  VMILogoCard_Mod564 in '1_供应商VMI库存管理\VMILogoCard_Mod564.pas' {frmVMILogoCard_Mod564};
+
+end.
+
+
+
+

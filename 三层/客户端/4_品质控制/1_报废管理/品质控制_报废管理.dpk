@@ -1,0 +1,76 @@
+package 品质控制_报废管理;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr,
+  frx17,
+  frxDB17,
+  fs17;
+
+contains
+  uEnterMod_13 in 'uEnterMod_13.pas',
+  Mainfrm_Mod705CheckMrg in '2_QC检测记录\Mainfrm_Mod705CheckMrg.pas' {FrmMain_Mod705CheckMrg},
+  BaseCheck_Mod705 in '2_QC检测记录\BaseCheck_Mod705.pas' {frmBaseCheck_Mod705},
+  CheckMrg_705FQC2 in '2_QC检测记录\2厂FQC检测\CheckMrg_705FQC2.pas' {FrmCheckMrg_705FQC2},
+  CheckMrg_705FQC1 in '2_QC检测记录\1厂FQC检测\CheckMrg_705FQC1.pas' {FrmCheckMrg_705FQC1},
+  AddTypeFrm_Mod664 in '1_IQC检测报告\AddTypeFrm_Mod664.pas' {frmAddType_Mod664},
+  DetailFrm_Mod664 in '1_IQC检测报告\DetailFrm_Mod664.pas' {frmDetail_Mod664},
+  MainFrm_Mod664 in '1_IQC检测报告\MainFrm_Mod664.pas' {frmMain_Mod664},
+  MeasureEditFrm_Mod664 in '1_IQC检测报告\MeasureEditFrm_Mod664.pas' {frmMeasureEdit_Mod664},
+  MeasureFrm_Mod664 in '1_IQC检测报告\MeasureFrm_Mod664.pas' {frmMeasure_Mod664},
+  PoSearchFrm_Mod664 in '1_IQC检测报告\PoSearchFrm_Mod664.pas' {frmPoSearch_Mod664},
+  ReportBindFrm_Mod664 in '1_IQC检测报告\ReportBindFrm_Mod664.pas' {frmReportBind_Mod664},
+  ReportFrm_Mod664 in '1_IQC检测报告\ReportFrm_Mod664.pas' {frmReport_Mod664},
+  Check_705Electron1 in '2_QC检测记录\1厂电测\Check_705Electron1.pas' {frmCheck_705Eelctron1},
+  Check_705Electron2 in '2_QC检测记录\2厂电测\Check_705Electron2.pas' {FrmCheck_705Electron2},
+  CheckMrg_705InnerAOI1 in '2_QC检测记录\1厂内层AOI\CheckMrg_705InnerAOI1.pas' {FrmCheckMrg_705InnerAOI1},
+  CheckMrg_705OuterAOI1 in '2_QC检测记录\1厂外层AOI\CheckMrg_705OuterAOI1.pas' {FrmCheckMrg_705OuterAOI1},
+  CheckMrg_705SecOuterAOI2 in '2_QC检测记录\2厂次外层AOI\CheckMrg_705SecOuterAOI2.pas' {FrmCheckMrg_705SecOuterAOI2},
+  CheckMrg_705InnerAOI2 in '2_QC检测记录\2厂内层AOI\CheckMrg_705InnerAOI2.pas' {FrmCheckMrg_705InnerAOI2},
+  CheckMrg_705OuterAOI2 in '2_QC检测记录\2厂外层AOI\CheckMrg_705OuterAOI2.pas' {FrmCheckMrg_705OuterAOI2},
+  CheckModeledit_705 in '2_QC检测记录\CheckModeledit_705.pas' {frmCheckModeledit_705},
+  CheckRecordMrg_705 in '2_QC检测记录\CheckRecordMrg_705.pas' {FrmCheckRecordMrg_705},
+  CheckRecordReport_705 in '2_QC检测记录\CheckRecordReport_705.pas' {FrmCheckRecordReport_705},
+  ElecCheckEdit_705 in '2_QC检测记录\ElecCheckEdit_705.pas' {frmElecCheckEdit_705},
+  FQCCheckRecordEdit_705 in '2_QC检测记录\FQCCheckRecordEdit_705.pas' {FrmFQCCheckRecordEdit_705},
+  PassNumber_Mod709 in '3_QC生产管控\1流转管控\PassNumber_Mod709.pas' {frmPassNumber_Mod709},
+  SetPassNum_Mod709 in '3_QC生产管控\1流转管控\SetPassNum_Mod709.pas' {frmSetPassNum_Mod709},
+  ReasonFrm_Mod664 in '1_IQC检测报告\ReasonFrm_Mod664.pas' {frmReason_Mod664},
+  BadRecordFrm_Mod664 in '1_IQC检测报告\BadRecordFrm_Mod664.pas' {frmBadRecord_Mod664},
+  BadDetail_Mod664 in '1_IQC检测报告\BadDetail_Mod664.pas' {FrmBadDetail_Mod664},
+  AOICheckRecordEdit_705 in '2_QC检测记录\AOICheckRecordEdit_705.pas' {FrmAOICheckRecordEdit_705},
+  PasSPCText_mod711 in '4_SPC检测记录\PasSPCText_mod711.pas' {frmSPCText_mod711},
+  SPCRecord_mod711 in '4_SPC检测记录\SPCRecord_mod711.pas' {frmSPCRecord_mod711};
+
+end.

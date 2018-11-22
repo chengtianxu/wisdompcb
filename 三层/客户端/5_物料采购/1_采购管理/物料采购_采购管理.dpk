@@ -1,0 +1,88 @@
+package 物料采购_采购管理;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr,
+  VclSmp,
+  frx17,
+  frxDB17,
+  fs17;
+
+contains
+  uEnterMod_17 in 'uEnterMod_17.pas',
+  MainFrm_Mod29OrderManager in '采购单管理\MainFrm_Mod29OrderManager.pas' {frmMain_Mod29OrderManager},
+  DetailFrm_Mod29 in '采购单管理\DetailFrm_Mod29.pas' {frmDetail_Mod29},
+  INVTSFrm_Mod29 in '采购单管理\INVTSFrm_Mod29.pas' {frmINVTS_Mod29},
+  MiscEx_Mod29 in '采购单管理\MiscEx_Mod29.pas' {frmMiscEx_Mod29},
+  TaxFrm_Mod29 in '采购单管理\TaxFrm_Mod29.pas' {frmTax_Mod29},
+  SupplierFrm_Mod29 in '采购单管理\SupplierFrm_Mod29.pas' {frmSupplier_Mode29},
+  INVTMFrm_Mod29 in '采购单管理\INVTMFrm_Mod29.pas' {frmINVTM_Mod29},
+  ImportFrm_Mod29 in '采购单管理\ImportFrm_Mod29.pas' {frmImport_Mod29},
+  AuthMsgFrm_Mod29 in '采购单管理\AuthMsgFrm_Mod29.pas' {frmAuthMsg_Mod29},
+  RecMsgFrm_Mod29 in '采购单管理\RecMsgFrm_Mod29.pas' {frmRecMsg_Mod29},
+  ChangLogFrm_Mod29 in '采购单管理\ChangLogFrm_Mod29.pas' {frmChangLog_Mod29},
+  SupplierMsgFrm_Mod29 in '采购单管理\SupplierMsgFrm_Mod29.pas' {frmSupplierMsg_Mod29},
+  CommFrm_Mod29 in '采购单管理\CommFrm_Mod29.pas' {frmComm_Mod29},
+  EdtReqDateFrm_Mod29 in '采购单管理\EdtReqDateFrm_Mod29.pas' {frmEdtReqDate_Mod29},
+  DateFrm_Mod29 in '采购单管理\DateFrm_Mod29.pas' {frmDate_Mod29},
+  NoteFrm_Mod29 in '采购单管理\NoteFrm_Mod29.pas' {frmNote_Mod29},
+  ReportSFrm_Mod29 in '采购单管理\ReportSFrm_Mod29.pas' {frmReportS_Mod29},
+  Mainfrm_Mod280 in '开请购单\Mainfrm_Mod280.pas' {frmMain_Mod280},
+  EditDetail_Mod280 in '开请购单\EditDetail_Mod280.pas' {frmDetailEdit_Mod280},
+  Editfrm_Mod280 in '开请购单\Editfrm_Mod280.pas' {frmEdit_mod280},
+  AuthInfo_Mod280 in '开请购单\AuthInfo_Mod280.pas' {FrmAuthInfo_Mod280},
+  EditDetailZx_Mod280 in '开请购单\EditDetailZx_Mod280.pas' {frmZxDetailEdit_Mod280},
+  MaterZt_Mod280 in '开请购单\MaterZt_Mod280.pas' {frmMaterZt_Mod280},
+  ReportMFrm_Mod29 in '采购单管理\ReportMFrm_Mod29.pas' {frmReportM_Mod29},
+  MultiPrintFrm_Mod29 in '采购单管理\MultiPrintFrm_Mod29.pas' {frmMultiPrint_Mod29},
+  MainFrm_Mod30OrderAuth in '采购单审核\MainFrm_Mod30OrderAuth.pas' {frmMain_Mod30OrderAuth},
+  MatStock_Mod280 in '开请购单\MatStock_Mod280.pas' {frmMatStock_Mod280},
+  HistoryRq_Mod280 in '开请购单\HistoryRq_Mod280.pas' {frmHistoryRq_Mod280},
+  QrySupp_Mod280 in '开请购单\QrySupp_Mod280.pas' {frmQrySupp_Mod280},
+  RecInf_Mode280 in '开请购单\RecInf_Mode280.pas' {frmRecInf_Mod280},
+  EditDetail_Mod27 in '开请购单\EditDetail_Mod27.pas' {frmEditDetail_Mod27},
+  EditDetailZx_Mod27 in '开请购单\EditDetailZx_Mod27.pas' {frmEditDetailZx_Mod27},
+  HisPriceZx_Mod27 in '开请购单\HisPriceZx_Mod27.pas' {frmHisPriceZx_Mod27},
+  HisPrice_Mod27 in '开请购单\HisPrice_Mod27.pas' {frmHisPrice_Mod27},
+  Remark_Mod280 in '开请购单\Remark_Mod280.pas' {frmRemark_Mod280},
+  BugetDel_Mod27 in '开请购单\BugetDel_Mod27.pas' {frmBugetDel_Mod27},
+  OutOfDateFrm_Mod29 in '采购单管理\OutOfDateFrm_Mod29.pas' {frmOutOfDay_Mod29},
+  CodeFrm_Mod280 in '开请购单\CodeFrm_Mod280.pas' {frmCode_Mod280};
+
+//  RecInf_Mode280 in '开请购单\RecInf_Mode280.pas' {frmRecInf_Mod280},
+//  MatStock_Mod280 in '开请购单\MatStock_Mod280.pas' {frmMatStock_Mod280},
+//  QrySupp_Mod280 in '开请购单\QrySupp_Mod280.pas' {frmQrySupp_Mod280};
+
+
+end.

@@ -1,0 +1,47 @@
+package 品质控制_数据查询;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr,
+  frx17,
+  frxDB17,
+  fs17;
+
+contains
+  UEnterMod_15 in 'UEnterMod_15.pas',
+  MainFrm_Mod725 in '1_ID码数据查询\MainFrm_Mod725.pas' {frmMain_Mod725},
+  QryItemFrm_Mod725 in '1_ID码数据查询\QryItemFrm_Mod725.pas' {frmQryItem_Mod725},
+  ReportFrm_Mod725 in '1_ID码数据查询\ReportFrm_Mod725.pas' {frmReport_Mod725};
+
+end.

@@ -1,0 +1,319 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D2A9D5B1-41E9-4AAC-8509-C2A53EF8DA74}</ProjectGuid>
+        <MainSource>物料采购_采购管理.dpk</MainSource>
+        <ProjectVersion>14.4</ProjectVersion>
+        <FrameworkType>VCL</FrameworkType>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Base)'=='true') or '$(Base_OSX32)'!=''">
+        <Base_OSX32>true</Base_OSX32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX32)'!=''">
+        <Cfg_2_OSX32>true</Cfg_2_OSX32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>2052</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_UnitSearchPath>..\..\..\公共单元\dcp;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
+        <DCC_BplOutput>D:\SJSYS\ERP_3_TIER</DCC_BplOutput>
+        <GenDll>true</GenDll>
+        <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
+        <GenPackage>true</GenPackage>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_E>false</DCC_E>
+        <DCC_N>false</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <DCC_UsePackage>rtl;dsnap;dbrtl;DbxCommonDriver;DataSnapClient;DataSnapCommon;DbxClientDriver;CustomIPTransport;dbexpress;dbxcds;IndyIPClient;IndyIPCommon;IndySystem;IndyProtocols;IndyCore;xmlrtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_UsePackage>rtl;dsnap;dbrtl;DbxCommonDriver;DataSnapClient;DataSnapCommon;DbxClientDriver;CustomIPTransport;dbexpress;dbxcds;IndyIPClient;IndyIPCommon;IndySystem;IndyProtocols;IndyCore;gSvrIntf;vcl;xmlrtl;vcldb;RaizeComponentsVcl;RaizeComponentsVclDb;EhLib170;gCommonFunc;gFormClass;adortl;gLookupDM;gCustomerCtr;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_UsePackage>rtl;dsnap;dbrtl;DbxCommonDriver;DataSnapClient;DataSnapCommon;DbxClientDriver;CustomIPTransport;dbexpress;dbxcds;IndyIPClient;IndyIPCommon;IndySystem;IndyProtocols;IndyCore;vcl;xmlrtl;vcldb;RaizeComponentsVcl;RaizeComponentsVclDb;EhLib170;adortl;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Release>3</VerInfo_Release>
+        <VerInfo_Keys>CompanyName=锌智泉;FileDescription=;FileVersion=1.0.3.1;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Debugger_HostApplication>D:\SJSYS\ERP_3_TIER\ERPLauncher.exe</Debugger_HostApplication>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_RemoteDebug>false</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
+        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="gsvrintf.dcp"/>
+        <DCCReference Include="gcommonfunc.dcp"/>
+        <DCCReference Include="glookupdm.dcp"/>
+        <DCCReference Include="gformclass.dcp"/>
+        <DCCReference Include="gcustomerctr.dcp"/>
+        <DCCReference Include="VclSmp.dcp"/>
+        <DCCReference Include="frx17.dcp"/>
+        <DCCReference Include="frxDB17.dcp"/>
+        <DCCReference Include="fs17.dcp"/>
+        <DCCReference Include="uEnterMod_17.pas"/>
+        <DCCReference Include="采购单管理\MainFrm_Mod29OrderManager.pas">
+            <Form>frmMain_Mod29OrderManager</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\DetailFrm_Mod29.pas">
+            <Form>frmDetail_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\INVTSFrm_Mod29.pas">
+            <Form>frmINVTS_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\MiscEx_Mod29.pas">
+            <Form>frmMiscEx_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\TaxFrm_Mod29.pas">
+            <Form>frmTax_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\SupplierFrm_Mod29.pas">
+            <Form>frmSupplier_Mode29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\INVTMFrm_Mod29.pas">
+            <Form>frmINVTM_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\ImportFrm_Mod29.pas">
+            <Form>frmImport_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\AuthMsgFrm_Mod29.pas">
+            <Form>frmAuthMsg_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\RecMsgFrm_Mod29.pas">
+            <Form>frmRecMsg_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\ChangLogFrm_Mod29.pas">
+            <Form>frmChangLog_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\SupplierMsgFrm_Mod29.pas">
+            <Form>frmSupplierMsg_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\CommFrm_Mod29.pas">
+            <Form>frmComm_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\EdtReqDateFrm_Mod29.pas">
+            <Form>frmEdtReqDate_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\DateFrm_Mod29.pas">
+            <Form>frmDate_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\NoteFrm_Mod29.pas">
+            <Form>frmNote_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\ReportSFrm_Mod29.pas">
+            <Form>frmReportS_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\Mainfrm_Mod280.pas">
+            <Form>frmMain_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\EditDetail_Mod280.pas">
+            <Form>frmDetailEdit_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\Editfrm_Mod280.pas">
+            <Form>frmEdit_mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\AuthInfo_Mod280.pas">
+            <Form>FrmAuthInfo_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\EditDetailZx_Mod280.pas">
+            <Form>frmZxDetailEdit_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\MaterZt_Mod280.pas">
+            <Form>frmMaterZt_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\ReportMFrm_Mod29.pas">
+            <Form>frmReportM_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\MultiPrintFrm_Mod29.pas">
+            <Form>frmMultiPrint_Mod29</Form>
+        </DCCReference>
+        <DCCReference Include="采购单审核\MainFrm_Mod30OrderAuth.pas">
+            <Form>frmMain_Mod30OrderAuth</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="开请购单\MatStock_Mod280.pas">
+            <Form>frmMatStock_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\HistoryRq_Mod280.pas">
+            <Form>frmHistoryRq_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\QrySupp_Mod280.pas">
+            <Form>frmQrySupp_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\RecInf_Mode280.pas">
+            <Form>frmRecInf_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\EditDetail_Mod27.pas">
+            <Form>frmEditDetail_Mod27</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\EditDetailZx_Mod27.pas">
+            <Form>frmEditDetailZx_Mod27</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\HisPriceZx_Mod27.pas">
+            <Form>frmHisPriceZx_Mod27</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\HisPrice_Mod27.pas">
+            <Form>frmHisPrice_Mod27</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\Remark_Mod280.pas">
+            <Form>frmRemark_Mod280</Form>
+        </DCCReference>
+        <DCCReference Include="开请购单\BugetDel_Mod27.pas">
+            <Form>frmBugetDel_Mod27</Form>
+        </DCCReference>
+        <DCCReference Include="采购单管理\OutOfDateFrm_Mod29.pas">
+            <Form>frmOutOfDay_Mod29</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="开请购单\CodeFrm_Mod280.pas">
+            <Form>frmCode_Mod280</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">物料采购_采购管理.dpk</Source>
+                </Source>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">2052</VersionInfo>
+                    <VersionInfo Name="CodePage">936</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                    <VersionInfoKeys Name="CFBundleName"/>
+                    <VersionInfoKeys Name="CFBundleDisplayName"/>
+                    <VersionInfoKeys Name="CFBundleIdentifier"/>
+                    <VersionInfoKeys Name="CFBundleVersion"/>
+                    <VersionInfoKeys Name="CFBundlePackageType"/>
+                    <VersionInfoKeys Name="CFBundleSignature"/>
+                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
+                    <VersionInfoKeys Name="CFBundleExecutable"/>
+                </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDrivers170.bpl">Embarcadero Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPlugin170.bpl">DBExpress Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k170.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp170.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversInt170.bpl">Embarcadero Intro Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginEnt170.bpl">DBExpress Enterprise Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversEnt170.bpl">Embarcadero Enterprise Driver Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Deployment/>
+            <Platforms>
+                <Platform value="OSX32">False</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

@@ -1,0 +1,67 @@
+package 物料采购_基础数据;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr,
+  VclSmp;
+
+contains
+  uEnterMod_19 in 'uEnterMod_19.pas',
+  MainFrm_Mod63 in '供应商信息管理\MainFrm_Mod63.pas' {FrmMain_Mod63},
+  DetailFrm_Mod63 in '供应商信息管理\DetailFrm_Mod63.pas' {FrmDetail_Mod63},
+  SelectedFrm_Mod63 in '供应商信息管理\SelectedFrm_Mod63.pas' {FrmSelected_Mod63},
+  PurBugetFrmMain_mod25 in '请购需求预算\PurBugetFrmMain_mod25.pas' {frmMainPurBuget_Mod25},
+  auditFLowMainFrm_mod67 in '审批流程定义\auditFLowMainFrm_mod67.pas' {frmMainAuditFLow_mod67},
+  PurAuditMainFrm_mod274 in '采购审批授权定义\PurAuditMainFrm_mod274.pas' {frmMainPurAudit_mod274},
+  AuditAuthMainFrm_mod315 in '审批授权\AuditAuthMainFrm_mod315.pas' {frmMainAuditAuth_mod315},
+  OtherMtrlTypeMainFrm_mod278 in '杂项物品类别\OtherMtrlTypeMainFrm_mod278.pas' {frmMainOtherMtrlType_mod278},
+  EditFrm_mod25 in '请购需求预算\EditFrm_mod25.pas' {frmEdit_mod25},
+  SelUserFrm_mod25 in '请购需求预算\SelUserFrm_mod25.pas' {FrmSelUser_mod25},
+  editFrm_mod67 in '审批流程定义\editFrm_mod67.pas' {frmedit_mod67},
+  SelUserFrm_mod67 in '审批流程定义\SelUserFrm_mod67.pas' {frmSelUser_mod67},
+  editFrm_mod274 in '采购审批授权定义\editFrm_mod274.pas' {frmEdit_mod274},
+  editFrm_mod278 in '杂项物品类别\editFrm_mod278.pas' {frmEdit_mod278},
+  SelUserFrm_mod315 in '审批授权\SelUserFrm_mod315.pas' {frmSelUser_mod315},
+  ChangeRecFrm_mod26 in '供应商价格\ChangeRecFrm_mod26.pas' {frmChangeRec_mod26},
+  ChangQryFrm_mod26 in '供应商价格\ChangQryFrm_mod26.pas' {frmChangQry_mod26},
+  editFrm_mod26 in '供应商价格\editFrm_mod26.pas' {frmEdit_mod26},
+  MainFrm_mod26 in '供应商价格\MainFrm_mod26.pas' {FrmMainVendorPrice_Mod26},
+  QryCurrFrm_mod26 in '供应商价格\QryCurrFrm_mod26.pas' {frmQryCurr_mod26},
+  QryMtrlFrm_mod26 in '供应商价格\QryMtrlFrm_mod26.pas' {frmQryMtrl_mod26},
+  QryUnitFrm_mod26 in '供应商价格\QryUnitFrm_mod26.pas' {frmQryUnit_mod26},
+  QryVendorFrm_mod26 in '供应商价格\QryVendorFrm_mod26.pas' {frmVendorQry_mod26},
+  SelPlaceFrm_mod26 in '供应商价格\SelPlaceFrm_mod26.pas' {frmSelPlace_mod26},
+  ChangRecordFrm_Mod63 in '供应商信息管理\ChangRecordFrm_Mod63.pas' {FrmChangeRecord_Mod63};
+
+end.

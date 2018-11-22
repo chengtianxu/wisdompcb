@@ -1,0 +1,52 @@
+package 市场销售_基础数据;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gSvrIntf,
+  gCommonFunc,
+  gCustomerCtr,
+  gFormClass,
+  gLookupDM,
+  bdertl;
+
+contains
+  mainfrm_Mod83 in '客户信息管理\mainfrm_Mod83.pas' {FrmMain_Mod83},
+  uEnterMod_4 in 'uEnterMod_4.pas',
+  Editfrm_Mod83 in '客户信息管理\Editfrm_Mod83.pas' {frmEdit_mod83},
+  EditfrmAddr_Mod83 in '客户信息管理\EditfrmAddr_Mod83.pas' {FrmEditAddr_Mod83},
+  UserFrm_Mod83 in '客户信息管理\UserFrm_Mod83.pas' {frmUser_Mod83},
+  Changefrm_Mod83 in '客户信息管理\Changefrm_Mod83.pas' {frmChange_Mod83},
+  Creditfrm_Mod83 in '客户信息管理\Creditfrm_Mod83.pas' {frmCredit_Mod83},
+  Mainfrm_Mod086 in '工具费用类别\Mainfrm_Mod086.pas' {Mainfrm_Mod86},
+  Editfrm_Mod86 in '工具费用类别\Editfrm_Mod86.pas' {Editfrm_Mod086},
+  MainFrm_Mod482 in '流水号设置\MainFrm_Mod482.pas' {frmMainFrm_Mod482},
+  EditFrm_Mod482 in '流水号设置\EditFrm_Mod482.pas' {frmEdiFrm_Mod482};
+
+end.

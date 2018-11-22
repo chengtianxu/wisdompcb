@@ -1,0 +1,288 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{4F293510-8DE5-44E8-AF5C-00B08573639A}</ProjectGuid>
+        <MainSource>品质控制_报废管理.dpk</MainSource>
+        <ProjectVersion>14.4</ProjectVersion>
+        <FrameworkType>VCL</FrameworkType>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Package</AppType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Base)'=='true') or '$(Base_OSX32)'!=''">
+        <Base_OSX32>true</Base_OSX32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Cfg_2)'=='true') or '$(Cfg_2_OSX32)'!=''">
+        <Cfg_2_OSX32>true</Cfg_2_OSX32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_UnitSearchPath>..\..\..\公共单元\dcp;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>2052</VerInfo_Locale>
+        <DCC_DcpOutput>..\..\dcp</DCC_DcpOutput>
+        <DCC_BplOutput>D:\SJSYS\ERP_3_TIER</DCC_BplOutput>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <GenPackage>true</GenPackage>
+        <GenDll>true</GenDll>
+        <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
+        <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_E>false</DCC_E>
+        <DCC_N>false</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Build>3</VerInfo_Build>
+        <VerInfo_Release>3</VerInfo_Release>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.3.3;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Debugger_HostApplication>D:\SJSYS\ERP_3_TIER\MainApp.exe</Debugger_HostApplication>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_RemoteDebug>false</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>false</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_OSX32)'!=''">
+        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="rtl.dcp"/>
+        <DCCReference Include="gsvrintf.dcp"/>
+        <DCCReference Include="gcommonfunc.dcp"/>
+        <DCCReference Include="glookupdm.dcp"/>
+        <DCCReference Include="gformclass.dcp"/>
+        <DCCReference Include="gcustomerctr.dcp"/>
+        <DCCReference Include="frx17.dcp"/>
+        <DCCReference Include="frxDB17.dcp"/>
+        <DCCReference Include="fs17.dcp"/>
+        <DCCReference Include="uEnterMod_13.pas"/>
+        <DCCReference Include="2_QC检测记录\Mainfrm_Mod705CheckMrg.pas">
+            <Form>FrmMain_Mod705CheckMrg</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\BaseCheck_Mod705.pas">
+            <Form>frmBaseCheck_Mod705</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\2厂FQC检测\CheckMrg_705FQC2.pas">
+            <Form>FrmCheckMrg_705FQC2</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\1厂FQC检测\CheckMrg_705FQC1.pas">
+            <Form>FrmCheckMrg_705FQC1</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\AddTypeFrm_Mod664.pas">
+            <Form>frmAddType_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\DetailFrm_Mod664.pas">
+            <Form>frmDetail_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\MainFrm_Mod664.pas">
+            <Form>frmMain_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\MeasureEditFrm_Mod664.pas">
+            <Form>frmMeasureEdit_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\MeasureFrm_Mod664.pas">
+            <Form>frmMeasure_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\PoSearchFrm_Mod664.pas">
+            <Form>frmPoSearch_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\ReportBindFrm_Mod664.pas">
+            <Form>frmReportBind_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\ReportFrm_Mod664.pas">
+            <Form>frmReport_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\1厂电测\Check_705Electron1.pas">
+            <Form>frmCheck_705Eelctron1</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\2厂电测\Check_705Electron2.pas">
+            <Form>FrmCheck_705Electron2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\1厂内层AOI\CheckMrg_705InnerAOI1.pas">
+            <Form>FrmCheckMrg_705InnerAOI1</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\1厂外层AOI\CheckMrg_705OuterAOI1.pas">
+            <Form>FrmCheckMrg_705OuterAOI1</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\2厂次外层AOI\CheckMrg_705SecOuterAOI2.pas">
+            <Form>FrmCheckMrg_705SecOuterAOI2</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\2厂内层AOI\CheckMrg_705InnerAOI2.pas">
+            <Form>FrmCheckMrg_705InnerAOI2</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\2厂外层AOI\CheckMrg_705OuterAOI2.pas">
+            <Form>FrmCheckMrg_705OuterAOI2</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\CheckModeledit_705.pas">
+            <Form>frmCheckModeledit_705</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\CheckRecordMrg_705.pas">
+            <Form>FrmCheckRecordMrg_705</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\CheckRecordReport_705.pas">
+            <Form>FrmCheckRecordReport_705</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\ElecCheckEdit_705.pas">
+            <Form>frmElecCheckEdit_705</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\FQCCheckRecordEdit_705.pas">
+            <Form>FrmFQCCheckRecordEdit_705</Form>
+        </DCCReference>
+        <DCCReference Include="3_QC生产管控\1流转管控\PassNumber_Mod709.pas">
+            <Form>frmPassNumber_Mod709</Form>
+        </DCCReference>
+        <DCCReference Include="3_QC生产管控\1流转管控\SetPassNum_Mod709.pas">
+            <Form>frmSetPassNum_Mod709</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\ReasonFrm_Mod664.pas">
+            <Form>frmReason_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\BadRecordFrm_Mod664.pas">
+            <Form>frmBadRecord_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="1_IQC检测报告\BadDetail_Mod664.pas">
+            <Form>FrmBadDetail_Mod664</Form>
+        </DCCReference>
+        <DCCReference Include="2_QC检测记录\AOICheckRecordEdit_705.pas">
+            <Form>FrmAOICheckRecordEdit_705</Form>
+        </DCCReference>
+        <DCCReference Include="4_SPC检测记录\PasSPCText_mod711.pas">
+            <Form>frmSPCText_mod711</Form>
+        </DCCReference>
+        <DCCReference Include="4_SPC检测记录\SPCRecord_mod711.pas">
+            <Form>frmSPCRecord_mod711</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Package</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">品质控制_报废管理.dpk</Source>
+                </Source>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">2052</VersionInfo>
+                    <VersionInfo Name="CodePage">936</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                    <VersionInfoKeys Name="CFBundleName"/>
+                    <VersionInfoKeys Name="CFBundleDisplayName"/>
+                    <VersionInfoKeys Name="CFBundleIdentifier"/>
+                    <VersionInfoKeys Name="CFBundleVersion"/>
+                    <VersionInfoKeys Name="CFBundlePackageType"/>
+                    <VersionInfoKeys Name="CFBundleSignature"/>
+                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
+                    <VersionInfoKeys Name="CFBundleExecutable"/>
+                </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversInt170.bpl">Embarcadero Intro Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\DataExplorerDBXPluginEnt170.bpl">DBExpress Enterprise Data Explorer Integration</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclDBXDriversEnt170.bpl">Embarcadero Enterprise Driver Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k170.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp170.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Deployment/>
+            <Platforms>
+                <Platform value="OSX32">False</Platform>
+                <Platform value="Win32">True</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

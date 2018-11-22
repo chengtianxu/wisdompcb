@@ -1,0 +1,101 @@
+package 市场销售_订单管理;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr,
+  frx17,
+  frxDB17,
+  fs17;
+
+contains
+  uEnterMod_2 in 'uEnterMod_2.pas',
+  Mainfrm_OrderEditSChe_mod284 in '销售订单更改(计划部)\Mainfrm_OrderEditSChe_mod284.pas' {frmMain_OrderModiSChe_mod284},
+  OrderDetailFrm_mod284 in '销售订单更改(计划部)\OrderDetailFrm_mod284.pas' {frmOrderDetail_mod284},
+  WorkListFrm_mod284 in '销售订单更改(计划部)\WorkListFrm_mod284.pas' {frmWorkList_mod284},
+  orderNoteFrm_mod284 in '销售订单更改(计划部)\orderNoteFrm_mod284.pas' {frmorderNote_mod284},
+  OrderVerEditFrm_mod284 in '销售订单更改(计划部)\OrderVerEditFrm_mod284.pas' {frmOrderVerEdit_mod284},
+  QryCustPartNoFrm_mod284 in '销售订单更改(计划部)\QryCustPartNoFrm_mod284.pas' {frmQryCustPartNo_mod284},
+  SelShipAddrFrm_mod284 in '销售订单更改(计划部)\SelShipAddrFrm_mod284.pas' {frmSelShipAddr_mod284},
+  AddSplitOrderFrm_mod354 in '销售订单更改(市场部)\AddSplitOrderFrm_mod354.pas' {frmAddSplitOrder_mod354},
+  CustEditFrm_mod354 in '销售订单更改(市场部)\CustEditFrm_mod354.pas' {frmCustEdit_mod354},
+  MainFrm_OrderEditMarket_mod354 in '销售订单更改(市场部)\MainFrm_OrderEditMarket_mod354.pas' {frmMain_OrderEditMarket_mod354},
+  OrderDetailFrm_mod354 in '销售订单更改(市场部)\OrderDetailFrm_mod354.pas' {frmOrderDetail_mod354},
+  QryCurrFrm_mod354 in '销售订单更改(市场部)\QryCurrFrm_mod354.pas' {frmQryCurr_mod354},
+  QryCustFrm_mod354 in '销售订单更改(市场部)\QryCustFrm_mod354.pas' {frmQryCust_mod354},
+  QryCustOrderFrm_mod354 in '销售订单更改(市场部)\QryCustOrderFrm_mod354.pas' {frmQryCustOrder_mod354},
+  QryQuoteFrm_mod354 in '销售订单更改(市场部)\QryQuoteFrm_mod354.pas' {frmQryQuote_mod354},
+  QryQuoteNoFrm_mod354 in '销售订单更改(市场部)\QryQuoteNoFrm_mod354.pas' {frmQryQuoteNo_mod354},
+  QryShipAddrFrm_mod354 in '销售订单更改(市场部)\QryShipAddrFrm_mod354.pas' {frmQryShipAddr_mod354},
+  QtyEditFrm_mod354 in '销售订单更改(市场部)\QtyEditFrm_mod354.pas' {frmQtyEdit_mod354},
+  SplitOrderFrm_mod354 in '销售订单更改(市场部)\SplitOrderFrm_mod354.pas' {frmSplitOrder_mod354},
+  ToolCostEditFrm_mod354 in '销售订单更改(市场部)\ToolCostEditFrm_mod354.pas' {frmToolCostEdit_mod354},
+  DateFrm_Mod291 in '订单评审\DateFrm_Mod291.pas' {frmDate_Mod291},
+  DetailFrm_Mod291 in '订单评审\DetailFrm_Mod291.pas' {frmDetail_Mod291},
+  MainFrm_Mod291 in '订单评审\MainFrm_Mod291.pas' {frmMain_Mod291},
+  RemarkFrm_Mod291 in '订单评审\RemarkFrm_Mod291.pas' {frmRemark_Mod291},
+  details_mod73 in '销售定单确认\details_mod73.pas' {Form_details},
+  EP027_mod73 in '销售定单确认\EP027_mod73.pas' {Form_mod73},
+  UeditRemark_mod73 in '销售定单确认\UeditRemark_mod73.pas' {Form2},
+  Umost in '销售定单确认\Umost.pas' {cost_mod73},
+  Unode_mod73 in '销售定单确认\Unode_mod73.pas' {Form3},
+  URemark_mod73 in '销售定单确认\URemark_mod73.pas' {Remark_mod73},
+  Uso_mod73 in '销售定单确认\Uso_mod73.pas' {Form1},
+  DetailsFrm_Mod623 in '订单预处理\DetailsFrm_Mod623.pas' {frmDetail_Mod623},
+  MainFrm_Mod623 in '订单预处理\MainFrm_Mod623.pas' {frmMain_Mod623},
+  PrintFrm_Mod623 in '订单预处理\PrintFrm_Mod623.pas' {frmPrint_Mod623},
+  DateFrm_Mod599 in '回复交期更改审核\DateFrm_Mod599.pas' {frmDate_Mod599},
+  MainFrm_Mod599 in '回复交期更改审核\MainFrm_Mod599.pas' {frmMain_Mod599},
+  ModifyFrm_Mod599 in '回复交期更改审核\ModifyFrm_Mod599.pas' {frmModify_Mod599},
+  MainFrm_Mod72 in '销售订单输入\MainFrm_Mod72.pas' {frm_MainMod72},
+  PasAddSales in '销售订单输入\PasAddSales.pas' {frmAddSales},
+  PasAllOldVersion in '销售订单输入\PasAllOldVersion.pas' {frmAllOldVersion},
+  PasDeptinfo in '销售订单输入\PasDeptinfo.pas' {frmDeptinfo},
+  PasEdit_note in '销售订单输入\PasEdit_note.pas' {frmEdit_note},
+  PasEdit_so in '销售订单输入\PasEdit_so.pas' {frmEdit_so},
+  PasFind213 in '销售订单输入\PasFind213.pas' {frmFind213},
+  PasHistoryPrice in '销售订单输入\PasHistoryPrice.pas' {frmHistoryPrice},
+  PasMulti_so in '销售订单输入\PasMulti_so.pas' {frmMulti_so},
+  PasNewSales2 in '销售订单输入\PasNewSales2.pas' {frmNewSales2},
+  PasNewSales in '销售订单输入\PasNewSales.pas' {frmNewSales},
+  PasNote_information in '销售订单输入\PasNote_information.pas' {frmNote_information},
+  PasPreInquire in '销售订单输入\PasPreInquire.pas' {frmPreInquire},
+  PasShow213 in '销售订单输入\PasShow213.pas' {frmShow213},
+  PasShowStock in '销售订单输入\PasShowStock.pas' {frmShowStock},
+  PasViewCredit in '销售订单输入\PasViewCredit.pas' {frmViewCredit},
+  PasSo_report in '销售订单输入\PasSo_report.pas' {frmSo_report},
+  PasMany_So_report in '销售订单输入\PasMany_So_report.pas' {frmMany_So_report},
+  pasSupplier_report in '销售订单输入\pasSupplier_report.pas' {frmSupplier_report},
+  PasPublic in '销售订单输入\PasPublic.pas';
+
+end.

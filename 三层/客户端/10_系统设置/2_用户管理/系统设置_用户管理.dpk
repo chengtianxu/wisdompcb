@@ -1,0 +1,48 @@
+package 系统设置_用户管理;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr;
+
+contains
+  uEnterMod_27 in 'uEnterMod_27.pas',
+  MainFrm_Mod474SysuserSet in '1_系统用户管理\MainFrm_Mod474SysuserSet.pas' {frmMain_Mod474SysuserSet},
+  MainFrm_Mod474Caller in '1_系统用户管理\MainFrm_Mod474Caller.pas' {frmMain_Mod474Caller},
+  MainFrm_Mod474ModSet in '1_系统用户管理\MainFrm_Mod474ModSet.pas' {frmMain_Mod474ModSet},
+  Mod474ModSet_Edit in '1_系统用户管理\Mod474ModSet_Edit.pas' {frmMod474ModSet_Edit},
+  SysuserEdit_Mod474 in '1_系统用户管理\SysuserEdit_Mod474.pas' {frmSysuserEdit_Mod474},
+  MainFrm_Mod474UpdateVer in '1_系统用户管理\MainFrm_Mod474UpdateVer.pas' {frmMain_Mod474Update},
+  UpdateSysFile_Mod474 in '1_系统用户管理\UpdateSysFile_Mod474.pas' {frmUpdateSysFile_Mod474};
+
+end.

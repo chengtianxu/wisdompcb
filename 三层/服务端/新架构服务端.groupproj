@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{585B6CA8-0C20-461B-A199-8F38EA711ED0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ERPSvr.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SvrEng\0_公共基础\公共基础.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ERPSvr">
+        <MSBuild Projects="ERPSvr.dproj"/>
+    </Target>
+    <Target Name="ERPSvr:Clean">
+        <MSBuild Projects="ERPSvr.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ERPSvr:Make">
+        <MSBuild Projects="ERPSvr.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="公共基础">
+        <MSBuild Projects="SvrEng\0_公共基础\公共基础.dproj"/>
+    </Target>
+    <Target Name="公共基础:Clean">
+        <MSBuild Projects="SvrEng\0_公共基础\公共基础.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="公共基础:Make">
+        <MSBuild Projects="SvrEng\0_公共基础\公共基础.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ERPSvr;公共基础"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ERPSvr:Clean;公共基础:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ERPSvr:Make;公共基础:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

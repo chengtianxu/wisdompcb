@@ -1,7 +1,11 @@
 */.svn/
+*/*/.svn/
+三层/客户端/rtl/
 */dcu/
 */dcp/
 *.dcu
 *.exe
 *.ddp
 *.~*
+*.local
+*.identcache

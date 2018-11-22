@@ -1,0 +1,60 @@
+package 库存管理_成品进出;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  gsvrintf,
+  gcommonfunc,
+  glookupdm,
+  gformclass,
+  gcustomerctr,
+  frx17,
+  frxDB17,
+  fs17;
+
+contains
+  uEnterMod_21 in 'uEnterMod_21.pas',
+  MainFrm_Mod525 in '1_新包装标签打印\MainFrm_Mod525.pas' {frmMainMod_525},
+  BasePackPrintFrm_525 in '1_新包装标签打印\BasePackPrintFrm_525.pas' {frmBasePackPrint_525},
+  PackPrintFrm_HWJS in '1_新包装标签打印\华为技术\PackPrintFrm_HWJS.pas' {frmHWJS},
+  PackPrintFrm_SanDiHOTYI in '1_新包装标签打印\闪迪HOTAYI\PackPrintFrm_SanDiHOTYI.pas' {frmPackReportFrm_SanDiHOTYI},
+  PackPrintfrm_SanDiDaYan in '1_新包装标签打印\闪迪达研\PackPrintfrm_SanDiDaYan.pas' {frmPackPrint_SanDiDaYan},
+  PackPrintFrm_SanDiSDSM in '1_新包装标签打印\闪迪SDSM\PackPrintFrm_SanDiSDSM.pas' {frmPackPrint_SanDiSDSM},
+  PackPrintEditFrn_525 in '1_新包装标签打印\PackPrintEditFrn_525.pas' {frmPackPrintEdit_525},
+  PackPrintHisFrm_525 in '1_新包装标签打印\PackPrintHisFrm_525.pas' {frmPackPrintHis_525},
+  MainFrm_Mod531 in '2_标签管理系统\MainFrm_Mod531.pas' {frmMain_Mod531},
+  BaseOperatorFrm_Mod531 in '2_标签管理系统\BaseOperatorFrm_Mod531.pas' {frmBaseOperator_Mod531},
+  TagOperator_DecodeFrm in '2_标签管理系统\标签信息解析\TagOperator_DecodeFrm.pas' {frmTagOperator_Decode},
+  TagOperator_SumPackColumnFrm in '2_标签管理系统\标签信息解析\TagOperator_SumPackColumnFrm.pas' {frmTagOperator_SumPackColumn},
+  TagOperator_SumPackFrm in '2_标签管理系统\标签信息解析\TagOperator_SumPackFrm.pas' {frmTagOperator_SumPack},
+  InOutStockFrm_Mod525 in '2_标签管理系统\标签信息解析\InOutStockFrm_Mod525.pas' {frmInOutStock_Mod525},
+  PackPrintFrm_Common in '1_新包装标签打印\通用标签\PackPrintFrm_Common.pas' {frmPackPrint_Common},
+  PackPrintFrm_FanGuDaDi in '1_新包装标签打印\凡谷大地\PackPrintFrm_FanGuDaDi.pas' {frmPackPrint_FanGuDaDi};
+
+end.
