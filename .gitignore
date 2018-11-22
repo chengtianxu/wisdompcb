@@ -9,3 +9,5 @@
 *.~*
 *.local
 *.identcache
+database/wisdompcb.mdf
+database/wisdompcb_log.ldf
