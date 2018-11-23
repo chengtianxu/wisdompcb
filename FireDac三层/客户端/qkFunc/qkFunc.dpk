@@ -1,0 +1,49 @@
+package qkFunc;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  IndySystem,
+  IndyProtocols,
+  IndyCore,
+  FireDACCommon,
+  FireDAC,
+  qkSvrIntf,
+  RaizeComponentsVcl250,
+  vcldb,
+  EhLib250;
+
+contains
+  qkFunc.Commfunc in 'qkFunc.Commfunc.pas',
+  qkFtpFrm in 'qkFtpFrm.pas' {frmqkftp},
+  qkFunc.FrmExistCheck in 'qkFunc.FrmExistCheck.pas' {frmqkfuncDialogFrmExistcheck};
+
+end.

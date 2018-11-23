@@ -1,0 +1,21 @@
+object frmqkBase: TfrmqkBase
+  Left = 0
+  Top = 0
+  Caption = 'frmqkBase'
+  ClientHeight = 299
+  ClientWidth = 635
+  Color = clBtnFace
+  DoubleBuffered = True
+  Font.Charset = GB2312_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = #23435#20307
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+end

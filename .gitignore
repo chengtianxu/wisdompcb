@@ -9,3 +9,6 @@
 *.~*
 *.local
 *.identcache
+*.stat
+*.tvsconfig
+*.vlb

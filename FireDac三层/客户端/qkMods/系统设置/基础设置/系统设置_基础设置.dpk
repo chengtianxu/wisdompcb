@@ -1,0 +1,49 @@
+package 系统设置_基础设置;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  qkForm,
+  qkFunc,
+  qkSvrIntf,
+  RaizeComponentsVclDb250;
+
+contains
+  Enter2000 in 'Enter2000.pas',
+  qk200000001Fram in '单位字典\qk200000001Fram.pas' {frmqk200000001Fram},
+  qk200000001MainFrm in '单位字典\qk200000001MainFrm.pas' {frmqk200000001Main},
+  qk200000001Edit in '单位字典\qk200000001Edit.pas' {frmqk20000001Edit},
+  qk200002Fram in '流水码控制\qk200002Fram.pas' {frmqk200002Fram},
+  qk200002Main in '流水码控制\qk200002Main.pas' {frmqk200002Main},
+  qk200002Edit in '流水码控制\qk200002Edit.pas' {frmqk200002Edit},
+  qk20000003MainFrm in '参数定义\qk20000003MainFrm.pas' {frmqk20000003Main},
+  qk20000003Fram in '参数定义\qk20000003Fram.pas' {frmqk20000003Fram},
+  qk20000003Edit in '参数定义\qk20000003Edit.pas' {frmqk20000003Edit};
+
+end.

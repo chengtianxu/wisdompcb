@@ -1,0 +1,46 @@
+package 人事管理_基础数据;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  qkForm,
+  qkFunc,
+  qkSvrIntf,
+  RaizeComponentsVclDb250;
+
+contains
+  Enter1604 in 'Enter1604.pas',
+  qk1604001EditTreeNode in '人员管理\qk1604001EditTreeNode.pas' {frmqk1604001edittreenode},
+  qk1604001Fram in '人员管理\qk1604001Fram.pas' {frmqk1604001Fram},
+  qk1604001MainFrm in '人员管理\qk1604001MainFrm.pas' {frmqk1604001MainFrm},
+  qk1604001PeopEdit in '人员管理\qk1604001PeopEdit.pas' {frmqk1604001PeopEdit},
+  qk1604001PeopList in '人员管理\qk1604001PeopList.pas' {frmqk1604001PeopList},
+  qk1604001DeptErpRights in '人员管理\qk1604001DeptErpRights.pas' {frmqk1604001DepterpRights};
+
+end.

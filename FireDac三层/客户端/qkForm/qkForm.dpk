@@ -1,0 +1,50 @@
+package qkForm;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  qkFunc,
+  qkSvrIntf,
+  vcldb,
+  EhLib250,
+  RaizeComponentsVcl250,
+  EhLibFireDacDataDrivers250,
+  RaizeComponentsVclDb250;
+
+contains
+  qkBaseFrm in 'qkBaseFrm.pas' {frmqkBase},
+  qkBaseTabFrm in 'qkBaseTabFrm.pas' {frmqkTabFormbase},
+  qkBaseMainFrm in 'qkBaseMainFrm.pas' {frmqkBaseMain},
+  qkBaseGridFrm in 'qkBaseGridFrm.pas' {frmqkbaseGrid},
+  qkBasePickFrm in 'qkBasePickFrm.pas' {frmqkBasepick},
+  qkBaseEditFrm in 'qkBaseEditFrm.pas' {frmqkbaseedit},
+  qkBaseEditVGridFrm in 'qkBaseEditVGridFrm.pas' {frmqkbaseeditvgrid},
+  qkBasePickFrmTree in 'qkBasePickFrmTree.pas' {frmqkbasePickTree};
+
+end.

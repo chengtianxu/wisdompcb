@@ -1,0 +1,43 @@
+package 财务管理_基础数据;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  qkForm,
+  qkFunc,
+  qkSvrIntf,
+  RaizeComponentsVclDb250;
+
+contains
+  Enter1901 in 'Enter1901.pas',
+  qk1909001Fram in '货币设置\qk1909001Fram.pas' {frmqk1909001Fram},
+  qk1909001Main in '货币设置\qk1909001Main.pas' {frmqk1909001Main},
+  qk1909001Edit in '货币设置\qk1909001Edit.pas' {frmqk1909001Edit};
+
+end.

@@ -1,0 +1,52 @@
+package 市场销售_基础数据;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  qkForm,
+  qkFunc,
+  qkSvrIntf,
+  qkScriptEng,
+  RaizeComponentsVclDb250,
+  VclSmp;
+
+contains
+  Enter1005 in 'Enter1005.pas',
+  qk1005001Fram in '客户信息管理\qk1005001Fram.pas' {frmqk1005001Fram},
+  qk1005001Main in '客户信息管理\qk1005001Main.pas' {frmqk1005001Main},
+  qk1005001Edit in '客户信息管理\qk1005001Edit.pas' {frmqk1005001Edit},
+  qk1005002Fram in '报价规则定义\qk1005002Fram.pas' {frmqk1005002Fram},
+  qk1005002Main in '报价规则定义\qk1005002Main.pas' {frmqk1005002Main},
+  qk1005002GridEdit in '报价规则定义\qk1005002GridEdit.pas' {frmqk1005002GridEdit},
+  qk1005002GridEditDetail in '报价规则定义\qk1005002GridEditDetail.pas' {frmqk1005002GridEditDetail},
+  TestQkScript in '报价规则定义\TestQkScript.pas' {frmqkScriptTest},
+  qk1005002ScriptFuncEdit in '报价规则定义\qk1005002ScriptFuncEdit.pas' {frmqk1005002ScriptFuncEdit},
+  qk1005002ScriptFunc in '报价规则定义\qk1005002ScriptFunc.pas' {frmqk1005002ScriptFunc};
+
+end.

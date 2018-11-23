@@ -1,0 +1,65 @@
+package 系统设置_开发选项;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  qkForm,
+  qkFunc,
+  qkSvrIntf,
+  RaizeComponentsVclDb250;
+
+contains
+  Enter2002 in 'Enter2002.pas',
+  qk20001Fram in 'SQL脚本\qk20001Fram.pas' {frmqk20001Fram},
+  qk20001MainFrm in 'SQL脚本\qk20001MainFrm.pas' {frmqk20001Main},
+  qk20001EditFrm in 'SQL脚本\qk20001EditFrm.pas' {frmqk20001Edit},
+  qk20003Fram in '垂直表格\qk20003Fram.pas' {frmqk20003Fram},
+  qk20003MainFrm in '垂直表格\qk20003MainFrm.pas' {frmqk20003Main},
+  qk20003EditFram in '垂直表格\qk20003EditFram.pas' {frmqk20003EditFram},
+  qk20003Edit1 in '垂直表格\qk20003Edit1.pas' {frmqk20003edit1},
+  qk20003Edit2 in '垂直表格\qk20003Edit2.pas' {frmqk20003Edit2},
+  qk20004Fram in '水平表格\qk20004Fram.pas' {frmqk20004Fram},
+  qk20004MainFrm in '水平表格\qk20004MainFrm.pas' {frmqk20004Main},
+  qk20004EditFram in '水平表格\qk20004EditFram.pas' {frmqk20004editfram},
+  qk20004Edit1 in '水平表格\qk20004Edit1.pas' {frmqk20004Edit1},
+  qk20004Edit2 in '水平表格\qk20004Edit2.pas' {frmqk20004edit2},
+  qk20002Fram in '主界面SQL\qk20002Fram.pas' {frmqk20002Fram},
+  qk20002MainFrm in '主界面SQL\qk20002MainFrm.pas' {frmqk20002main},
+  qk20002EditMainWhere in '主界面SQL\qk20002EditMainWhere.pas' {frmqk20002EditMainWhere},
+  qk20000Fram in '系统模块\qk20000Fram.pas' {frmqk20000Fram},
+  qk20000MainFrm in '系统模块\qk20000MainFrm.pas' {frmqk20000MainFrm},
+  qk20005Fram in '挑选框设置\qk20005Fram.pas' {frmqk20005Fram},
+  qk20005MainFrm in '挑选框设置\qk20005MainFrm.pas' {frmqk20005Main},
+  qk20000Edit in '系统模块\qk20000Edit.pas' {frmqk20000Edit},
+  qk20005Edit in '挑选框设置\qk20005Edit.pas' {frmqk20005Edit},
+  qk20002EditUIGrid in '主界面SQL\qk20002EditUIGrid.pas' {frmqk20002EditUIGrid},
+  qk20002Edit in '主界面SQL\qk20002Edit.pas' {frmqk20002Edit},
+  qk20005EditUIGrid in '挑选框设置\qk20005EditUIGrid.pas' {frmqk20005EditUIGrid};
+
+end.

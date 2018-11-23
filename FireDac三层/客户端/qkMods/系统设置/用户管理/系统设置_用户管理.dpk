@@ -1,0 +1,45 @@
+package 系统设置_用户管理;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  qkForm,
+  qkFunc,
+  qkSvrIntf,
+  RaizeComponentsVcl250,
+  RaizeComponentsVclDb250;
+
+contains
+  Enter2001 in 'Enter2001.pas',
+  qk10000Fram in '系统用户\qk10000Fram.pas' {frmqk10000Fram},
+  qk10000MainFrm in '系统用户\qk10000MainFrm.pas' {frmqk10000Main},
+  qk10000Edit in '系统用户\qk10000Edit.pas' {frmqk10000Edit};
+
+end.
