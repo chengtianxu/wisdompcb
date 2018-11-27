@@ -12,3 +12,5 @@
 *.stat
 *.tvsconfig
 *.vlb
+database/wisdompcb.mdf
+database/wisdompcb_log.ldf
