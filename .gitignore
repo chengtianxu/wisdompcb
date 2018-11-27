@@ -14,3 +14,13 @@
 *.vlb
 database/wisdompcb.mdf
 database/wisdompcb_log.ldf
+AriesERP/Aries.Controllers/obj
+AriesERP/Aries.Core/obj
+AriesERP/CYQ.Data/obj/
+AriesERP/Aries.Logic/obj
+*.vs
+AriesERP/Web.UI/obj
+AriesERP/Web.UI/bin/
+AriesERP/packages
+AriesERP/output/
+AriesERP/CYQ.Data/bin/
