@@ -4,6 +4,8 @@
 */dcu/
 */dcp/
 *.dcu
+*.cfg
+*.dof
 *.exe
 *.ddp
 *.~*

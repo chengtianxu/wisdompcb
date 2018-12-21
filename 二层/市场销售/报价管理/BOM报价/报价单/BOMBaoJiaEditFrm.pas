@@ -1625,6 +1625,8 @@ begin
 
     lblBenBiPrice.Caption := FormatFloat('0.0000000',cdsBP06.FieldByName('buhanshuijiage_Pcs').AsFloat * cdsBP06.FieldByName('curr_rate').AsFloat);
     lblBenBiPriceM.Caption := FormatFloat('0.0000000',cdsBP06.FieldByName('buhanshuijiage_M').AsFloat * cdsBP06.FieldByName('curr_rate').AsFloat);
+
+    btnSvae.Enabled := True;
   finally
     LgParam.Free;
     LpParam.Free;

@@ -706,6 +706,7 @@ begin
     LFrm.FIDKey := cdsMain.FieldByName('idkey').AsString;
     LFrm.FBCopy := True;
     LFrm.edtManuPartNum.Text := cdsMain.FieldByName('MANU_PART_NUMBER').AsString;
+    LFrm.btnSvae.Enabled := False;
     if LFrm.ShowModal = mrOk then
     begin
       btnRefreshClick(btnRefresh);

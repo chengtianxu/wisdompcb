@@ -134,9 +134,10 @@ begin
       ' left join datadetail f on a.leave_type=f.rkey '+
       ' left join datadetail g on a.current_station=g.rkey '+
       ' where a.accountid='+inttostr(Accountid)+
-      ' and a.current_departmentid in '+
-      '(select departmentid from hr_permission where operator_ptr='+rkey73+
-      ' and program_ptr='+inttostr(dm.program_rkey)+')';
+      ' and 1=1 '  ;
+      //a.current_departmentid in '+
+      //'(select departmentid from hr_permission where operator_ptr='+rkey73+
+      //' and program_ptr='+inttostr(dm.program_rkey)+')';
      // ' and a.yearmonth=(select top 1 checkyearmonth from salarycheck where actived=1 ) ';
    //  ShowMessage(dm.qry_main.SQL.Text);    //0801
     for i := 0 to sg1.RowCount-1 do

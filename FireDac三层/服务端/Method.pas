@@ -97,12 +97,14 @@ function qkStrToDateTime(AStr: string): TDateTime;
 var
   LFmt: TFormatSettings;
 begin
+{$WARN SYMBOL_PLATFORM OFF}
   LFmt := TFormatSettings.Create(LOCALE_USER_DEFAULT);
   LFmt.ShortDateFormat:='yyyy-MM-dd';
   LFmt.DateSeparator:='-';
   //FSetting.TimeSeparator:=':';
   LFmt.LongTimeFormat:='hh:mm:ss';
   Result := StrToDateDef(AStr,0,LFmt);
+{$WARN SYMBOL_PLATFORM ON}
 end;
 
 
