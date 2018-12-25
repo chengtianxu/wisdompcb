@@ -1,7 +1,7 @@
 object frmCreateOutTag: TfrmCreateOutTag
   Left = 546
   Top = 221
-  Width = 776
+  Width = 895
   Height = 710
   Caption = #29983#25104#22806#31665#26631#31614
   Color = clBtnFace
@@ -19,7 +19,7 @@ object frmCreateOutTag: TfrmCreateOutTag
   object pnl1: TPanel
     Left = 0
     Top = 0
-    Width = 760
+    Width = 879
     Height = 37
     Align = alTop
     TabOrder = 0
@@ -53,14 +53,14 @@ object frmCreateOutTag: TfrmCreateOutTag
   object pnl2: TPanel
     Left = 0
     Top = 37
-    Width = 760
+    Width = 879
     Height = 634
     Align = alClient
     TabOrder = 1
     object pnl3: TPanel
       Left = 1
       Top = 592
-      Width = 758
+      Width = 877
       Height = 41
       Align = alBottom
       TabOrder = 0
@@ -92,6 +92,7 @@ object frmCreateOutTag: TfrmCreateOutTag
         Width = 57
         Height = 19
         Caption = #34955#37325#65306
+        OnDblClick = lbl7DblClick
       end
       object lblPWeight: TLabel
         Left = 618
@@ -114,14 +115,15 @@ object frmCreateOutTag: TfrmCreateOutTag
         Top = 7
         Width = 88
         Height = 27
+        ReadOnly = True
         TabOrder = 1
-        Text = '1'
+        Text = '4'
       end
     end
     object pnl4: TPanel
       Left = 1
       Top = 1
-      Width = 758
+      Width = 877
       Height = 41
       Align = alTop
       TabOrder = 1
@@ -178,7 +180,7 @@ object frmCreateOutTag: TfrmCreateOutTag
     object dbgrd1: TDBGrid
       Left = 169
       Top = 42
-      Width = 590
+      Width = 709
       Height = 550
       Align = alClient
       DataSource = dsIn

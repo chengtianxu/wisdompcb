@@ -418,7 +418,8 @@ object frmZXKX2303: TfrmZXKX2303
           'OSP'
           #27785#37329
           'OSP+'#27785#37329
-          #27785#38177)
+          #27785#38177
+          #26080#38085#21943#38177)
       end
       object rg1: TRadioGroup
         Left = 208
@@ -720,6 +721,7 @@ object frmZXKX2303: TfrmZXKX2303
         ItemIndex = 0
         TabOrder = 2
         Text = #26080#21449#26495
+        OnChange = cbbDCBChange
         Items.Strings = (
           #26080#21449#26495
           #21333#21449#26495

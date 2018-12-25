@@ -176,6 +176,7 @@ var
   LYearWeek: Boolean;
   ltmpstr: string;
   LText: string;
+  LtmpIni: integer;
 begin
   ZXlblNum := nil;
   DM1.adsReport.Close;
@@ -271,11 +272,15 @@ begin
     then
       ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),6))
     else
+    if (DM1.adsReport.fieldbyname('表面处理').AsString = '沉锡') then
+    begin
+      ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),3))
+    end else
     if (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP')
       or (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP+沉金')
     then
     begin
-      ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),3));
+      ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),6));
 
       //周期如果大于4617则保质期为6个月
       //程天旭
@@ -317,24 +322,29 @@ begin
     if Pos('@', DM1.adsReport.FieldByName('备注698').AsString) > 0 then
     begin
       ZXHKTime.Caption := Copy(DM1.adsReport.FieldByName('备注698').AsString,Pos('@', DM1.adsReport.FieldByName('备注698').AsString)+1,10);
+      if StrInArr(ACustCode,['2303']) then
+        LtmpIni := 6
+      else
+        LtmpIni := 3;
+
       if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡')
         or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉金')
       then
-         ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),6))
+         ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni))
       else
       if (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP')
         or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉锡')
         or (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP+沉金')
       then
       begin
-        ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),3));
+        ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni));
         //周期如果大于4617则保质期为6个月
         //程天旭
         if StrInArr(ACustCode,['Z0257','Z1001','Z0276','2031','7053','6791']) then
         begin
           //if (StrToInt(LeftStr(DM1.adsReport.fieldbyname('批次').AsString,2)) >= 44) and (StrToInt(RightStr(DM1.adsReport.fieldbyname('批次').AsString,2)) >= 17) then
           begin
-            ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),6));
+            ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni));
           end;
         end;
         //------2017-11-1
@@ -361,12 +371,15 @@ begin
     then
        ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),6))
     else
+    if (DM1.adsReport.fieldbyname('表面处理').AsString = '沉锡') then
+    begin
+      ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),3))
+    end else
     if (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP')
       or (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP+沉金')
-      or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉锡')
     then
     begin
-      ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),3));
+      ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),6));
 
         //周期如果大于4617则保质期为6个月
         //程天旭
@@ -407,25 +420,30 @@ begin
     if Pos('@', DM1.adsReport.FieldByName('备注698').AsString) > 0 then
     begin
       ZXHKTime.Caption := Copy(DM1.adsReport.FieldByName('备注698').AsString,Pos('@', DM1.adsReport.FieldByName('备注698').AsString)+1,10);
+      if StrInArr(ACustCode,['2303']) then
+        LtmpIni := 6
+      else
+        LtmpIni := 3;
       if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡')
         or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉金')
       then
-         ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),6))
+         ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni))
       else
       if (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP')
         or (DM1.adsReport.fieldbyname('表面处理').AsString = 'OSP+沉金')
+        or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉锡')
       then
       begin
-        ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),3));
+        ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni));
         ShowMessage(ZXHKTime.Caption);
-        
+
         //周期如果大于4617则保质期为6个月Z0257/Z1001/Z0276
         //程天旭
         if StrInArr(ACustCode,['Z0257','Z1001','Z0276','2031','7053','6791']) then
         begin
           //if (StrToInt(LeftStr(DM1.adsReport.fieldbyname('批次').AsString,2)) >= 44) and (StrToInt(RightStr(DM1.adsReport.fieldbyname('批次').AsString,2)) >= 17) then
           begin
-            ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),6));
+            ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni));
           end;
         end;
         //------2017-11-1
@@ -608,7 +626,7 @@ begin
            'V' + DM1.adsReport.fieldbyname('客供代码').AsString + //' ' +
            '1T' + DM1.adsReport.fieldbyname('箱号').AsString + //' ' +
            '9D' + DM1.adsReport.fieldbyname('批次').AsString + //' ' +
-           'X'+DM1.adsReport.fieldbyname('xBrode').AsString + //' ' +
+           '25B'+DM1.adsReport.fieldbyname('xBrode').AsString + //' ' +
            'PSN'+ DM1.adsReport.fieldbyname('Psn').AsString + //' ' +
            'MWuZhu' + //' ' +
            '4LChina'; //+ ' ';

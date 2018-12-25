@@ -111,6 +111,7 @@ type
     procedure btnCloseClick(Sender: TObject);
     procedure eh699Columns2UpdateData(Sender: TObject; var Text: String;
       var Value: Variant; var UseText, Handled: Boolean);
+    procedure cbbDCBChange(Sender: TObject);
   private
     { Private declarations }
     function GetBCBHInfo(AManu_Part_Number: string): Boolean;
@@ -638,7 +639,7 @@ begin
     LSql := ' INSERT INTO Data0698(pack_number,so_ptr,description,code,qty,lotno,v_date,empl_ptr,pack_item,type,surface,netWeight,grossWeight,caseSpec,notes,flag) ' +
     ' VALUES(' + QuotedStr(edtBQDM.Text) + ',' + IntToStr(edtXSDD.Tag) + ',' + QuotedStr(edtCPMS.Text) + ',' +  QuotedStr(edtKGDM.Text) + ',' + IntToStr(LPcsCount) + ',' +
     QuotedStr(edtSCZQ.Text) + ',getdate(),' + gUser.User_Ptr + ',' + edtBQSL.Text + ',' +  QuotedStr(rgLX.Items[rgLX.ItemIndex]) + ',' +
-    QuotedStr(cbxZXBMCL.Items[cbxZXBMCL.ItemIndex]) + ',' + QuotedStr(edtJZ.Text) + ',' + QuotedStr(edtMZ.Text) + ',' + QuotedStr(edtZXGG.Text) + ',';
+    QuotedStr(cbxZXBMCL.Text) + ',' + QuotedStr(edtJZ.Text) + ',' + QuotedStr(edtMZ.Text) + ',' + QuotedStr(edtZXGG.Text) + ',';
 
     if (cbbDCB.ItemIndex > 0) and (cbbDCB.ItemIndex < StrToInt(lblPcsPerSet.Caption)) then
       tmpS :=  ';' + cbbDCB.Items[cbbDCB.ItemIndex] +';' ;
@@ -843,6 +844,14 @@ begin
       cbxZXBMCL.ItemIndex := BMType-1;           
   end;
   Result := True;
+end;
+
+procedure TfrmZXKX2303.cbbDCBChange(Sender: TObject);
+begin
+  if cbbDCB.ItemIndex <> 0 then
+  begin
+    edtBZ.Text := edtBZ.Text + ' ' + cbbDCB.Items[cbbDCB.ItemIndex]
+  end;
 end;
 
 end.

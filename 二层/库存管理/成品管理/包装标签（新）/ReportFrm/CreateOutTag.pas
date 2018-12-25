@@ -65,6 +65,7 @@ type
     procedure edtPcsNumKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure lst1ClickCheck(Sender: TObject);
+    procedure lbl7DblClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -717,6 +718,11 @@ begin
           ' 包装重' + lblPWeight.Caption + #13 +
     '  电子秤:' + FloatToStr(Single(Psingle(@Msg.LParam)^)));
   end;
+end;
+
+procedure TfrmCreateOutTag.lbl7DblClick(Sender: TObject);
+begin
+  edt1.ReadOnly := not edt1.ReadOnly;
 end;
 
 end.

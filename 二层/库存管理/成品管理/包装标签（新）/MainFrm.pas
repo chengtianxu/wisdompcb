@@ -128,6 +128,10 @@ type
     lbl1: TLabel;
     N60031: TMenuItem;
     mniN67911: TMenuItem;
+    mniZ13771: TMenuItem;
+    mniN80011: TMenuItem;
+    mniN78261: TMenuItem;
+    mniN80051: TMenuItem;
     procedure btnExitClick(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -821,6 +825,10 @@ begin
         ctDGDELL:
         begin
           mniN73641Click(Self);
+        end;
+        ctBCKJ:
+        begin
+          mniN23901Click(Self);
         end;
         ctUnknow://ÆäËû
         begin

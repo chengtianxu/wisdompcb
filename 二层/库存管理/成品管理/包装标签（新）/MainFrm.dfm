@@ -601,7 +601,7 @@ object frmMain: TfrmMain
     AutoHotkeys = maManual
     OnPopup = pmMainPopup
     Left = 104
-    Top = 96
+    Top = 94
     object mniNew: TMenuItem
       Caption = #26032#24314
       object mniHWJS: TMenuItem
@@ -718,6 +718,10 @@ object frmMain: TfrmMain
         end
         object Z1: TMenuItem
           Caption = 'Z1289_'#26757#24030
+          OnClick = mniZK0275MZClick
+        end
+        object mniZ13771: TMenuItem
+          Caption = 'Z1377_'#26757#24030
           OnClick = mniZK0275MZClick
         end
       end
@@ -918,6 +922,14 @@ object frmMain: TfrmMain
           Caption = '6003_'#19996#33694
           OnClick = mniN60041Click
         end
+        object mniN80011: TMenuItem
+          Caption = '8001_'#19996#33694
+          OnClick = mniN60041Click
+        end
+        object mniN80051: TMenuItem
+          Caption = '8005_'#19996#33694
+          OnClick = mniN60041Click
+        end
       end
       object nN1: TMenuItem
         Caption = #31934#35802#31185#25216
@@ -930,6 +942,10 @@ object frmMain: TfrmMain
         Caption = #25300#36229#31185#25216
         object nS27631: TMenuItem
           Caption = 'S2763_'#28145#22323
+          OnClick = mniN23901Click
+        end
+        object mniN78261: TMenuItem
+          Caption = '7826_'#19996#33694
           OnClick = mniN23901Click
         end
       end

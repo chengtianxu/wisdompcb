@@ -198,48 +198,49 @@ type
     adsReportpsn: TStringField;
     cdsReportxBrode: TIntegerField;
     cdsReportpsn: TStringField;
-    pdtlbnd1: TppDetailBand;
-    lbl1: TppDBText;
-    lbl2: TppDBText;
-    lblplbl5: TppLabel;
-    lblplbl6: TppLabel;
-    lblplbl7: TppLabel;
-    lblplbl8: TppLabel;
-    lbl3: TppDBText;
-    lbl4: TppDBText;
-    lblPcs: TppDBText;
-    lbl6: TppDBText;
-    pln1: TppLine;
-    pln3: TppLine;
-    pln4: TppLine;
-    pln5: TppLine;
-    lblplbl3: TppLabel;
-    pln6: TppLine;
-    pln7: TppLine;
-    pln8: TppLine;
-    lblplbl4: TppLabel;
-    pln9: TppLine;
-    lblplbl9: TppLabel;
-    lblplbl11: TppLabel;
-    lblplbl13: TppLabel;
-    lblBZRQ: TppLabel;
-    pln13: TppLine;
-    img1: TppImage;
-    img2: TppImage;
-    pdbrcd1: TppDBBarCode;
-    imgHSF: TppImage;
-    pln15: TppLine;
-    pln16: TppLine;
-    lblplbl10: TppLabel;
-    lblplbl14: TppLabel;
-    lblSCRQ: TppLabel;
-    lblHKRQ: TppLabel;
+    ppTitleBand1: TppTitleBand;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
     ppLabel1: TppLabel;
     ppDBText1: TppDBText;
-    ppLabel2: TppLabel;
-    ppDBBarCode5: TppDBBarCode;
-    ppImage1: TppImage;
+    ppLabel4: TppLabel;
+    ppLabel21: TppLabel;
+    ppLabel24: TppLabel;
+    ppLabel25: TppLabel;
+    ppLabel26: TppLabel;
+    ppLabel27: TppLabel;
+    ppLabel28: TppLabel;
+    ppLabel29: TppLabel;
+    ppDBText2: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppLabel30: TppLabel;
+    ppDBText7: TppDBText;
+    ppDBText8: TppDBText;
+    ppDBText37: TppDBText;
+    ppLabel31: TppLabel;
+    ppLabel72: TppLabel;
+    ppDBText40: TppDBText;
     ppDBBarCode1: TppDBBarCode;
+    ppDBBarCode24: TppDBBarCode;
+    ppDBBarCode26: TppDBBarCode;
+    ppDBBarCode27: TppDBBarCode;
+    ppDBBarCode28: TppDBBarCode;
+    ppDBBarCode29: TppDBBarCode;
+    ppLabel93: TppLabel;
+    ppLabel108: TppLabel;
+    ppDBText49: TppDBText;
+    lbl1: TppLabel;
+    lbl2: TppLabel;
+    lbl3: TppDBText;
+    ppDBBarCode30: TppDBBarCode;
+    ppImage1: TppImage;
+    ppDBText6: TppDBText;
+    ppLabel2: TppLabel;
+    ppDBText9: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppSummaryBand1: TppSummaryBand;
     //ppDetailBand1: TppDetailBand;
     //ppLabel1: TppLabel;
 //    ppDBText1: TppDBText;
@@ -417,7 +418,7 @@ function GetCustType(ACustCode: string): TCustomType;
   创力仕:1901
   三星:1850,1992,2157,2158  已经失效
   海思半导体: S2258,2258,2516
-  中兴康讯：2303,2156(深圳), (0275,0276,0257,1001 梅州) ,(7053，7345,6791 东莞)
+  中兴康讯：2303,2156(深圳), (0275,0276,0257,1001,Z1377 梅州) ,(7053，7345,6791 东莞)
   大华：2390, 2622
   闻泰：6259东莞
   大运河：7100东莞,7101东莞 ,6431东莞 6399东莞 7139东莞，7486东莞
@@ -438,7 +439,7 @@ begin
   //if StrInArr(ACustCode,['1202']) then Result := ctGreatWall else
   if StrInArr(ACustCode,['1901']) then Result := ctCLS else
   //if StrInArr(ACustCode,['1850','1992','2157','2158']) then Result := ctSAMSUNG else
-  if StrInArr(ACustCode,['2303','Z0275','Z0276','Z0257','2156','Z1001','7053','7345','6791','Z1061','Z1289','2031']) then Result := ctZXKX else
+  if StrInArr(ACustCode,['2303','Z0275','Z0276','Z0257','2156','Z1001','7053','7345','6791','Z1061','Z1289','2031','Z1377']) then Result := ctZXKX else
   if StrInArr(ACustCode,['S2258','2258','2516']) then Result := ctHS else
   if StrInArr(ACustCode,['2390','2622']) then Result := ctDH else
   //
@@ -448,7 +449,7 @@ begin
   if StrInArr(ACustCode,['6095','6109']) then Result := ctHQ else
   if StrInArr(ACustCode,['6298','6241','7139']) then Result := ctTCL else
   if StrInArr(ACustCode,['6378']) then Result := ctJCKJ else
-  if StrInArr(ACustCode,['S2763']) then Result := ctBCKJ else
+  if StrInArr(ACustCode,['S2763','7826']) then Result := ctBCKJ else
   if StrInArr(ACustCode,['7340']) then Result := ctYYD else
   if StrInArr(ACustCode,['7325']) then Result := ctDGHS else
   if StrInArr(ACustCode,['7364','7365','7195']) then Result := ctDGDELL else
@@ -752,7 +753,7 @@ begin
            'V' + DM1.adsReport.fieldbyname('客供代码').AsString + //' ' +
            '1T' + pdbReport.Fields[pdbReport.FindField('箱号')].AsString + //' ' +
            '9D' + pdbReport.Fields[pdbReport.FindField('批次')].AsString + //' ' +
-           'X'+ pdbReport.Fields[pdbReport.FindField('xBrode')].AsString + //' ' +
+           '25B'+ pdbReport.Fields[pdbReport.FindField('xBrode')].AsString + //' ' +
            'PSN'+ pdbReport.Fields[pdbReport.FindField('Psn')].AsString + //' ' +
            'MWuZhu' + //' ' +
            '4LChina' ;//+ ' ';
