@@ -156,9 +156,9 @@ begin
   qkVar.LoginTime := qkCommfunc.DateTimeToStr(now);
   qkVar.LoginIP := qkCommfunc.GetLocalIP;
   qkVar.LoginDBName := 'QuickSoft';
-  qkVar.LoginSvrIP := 'eastsoft.imwork.net';
+  qkVar.LoginSvrIP := 'www.topcb.work';
   qkVar.LoginPsdMD5 := '21232F297A57A5A743894A0E4A801FC3';
-  //qkVar.LoginSvrIP := '127.0.0.1';
+  //qkVar.LoginSvrIP := '172.18.8.30';
 {$ENDIF}
 {$ENDREGION}
 

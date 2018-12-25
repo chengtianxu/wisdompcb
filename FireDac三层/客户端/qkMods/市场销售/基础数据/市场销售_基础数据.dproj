@@ -70,6 +70,7 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UnitSearchPath>..\..\..\..\qkSearchPth\dcp\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -150,6 +151,20 @@
                     <Source Name="MainSource">市场销售_基础数据.dpk</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\Project\qkSearchPth\bpl\DclEhLib250.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\Project\qkSearchPth\bpl\DclEhLib250.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrx25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrx25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxADO25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxADO25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxDB25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxDB25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxDBX25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxDBX25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxe25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxe25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxIBX25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxIBX25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxTee25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfrxTee25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfs25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfs25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsADO25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsADO25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsDB25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsDB25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsIBX25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsIBX25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsTee25.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\ThirdPart\FastReport Professtional 5.6.2 Full Source for 10.2 Tokyo\LibD25\dclfsTee25.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\Project\output\qkClient\qkControls.bpl">File F:\MyDisk\WZ\WZ_Svn\个人存储目录\ChengTX\DQuickSoft\Project\output\qkClient\qkControls.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>

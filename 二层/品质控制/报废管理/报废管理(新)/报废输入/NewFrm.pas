@@ -494,7 +494,7 @@ begin
   end else
   begin
     lblNote.Visible := False;
-    if FType06 = 0 then
+    //if FType06 = 0 then
     begin
       dm1.cdsIN.Close;         //打开内层预报废
       dm1.cdsIN.Params.ParamByName('OUT06').Value:= edtZYDH.Tag;

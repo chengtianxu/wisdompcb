@@ -93,13 +93,13 @@
         <DCC_Optimize>false</DCC_Optimize>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Build>69</VerInfo_Build>
+        <VerInfo_Release>1</VerInfo_Release>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_ExeOutput>D:\sjsys\EXEC\</DCC_ExeOutput>
         <DCC_DcuOutput>..\..\..\..\dcu\</DCC_DcuOutput>
         <DCC_DcpOutput>..\..\..\..\dcp</DCC_DcpOutput>
-        <VerInfo_Keys>CompanyName=WISDOMPCB;FileDescription=BOM报价单;FileVersion=1.0.0.69;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=BOM报价单;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=WISDOMPCB;FileDescription=BOM报价单;FileVersion=1.0.1.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=BOM报价单;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_UnitSearchPath>..\common\;..\计价工序设置\;..\报价模板设置\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>

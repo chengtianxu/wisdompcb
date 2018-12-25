@@ -18,16 +18,16 @@ object FrmDB: TFrmDB
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 777
-    Height = 438
+    Width = 769
+    Height = 430
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
     object sg1: TStringGrid
       Left = 1
       Top = 1
-      Width = 775
-      Height = 436
+      Width = 767
+      Height = 428
       Align = alClient
       TabOrder = 0
       ColWidths = (

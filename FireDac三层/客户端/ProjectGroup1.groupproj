@@ -1,0 +1,180 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6E48E39F-03CE-4DEF-9530-322A855EC909}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="qkSvrIntf\qkSvrIntf.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkControl\qkControls.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkFunc\qkFunc.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkForm\qkForm.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkERPLauncher\qkERPLanucher.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkMainApp\qkMainApp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkScript\qkScriptEng.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkMods\系统设置\基础设置\系统设置_基础设置.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkMods\系统设置\开发选项\系统设置_开发选项.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkMods\系统设置\用户管理\系统设置_用户管理.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkMods\财务管理\基础数据\财务管理_基础数据.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkMods\人事管理\基础数据\人事管理_基础数据.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="qkMods\市场销售\基础数据\市场销售_基础数据.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="qkSvrIntf">
+        <MSBuild Projects="qkSvrIntf\qkSvrIntf.dproj"/>
+    </Target>
+    <Target Name="qkSvrIntf:Clean">
+        <MSBuild Projects="qkSvrIntf\qkSvrIntf.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qkSvrIntf:Make">
+        <MSBuild Projects="qkSvrIntf\qkSvrIntf.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="qkControls">
+        <MSBuild Projects="qkControl\qkControls.dproj"/>
+    </Target>
+    <Target Name="qkControls:Clean">
+        <MSBuild Projects="qkControl\qkControls.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qkControls:Make">
+        <MSBuild Projects="qkControl\qkControls.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="qkFunc">
+        <MSBuild Projects="qkFunc\qkFunc.dproj"/>
+    </Target>
+    <Target Name="qkFunc:Clean">
+        <MSBuild Projects="qkFunc\qkFunc.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qkFunc:Make">
+        <MSBuild Projects="qkFunc\qkFunc.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="qkForm">
+        <MSBuild Projects="qkForm\qkForm.dproj"/>
+    </Target>
+    <Target Name="qkForm:Clean">
+        <MSBuild Projects="qkForm\qkForm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qkForm:Make">
+        <MSBuild Projects="qkForm\qkForm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="qkERPLanucher">
+        <MSBuild Projects="qkERPLauncher\qkERPLanucher.dproj"/>
+    </Target>
+    <Target Name="qkERPLanucher:Clean">
+        <MSBuild Projects="qkERPLauncher\qkERPLanucher.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qkERPLanucher:Make">
+        <MSBuild Projects="qkERPLauncher\qkERPLanucher.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="qkMainApp">
+        <MSBuild Projects="qkMainApp\qkMainApp.dproj"/>
+    </Target>
+    <Target Name="qkMainApp:Clean">
+        <MSBuild Projects="qkMainApp\qkMainApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qkMainApp:Make">
+        <MSBuild Projects="qkMainApp\qkMainApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="qkScriptEng">
+        <MSBuild Projects="qkScript\qkScriptEng.dproj"/>
+    </Target>
+    <Target Name="qkScriptEng:Clean">
+        <MSBuild Projects="qkScript\qkScriptEng.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="qkScriptEng:Make">
+        <MSBuild Projects="qkScript\qkScriptEng.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="系统设置_基础设置">
+        <MSBuild Projects="qkMods\系统设置\基础设置\系统设置_基础设置.dproj"/>
+    </Target>
+    <Target Name="系统设置_基础设置:Clean">
+        <MSBuild Projects="qkMods\系统设置\基础设置\系统设置_基础设置.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="系统设置_基础设置:Make">
+        <MSBuild Projects="qkMods\系统设置\基础设置\系统设置_基础设置.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="系统设置_开发选项">
+        <MSBuild Projects="qkMods\系统设置\开发选项\系统设置_开发选项.dproj"/>
+    </Target>
+    <Target Name="系统设置_开发选项:Clean">
+        <MSBuild Projects="qkMods\系统设置\开发选项\系统设置_开发选项.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="系统设置_开发选项:Make">
+        <MSBuild Projects="qkMods\系统设置\开发选项\系统设置_开发选项.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="系统设置_用户管理">
+        <MSBuild Projects="qkMods\系统设置\用户管理\系统设置_用户管理.dproj"/>
+    </Target>
+    <Target Name="系统设置_用户管理:Clean">
+        <MSBuild Projects="qkMods\系统设置\用户管理\系统设置_用户管理.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="系统设置_用户管理:Make">
+        <MSBuild Projects="qkMods\系统设置\用户管理\系统设置_用户管理.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="财务管理_基础数据">
+        <MSBuild Projects="qkMods\财务管理\基础数据\财务管理_基础数据.dproj"/>
+    </Target>
+    <Target Name="财务管理_基础数据:Clean">
+        <MSBuild Projects="qkMods\财务管理\基础数据\财务管理_基础数据.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="财务管理_基础数据:Make">
+        <MSBuild Projects="qkMods\财务管理\基础数据\财务管理_基础数据.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="人事管理_基础数据">
+        <MSBuild Projects="qkMods\人事管理\基础数据\人事管理_基础数据.dproj"/>
+    </Target>
+    <Target Name="人事管理_基础数据:Clean">
+        <MSBuild Projects="qkMods\人事管理\基础数据\人事管理_基础数据.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="人事管理_基础数据:Make">
+        <MSBuild Projects="qkMods\人事管理\基础数据\人事管理_基础数据.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="市场销售_基础数据">
+        <MSBuild Projects="qkMods\市场销售\基础数据\市场销售_基础数据.dproj"/>
+    </Target>
+    <Target Name="市场销售_基础数据:Clean">
+        <MSBuild Projects="qkMods\市场销售\基础数据\市场销售_基础数据.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="市场销售_基础数据:Make">
+        <MSBuild Projects="qkMods\市场销售\基础数据\市场销售_基础数据.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="qkSvrIntf;qkControls;qkFunc;qkForm;qkERPLanucher;qkMainApp;qkScriptEng;系统设置_基础设置;系统设置_开发选项;系统设置_用户管理;财务管理_基础数据;人事管理_基础数据;市场销售_基础数据"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="qkSvrIntf:Clean;qkControls:Clean;qkFunc:Clean;qkForm:Clean;qkERPLanucher:Clean;qkMainApp:Clean;qkScriptEng:Clean;系统设置_基础设置:Clean;系统设置_开发选项:Clean;系统设置_用户管理:Clean;财务管理_基础数据:Clean;人事管理_基础数据:Clean;市场销售_基础数据:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="qkSvrIntf:Make;qkControls:Make;qkFunc:Make;qkForm:Make;qkERPLanucher:Make;qkMainApp:Make;qkScriptEng:Make;系统设置_基础设置:Make;系统设置_开发选项:Make;系统设置_用户管理:Make;财务管理_基础数据:Make;人事管理_基础数据:Make;市场销售_基础数据:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
