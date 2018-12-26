@@ -1,0 +1,19 @@
+ÉîÛÚ 172.16.0.8
+
+User ID= WZPCBConnect
+Password= 62ddf8f60269678
+Initial Catalog= SJ_V20_LIVE
+---------------------------
+
+
+¶«Ý¸ 172.18.0.8
+
+User ID= WZPCBConnect
+Password= 62ddf8f60269678
+Initial Catalog= WISDOMPCB
+---------------------------
+
+172.18.120.254
+sa
+PiQSN3mx
+
