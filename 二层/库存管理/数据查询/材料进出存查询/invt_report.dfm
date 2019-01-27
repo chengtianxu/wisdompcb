@@ -1,8 +1,8 @@
 object Form_report: TForm_report
-  Left = 574
-  Top = 270
-  Width = 328
-  Height = 320
+  Left = 416
+  Top = 314
+  Width = 536
+  Height = 495
   Caption = 'Form_report'
   Color = clBtnFace
   Font.Charset = GB2312_CHARSET
@@ -2212,7 +2212,7 @@ object Form_report: TForm_report
     PrinterSetup.mmMarginTop = 3350
     PrinterSetup.mmPaperHeight = 140000
     PrinterSetup.mmPaperWidth = 210000
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 152
     SaveAsTemplate = True
     Template.FileName = 'D:\SJSYS\NIERP\Report\exhale_inventory.rtm'
     Units = utMillimeters
@@ -3145,7 +3145,7 @@ object Form_report: TForm_report
     PrinterSetup.mmMarginTop = 0
     PrinterSetup.mmPaperHeight = 30000
     PrinterSetup.mmPaperWidth = 70000
-    PrinterSetup.PaperSize = 256
+    PrinterSetup.PaperSize = 152
     SaveAsTemplate = True
     Template.FileName = 'D:\SJSYS\NIERP\Report\IQCCode.rtm'
     Units = utMillimeters
@@ -3957,5 +3957,889 @@ object Form_report: TForm_report
     WindowWidth = 600
     Left = 224
     Top = 216
+  end
+  object ppReportPO: TppReport
+    AutoStop = False
+    DataPipeline = DBPipelinePO
+    PrinterSetup.BinName = #32487#32493#21367#21160
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'Custom'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.mmMarginBottom = 3350
+    PrinterSetup.mmMarginLeft = 3350
+    PrinterSetup.mmMarginRight = 1000
+    PrinterSetup.mmMarginTop = 3000
+    PrinterSetup.mmPaperHeight = 45000
+    PrinterSetup.mmPaperWidth = 95000
+    PrinterSetup.PaperSize = 152
+    Template.FileName = 'D:\sjsys\NIERP\Report\PoCodeprint22.rtm'
+    Units = utMillimeters
+    DeviceType = 'Screen'
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    Left = 344
+    Top = 300
+    Version = '7.01'
+    mmColumnWidth = 57300
+    DataPipelineName = 'DBPipelinePO'
+    object ppDetailBand6: TppDetailBand
+      mmBottomOffset = 0
+      mmHeight = 37306
+      mmPrintPosition = 0
+      object ppLabel247: TppLabel
+        UserName = 'Label247'
+        Caption = #20116#26666'   '#29289#26009#26631#31614
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Courier New'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 25135
+        mmTop = 1588
+        mmWidth = 29898
+        BandType = 4
+      end
+      object ppLine141: TppLine
+        UserName = 'Line141'
+        Weight = 0.750000000000000000
+        mmHeight = 1323
+        mmLeft = 5027
+        mmTop = 4763
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLine143: TppLine
+        UserName = 'Line143'
+        Weight = 0.750000000000000000
+        mmHeight = 1588
+        mmLeft = 5027
+        mmTop = 13758
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLine144: TppLine
+        UserName = 'Line144'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 32279
+        mmLeft = 21167
+        mmTop = 4763
+        mmWidth = 529
+        BandType = 4
+      end
+      object ppLabel249: TppLabel
+        UserName = 'Label249'
+        Caption = #29289#26009#32534#30721
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 6085
+        mmTop = 7144
+        mmWidth = 14023
+        BandType = 4
+      end
+      object ppLine145: TppLine
+        UserName = 'Line145'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 5027
+        mmTop = 17992
+        mmWidth = 76465
+        BandType = 4
+      end
+      object ppLabel248: TppLabel
+        UserName = 'Label248'
+        Caption = #35268#26684#22411#21495
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 6350
+        mmTop = 14023
+        mmWidth = 14023
+        BandType = 4
+      end
+      object ppLabel250: TppLabel
+        UserName = 'Label250'
+        Caption = #25968#37327
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 12965
+        mmTop = 32279
+        mmWidth = 7144
+        BandType = 4
+      end
+      object ppLine148: TppLine
+        UserName = 'Line148'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 4763
+        mmTop = 25929
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLine150: TppLine
+        UserName = 'Line150'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 5027
+        mmTop = 30692
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLabel252: TppLabel
+        UserName = 'Label252'
+        Caption = #20379#24212#21830
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 4022
+        mmLeft = 9525
+        mmTop = 26723
+        mmWidth = 10541
+        BandType = 4
+      end
+      object ppLabel254: TppLabel
+        UserName = 'Label254'
+        Caption = #22791#27880
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 13229
+        mmTop = 19844
+        mmWidth = 7144
+        BandType = 4
+      end
+      object ppDBBarCode1: TppDBBarCode
+        UserName = 'DBBarCode1'
+        AutoEncode = True
+        BarCodeType = bcCode128
+        BarColor = clWindowText
+        DataField = 'INV_PART_NUMBER'
+        DataPipeline = DBPipelinePO
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Courier New'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 7938
+        mmLeft = 23283
+        mmTop = 5821
+        mmWidth = 57415
+        BandType = 4
+        mmBarWidth = 254
+        mmWideBarRatio = 76200
+      end
+      object ppDBText73: TppDBText
+        UserName = 'DBText73'
+        AutoSize = True
+        DataField = 'INV_DESCRIPTION'
+        DataPipeline = DBPipelinePO
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 3979
+        mmLeft = 23283
+        mmTop = 14288
+        mmWidth = 58208
+        BandType = 4
+      end
+      object ppDBBarCode2: TppDBBarCode
+        UserName = 'DBBarCode2'
+        AutoEncode = True
+        BarCodeType = bcCode128
+        BarColor = clWindowText
+        DataField = 'QUAN_ON_HAND'
+        DataPipeline = DBPipelinePO
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Courier New'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 5821
+        mmLeft = 23283
+        mmTop = 31221
+        mmWidth = 58738
+        BandType = 4
+        mmBarWidth = 254
+        mmWideBarRatio = 76200
+      end
+      object ppDBText76: TppDBText
+        UserName = 'DBText76'
+        AutoSize = True
+        DataField = 'BARCODE_ID'
+        DataPipeline = DBPipelinePO
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        WordWrap = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 3979
+        mmLeft = 23283
+        mmTop = 19050
+        mmWidth = 58208
+        BandType = 4
+      end
+      object ppLine142: TppLine
+        UserName = 'Line142'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 32279
+        mmLeft = 4763
+        mmTop = 4763
+        mmWidth = 529
+        BandType = 4
+      end
+      object ppLine146: TppLine
+        UserName = 'Line146'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 32279
+        mmLeft = 81756
+        mmTop = 5027
+        mmWidth = 529
+        BandType = 4
+      end
+      object ppLine147: TppLine
+        UserName = 'Line1501'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 4763
+        mmTop = 37041
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppDBText74: TppDBText
+        UserName = 'DBText74'
+        AutoSize = True
+        DataField = 'code23'
+        DataPipeline = DBPipelinePO
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        WordWrap = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 3979
+        mmLeft = 23283
+        mmTop = 26458
+        mmWidth = 58462
+        BandType = 4
+      end
+    end
+  end
+  object ppDesignerPO: TppDesigner
+    Caption = 'ReportBuilder'
+    DataSettings.SessionType = 'BDESession'
+    DataSettings.AllowEditSQL = False
+    DataSettings.CollationType = ctASCII
+    DataSettings.DatabaseType = dtParadox
+    DataSettings.IsCaseSensitive = True
+    DataSettings.SQLType = sqBDELocal
+    Position = poScreenCenter
+    Report = ppReportPO
+    IniStorageType = 'IniFile'
+    IniStorageName = '($WINSYS)\RBuilder.ini'
+    WindowHeight = 400
+    WindowLeft = 100
+    WindowTop = 50
+    WindowWidth = 600
+    Left = 432
+    Top = 304
+  end
+  object DataSource4: TDataSource
+    DataSet = ADOQuery1
+    Left = 168
+    Top = 300
+  end
+  object ADOQuery1: TADOQuery
+    Connection = Form1.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'rkey22'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      ''
+      '               '
+      
+        '               SELECT     TOP (100) PERCENT dbo.Data0017.INV_PAR' +
+        'T_NUMBER, dbo.Data0017.INV_NAME, dbo.Data0017.INV_DESCRIPTION, d' +
+        'bo.Data0496.GROUP_DESC, '
+      
+        '                      dbo.Data0022.RKEY AS rkey22, dbo.Data0023.' +
+        'ABBR_NAME AS code23, dbo.Data0022.QUAN_ON_HAND, dbo.Data0022.QUA' +
+        'N_TO_BE_STOCKED,                       '
+      
+        '                       (case when dbo.Data0022.EXPIRE_DATE IS no' +
+        't NULL  then  DATEDIFF(day, GETDATE(), dbo.Data0022.EXPIRE_DATE)' +
+        ' else 0 end ) AS eff_day,        '
+      
+        '                       dbo.Data0016.LOCATION, dbo.Data0022.EXPIR' +
+        'E_DATE,dbo.Data0022.BARCODE_ID, '
+      
+        '                      dbo.Data0022.cust_decl, dbo.Data0070.PO_RE' +
+        'V_NO,dbo.Data0456.GRN_NUMBER,'
+      
+        '                      dbo.Data0022.rohs, dbo.Data0022.SUPPLIER2,' +
+        ' '
+      
+        '                      ROUND(dbo.Data0022.QUAN_ON_HAND * dbo.Data' +
+        '0017.STOCK_SELL, 4) AS total_area,'
+      
+        '                      dbo.Data0022.PACKING_SLIP_FLAG,           ' +
+        '         '
+      
+        '                       dbo.Data0022.STOCK_BASE, dbo.Data0022.spe' +
+        'c_place, '
+      
+        '                      dbo.Data0019.inv_group_name, dbo.Data0022.' +
+        'STOCK_BASE * dbo.Data0022.QUAN_ON_HAND AS '#24211#23384#24635#37325', dbo.Data0070.PO_' +
+        'NUMBER, '
+      
+        '                      dbo.Data0022.TDATE, dbo.Data0016.RKEY AS r' +
+        'key16, '
+      
+        '                       dbo.Data0070.ANALYSIS_CODE_1,  Data0005_1' +
+        '.EMPLOYEE_NAME, '
+      
+        '                      dbo.Data0070.CONFIRMATION_NUMBER, dbo.Data' +
+        '0068.PO_REQ_NUMBER,'
+      
+        '                      DATEDIFF(day,dbo.Data0456.ship_date, GETDA' +
+        'TE()) as InDays '
+      '                    '
+      'FROM      dbo.Data0005 AS Data0005_1 RIGHT OUTER JOIN'
+      '               dbo.Data0070 RIGHT OUTER JOIN'
+      #9#9'  dbo.Data0015 INNER JOIN'
+      #9#9'  dbo.Data0023 INNER JOIN'
+      #9#9'  dbo.Data0456 INNER JOIN'
+      #9#9'  dbo.Data0022 INNER JOIN'
+      
+        #9#9'  dbo.Data0017 ON dbo.Data0022.INVENTORY_PTR = dbo.Data0017.RK' +
+        'EY INNER JOIN'
+      
+        #9#9'  dbo.Data0496 ON dbo.Data0017.GROUP_PTR = dbo.Data0496.RKEY O' +
+        'N dbo.Data0456.RKEY = dbo.Data0022.GRN_PTR INNER JOIN'
+      
+        #9#9'  dbo.Data0002 ON dbo.Data0022.LOCATION_PTR_FROM = dbo.Data000' +
+        '2.RKEY ON dbo.Data0023.RKEY = dbo.Data0456.SUPP_PTR INNER JOIN'
+      
+        #9#9'  dbo.Data0016 ON dbo.Data0022.LOCATION_PTR = dbo.Data0016.RKE' +
+        'Y ON dbo.Data0015.RKEY = dbo.Data0456.warehouse_ptr INNER JOIN'
+      
+        #9#9'  dbo.Data0001 ON dbo.Data0456.currency_ptr = dbo.Data0001.RKE' +
+        'Y LEFT OUTER JOIN'
+      
+        #9#9'  dbo.Data0071 ON dbo.Data0022.SOURCE_PTR = dbo.Data0071.RKEY ' +
+        'LEFT OUTER JOIN'
+      
+        #9#9'  dbo.Data0019 ON dbo.Data0496.group_ptr = dbo.Data0019.rkey L' +
+        'EFT OUTER JOIN'
+      
+        #9#9'  dbo.DATA0391 ON dbo.Data0022.rkey391 = dbo.DATA0391.rkey LEF' +
+        'T OUTER JOIN'
+      
+        #9#9'  dbo.Data0005 ON dbo.DATA0391.auth_user_ptr = dbo.Data0005.RK' +
+        'EY ON dbo.Data0070.RKEY = dbo.Data0456.PO_PTR LEFT OUTER JOIN'
+      
+        #9#9'  dbo.Data0069 ON dbo.Data0071.rkey69 = dbo.Data0069.RKEY LEFT' +
+        ' OUTER JOIN'
+      
+        #9#9'  dbo.Data0068 ON dbo.Data0069.PURCH_REQ_PTR = dbo.Data0068.RK' +
+        'EY ON Data0005_1.RKEY = dbo.Data0070.EMPLOYEE_POINTER'
+      ''
+      'WHERE dbo.Data0022.RKEY=:rkey22')
+    Left = 80
+    Top = 300
+    object ADOQuery1INV_PART_NUMBER: TStringField
+      FieldName = 'INV_PART_NUMBER'
+      Size = 25
+    end
+    object ADOQuery1INV_NAME: TStringField
+      FieldName = 'INV_NAME'
+      Size = 30
+    end
+    object ADOQuery1INV_DESCRIPTION: TStringField
+      FieldName = 'INV_DESCRIPTION'
+      Size = 70
+    end
+    object ADOQuery1GROUP_DESC: TStringField
+      FieldName = 'GROUP_DESC'
+      Size = 30
+    end
+    object ADOQuery1rkey22: TAutoIncField
+      FieldName = 'rkey22'
+      ReadOnly = True
+    end
+    object ADOQuery1code23: TStringField
+      FieldName = 'code23'
+      Size = 16
+    end
+    object ADOQuery1QUAN_ON_HAND: TBCDField
+      FieldName = 'QUAN_ON_HAND'
+      Precision = 19
+    end
+    object ADOQuery1QUAN_TO_BE_STOCKED: TBCDField
+      FieldName = 'QUAN_TO_BE_STOCKED'
+      Precision = 18
+      Size = 6
+    end
+    object ADOQuery1eff_day: TIntegerField
+      FieldName = 'eff_day'
+      ReadOnly = True
+    end
+    object ADOQuery1LOCATION: TStringField
+      FieldName = 'LOCATION'
+    end
+    object ADOQuery1EXPIRE_DATE: TDateTimeField
+      FieldName = 'EXPIRE_DATE'
+    end
+    object ADOQuery1BARCODE_ID: TStringField
+      FieldName = 'BARCODE_ID'
+      Size = 100
+    end
+    object ADOQuery1cust_decl: TStringField
+      FieldName = 'cust_decl'
+      Size = 50
+    end
+    object ADOQuery1PO_REV_NO: TStringField
+      FieldName = 'PO_REV_NO'
+      Size = 10
+    end
+    object ADOQuery1GRN_NUMBER: TStringField
+      FieldName = 'GRN_NUMBER'
+      Size = 10
+    end
+    object ADOQuery1rohs: TStringField
+      FieldName = 'rohs'
+      Size = 10
+    end
+    object ADOQuery1SUPPLIER2: TStringField
+      FieldName = 'SUPPLIER2'
+      Size = 30
+    end
+    object ADOQuery1total_area: TFloatField
+      FieldName = 'total_area'
+      ReadOnly = True
+    end
+    object ADOQuery1PACKING_SLIP_FLAG: TStringField
+      FieldName = 'PACKING_SLIP_FLAG'
+      FixedChar = True
+      Size = 2
+    end
+    object ADOQuery1STOCK_BASE: TBCDField
+      FieldName = 'STOCK_BASE'
+      Precision = 8
+    end
+    object ADOQuery1spec_place: TStringField
+      FieldName = 'spec_place'
+    end
+    object ADOQuery1inv_group_name: TStringField
+      FieldName = 'inv_group_name'
+    end
+    object ADOQuery1DSDesigner: TBCDField
+      FieldName = #24211#23384#24635#37325
+      ReadOnly = True
+      Precision = 28
+      Size = 8
+    end
+    object ADOQuery1PO_NUMBER: TStringField
+      FieldName = 'PO_NUMBER'
+      Size = 15
+    end
+    object ADOQuery1TDATE: TDateTimeField
+      FieldName = 'TDATE'
+    end
+    object ADOQuery1rkey16: TAutoIncField
+      FieldName = 'rkey16'
+      ReadOnly = True
+    end
+    object ADOQuery1ANALYSIS_CODE_1: TStringField
+      FieldName = 'ANALYSIS_CODE_1'
+    end
+    object ADOQuery1EMPLOYEE_NAME: TStringField
+      FieldName = 'EMPLOYEE_NAME'
+      Size = 16
+    end
+    object ADOQuery1CONFIRMATION_NUMBER: TStringField
+      FieldName = 'CONFIRMATION_NUMBER'
+    end
+    object ADOQuery1PO_REQ_NUMBER: TStringField
+      FieldName = 'PO_REQ_NUMBER'
+      Size = 15
+    end
+    object ADOQuery1InDays: TIntegerField
+      FieldName = 'InDays'
+      ReadOnly = True
+    end
+  end
+  object ppReportNo: TppReport
+    AutoStop = False
+    DataPipeline = DBPipelinePO
+    PrinterSetup.BinName = #32487#32493#21367#21160
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'Custom'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.mmMarginBottom = 3350
+    PrinterSetup.mmMarginLeft = 3350
+    PrinterSetup.mmMarginRight = 1000
+    PrinterSetup.mmMarginTop = 3000
+    PrinterSetup.mmPaperHeight = 45000
+    PrinterSetup.mmPaperWidth = 95000
+    PrinterSetup.PaperSize = 152
+    Template.FileName = 'D:\sjsys\NIERP\Report\PoCodeprintNo22.rtm'
+    Units = utMillimeters
+    BeforePrint = ppReportNoBeforePrint
+    DeviceType = 'Screen'
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    TextSearchSettings.DefaultString = '<FindText>'
+    TextSearchSettings.Enabled = True
+    Left = 344
+    Top = 380
+    Version = '7.01'
+    mmColumnWidth = 57300
+    DataPipelineName = 'DBPipelinePO'
+    object ppDetailBand7: TppDetailBand
+      mmBottomOffset = 0
+      mmHeight = 37306
+      mmPrintPosition = 0
+      object ppLabel251: TppLabel
+        UserName = 'Label247'
+        Caption = #20116#26666'   '#29289#26009#26631#31614
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Courier New'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3175
+        mmLeft = 25135
+        mmTop = 1588
+        mmWidth = 29898
+        BandType = 4
+      end
+      object ppLine149: TppLine
+        UserName = 'Line141'
+        Weight = 0.750000000000000000
+        mmHeight = 1323
+        mmLeft = 5027
+        mmTop = 4763
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLine151: TppLine
+        UserName = 'Line143'
+        Weight = 0.750000000000000000
+        mmHeight = 1588
+        mmLeft = 5027
+        mmTop = 13758
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLine152: TppLine
+        UserName = 'Line144'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 32279
+        mmLeft = 21167
+        mmTop = 4763
+        mmWidth = 529
+        BandType = 4
+      end
+      object ppLabel253: TppLabel
+        UserName = 'Label249'
+        Caption = #29289#26009#32534#30721
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 6085
+        mmTop = 7144
+        mmWidth = 14023
+        BandType = 4
+      end
+      object ppLine153: TppLine
+        UserName = 'Line145'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 5027
+        mmTop = 20902
+        mmWidth = 76465
+        BandType = 4
+      end
+      object ppLabel255: TppLabel
+        UserName = 'Label248'
+        Caption = #35268#26684#22411#21495
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 6350
+        mmTop = 14023
+        mmWidth = 14023
+        BandType = 4
+      end
+      object ppLabel256: TppLabel
+        UserName = 'Label250'
+        Caption = #25968#37327
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 23283
+        mmTop = 32279
+        mmWidth = 6879
+        BandType = 4
+      end
+      object ppLine154: TppLine
+        UserName = 'Line148'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 4763
+        mmTop = 25929
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLine155: TppLine
+        UserName = 'Line150'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 5027
+        mmTop = 30692
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppLabel257: TppLabel
+        UserName = 'Label252'
+        Caption = #20379#24212#21830
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 4022
+        mmLeft = 9525
+        mmTop = 26723
+        mmWidth = 10541
+        BandType = 4
+      end
+      object ppLabel258: TppLabel
+        UserName = 'Label254'
+        Caption = #22791#27880
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 13229
+        mmTop = 22225
+        mmWidth = 7144
+        BandType = 4
+      end
+      object ppDBBarCode3: TppDBBarCode
+        UserName = 'DBBarCode1'
+        AutoEncode = True
+        BarCodeType = bcCode128
+        BarColor = clWindowText
+        DataField = 'INV_PART_NUMBER'
+        DataPipeline = DBPipelinePO
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Courier New'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 7938
+        mmLeft = 23283
+        mmTop = 5821
+        mmWidth = 57679
+        BandType = 4
+        mmBarWidth = 254
+        mmWideBarRatio = 76200
+      end
+      object ppDBText75: TppDBText
+        UserName = 'DBText73'
+        AutoSize = True
+        DataField = 'INV_DESCRIPTION'
+        DataPipeline = DBPipelinePO
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        WordWrap = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 6879
+        mmLeft = 23283
+        mmTop = 14288
+        mmWidth = 57679
+        BandType = 4
+      end
+      object ppDBText77: TppDBText
+        UserName = 'DBText76'
+        AutoSize = True
+        DataField = 'BARCODE_ID'
+        DataPipeline = DBPipelinePO
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        WordWrap = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 4022
+        mmLeft = 23283
+        mmTop = 21960
+        mmWidth = 17780
+        BandType = 4
+      end
+      object ppLine156: TppLine
+        UserName = 'Line142'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 32279
+        mmLeft = 4763
+        mmTop = 4763
+        mmWidth = 529
+        BandType = 4
+      end
+      object ppLine157: TppLine
+        UserName = 'Line146'
+        Position = lpLeft
+        Weight = 0.750000000000000000
+        mmHeight = 32279
+        mmLeft = 81756
+        mmTop = 5027
+        mmWidth = 529
+        BandType = 4
+      end
+      object ppLine158: TppLine
+        UserName = 'Line1501'
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 4763
+        mmTop = 37041
+        mmWidth = 76994
+        BandType = 4
+      end
+      object ppDBText78: TppDBText
+        UserName = 'DBText74'
+        AutoSize = True
+        DataField = 'code23'
+        DataPipeline = DBPipelinePO
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        Transparent = True
+        WordWrap = True
+        DataPipelineName = 'DBPipelinePO'
+        mmHeight = 4022
+        mmLeft = 23283
+        mmTop = 26458
+        mmWidth = 10668
+        BandType = 4
+      end
+      object ppLabel20: TppLabel
+        UserName = 'Label2501'
+        Caption = #25968#37327
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = #23435#20307
+        Font.Size = 10
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 13229
+        mmTop = 32279
+        mmWidth = 6879
+        BandType = 4
+      end
+    end
+  end
+  object DBPipelinePO: TppDBPipeline
+    DataSource = DataSource4
+    UserName = 'ppDBPipeline1'
+    Left = 252
+    Top = 304
   end
 end

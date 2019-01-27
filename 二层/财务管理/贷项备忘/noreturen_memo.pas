@@ -133,6 +133,9 @@ type
   public
     { Public declarations }
    CUST_PTR:integer;
+   FCreateFN: Boolean;
+   FChanges: Boolean;
+   FIsEdit: Boolean;
   end;
 
 var
@@ -593,10 +596,32 @@ var
  i:word;
  mt_error:boolean;
 begin
-if (strtofloat(edit5.Text)=0)  or (not bitbtn2.Enabled) then exit;
-if (dm.fincontrol1='N') then exit;
+if (strtofloat(edit5.Text)=0) or (not bitbtn2.Enabled) then exit;
+if (dm.fincontrol1='N') then exit;  //走发出商品形式不同步生成凭证
 
+
+ 
 if (dm.ADO116.State=dsinsert) or (edit11.Text='') then
+begin
+
+if (dm.fincontrol1='Y') and (sgrid1.RowCount<=2) and not FCreateFN and not FChanges then
+begin
+  if MessageBox(Handle,'是否生成凭证','提示',MB_YESNO) = IDYES then
+  begin
+    FCreateFN := True;
+  end else
+  begin
+    FCreateFN := False;
+  end;
+  FChanges := True;
+end;
+
+if (sgrid1.RowCount>2) then
+  FCreateFN := True;
+
+if not FCreateFN then Exit;
+
+
 if (dm.ado116CUST_PTR.Value<>CUST_PTR) or (sgrid1.RowCount<=2) then
  begin
   cust_ptr:=dm.ado116CUST_PTR.Value;
@@ -964,6 +989,8 @@ if (dm.ado116CUST_PTR.Value<>CUST_PTR) or (sgrid1.RowCount<=2) then
 
   self.re_calculate;
  end;
+
+end;
 if sgrid1.RowCount=2 then
  begin
   speedbutton2.Enabled:=false;
@@ -1034,10 +1061,26 @@ if strtocurr(edit9.Text)<=0 then
     DBEdit3.SetFocus;
     exit;
    end;
-    
-self.PageControl1Change(sender);
-re_calculate;
-if strtocurr(RemoveInvalid(statictext1.Caption))<>
+
+
+
+ self.PageControl1Change(sender);
+
+ if (dm.fincontrol1='Y') and (sgrid1.RowCount<=2) then
+begin
+  if MessageBox(Handle,'该笔扣款没有生成凭证，是否继续？','提示',MB_YESNO) = IDYES then
+  begin
+
+  end else
+  begin
+    Exit;
+  end;
+end;
+
+
+
+ re_calculate;
+ if strtocurr(RemoveInvalid(statictext1.Caption))<>
    strtocurr(RemoveInvalid(statictext2.Caption)) then
  begin
   messagedlg('科目借贷双方金额不一致!',mterror,[mbcancel],0);
@@ -1046,17 +1089,7 @@ if strtocurr(RemoveInvalid(statictext1.Caption))<>
   exit;
  end;
 
-{ if strtocurr(formatfloat('0.00',strtocurr(edit9.Text)*strtofloat(edit5.Text)
-                             ))<>   //贷方合计
-    strtocurr(RemoveInvalid(statictext2.Caption)) then
-  begin
-   messagedlg('业务发生额与凭证发生额不一致!',mterror,[mbcancel],0);
-   self.PageControl1.ActivePageIndex:=1;
-   sgrid1.SetFocus;
-   exit;
-  end;
-}
-  if edit11.Text<> '' then
+ if edit11.Text<> '' then
   begin
   if not dm.Aqd508.Active then dm.Aqd508.Open;
   if (strtoint(Edit14.Text) < dm.Aqd508CURR_FYEAR.Value) or
@@ -1075,8 +1108,11 @@ if strtocurr(RemoveInvalid(statictext1.Caption))<>
     edit12.SetFocus;
     exit;
    end;
-  end;    
+  end;
+     
 end;
+
+
 
 procedure TForm3.BitBtn2Click(Sender: TObject);
 var
@@ -1109,6 +1145,7 @@ if dm.ado116.State=dsinsert then//新增
      end;
    end;
 
+  if Trim(Edit11.Text)<>'' then
   if self.vo_number(trim(edit11.Text)) then
    begin
     edit11.Text:=self.get_vouchernumber(strtodate(edit12.Text));
@@ -1625,6 +1662,8 @@ else
   n9.Enabled:=true;
   n11.Enabled:=true;
  end;
+ if FIsEdit then
+  N7.Enabled := False;
 end;
 
 procedure TForm3.BitBtn1Click(Sender: TObject);

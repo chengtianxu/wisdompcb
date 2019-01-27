@@ -1,6 +1,6 @@
 object frmMain: TfrmMain
-  Left = 259
-  Top = 127
+  Left = 129
+  Top = 70
   Width = 937
   Height = 631
   Caption = #22266#23450#36164#20135#22686#21152
@@ -323,7 +323,7 @@ object frmMain: TfrmMain
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 573
+    Top = 574
     Width = 921
     Height = 19
     Panels = <
@@ -342,10 +342,11 @@ object frmMain: TfrmMain
     Left = 0
     Top = 41
     Width = 921
-    Height = 532
+    Height = 533
     Align = alClient
     Ctl3D = True
     DataSource = dmcon.dsAssetList
+    DrawMemoText = True
     Flat = True
     FooterColor = clWindow
     FooterFont.Charset = ANSI_CHARSET
@@ -607,6 +608,13 @@ object frmMain: TfrmMain
         Footers = <>
         Title.Caption = #35760#36134#20973#35777#32534#30721
         Width = 99
+      end
+      item
+        EditButtons = <>
+        FieldName = 'zj_depts'
+        Footers = <>
+        Title.Caption = #25240#26087#37096#38376
+        Width = 93
       end>
   end
   object PopupMenu1: TPopupMenu

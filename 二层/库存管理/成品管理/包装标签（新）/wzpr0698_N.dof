@@ -111,7 +111,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=0
 Release=12
-Build=16
+Build=19
 Debug=0
 PreRelease=0
 Special=0
@@ -122,7 +122,7 @@ CodePage=936
 [Version Info Keys]
 CompanyName=WISDOMPCB
 FileDescription=新包装标签打印
-FileVersion=1.0.12.16
+FileVersion=1.0.12.19
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -130,7 +130,6 @@ OriginalFilename=
 ProductName=新包装标签打印
 ProductVersion=1.1.1.1
 Comments=YYY
-LastCompiledTime=2011-12-26 9:25:15
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;

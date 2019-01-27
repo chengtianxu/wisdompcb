@@ -19,7 +19,6 @@ type
     Label1: TLabel;
     Edit1: TEdit;
     DBGrid1: TDBGrid;
-    user_ptr: TLabel;
     PopupMenu1: TPopupMenu;
     PopupMenu2: TPopupMenu;
     N1: TMenuItem;
@@ -196,7 +195,6 @@ if  dm.ADOConnection1.Connected then
     sql.Add('on data0073.employee_ptr=data0005.rkey');
     sql.Add('where data0073.rkey='+rkey73);
     open;
-    user_ptr.Caption:=fieldbyname('employee_ptr').AsString;
     empl_name.Caption:=fieldbyname('employee_name').AsString;
    end;
 
@@ -395,7 +393,7 @@ if (strtoint(vprev)=1) or (strtoint(vprev)=3) then
   exit;
  end;
 
-if strtoint(self.user_ptr.Caption)<>dm.aqd116EMPL_PTR.Value then
+if strtoint(common.user_ptr)<>dm.aqd116EMPL_PTR.Value then
  begin
   messagedlg('对不起!取消操作只人输入人员才可以进行!',mtinformation,[mbok],0);
   exit;
@@ -493,7 +491,7 @@ form2:=tform2.Create(application);
  dm.ado116.Open;
  dm.ado116.Append;
  dm.ado116MEMO_TP.Value:=4;//退货备忘
- dm.ado116EMPL_PTR.Value:=strtoint(user_ptr.Caption);
+ dm.ado116EMPL_PTR.Value:=strtoint(common.user_ptr);
  dm.ado116MEMO_DATE.Value:=self.sys_sortdate;
  dm.ado116RMA_DATE.Value:=self.sys_sortdate;
  dm.ADO04.Close;
@@ -570,6 +568,7 @@ try
  dm.ado116.edit;
  with form2 do
   begin
+    FIsEdit := True;
    edit4.Text:=dm.ado116MEMO_NUMBER.Value;
    edit1.Text:=dm.aqd116CUST_CODE.Value;
    label14.Caption:=dm.aqd116CUSTOMER_NAME.Value;
@@ -607,6 +606,7 @@ try
  dm.ado116.edit;
  with form3 do
   begin
+    FIsEdit := True;
    edit4.Text:=dm.ado116MEMO_NUMBER.Value;
    edit1.Text:=dm.aqd116CUST_CODE.Value;
    label14.Caption:=dm.aqd116CUSTOMER_NAME.Value;
@@ -653,7 +653,7 @@ try
  dm.ado116.Open;
  dm.ado116.Append;
  dm.ado116MEMO_TP.Value:=3;//退货备忘
- dm.ado116EMPL_PTR.Value:=strtoint(user_ptr.Caption);
+ dm.ado116EMPL_PTR.Value:=strtoint(common.user_ptr);
  dm.ado116MEMO_DATE.Value:=self.sys_sortdate;
  dm.ado116RMA_DATE.Value:=self.sys_sortdate;
  dm.ADO04.Close;

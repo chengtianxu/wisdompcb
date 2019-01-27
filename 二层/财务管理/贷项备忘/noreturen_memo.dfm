@@ -1,6 +1,6 @@
 object Form3: TForm3
-  Left = 280
-  Top = 211
+  Left = 410
+  Top = 232
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #23458#25143#26080#36864#36135#36151#39033#22791#24536
@@ -118,7 +118,7 @@ object Form3: TForm3
     Top = 31
     Width = 688
     Height = 430
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 1
     OnChange = PageControl1Change

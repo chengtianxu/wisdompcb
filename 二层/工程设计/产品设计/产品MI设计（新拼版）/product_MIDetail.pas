@@ -852,7 +852,7 @@ for i:=1 to stringgrid3.RowCount-2 do StringGrid3.Rows[i].Clear;
  begin
   close;
   sql.Text:='select seq_no,source_ptr,layer_remark,YAB,XFB,'+
-    'XFC, XFG, XEA, XED, remark from data0033 where source_ptr='+inttostr(rkey25)+' order by seq_no ';
+    'XFC, XFG, XEA, XED,YDG, remark from data0033 where source_ptr='+inttostr(rkey25)+' order by seq_no ';
   open;
   stringgrid3.RowCount:=recordcount+2;
   for i:=1 to recordcount do
@@ -864,7 +864,8 @@ for i:=1 to stringgrid3.RowCount-2 do StringGrid3.Rows[i].Clear;
    stringgrid3.Cells[5,i]:=trim(fieldbyname('XFG').AsString);//XFG
    stringgrid3.Cells[6,i]:=trim(fieldbyname('XEA').AsString);//XEA
    stringgrid3.Cells[7,i]:=trim(fieldbyname('XED').AsString);//XED
-   stringgrid3.Cells[8,i]:=trim(fieldbyname('remark').AsString);//备注信息
+   StringGrid3.Cells[8,i]:=Trim(fieldbyname('YDG').AsString);//YDG
+   stringgrid3.Cells[9,i]:=trim(fieldbyname('remark').AsString);//备注信息
    next;
   end;
   target:=True;
@@ -887,7 +888,7 @@ with dm.ADOQuery1 do
  begin
   close;
   sql.Text:='select seq_no,source_ptr,layer_remark,YAB,XFB,'+
-    'XFC,XFG,XEA,XED,remark from data0033 where source_ptr='+inttostr(rkey25)+' order by seq_no ';
+    'XFC,XFG,XEA,XED,YDG,remark from data0033 where source_ptr='+inttostr(rkey25)+' order by seq_no ';
   open;
  end;
 
@@ -901,7 +902,8 @@ with dm.ADOQuery1 do
                               stringgrid3.Cells[5,i],
                               stringgrid3.Cells[6,i],
                               stringgrid3.Cells[7,i],
-                              stringgrid3.Cells[8,i]]);
+                              stringgrid3.Cells[8,i],
+                              stringgrid3.Cells[9,i]]);
 
 end;
 end;
@@ -2508,7 +2510,8 @@ stringgrid5.ColWidths[13] := 0;
  stringgrid3.Cells[5,0]:='XFG/XA1D1';
  stringgrid3.Cells[6,0]:='XEA/XA2B2';
  stringgrid3.Cells[7,0]:='XED/XA2C2';
- stringgrid3.Cells[8,0]:='备注信息';
+ stringgrid3.Cells[8,0]:='斜边距离';
+ stringgrid3.Cells[9,0]:='备注信息';
 
  if dm.AQY0025PROD_ROUTE_PTR.Value>0 then
   with dm.ADOQuery1 do
@@ -7258,7 +7261,7 @@ end;
 
 procedure TForm2.StringGrid3KeyPress(Sender: TObject; var Key: Char);
 begin
-if StringGrid3.Col in [2,3,4,5,6,7] then
+if StringGrid3.Col in [2,3,4,5,6,7,8] then
  begin
   if not (key in ['0'..'9','.',#8,#13]) then abort;
   if key = chr(46) then      //判断是否重复输入小数点'.'

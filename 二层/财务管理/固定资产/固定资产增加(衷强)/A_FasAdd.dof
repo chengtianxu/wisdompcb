@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=1
 Release=5
-Build=1
+Build=2
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=936
 [Version Info Keys]
 CompanyName=WISDOMPCB
 FileDescription=固定资产增加
-FileVersion=1.1.5.1
+FileVersion=1.1.5.2
 InternalName=
 LegalCopyright=
 LegalTrademarks=

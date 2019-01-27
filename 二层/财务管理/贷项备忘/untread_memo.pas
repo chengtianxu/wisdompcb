@@ -147,6 +147,7 @@ type
    function get_col6(row:integer):currency;      
   public
     { Public declarations }
+    FIsEdit: Boolean;
   end;
 
 var
@@ -1097,7 +1098,7 @@ var
  mt_error:boolean;
 begin
 if (strtofloat(edit5.Text)=0) or (not bitbtn2.Enabled) then exit;
-if (dm.fincontrol1='N') then exit;
+if (dm.fincontrol1='N') then exit;  //走发出商品形式不同步生成凭证
 if (dm.ADO116.State=dsinsert) or (edit11.Text='') then
 if (dm.ado116CUST_PTR.Value>0) and (sgrid1.RowCount<=2) then
  begin
@@ -1521,28 +1522,18 @@ if trim(edit1.Text)='' then
     exit;
    end;
 
-if sgrid1.RowCount=2 then 
-self.PageControl1Change(sender);
+ if sgrid1.RowCount=2 then self.PageControl1Change(sender);
 
-if strtocurr(RemoveInvalid(statictext1.Caption))<>
-   strtocurr(RemoveInvalid(statictext2.Caption)) then
- begin
-  messagedlg('科目借贷双方金额不一致!',mterror,[mbcancel],0);
-  self.PageControl1.ActivePageIndex:=1;
-  sgrid1.SetFocus;
-  exit;
- end;
-
-{ if strtocurr(formatfloat('0.00',strtocurr(edit9.Text)*strtofloat(edit5.Text)
-                             ))<>   //贷方合计
+ if strtocurr(RemoveInvalid(statictext1.Caption))<>
     strtocurr(RemoveInvalid(statictext2.Caption)) then
   begin
-   messagedlg('业务发生额与凭证发生额不一致!',mterror,[mbcancel],0);
+   messagedlg('科目借贷双方金额不一致!',mterror,[mbcancel],0);
    self.PageControl1.ActivePageIndex:=1;
    sgrid1.SetFocus;
    exit;
   end;
-}
+
+
   if edit11.Text<>'' then
   begin
   if not dm.Aqd508.Active then dm.Aqd508.Open;
@@ -2107,6 +2098,8 @@ else
   n9.Enabled:=true;
   n11.Enabled:=true;
  end;
+if FIsEdit then
+  N7.Enabled := False;
 end;
 
 procedure TForm2.ComboBox1Change(Sender: TObject);

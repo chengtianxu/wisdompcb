@@ -303,8 +303,8 @@ begin
             'where data0025.rkey in (select rkey from data0025 where rkey='+rkey+
                                     ' union select rkey from data0025 where parent_ptr='+rkey+
                                     ' union select rkey from data0025 where parent_ptr in (select rkey from data0025 where parent_ptr='+rkey+')) '+
-            'and Data0494.flow_spfc_flag=''Y'' and '+
-            'Data0494.after_flag=''Y'' and isnull(Data0494.PARAMETER_VALUE,'''')=''''';
+            'and (Data0494.flow_spfc_flag=''Y'' and '+
+            'Data0494.after_flag=''Y'') and (isnull(Data0494.PARAMETER_VALUE,'''')='''' or Data0494.PARAMETER_VALUE=''0'')';
 
             dmcon.tmp1.Open;
             if not dmcon.tmp1.IsEmpty then

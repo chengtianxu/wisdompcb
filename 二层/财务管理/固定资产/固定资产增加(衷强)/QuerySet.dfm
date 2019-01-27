@@ -63,9 +63,9 @@ object frmQuerySet: TfrmQuerySet
     object Label8: TLabel
       Left = 125
       Top = 39
-      Width = 52
+      Width = 78
       Height = 13
-      Caption = #23458#25143#32534#21495
+      Caption = #22266#23450#36164#20135#21345#21495
     end
     object edtValue: TEdit
       Left = 127

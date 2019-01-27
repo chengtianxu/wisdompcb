@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ADODB, ppDB, ppComm, ppRelatv, ppDBPipe, ppModule, raCodMod,
   ppBands, ppCtrls, ppVar, ppPrnabl, ppClass, ppCache, ppProd, ppReport,
-  ppEndUsr, daDataModule, ppStrtch, ppMemo;
+  ppEndUsr, daDataModule, ppStrtch, ppMemo, ppBarCod;
 
 type
   TForm_report = class(TForm)
@@ -272,14 +272,95 @@ type
     qryCodeDSDesigner26: TStringField;
     qryCodeDSDesigner27: TStringField;
     ppDesignerCode: TppDesigner;
+    ppReportPO: TppReport;
+    ppDetailBand6: TppDetailBand;
+    ppLabel247: TppLabel;
+    ppLine141: TppLine;
+    ppLine143: TppLine;
+    ppLine144: TppLine;
+    ppLabel249: TppLabel;
+    ppLine145: TppLine;
+    ppLabel248: TppLabel;
+    ppLabel250: TppLabel;
+    ppLine148: TppLine;
+    ppLine150: TppLine;
+    ppLabel252: TppLabel;
+    ppLabel254: TppLabel;
+    ppDBBarCode1: TppDBBarCode;
+    ppDBText73: TppDBText;
+    ppDBBarCode2: TppDBBarCode;
+    ppDBText76: TppDBText;
+    ppLine142: TppLine;
+    ppLine146: TppLine;
+    ppLine147: TppLine;
+    ppDBText74: TppDBText;
+    ppDesignerPO: TppDesigner;
+    DataSource4: TDataSource;
+    ADOQuery1: TADOQuery;
+    ppReportNo: TppReport;
+    ppDetailBand7: TppDetailBand;
+    ppLabel251: TppLabel;
+    ppLine149: TppLine;
+    ppLine151: TppLine;
+    ppLine152: TppLine;
+    ppLabel253: TppLabel;
+    ppLine153: TppLine;
+    ppLabel255: TppLabel;
+    ppLabel256: TppLabel;
+    ppLine154: TppLine;
+    ppLine155: TppLine;
+    ppLabel257: TppLabel;
+    ppLabel258: TppLabel;
+    ppDBBarCode3: TppDBBarCode;
+    ppDBText75: TppDBText;
+    ppDBText77: TppDBText;
+    ppLine156: TppLine;
+    ppLine157: TppLine;
+    ppLine158: TppLine;
+    ppDBText78: TppDBText;
+    ADOQuery1INV_PART_NUMBER: TStringField;
+    ADOQuery1INV_NAME: TStringField;
+    ADOQuery1INV_DESCRIPTION: TStringField;
+    ADOQuery1GROUP_DESC: TStringField;
+    ADOQuery1rkey22: TAutoIncField;
+    ADOQuery1code23: TStringField;
+    ADOQuery1QUAN_ON_HAND: TBCDField;
+    ADOQuery1QUAN_TO_BE_STOCKED: TBCDField;
+    ADOQuery1eff_day: TIntegerField;
+    ADOQuery1LOCATION: TStringField;
+    ADOQuery1EXPIRE_DATE: TDateTimeField;
+    ADOQuery1BARCODE_ID: TStringField;
+    ADOQuery1cust_decl: TStringField;
+    ADOQuery1PO_REV_NO: TStringField;
+    ADOQuery1GRN_NUMBER: TStringField;
+    ADOQuery1rohs: TStringField;
+    ADOQuery1SUPPLIER2: TStringField;
+    ADOQuery1total_area: TFloatField;
+    ADOQuery1PACKING_SLIP_FLAG: TStringField;
+    ADOQuery1STOCK_BASE: TBCDField;
+    ADOQuery1spec_place: TStringField;
+    ADOQuery1inv_group_name: TStringField;
+    ADOQuery1DSDesigner: TBCDField;
+    ADOQuery1PO_NUMBER: TStringField;
+    ADOQuery1TDATE: TDateTimeField;
+    ADOQuery1rkey16: TAutoIncField;
+    ADOQuery1ANALYSIS_CODE_1: TStringField;
+    ADOQuery1EMPLOYEE_NAME: TStringField;
+    ADOQuery1CONFIRMATION_NUMBER: TStringField;
+    ADOQuery1PO_REQ_NUMBER: TStringField;
+    ADOQuery1InDays: TIntegerField;
+    DBPipelinePO: TppDBPipeline;
+    ppLabel20: TppLabel;
     procedure ppReport1PreviewFormCreate(Sender: TObject);
     procedure ppReport2PreviewFormCreate(Sender: TObject);
     procedure ppReport3PreviewFormCreate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ppDBPipelineCodeNext(Sender: TObject);
+    procedure ppReportNoBeforePrint(Sender: TObject);
   private
     { Private declarations }
   public
+    strnber:string;
     { Public declarations }
      procedure Get2DCodeBmp(AText: string;APic: TPicture);
   end;
@@ -337,6 +418,11 @@ begin
   Img2DBar := ppReportCode.Bands[I].Objects[J] as TppImage;
   LText := qryCode.fieldbyname('ÌõÂë±àºÅ').AsString;
   Get2DCodeBmp(LText,Img2DBar.Picture);
+end;
+
+procedure TForm_report.ppReportNoBeforePrint(Sender: TObject);
+begin
+  ppLabel250.Caption:=strnber
 end;
 
 end.

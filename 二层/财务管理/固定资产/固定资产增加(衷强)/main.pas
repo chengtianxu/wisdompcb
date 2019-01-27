@@ -75,8 +75,8 @@ begin
   end;
   self.Caption :=Application.Title;
 
- // user_ptr:='23';
- // vprev:='4';
+//  user_ptr:='23';
+//  vprev:='4';
 
 end;
 
@@ -137,7 +137,7 @@ var
 begin
   if subsql='' then exit;
   sqlstr:=uppercase(dmcon.adsAssetList.CommandText);
-  i:=Pos('WHERE',sqlstr);
+  i:=Pos('WHERE (1=1)',sqlstr);
   if i = 0 then
   begin
     ShowMsg('SQL语句出错,请联系系统管理员',1);

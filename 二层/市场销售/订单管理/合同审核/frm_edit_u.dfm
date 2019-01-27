@@ -17,7 +17,7 @@ object Frm_Edit: TFrm_Edit
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 765
+    Width = 757
     Height = 40
     Align = alTop
     TabOrder = 0
@@ -120,8 +120,8 @@ object Frm_Edit: TFrm_Edit
   end
   object pnl1: TPanel
     Left = 0
-    Top = 441
-    Width = 765
+    Top = 429
+    Width = 757
     Height = 25
     Align = alBottom
     TabOrder = 1
@@ -129,13 +129,13 @@ object Frm_Edit: TFrm_Edit
   object pnl2: TPanel
     Left = 0
     Top = 40
-    Width = 765
-    Height = 401
+    Width = 757
+    Height = 389
     Align = alClient
     TabOrder = 2
     DesignSize = (
-      765
-      401)
+      757
+      389)
     object Label5: TLabel
       Left = 21
       Top = 89

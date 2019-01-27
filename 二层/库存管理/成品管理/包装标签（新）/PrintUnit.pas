@@ -268,7 +268,7 @@ begin
         + 'X' + IntToStr(DM1.adsReport.fieldbyname('PCS数量').AsInteger div DM1.adsReport.fieldbyname('PCS每SETS').AsInteger)
         + '=' + DM1.adsReport.fieldbyname('PCS数量').AsString;
     if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡')
-      or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉金')
+      or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉金') or (DM1.adsReport.fieldbyname('表面处理').AsString = '无铅喷锡')
     then
       ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),6))
     else
@@ -327,7 +327,7 @@ begin
       else
         LtmpIni := 3;
 
-      if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡')
+      if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡') or (DM1.adsReport.fieldbyname('表面处理').AsString = '无铅喷锡')
         or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉金')
       then
          ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni))
@@ -366,7 +366,7 @@ begin
     ZXNoPB := DM1.ppPrint.Bands[I].Objects[J] as TppImage;
     DM1.ppPrint.ObjectByName(I,J,'imgHSF');
     ZXHSF := DM1.ppPrint.Bands[I].Objects[J] as TppImage;
-    if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡')
+    if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡') or (DM1.adsReport.fieldbyname('表面处理').AsString = '无铅喷锡')
       or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉金')
     then
        ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(ExtractTimeWithZQ(DM1.adsReport.fieldbyname('批次').AsString,LYearWeek),6))
@@ -424,7 +424,7 @@ begin
         LtmpIni := 6
       else
         LtmpIni := 3;
-      if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡')
+      if (DM1.adsReport.fieldbyname('表面处理').AsString = '喷锡')  or (DM1.adsReport.fieldbyname('表面处理').AsString = '无铅喷锡')
         or (DM1.adsReport.fieldbyname('表面处理').AsString = '沉金')
       then
          ZXBZtime.Caption := FormatDateTime('YYYY-MM-DD',IncMonth(gStrToDate(ZXHKTime.Caption),LtmpIni))

@@ -1,6 +1,6 @@
 object Form9: TForm9
-  Left = 383
-  Top = 212
+  Left = 205
+  Top = 223
   Width = 1004
   Height = 619
   Caption = #26448#26009#24211#23384#26126#32454
@@ -1120,6 +1120,14 @@ object Form9: TForm9
     object N2: TMenuItem
       Caption = #25171#21360#26631#31614#26465#30721
       OnClick = N2Click
+    end
+    object NPO: TMenuItem
+      Caption = #25171#21360#29289#26009#26631#31614
+      OnClick = NPOClick
+    end
+    object NPoN: TMenuItem
+      Caption = #25171#21360#29289#26009#26631#31614'('#26080#25968#37327')'
+      OnClick = NPOClick
     end
   end
   object ColorDialog1: TColorDialog

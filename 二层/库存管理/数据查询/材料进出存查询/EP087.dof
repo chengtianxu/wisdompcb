@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=2
 Release=4
-Build=10
+Build=13
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=936
 [Version Info Keys]
 CompanyName=WISDOMPCB
 FileDescription=材料进出存查询
-FileVersion=1.2.4.10
+FileVersion=1.2.4.13
 InternalName=
 LegalCopyright=
 LegalTrademarks=

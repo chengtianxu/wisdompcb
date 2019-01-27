@@ -1,6 +1,6 @@
 object Form2: TForm2
-  Left = 414
-  Top = 143
+  Left = 316
+  Top = 303
   Width = 900
   Height = 591
   Caption = #26448#26009#25509#25910#28165#21333
@@ -312,7 +312,7 @@ object Form2: TForm2
     Left = 0
     Top = 41
     Width = 884
-    Height = 512
+    Height = 511
     Align = alClient
     DataSource = DataSource1
     ImeName = #20013#25991'('#31616#20307') - '#25628#29399#20116#31508#36755#20837#27861
@@ -679,7 +679,7 @@ object Form2: TForm2
       FieldName = 'GRN_NUMBER'
       ReadOnly = True
       FixedChar = True
-      Size = 10
+      Size = 30
     end
     object ado0022DELIVER_NUMBER: TStringField
       DisplayLabel = #36865#36135#21333#21495

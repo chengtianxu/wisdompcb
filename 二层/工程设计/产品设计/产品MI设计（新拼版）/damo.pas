@@ -514,12 +514,12 @@ begin
 
     end;
 
-//    if (Sender.AsFloat < ads494min_value.AsFloat) or
-//       (Sender.AsFloat > ads494max_value.AsFloat) then
-//    begin
-////       showmsg('参数值不在的合理范围之内!',1);
-////       abort;
-//    end;
+    if (Sender.AsFloat < ads494min_value.AsFloat) or
+       (Sender.AsFloat > ads494max_value.AsFloat) then
+    begin
+       showmsg(LStr + ' 参数值不在的合理范围之内!',1);
+       abort;
+    end;
   end;
 
 end;

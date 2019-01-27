@@ -611,7 +611,7 @@ begin
   edtBZ.Text := ads699.FieldByName('notes').AsString;
   edtBMCL.Text := DM1.adsFrmMain.FieldByName('surface').AsString;
   edtCPMS.Text := DM1.adsFrmMain.FieldByName('description').AsString;
-  edtBQSL.Text := DM1.adsFrmMain.FieldByName('pack_item').AsString;
+  edtBQSL.Text := IntToStr(ads699.RecordCount); //DM1.adsFrmMain.FieldByName('pack_item').AsString;
   GetBCBHInfo(edtBCBH.Text);
   GetXSDDInfo(edtXSDD.Text);
   edtSLSet.Text := '';//IntToStr(DM1.adsFrmMain.FieldByName('qty').AsInteger div StrToInt(lblPcsPerSet.Caption));

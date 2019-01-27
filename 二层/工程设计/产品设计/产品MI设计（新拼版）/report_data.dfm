@@ -1,6 +1,6 @@
 object Form_report: TForm_report
-  Left = 512
-  Top = 271
+  Left = 382
+  Top = 125
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #25253#34920#25968#25454#23450#20041
@@ -556,7 +556,6 @@ object Form_report: TForm_report
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
     PrinterSetup.PaperSize = 9
-    SaveAsTemplate = True
     Template.FileName = 'D:\SJSYS\NIERP\Report\MANU_INSTRUCTION.RTM'
     Units = utMillimeters
     CachePages = True

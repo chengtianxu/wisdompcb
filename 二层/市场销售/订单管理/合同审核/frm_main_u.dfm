@@ -1,6 +1,6 @@
 object frm_main: Tfrm_main
-  Left = 256
-  Top = 120
+  Left = 289
+  Top = 162
   BorderStyle = bsSingle
   Caption = #21512#21516#23457#25209
   ClientHeight = 633

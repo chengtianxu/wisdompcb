@@ -5,10 +5,6 @@ object dmcon: Tdmcon
   Height = 356
   Width = 471
   object ADOConnection1: TADOConnection
-    ConnectionString = 
-      'Provider=SQLOLEDB.1;Password=62ddf8f60269678;Persist Security In' +
-      'fo=True;User ID=WZPCBConnect;Initial Catalog=demo2;Data Source=1' +
-      '72.18.8.89'
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 32
@@ -40,13 +36,18 @@ object dmcon: Tdmcon
       '0105.STATUS=1 then '#39#20250#35745#24050#23457#39#13#10'when Data0105.STATUS=2 then '#39#20027#31649#24050#23457#39#9#13#10 +
       'when Data0105.STATUS=3 then '#39#24050#30331#24080#39#13#10'when Data0105.STATUS=4 then '#39 +
       #20986#32435#23457#26680#39' end as STATUS ,'#13#10'd15.abbr_name,data0517.supplier_name,Data' +
-      '0517.faccu_depr_gl_ptr'#13#10'FROM Data0517 INNER JOIN'#13#10'      Data0514' +
-      ' ON Data0517.FASSET_TYPE_PTR = Data0514.RKEY INNER JOIN'#13#10'      D' +
-      'ata0515 ON Data0517.ALT_TYPE_PTR = Data0515.RKEY INNER JOIN'#13#10'   ' +
-      '   Data0516 ON Data0517.STATUS_PTR = Data0516.RKEY LEFT OUTER JO' +
-      'IN'#13#10'      Data0105 ON Data0517.voucher_ptr = Data0105.RKEY left ' +
-      'join data0015 d15 on'#13#10'data0517.warehouse_ptr=d15.rkey'#13#10' WHERE (1' +
-      '=1)'#13#10'ORDER BY Data0517.FASSET_CODE'
+      '0517.faccu_depr_gl_ptr,db01.names_value as zj_depts'#13#10'FROM Data05' +
+      '17 INNER JOIN'#13#10'      Data0514 ON Data0517.FASSET_TYPE_PTR = Data' +
+      '0514.RKEY INNER JOIN'#13#10'      Data0515 ON Data0517.ALT_TYPE_PTR = ' +
+      'Data0515.RKEY INNER JOIN'#13#10'      Data0516 ON Data0517.STATUS_PTR ' +
+      '= Data0516.RKEY LEFT OUTER JOIN'#13#10'      Data0105 ON Data0517.vouc' +
+      'her_ptr = Data0105.RKEY left join data0015 d15 on'#13#10'data0517.ware' +
+      'house_ptr=d15.rkey'#13#10'left join'#13#10'('#13#10'select tc.fasset_ptr, names_va' +
+      'lue=stuff((select distinct '#39','#39'+b.DEPT_NAME '#13#10'from data0326 t '#13#10'i' +
+      'nner join Data0034 b on t.DEPT_PTR=b.RKEY '#13#10'where t.fasset_ptr=t' +
+      'c.fasset_ptr '#13#10'for xml path('#39#39')), 1, 1, '#39#39') '#13#10'from  data0326 tc'#13 +
+      #10'group by tc.fasset_ptr'#13#10') as db01 on db01.fasset_ptr=data0517.r' +
+      'key'#13#10' WHERE (1=1)'#13#10'ORDER BY Data0517.FASSET_CODE'
     Parameters = <>
     Left = 192
     Top = 8

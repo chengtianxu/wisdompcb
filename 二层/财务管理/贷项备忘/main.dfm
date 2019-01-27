@@ -16,14 +16,6 @@ object Form1: TForm1
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object user_ptr: TLabel
-    Left = 136
-    Top = 280
-    Width = 7
-    Height = 13
-    Caption = '0'
-    Visible = False
-  end
   object empl_name: TLabel
     Left = 136
     Top = 344

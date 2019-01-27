@@ -536,7 +536,7 @@ object Form2: TForm2
     Width = 762
     Height = 567
     Align = alClient
-    PageIndex = 1
+    PageIndex = 8
     TabOrder = 4
     object TPage
       Left = 0
@@ -1416,7 +1416,7 @@ object Form2: TForm2
         Width = 118
         Height = 21
         ImeName = #20013#25991'('#31616#20307') - '#25628#29399#20116#31508#36755#20837#27861
-        ItemHeight = 0
+        ItemHeight = 13
         TabOrder = 34
         OnExit = cbbgradeExit
         OnKeyPress = cbbgradeKeyPress
@@ -4585,7 +4585,7 @@ object Form2: TForm2
             Width = 758
             Height = 101
             Align = alClient
-            ColCount = 9
+            ColCount = 10
             DefaultRowHeight = 20
             RowCount = 2
             Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
@@ -4606,7 +4606,8 @@ object Form2: TForm2
               83
               80
               88
-              155)
+              155
+              64)
           end
           object ComboBox2: TComboBox
             Left = 26

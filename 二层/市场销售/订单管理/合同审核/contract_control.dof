@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=1
 Release=5
-Build=5
+Build=6
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=936
 [Version Info Keys]
 CompanyName=wisdompcb
 FileDescription=∫œÕ¨…Û∫À
-FileVersion=1.1.5.5
+FileVersion=1.1.5.6
 InternalName=
 LegalCopyright=
 LegalTrademarks=

@@ -147,7 +147,7 @@ object frmDetail_Edti: TfrmDetail_Edti
     Left = 0
     Top = 49
     Width = 725
-    Height = 446
+    Height = 447
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1

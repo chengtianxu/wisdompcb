@@ -113,7 +113,8 @@ type
     procedure Edit1DblClick(Sender: TObject);
   private
 
-    FAFc:array[0..9] of integer;
+    //FAFc:array[0..9] of integer;
+    FAFc:array of Integer;
   public
     F_status:Integer;
     FchgMe:boolean;
@@ -278,9 +279,15 @@ begin
     aqDepartment.Open;
     aqAcctItem.Close;
     aqAcctItem.Open;
+
     tmp.Close;
-    tmp.SQL.Text:='select rkey,abbr_name from data0015 order by rkey';
+    tmp.SQL.Clear;
+    if (vEnterMode=2) or (vEnterMode=3) then
+     tmp.SQL.Text:='select rkey,abbr_name from data0015 where active_flag='+quotedstr('Y')+'order by rkey'
+    else
+    tmp.sql.Text:='select rkey,abbr_name from data0015 order by rkey';
     tmp.Open;
+    SetLength(FAFc,tmp.RecordCount);
     i:=0;
     while not tmp.Eof do
     begin
@@ -344,6 +351,7 @@ begin
     dbedit1.Enabled:=false
    else
     dbedit1.Enabled:=true;
+    // FchgMe:=False;
   end
   else
   begin
@@ -354,7 +362,7 @@ begin
     else
       dtpCSRZ.Date := dmcon.ads517.fieldbyName('orig_BOOK_DATE').Asdatetime;
     dmcon.ads517FASSET_TYPE_PTR_oldV:=dmcon.ads517FASSET_TYPE_PTR.Value;
-    for i:=0 to 9 do
+    for i:=0 to Length(FAFc) do
     if dmcon.ads517.fieldbyName('warehouse_ptr').AsInteger=FAfc[i] then
     begin
       ComboBox1.ItemIndex:=i;
@@ -371,7 +379,6 @@ begin
        edit1.Text:=dmcon.tmp.Fieldbyname('FASSET_CODE').AsString;
        Label29.Caption:=dmcon.tmp.Fieldbyname('FASSET_NAME').AsString;
        dmcon.rkey417 :=  dmcon.tmp.Fieldbyname('rkey').AsInteger;
-       
      end;
    end;
   end;
@@ -382,14 +389,13 @@ begin
     Memo1.Text:=DBMemo1.Text;
     EdtSupp.Visible:=true;
     Edtid_code.Visible:=true;
-
     EdtSupp.Text:=DBEdit8.Text;
     Edtid_code.Text:=DBEdit2.Text;
     EdtVou.Visible:=true;
     EdtVou.Text:=DBEdit19.Text;
-
     btnSave.Enabled:=true;
   end;
+
   ShowModal;
 end;
 
@@ -398,7 +404,7 @@ procedure TfrmDetail_Edti.FormClose(Sender: TObject;
 var
   rKey:integer;
 begin
-  rKey:= dmcon.ads517.FieldByName('rKey').AsInteger;  
+  rKey:= dmcon.ads517.FieldByName('rKey').AsInteger;
   dmcon.ads517.Close;
   dmcon.ads325.Close;
   dmcon.ads326.Close;

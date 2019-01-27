@@ -93,6 +93,8 @@ type
     lbl1: TLabel;
     ado0022rkey391: TAutoIncField;
     N2: TMenuItem;
+    NPO: TMenuItem;
+    NPoN: TMenuItem;
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button2Click(Sender: TObject);
@@ -116,6 +118,7 @@ type
     procedure N1Click(Sender: TObject);
     procedure PopupMenu2Popup(Sender: TObject);
     procedure N2Click(Sender: TObject);
+    procedure NPOClick(Sender: TObject);
   private
     { Private declarations }
     field_name:string;
@@ -386,6 +389,47 @@ begin
     LFrm.ppReportCode.Print;
   finally
     LFrm.Free;
+  end;
+end;
+
+procedure TForm9.NPOClick(Sender: TObject);
+begin
+
+ if ado0022.IsEmpty then
+    begin
+      ShowMessage('无可打印标签');
+      Exit;
+    end;
+  try
+    Form_report:=TForm_report.Create(Application);
+    Form_report.ADOQuery1.Close;
+    Form_report.ADOQuery1.Parameters.ParamByName('rkey22').Value:=ado0022rkey22.Value;
+    Form_report.ADOQuery1.Open;
+
+
+    if (Sender as TmenuItem).Name='NPO' then
+    begin
+      Form_report.ppReportPO.Reset;
+      Form_report.ppReportPO.Template.FileName:=
+        StringReplace(uppercase(GetCurrentDir),'EXEC','NIERP\REPORT\',[rfReplaceAll])+
+           'PoCodeprint22.rtm';
+      Form_report.ppReportPO.Template.LoadFromFile;
+      Form_report.ppReportPO.SaveAsTemplate:=False;
+      Form_report.ppReportPO.Print;
+    end;
+    if (Sender as TmenuItem).Name='NPoN' then
+    begin
+      Form_report.strnber := InputBox('填写数量','','');
+      Form_report.ppReportPO.Reset;
+      Form_report.ppReportPO.Template.FileName:=
+        StringReplace(uppercase(GetCurrentDir),'EXEC','NIERP\REPORT\',[rfReplaceAll])+
+           'PoCodeprintNo22.rtm';
+      Form_report.ppReportPO.Template.LoadFromFile;
+      Form_report.ppReportPO.SaveAsTemplate:=False;
+      Form_report.ppReportPO.Print;
+    end;
+  finally
+    Form_report.Free;
   end;
 end;
 

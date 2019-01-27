@@ -127,10 +127,10 @@ begin
     Edit3.SetFocus;
     exit;
   end;
-    if Label_691rkey.Caption='' then
+    if Edit4.Text='' then
   begin
-    showmessage('审批流程不能为空...');
-    Edit3.SetFocus;
+    showmessage('审批流程不能为空,请选择！');
+    Edit4.SetFocus;
     exit;
   end;
 
